@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/SistemaVuelos/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/SistemaVuelos/tests" isTestSource="true" packagePrefix="Tests\" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/arrilot/laravel-widgets" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/dnoegel/php-xdg-base-dir" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/doctrine/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/doctrine/dbal" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/doctrine/event-manager" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/doctrine/inflector" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/doctrine/instantiator" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/doctrine/lexer" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/dragonmantank/cron-expression" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/egulias/email-validator" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/fideloper/proxy" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/filp/whoops" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/fzaninotto/faker" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/guzzlehttp/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/hamcrest/hamcrest-php" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/intervention/image" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/jakub-onderka/php-console-color" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/jakub-onderka/php-console-highlighter" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/justinrainbow/json-schema" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/larapack/doctrine-support" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/larapack/hooks" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/larapack/voyager-hooks" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/laravel/framework" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/laravel/tinker" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/league/commonmark" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/league/flysystem" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/mockery/mockery" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/monolog/monolog" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/myclabs/deep-copy" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/nesbot/carbon" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/nikic/php-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/nunomaduro/collision" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/opis/closure" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/paragonie/random_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/phar-io/manifest" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/phar-io/version" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/phpdocumentor/reflection-common" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/phpdocumentor/reflection-docblock" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/phpdocumentor/type-resolver" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/phpoption/phpoption" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/phpspec/prophecy" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/phpunit/php-code-coverage" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/phpunit/php-file-iterator" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/phpunit/php-text-template" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/phpunit/php-timer" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/phpunit/php-token-stream" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/phpunit/phpunit" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/psr/simple-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/psy/psysh" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/ralouphie/getallheaders" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/ramsey/uuid" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/sebastian/code-unit-reverse-lookup" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/sebastian/comparator" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/sebastian/diff" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/sebastian/environment" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/sebastian/exporter" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/sebastian/global-state" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/sebastian/object-enumerator" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/sebastian/object-reflector" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/sebastian/recursion-context" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/sebastian/resource-operations" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/sebastian/type" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/sebastian/version" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/seld/jsonlint" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/seld/phar-utils" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/swiftmailer/swiftmailer" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/console" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/css-selector" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/debug" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/error-handler" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/event-dispatcher" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/event-dispatcher-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/filesystem" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/finder" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/http-foundation" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/http-kernel" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/mime" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/polyfill-iconv" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/polyfill-intl-idn" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/polyfill-php72" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/polyfill-php73" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/process" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/routing" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/service-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/translation" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/translation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/symfony/var-dumper" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/tcg/voyager" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/test-hook/src" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/theseer/tokenizer" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/tijsverkoyen/css-to-inline-styles" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/vlucas/phpdotenv" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/yajra/laravel-oci8" />
+      <excludeFolder url="file://$MODULE_DIR$/SistemaVuelos/vendor/yajra/laravel-pdo-via-oci8" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
