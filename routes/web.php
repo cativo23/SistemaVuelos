@@ -18,11 +18,11 @@ Route::view('/', 'landing');
 
 Route::match(['get', 'post'], '/dashboard', function(){
     return view('dashboard');
-})->middleware('auth');
-Route::view('/pages/slick', 'pages.slick');
-Route::view('/pages/datatables', 'pages.datatables');
-Route::view('/pages/blank', 'pages.blank');
+})->middleware('verified');;
+Route::view('/pages/slick', 'pages.slick')->middleware('verified');
+Route::view('/pages/datatables', 'pages.datatables')->middleware('verified');
+Route::view('/pages/blank', 'pages.blank')->middleware('verified');;
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
