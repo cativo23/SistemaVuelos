@@ -29,14 +29,14 @@ class CreateFlightsTable extends Migration
             $table->integer('flight_miles');
             $table->string('status');
             $table->decimal('duration', 10, 2);
-            $table->unsignedBigInteger('landing_gateway_id');
-            $table->unsignedBigInteger('arrival_gateway_id');
+            $table->unsignedBigInteger('landing_terminal_id');
+            $table->unsignedBigInteger('boarding_terminal_id');
 
-            $table->foreign('landing_gateway_id')->references('id')->on('gateways');
-            $table->foreign('arrival_gateway_id')->references('id')->on('gateways');
+            $table->foreign('boarding_terminal_id')->references('id')->on('terminals');
+            $table->foreign('landing_terminal_id')->references('id')->on('terminals');
             $table->foreignId('airplane_id')->constrained();
-            $table->foreignId('itinerary_id')->constrained();
             $table->foreignId('airline_id')->constrained();
+            $table->foreignId('itinerary_id')->constrained();
         });
     }
 

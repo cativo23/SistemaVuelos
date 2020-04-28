@@ -19,7 +19,7 @@ class CreateAirlineDestinationTable extends Migration
 
 
             $table->foreignId('destination_id')->constrained();
-            $table->foreignId('airline')->constrained();
+            $table->foreignId('airline_id')->constrained();
 
         });
     }
@@ -31,6 +31,6 @@ class CreateAirlineDestinationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('airport_detination');
+        Schema::dropIfExists('airline_destination');
     }
 }

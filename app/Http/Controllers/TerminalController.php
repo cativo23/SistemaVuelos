@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Gateway;
+use App\Terminal;
 use Illuminate\Http\Request;
 
-class GatewayController extends Controller
+class TerminalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class GatewayController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Gateway  $gateway
+     * @param  \App\Terminal  $gateway
      * @return \Illuminate\Http\Response
      */
-    public function show(Gateway $gateway)
+    public function show(Terminal $gateway)
     {
         //
     }
@@ -52,10 +52,10 @@ class GatewayController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Gateway  $gateway
+     * @param  \App\Terminal  $gateway
      * @return \Illuminate\Http\Response
      */
-    public function edit(Gateway $gateway)
+    public function edit(Terminal $gateway)
     {
         //
     }
@@ -64,10 +64,10 @@ class GatewayController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Gateway  $gateway
+     * @param  \App\Terminal  $gateway
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Gateway $gateway)
+    public function update(Request $request, Terminal $gateway)
     {
         //
     }
@@ -75,10 +75,10 @@ class GatewayController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Gateway  $gateway
+     * @param  \App\Terminal  $gateway
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Gateway $gateway)
+    public function destroy(Terminal $gateway)
     {
         //
     }

@@ -25,7 +25,9 @@ class CreateItinerariesTable extends Migration
             $table->decimal('total_duration', 10, 2);
             $table->string('destination');
             $table->string('origin');
-            $table->unsignedBigInteger('airline_id');
+            $table->string('type');
+
+            $table->foreignId('airline_id');
         });
     }
 

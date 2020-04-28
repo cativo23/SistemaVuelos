@@ -174,7 +174,14 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        /*
+         * Oracle Database Service Provider
+         */
         Yajra\Oci8\Oci8ServiceProvider::class,
+        /*
+         * Laravel IDE Helper
+         */
+        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 
     ],
 

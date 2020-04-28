@@ -20,6 +20,8 @@ class CreateAirplanesTable extends Migration
             $table->string('manufacturer');
             $table->integer('seat_capacity');
             $table->string('model');
+
+            $table->foreignId('airline_id')->constrained();
         });
     }
 

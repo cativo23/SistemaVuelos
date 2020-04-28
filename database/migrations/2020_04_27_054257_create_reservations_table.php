@@ -19,6 +19,7 @@ class CreateReservationsTable extends Migration
             $table->unsignedBigInteger('number')->unique();
             $table->integer('suitcase_num');
             $table->boolean('payed');
+            $table->integer('passengers');
 
             $table->foreignId('client_id')->constrained();
             $table->foreignId('itinerary_id')->constrained();
