@@ -14,7 +14,9 @@ class DestinationController extends Controller
      */
     public function index()
     {
-        //
+        $Destionation = Destination::all();
+        //return dd($Destionation);
+        return view('destination.index', compact('Destionation'));
     }
 
     /**
@@ -24,7 +26,7 @@ class DestinationController extends Controller
      */
     public function create()
     {
-        //
+        return view('destination.create');
     }
 
     /**
@@ -35,7 +37,17 @@ class DestinationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Destination = new Destination;
+        $Destination->city = $request->ciudad;
+        $Destination->state = $request->estado;
+        $Destination->country = $request->pais;
+        $Destination->continent = $request->continente;
+        $Destination->code = $request->codigo;
+        $Destination->save();
+
+        return redirect()->route('destinations.index')->with('datos', '¡El destino se guardó correctamente!');
+        //return 'Registro guardado';
+        //return dd($request); 
     }
 
     /**
@@ -55,9 +67,11 @@ class DestinationController extends Controller
      * @param  \App\Destination  $destination
      * @return \Illuminate\Http\Response
      */
-    public function edit(Destination $destination)
+    public function edit($id)
     {
-        //
+        $destino = Destination::findOrFail($id);
+
+        return view('destination.edit', compact('destino'));    
     }
 
     /**
@@ -67,9 +81,24 @@ class DestinationController extends Controller
      * @param  \App\Destination  $destination
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Destination $destination)
+    public function update(Request $request, $id)
     {
-        //
+        $Destination = Destination::findOrFail($id);
+        $Destination->city = $request->ciudad;
+        $Destination->state = $request->estado;
+        $Destination->country = $request->pais;
+        $Destination->continent = $request->continente;
+        $Destination->code = $request->codigo;
+        $Destination->save();
+        return redirect()->route('destinations.index')->with('datos', '¡El destino se editó correctamente!');
+        
+    }
+
+
+    public function confirm($id)
+    {
+        $Destination = Destination::findOrFail($id);
+        return view('destination.confirm', compact('Destination'));
     }
 
     /**
@@ -78,8 +107,12 @@ class DestinationController extends Controller
      * @param  \App\Destination  $destination
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Destination $destination)
+    public function destroy($id)
     {
-        //
+        $Destination = Destination::findOrFail($id);
+        $Destination->delete();
+        return redirect()->route('destinations.index')->with('datos', '¡El destino se eliminó correctamente!');
     }
+
+
 }
