@@ -7,7 +7,7 @@
         <!-- Page Content -->
         <div class="content">
             <h2 class="content-heading">Detalles de aerolinea "{{ $airline->short_name }}"</h2>
-            
+
             <div class="col-md-11">
                 <div class="block">
                     <div class="block-header block-header-default">
@@ -149,7 +149,7 @@
                             <div class="form-group row">
                                 <div class="col-md-9">
 
-                                    <a href="{{ route('cancelarAerolinea')}}" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Atrás</a>
+                                    <a href="{{ route('airlines.index')}}" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Atrás</a>
                                 </div>
                             </div>
                         </form>
