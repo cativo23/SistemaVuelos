@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
+    //TODO: Login by username or email
+
     /*
     |--------------------------------------------------------------------------
     | Login Controller
