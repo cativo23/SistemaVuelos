@@ -37,7 +37,7 @@
                                         <label for="nombrecorto">Nombre Corto</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
-                                                <i class="fa fa-compress"></i>
+                                                <i class="fa fa-compress" disabled></i>
                                             </span>
                                         </div>
                                     </div>
