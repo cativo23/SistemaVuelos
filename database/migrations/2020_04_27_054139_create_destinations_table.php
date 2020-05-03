@@ -21,6 +21,8 @@ class CreateDestinationsTable extends Migration
             $table->string('country');
             $table->string('continent');
             $table->string('code')->unique();
+
+            
         });
     }
 
