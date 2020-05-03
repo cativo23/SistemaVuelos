@@ -15,6 +15,8 @@ class AirportController extends Controller
     public function index()
     {
         //
+        $Airports = Airport::all();
+        return view('airport.index', compact('Airports'));
     }
 
     /**
@@ -25,6 +27,8 @@ class AirportController extends Controller
     public function create()
     {
         //
+        return view('airport.create');
+
     }
 
     /**
@@ -36,6 +40,16 @@ class AirportController extends Controller
     public function store(Request $request)
     {
         //
+        $Airport =  new  Airport();
+        $Airport->name = $request->nombre;
+        $Airport->telephone = $request->telefono;
+        $Airport->code = $request->codigo;
+        $Airport->num_gateways = $request->terminales;
+        $Airport->representative = $request->representante;
+        $Airport->city = $request->ciudad;
+        $Airport->country = $request->pais;
+        $Airport->save();
+        return redirect()->route('airport.index')->with('datos', '¡El aeropuerto se guardó correctamente!');
     }
 
     /**
@@ -55,9 +69,12 @@ class AirportController extends Controller
      * @param  \App\Airport  $airport
      * @return \Illuminate\Http\Response
      */
-    public function edit(Airport $airport)
+    public function edit($id)
     {
         //
+        $Airport = Airport::findOrFail($id);
+
+        return view('airport.edit', compact('Airport'));
     }
 
     /**
@@ -67,9 +84,26 @@ class AirportController extends Controller
      * @param  \App\Airport  $airport
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Airport $airport)
+
+    public function update(Request $request, $id)
     {
         //
+        $Airport =  Airport::findOrFail($id);
+        $Airport->name = $request->nombre;
+        $Airport->telephone = $request->telefono;
+        $Airport->code = $request->codigo;
+        $Airport->num_gateways = $request->terminales;
+        $Airport->representative = $request->representante;
+        $Airport->city = $request->ciudad;
+        $Airport->country = $request->pais;
+        $Airport->save();
+        return redirect()->route('airport.index')->with('datos', '¡El aeropuerto se guardó correctamente!');
+    }
+
+    public function confirm($id)
+    {
+        $Airport = Airport::findOrFail($id);
+        return view('airport.confirm', compact('Airport'));
     }
 
     /**
@@ -78,8 +112,11 @@ class AirportController extends Controller
      * @param  \App\Airport  $airport
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Airport $airport)
+    public function destroy($id)
     {
         //
+        $Airport = Airport::findOrFail($id);
+        $Airport->delete();
+        return redirect()->route('airport.index')->with('datos','El aeropuerto se elimino correctamente');
     }
 }
