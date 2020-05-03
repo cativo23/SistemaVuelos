@@ -5,7 +5,7 @@
 <main id="main-container">
     <!-- Page Content -->
     <div class="content">
-		
+
 		<h2 class="content-heading">¿Desea eliminar el destino "{{ $Destination->city }}"?</h2>
 		<div class="row">
 			<div class="col-md-8">
@@ -55,9 +55,9 @@
 
                             <div class="form-group row">
                                 <div class="col-md-9">
-                                
+
                                     <button type="submit" class="btn btn-square btn-outline-primary min-width-125 mb-10" data-toggle="click-ripple">Eliminar</button>
-                                    <a href="{{ route('cancelar')}}" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>
+                                    <a href="{{ route('destinations.index')}}" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>
                                 </div>
                             </div>
                         </form>

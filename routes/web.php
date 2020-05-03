@@ -18,7 +18,9 @@ Route::view('/', 'landing');
 
 Route::match(['get', 'post'], '/dashboard', function(){
     return view('dashboard');
-})->middleware('verified');;
+})->middleware('verified');
+
+
 Route::view('/pages/slick', 'pages.slick')->middleware('verified');
 Route::view('/pages/datatables', 'pages.datatables')->middleware('verified');
 Route::view('/pages/blank', 'pages.blank')->middleware('verified');;
@@ -32,24 +34,17 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Inicio Ricardo Sosa
 
-# CRUD Destionation
-Route::resource('/destinations', 'DestinationController');
+/*
+ * CRUD Destinations
+ */
+Route::resource('/destinations', 'DestinationController')->middleware('verified');
 
-Route::get('/cancelar', function(){
-	return redirect()->route('destinations.index');
-})->name('cancelar');
-
-Route::get('/destinations/{id}/confirm', 'DestinationController@confirm')->name('destinations.confirm');
+Route::get('/destinations/{id}/confirm', 'DestinationController@confirm')->name('destinations.confirm')->middleware('verified');
 
 
 # CRUD Airline
-Route::resource('/airlines', 'AirlineController');
-
-Route::get('/cancelarAerolinea', function(){
-	return redirect()->route('airlines.index');
-})->name('cancelarAerolinea');
-
-Route::get('/airlines/{id}/confirm', 'AirlineController@confirm')->name('airlines.confirm');
+Route::resource('/airlines', 'AirlineController')->middleware('verified');
+Route::get('/airlines/{id}/confirm', 'AirlineController@confirm')->name('airlines.confirm')->middleware('verified');
 
 
 // Fin Ricardo Sosa

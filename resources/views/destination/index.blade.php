@@ -22,7 +22,7 @@
             <h2 class="font-w700 text-black mb-10">Destinos</h2>
             <h3 class="h5 text-muted mb-0">Destinations</h3><br>
 
-            <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float" 
+            <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
             href="{{ route('destinations.create') }}">Nuevo</a>
         </div>
 
