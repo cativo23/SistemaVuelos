@@ -53,9 +53,6 @@ Route::get('/airlines/{id}/confirm', 'AirlineController@confirm')->name('airline
 // Inicio ARIEL ZELAYA
 
 Route::resource('/airport','AirportController');
-
-
-
 Route::get('/airport/{id}/confirm', 'AirportController@confirm')->name('airport.confirm');
 
 //FIN ARIEL ZELAYA
