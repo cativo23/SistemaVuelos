@@ -16,10 +16,9 @@ use Illuminate\Support\Facades\Route;
 // Example Routes
 Route::view('/', 'landing');
 
-Route::match(['get', 'post'], '/dashboard', function(){
-    return view('dashboard');
-})->middleware('verified');
-
+Route::match(['get', 'post'], '/dashboard','DashboardController@index')->middleware('verified');
+Route::get('/roles', 'RolesController@index')->middleware('verified')->middleware('can:see-roles');
+Route::get('/getadmin', 'RolesController@asign_admin');
 
 Route::view('/pages/slick', 'pages.slick')->middleware('verified');
 Route::view('/pages/datatables', 'pages.datatables')->middleware('verified');

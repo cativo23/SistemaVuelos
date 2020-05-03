@@ -57,7 +57,9 @@ class LoginController extends Controller
 
         $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
+
         request()->merge([$fieldType => $login]);
+
 
         return $fieldType;
     }
@@ -69,6 +71,7 @@ class LoginController extends Controller
      */
     public function username()
     {
+        \Log::info($this->username);
         return $this->username;
     }
 }
