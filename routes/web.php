@@ -22,7 +22,7 @@ Route::match(['get', 'post'], '/dashboard', function(){
 Route::view('/pages/slick', 'pages.slick')->middleware('verified');
 Route::view('/pages/datatables', 'pages.datatables')->middleware('verified');
 Route::view('/pages/blank', 'pages.blank')->middleware('verified');;
- 
+
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -53,3 +53,14 @@ Route::get('/airlines/{id}/confirm', 'AirlineController@confirm')->name('airline
 
 
 // Fin Ricardo Sosa
+
+
+// Inicio ARIEL ZELAYA
+
+Route::resource('/airport','AirportController');
+
+
+
+Route::get('/airport/{id}/confirm', 'AirportController@confirm')->name('airport.confirm');
+
+//FIN ARIEL ZELAYA
