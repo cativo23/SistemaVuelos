@@ -8,5 +8,12 @@
       <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
       <jdbc-url>jdbc:oracle:thin:@localhost:1521:XE</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="@voyarge.c0rfxjjpl55u.us-east-1.rds.amazonaws.com" uuid="9f7c1e83-2712-4249-ba9e-1fd1655cccc7">
+      <driver-ref>oracle</driver-ref>
+      <synchronize>true</synchronize>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@voyarge.c0rfxjjpl55u.us-east-1.rds.amazonaws.com:1521:DATABASE</jdbc-url>
+    </data-source>
   </component>
 </project>
