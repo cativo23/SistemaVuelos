@@ -14,9 +14,9 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Icons -->
-        <link rel="shortcut icon" href="{{ asset('media/favicons/favicon.png') }}">
-        <link rel="icon" sizes="192x192" type="image/png" href="{{ asset('media/favicons/favicon-192x192.png') }}">
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('media/favicons/apple-touch-icon-180x180.png') }}">
+        <link rel="shortcut icon" href="{{ asset('media/favicons/voyarge_logo.png') }}">
+        <link rel="icon" sizes="192x192" type="image/png" href="{{ asset('media/favicons/voyarge_logo.png') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('media/favicons/voyarge_logo.png') }}">
 
         <!-- Fonts and Styles -->
         @yield('css_before')
@@ -110,10 +110,10 @@
             </aside>
             <!-- END Side Overlay -->
 
-            @component('layouts.sidebar', ['user'=>Auth::user()])
+            @component($sidebar, ['user'=>Auth::user()])
             @endcomponent
 
-            @component('layouts.header', ['user'=>Auth::user()])
+            @component($header, ['user'=>Auth::user()])
             @endcomponent
 
             <!-- Main Container -->
@@ -122,18 +122,8 @@
             </main>
             <!-- END Main Container -->
 
-            <!-- Footer -->
-            <footer id="page-footer" class="opacity-0">
-                <div class="content py-20 font-size-sm clearfix">
-                    <div class="float-right">
-                        Crafted with <i class="fa fa-heart text-pulse"></i> by <a class="font-w600" href="https://1.envato.market/ydb" target="_blank">pixelcave</a>
-                    </div>
-                    <div class="float-left">
-                        <a class="font-w600" href="https://1.envato.market/95j" target="_blank">Codebase</a> &copy; <span class="js-year-copy"></span>
-                    </div>
-                </div>
-            </footer>
-            <!-- END Footer -->
+            @component($footer, ['user'=>Auth::user()])
+            @endcomponent
         </div>
         <!-- END Page Container -->
 
