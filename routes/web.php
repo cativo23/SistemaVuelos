@@ -16,19 +16,37 @@ use Illuminate\Support\Facades\Route;
 // Example Routes
 Route::view('/', 'landing');
 
-Route::match(['get', 'post'], '/dashboard', function(){
-    return view('dashboard');
-})->middleware('verified');
-
-
 Route::view('/pages/slick', 'pages.slick')->middleware('verified');
 Route::view('/pages/datatables', 'pages.datatables')->middleware('verified');
 Route::view('/pages/blank', 'pages.blank')->middleware('verified');;
 
-Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+/*
+ * Cativo's Stuff START
+ */
 
+Route::group(['middleware' => ['verified'], 'prefix' => 'super', 'as' => 'super.', 'namespace' => 'Super'], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::post('abilities/destroy', 'AbilitiesController@massDestroy')->name('abilities.massDestroy');
+    Route::resource('abilities', 'AbilitiesController');
+    Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
+    Route::resource('roles', 'RolesController');
+    Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
+    Route::resource('users', 'UsersController');
+
+});
+
+Auth::routes(['verify' => true]); //Auth Routes
+
+Route::match(['get', 'post'], '/dashboard','DashboardController@index')->middleware('verified');
+
+Route::get('/roles', 'RolesController@index')->middleware('verified');
+
+Route::get('/getadmin', 'RolesController@asign_admin');
+
+/*
+ * Cativo's Stuff END
+ */
 
 
 
