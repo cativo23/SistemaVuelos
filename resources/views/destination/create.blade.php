@@ -30,14 +30,14 @@
 
 
 	    	<h2 class="content-heading">Nuevo Destino</h2>
-
-    		<div class="col-md-12">
+	        
+    		<div class="col-md-10">
                 <div class="block">
                     <div class="block-header block-header-default">
                         <h3 class="block-title">Formulario Nuevo Destino</h3>
                         <div class="block-options">
                             <button type="button" class="btn-block-option">
-                                <i class="si si-wrench"></i>
+                                <i class="fa fa-map-o"></i>
                             </button>
                         </div>
                     </div>
@@ -46,6 +46,17 @@
 
                         <form action="{{ route('destinations.store') }}" method="post">@csrf
                             <div class="form-group row">
+                                                                <div class="col-md-4">
+                                    <div class="form-material floating input-group">
+                                        <input type="text" class="form-control" id="codigo" name="codigo">
+                                        <label for="codigo">Código de Destino</label>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-hashtag"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-4">
                                     <div class="form-material floating input-group">
                                         <input type="text" class="form-control" id="ciudad" name="ciudad">
@@ -63,7 +74,7 @@
                                         <label for="estado">Estado</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
-                                                <i class="fa fa-location-arrow"></i>
+                                                <i class="fa fa-map-signs"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -75,17 +86,6 @@
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-flag"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="codigo" name="codigo">
-                                        <label for="codigo">Código de Destino</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-hashtag"></i>
                                             </span>
                                         </div>
                                     </div>

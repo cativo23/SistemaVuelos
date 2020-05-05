@@ -3,7 +3,7 @@
 return [
     'oracle' => [
         'driver'        => 'oracle',
-        'tns'           => env('DB_TNS', ''),
+        'tns'           => env('DB_TNS', 'XE'),
         'host'          => env('DB_HOST', ''),
         'port'          => env('DB_PORT', '1521'),
         'database'      => env('DB_DATABASE', ''),
@@ -13,5 +13,6 @@ return [
         'prefix'        => env('DB_PREFIX', ''),
         'prefix_schema' => env('DB_SCHEMA_PREFIX', ''),
         'edition'       => env('DB_EDITION', 'ora$base'),
+        'server_version' => env('DB_SERVER_VERSION', '11g'),
     ],
 ];

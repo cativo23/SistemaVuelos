@@ -16,6 +16,15 @@ class CreateTicketsTable extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('origin');
+            $table->string('destination');
+            $table->date('date_booking');
+            $table->date('date_cancellation')->index();
+            $table->string('seat_num');
+            $table->string('class_seat');
+            $table->unsignedBigInteger('passenger_id');
+
+            $table->foreign('passenger_id')->references('id')->on('clients')->onDelete('cascade');
         });
     }
 

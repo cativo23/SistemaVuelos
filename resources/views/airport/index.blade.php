@@ -80,10 +80,10 @@
                             <td class="text-center">{{$Aipt->country}}</td>
                             <td class="text-center">
                                 <div class="btn-group">
-                                    <a href="#" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
+                                    <a href="{{ route('airport.edit', $Aipt->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
                                         <i class="fa fa-pencil"></i>
                                     </a>
-                                    <a href="#" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Eliminar" data-original-title="Delete">
+                                    <a href="{{ route('airport.confirm', $Aipt->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Eliminar" data-original-title="Delete">
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </div>

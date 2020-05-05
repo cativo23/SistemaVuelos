@@ -30,7 +30,9 @@ class Terminal extends Model
     /*
      * Airplane to which this Seat belongs
      */
-    public function airport(){
-        $this->belongsTo('App\Airport');
+
+    public function airport()
+    {
+        return $this->belongsTo('App\Airport', 'airport_id');
     }
 }
