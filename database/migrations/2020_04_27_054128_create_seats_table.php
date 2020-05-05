@@ -20,7 +20,7 @@ class CreateSeatsTable extends Migration
             $table->boolean('status');
             $table->string('code')->unique();
 
-            $table->foreignId('airplane_id')->constrained();
+            $table->foreignId('airplane_id')->constrained()->cascadeOnDelete();
         });
     }
 

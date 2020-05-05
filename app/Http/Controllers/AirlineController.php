@@ -14,7 +14,9 @@ class AirlineController extends Controller
      */
     public function index()
     {
-        //
+
+        $airlines = Airline::all();
+        return view('airline.index', compact('airlines'));
     }
 
     /**
@@ -24,7 +26,7 @@ class AirlineController extends Controller
      */
     public function create()
     {
-        //
+        return view('airline.create');
     }
 
     /**
@@ -35,7 +37,22 @@ class AirlineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $airline = new Airline;
+        $airline->code = $request->codigo;
+        $airline->short_name = $request->nombrecorto;
+        $airline->official_name = $request->nombreoficial;
+        $airline->email = $request->email;
+        $airline->origin_country = $request->paisorigen;
+        $airline->representative = $request->representante;
+        $airline->web_page = $request->paginaweb;
+        $airline->facebook = $request->facebook;
+        $airline->instagram = $request->instagram;
+        $airline->twitter = $request->twitter;
+        $airline->whatsapp = $request->whatsapp;
+        $airline->save();
+
+        return redirect()->route('airlines.index')->with('datos', '¡La aerolinea se guardó correctamente!');
+
     }
 
     /**
@@ -44,9 +61,10 @@ class AirlineController extends Controller
      * @param  \App\Airline  $airline
      * @return \Illuminate\Http\Response
      */
-    public function show(Airline $airline)
+    public function show($id)
     {
-        //
+        $airline = Airline::findOrFail($id);
+        return view('airline.show', compact('airline'));
     }
 
     /**
@@ -55,9 +73,10 @@ class AirlineController extends Controller
      * @param  \App\Airline  $airline
      * @return \Illuminate\Http\Response
      */
-    public function edit(Airline $airline)
+    public function edit($id)
     {
-        //
+        $airline = Airline::findOrFail($id);
+        return view('airline.edit', compact('airline'));   
     }
 
     /**
@@ -67,9 +86,23 @@ class AirlineController extends Controller
      * @param  \App\Airline  $airline
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Airline $airline)
+    public function update(Request $request, $id)
     {
-        //
+        $airline = Airline::findOrFail($id);
+        $airline->code = $request->codigo;
+        $airline->short_name = $request->nombrecorto;
+        $airline->official_name = $request->nombreoficial;
+        $airline->email = $request->email;
+        $airline->origin_country = $request->paisorigen;
+        $airline->representative = $request->representante;
+        $airline->web_page = $request->paginaweb;
+        $airline->facebook = $request->facebook;
+        $airline->instagram = $request->instagram;
+        $airline->twitter = $request->twitter;
+        $airline->whatsapp = $request->whatsapp;
+        $airline->save();
+
+        return redirect()->route('airlines.index')->with('datos', '¡La aerolinea se editó correctamente!');
     }
 
     /**
@@ -78,8 +111,19 @@ class AirlineController extends Controller
      * @param  \App\Airline  $airline
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Airline $airline)
+
+    public function confirm($id)
     {
-        //
+        $airline = Airline::findOrFail($id);
+        return view('airline.confirm', compact('airline'));
+    }
+
+
+
+    public function destroy($id)
+    {
+        $airline = Airline::findOrFail($id);
+        $airline->delete();
+        return redirect()->route('airlines.index')->with('datos', '¡La aerolinea se eliminó correctamente!');
     }
 }
