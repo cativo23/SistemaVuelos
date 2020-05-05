@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.backend', ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer'])
 
 
 @section('content')
@@ -7,7 +7,7 @@
         <!-- Page Content -->
         <div class="content">
             <h2 class="content-heading">¿Desea eliminar el avión "{{ $airplane->model }}"?</h2>
-            
+
             <div class="col-md-11">
                 <div class="block">
                     <div class="block-header block-header-default">
@@ -84,7 +84,7 @@
                             <br>
                             <div class="form-group row">
                                 <div class="col-md-9">
-                                
+
                                     <button type="submit" class="btn btn-square btn-outline-primary min-width-125 mb-10" data-toggle="click-ripple">Eliminar</button>
                                     <a href="{{ route('cancelarAvion')}}" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>
                                 </div>
@@ -95,14 +95,14 @@
             </div>
                             <!-- jQuery Validation functionality is initialized in js/pages/be_forms_validation.min.js which was auto compiled from _es6/pages/be_forms_validation.js -->
                             <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                           
 
 
 
 
-                                  
-                                
-                            
+
+
+
+
 
         </div>
     </main>
