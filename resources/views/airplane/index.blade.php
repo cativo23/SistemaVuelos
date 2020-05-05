@@ -1,6 +1,6 @@
-@extends('layouts.backend')
+@extends('layouts.backend', ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer'])
 
-            
+
 @section('css_before')
     <!-- Page JS Plugins CSS -->
     <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
@@ -21,7 +21,7 @@
         <div class="my-50 text-center">
             <h2 class="font-w700 text-black mb-10">Aviones</h2>
             <h3 class="h5 text-muted mb-0">Airplanes</h3><br>
-                    <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float" 
+                    <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
         href="{{ route('airplanes.create') }}">Nuevo</a>
         </div>
 
@@ -43,7 +43,7 @@
         @endif
 
         <!--
-        <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float-right" 
+        <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float-right"
         href="{{ route('destinations.create') }}">Nueva</a><br><br><br>
         -->
         <!-- Dynamic Table Full -->
@@ -53,7 +53,7 @@
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
-                <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                <table class="table table-responsive table-bordered table-striped table-vcenter js-dataTable-full">
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 80px;">#</th>
@@ -75,7 +75,7 @@
                             <td>{{ $airplane->type }}</td>
                             <td>{{ $airplane->seat_capacity }}</td>
                             <td>{{ $airplane->manufacturer }}</td>
-                        
+
                             <td>{{ $airplane->airline_id }}</td>
                             <td class="text-center">
                                 <div class="btn-group">
@@ -89,7 +89,7 @@
                             </td>
                          </tr>
                          @endforeach
-                       
+
                     </tbody>
                 </table>
             </div>

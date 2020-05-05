@@ -22,9 +22,9 @@ class RolesController extends Controller
         $user = \Auth::user();
 
         \Bouncer::allow('super')->to('manage-users');
-
+        \Bouncer::allow('super')->to('see-super-admin-dash');
         \Bouncer::assign('super')->to($user);
 
-        return redirect('/roles');
+        return redirect('/dashboard');
     }
 }

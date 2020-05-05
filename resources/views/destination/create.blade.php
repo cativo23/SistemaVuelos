@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.backend', ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer'])
 
 
 @section('content')
@@ -30,7 +30,7 @@
 
 
 	    	<h2 class="content-heading">Nuevo Destino</h2>
-	        
+
     		<div class="col-md-10">
                 <div class="block">
                     <div class="block-header block-header-default">
