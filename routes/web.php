@@ -26,6 +26,7 @@ Route::view('/pages/blank', 'pages.blank')->middleware('verified');;
  */
 
 Route::group(['middleware' => ['verified'], 'prefix' => 'super', 'as' => 'super.', 'namespace' => 'Super'], function () {
+    Route::get('/getadmin', 'RolesController@asign_admin');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::post('abilities/destroy', 'AbilitiesController@massDestroy')->name('abilities.massDestroy');
     Route::resource('abilities', 'AbilitiesController');
@@ -42,7 +43,6 @@ Route::match(['get', 'post'], '/dashboard','DashboardController@index')->middlew
 
 Route::get('/roles', 'RolesController@index')->middleware('verified');
 
-Route::get('/getadmin', 'RolesController@asign_admin');
 
 /*
  * Cativo's Stuff END
