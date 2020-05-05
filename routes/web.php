@@ -52,4 +52,23 @@ Route::get('/cancelarAerolinea', function(){
 Route::get('/airlines/{id}/confirm', 'AirlineController@confirm')->name('airlines.confirm');
 
 
+# CRUD Airplane
+Route::resource('/airplanes', 'AirplaneController');
+
+Route::get('/cancelarAvion', function(){
+	return redirect()->route('airplanes.index');
+})->name('cancelarAvion');
+
+Route::get('/airplanes/{id}/confirm', 'AirplaneController@confirm')->name('airplanes.confirm');
+
+
+# CRUD Seat
+Route::resource('/seats', 'SeatController');
+
+Route::get('/cancelarAsiento', function(){
+	return redirect()->route('seats.index');
+})->name('cancelarAsiento');
+
+
+Route::get('/seats/{id}/confirm', 'SeatController@confirm')->name('seats.confirm');
 // Fin Ricardo Sosa
