@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.backend', ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer'])
 
 @section('content')
     <main id="main-container">
@@ -32,7 +32,7 @@
             <div class="col-md-12">
                 <div class="block">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Formulario Nuevo Aeropuerto</h3>
+                        <h3 class="block-title">Editar Aeropuerto</h3>
                         <div class="block-options">
                             <button type="button" class="btn-block-option">
                                 <i class="si si-wrench"></i>
@@ -42,7 +42,7 @@
 
                     <div class="block-content">
 
-                        <form action="{{ route('airport.update', $Airport->id) }}" method="post">
+                        <form action="{{ route('airport.update',$Airport->id) }}" method="post">
                             @method('PUT')
                             @csrf
                             <div class="form-group row">
@@ -113,14 +113,23 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="pais" name="pais" value="{{$Airport->country}}" >
-                                        <label for="codigo">Pais</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-map-marker"></i>
-                                            </span>
-                                        </div>
+                                    <div class="form-material floating">
+
+                                        @php ($countryes=['Usa', 'Canada', 'El Salvador', 'Panama', 'Guatemala', 'Honduras'])
+                                        <select class="form-control" id="pais" name="pais">
+                                        <!--<option selected="selected" value="" >-->
+                                            @foreach($countryes as $cont)
+                                                <option value="{{ $cont }}"
+
+                                                        @if ($Airport->country== $cont)
+                                                        selected
+                                                    @endif
+                                                >{{ $cont }}
+                                                </option>
+                                            @endforeach
+
+                                        </select>
+                                        <label for="continente">Continente</label>
                                     </div>
                                 </div>
                             </div>
@@ -152,3 +161,26 @@
         </div>
     </main>
 @endsection
+
+@section('js_after')
+    <!-- Page JS Plugins -->
+    <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- Page JS Code -->
+    <script src="{{ asset('js/pages/tables_datatables.js') }}"></script>
+
+@section('js_after')
+
+    <script src="{{ asset('/js/codebase.core.min.js') }}"></script>
+    <!--
+      Codebase JS
+
+      Custom functionality including Blocks/Layout API as well as other vital and optional helpers
+      webpack is putting everything together at assets/_es6/main/app.js
+  -->
+
+    <script src="{{ asset('/js/codebase.app.min.js') }}"></script>
+
+@endsection
+

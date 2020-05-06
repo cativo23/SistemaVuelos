@@ -19,11 +19,10 @@
     <!-- Page Content -->
     <div class="content">
         <div class="my-50 text-center">
-            <h2 class="font-w700 text-black mb-10">Destinos</h2>
-            <h3 class="h5 text-muted mb-0">Destinations</h3><br>
-
-            <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
-            href="{{ route('destinations.create') }}">Nuevo</a>
+            <h2 class="font-w700 text-black mb-10">Aviones</h2>
+            <h3 class="h5 text-muted mb-0">Airplanes</h3><br>
+                    <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
+        href="{{ route('airplanes.create') }}">Nuevo</a>
         </div>
 
         @if( session('datos'))
@@ -43,11 +42,14 @@
         <!-- END Info -->
         @endif
 
-
+        <!--
+        <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float-right"
+        href="{{ route('destinations.create') }}">Nueva</a><br><br><br>
+        -->
         <!-- Dynamic Table Full -->
         <div class="block">
             <div class="block-header block-header-default">
-                <h3 class="block-title">Destinos <small></small></h3>
+                <h3 class="block-title">Aviones<small></small></h3>
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
@@ -55,57 +57,39 @@
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 80px;">#</th>
-                            <th>Ciudad</th>
-                            <th>Estado</th>
-                            <th>País</th>
-                            <th>Contienete</th>
-                            <th>Código</th>
+                            <th>Modelo</th>
+                            <th>Tipo</th>
+                            <th>Capacidad</th>
+                            <th>Fabricante</th>
+                            <th>Aerolinea</th>
                             <th>Acciones</th>
                             <!--<th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>-->
                             <!--<th style="width: 15%;">Registered</th>-->
                         </tr>
                     </thead>
                     <tbody>
-                        <!--@for ($i = 1; $i < 21; $i++)
+                        @foreach( $airplanes as $airplane)
                         <tr>
-                            <td class="text-center"><?php echo $i; ?></td>
-                            <td class="font-w600">
-                                <a href="javascript:void(0)">John Doe</a>
-                            </td>
-                            <td class="d-none d-sm-table-cell">
-                                client{{ $i }}<em class="text-muted">@example.com</em>
-                            </td>
-                            <td>
-                                <em class="text-muted">{{ rand(2, 10) }} days ago</em>
-                            </td>
-                            <td class="text-center"><?php echo $i; ?></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        @endfor -->
-                        @foreach( $Destionation as $Destino)
-                        <tr>
-                            <td class="text-center">{{ $Destino->id }}</td>
-                            <td>{{ $Destino->city }}</td>
-                            <td>{{ $Destino->state }}</td>
-                            <td>{{ $Destino->country }}</td>
-                            <td>{{ $Destino->continent }}</td>
-                            <td>{{ $Destino->code }}</td>
+                            <td class="text-center">{{ $airplane->id }}</td>
+                            <td>{{ $airplane->model }}</td>
+                            <td>{{ $airplane->type }}</td>
+                            <td>{{ $airplane->seat_capacity }}</td>
+                            <td>{{ $airplane->manufacturer }}</td>
+
+                            <td>{{ $airplane->airline_id }}</td>
                             <td class="text-center">
                                 <div class="btn-group">
-                                    <a href="{{ route('destinations.edit', $Destino->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
+                                    <a href="{{ route('airplanes.edit', $airplane->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
                                         <i class="fa fa-pencil"></i>
                                     </a>
-                                    <a href="{{ route('destinations.confirm', $Destino->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Eliminar" data-original-title="Delete">
+                                    <a href="{{ route('airplanes.confirm', $airplane->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Eliminar" data-original-title="Delete">
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </div>
                             </td>
                          </tr>
                          @endforeach
+
                     </tbody>
                 </table>
             </div>

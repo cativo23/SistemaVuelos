@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.backend', ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer'])
 
 
 @section('content')
@@ -37,7 +37,7 @@
                                         <label for="nombrecorto">Nombre Corto</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
-                                                <i class="fa fa-compress"></i>
+                                                <i class="fa fa-compress" disabled></i>
                                             </span>
                                         </div>
                                     </div>

@@ -6,50 +6,27 @@
     <main id="main-container">
         <!-- Page Content -->
         <div class="content">
-        	<!--
-	        <div class="my-50 text-center">
-	            <h2 class="font-w700 text-black mb-10">Nuevo Destino</h2>
-	            <h3 class="h5 text-muted mb-0">Plugin Integration</h3>
-	        </div>
-			-->
-	        <!-- Info -->
-	       	<!--
-	        <div class="row justify-content-center">
-	            <div class="col-md-6">
-	                <div class="block">
-	                    <div class="block-content">
-	                        <p class="text-muted">
-	                            This page showcases how easily you can add a plugin’s JS/CSS assets and init it using custom JS code.
-	                        </p>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    	-->
-	        <!-- END Info -->
+        	<h2 class="content-heading">Nuevo Avión</h2>
 
-
-	    	<h2 class="content-heading">Nuevo Destino</h2>
-
-    		<div class="col-md-10">
+    		<div class="col-md-9">
                 <div class="block">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Formulario Nuevo Destino</h3>
+                        <h3 class="block-title">Formulario Nuevo Avión</h3>
                         <div class="block-options">
                             <button type="button" class="btn-block-option">
-                                <i class="fa fa-map-o"></i>
+                                <i class="fa fa-plane"></i>
                             </button>
                         </div>
                     </div>
 
                     <div class="block-content">
 
-                        <form action="{{ route('destinations.store') }}" method="post">@csrf
+                        <form action="{{ route('airplanes.store') }}" method="post">@csrf
                             <div class="form-group row">
-                                                                <div class="col-md-4">
+                                <div class="col-md-4">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="codigo" name="codigo">
-                                        <label for="codigo">Código de Destino</label>
+                                        <input type="text" class="form-control" id="modelo" name="modelo">
+                                        <label for="modelo">Modelo</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-hashtag"></i>
@@ -59,77 +36,61 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="ciudad" name="ciudad">
-                                        <label for="ciudad">Ciudad</label>
+                                        <input type="text" class="form-control" id="tipo" name="tipo">
+                                        <label for="tipo">Tipo</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
-                                                <i class="fa fa-location-arrow"></i>
+                                                <i class="fa fa-usd"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-material floating input-group">
+                                        <input type="text" class="form-control" id="capacidad" name="capacidad">
+                                        <label for="capacidad">Capacidad</label>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-users"></i>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="estado" name="estado">
-                                        <label for="estado">Estado</label>
+                                        <input type="text" class="form-control" id="fabricante" name="fabricante">
+                                        <label for="fabricante">Fabricante</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
-                                                <i class="fa fa-map-signs"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="pais" name="pais">
-                                        <label for="pais">País</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-flag"></i>
+                                                <i class="fa fa-wrench"></i>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-material floating">
-                                        <select class="form-control" id="continente" name="continente">
-                                            <option selected="selected" disabled></option>
-                                            <option value="Asia">Asia</option>
-                                            <option value="América">América</option>
-                                            <option value="África">África</option>
-                                            <option value="Antártida">Antártida</option>
-                                            <option value="Europa">Europa</option>
-                                            <option value="Oceanía">Oceanía</option>
+                                        <select class="form-control" id="aerolinea" name="aerolinea">
+                                            <option selected disabled></option>
+                                            @foreach($airlines as $airline)
+                                            <option value="{{ $airline->id }}">{{ $airline->short_name }}</option>
+                                            @endforeach
                                         </select>
-                                        <label for="continente">Continente</label>
+                                        <label for="continente">Aerolínea</label>
                                     </div>
                                 </div>
                             </div>
-
-
-
+                            <br>
                             <div class="form-group row">
                                 <div class="col-md-9">
 
                                     <button type="submit" class="btn btn-square btn-outline-primary min-width-125 mb-10" data-toggle="click-ripple">Guardar</button>
-                                    <a href="{{ route('destinations.index')}}" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>
+                                    <a href="{{ route('cancelarAvion')}}" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-	                        <!-- jQuery Validation functionality is initialized in js/pages/be_forms_validation.min.js which was auto compiled from _es6/pages/be_forms_validation.js -->
-	                        <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
-
-
-
-
-
-
-
-
-
     	</div>
     </main>
     <!-- END Page Content -->

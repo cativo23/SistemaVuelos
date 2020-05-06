@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.backend'. ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer'])
 
 @section('content')
     <main id="main-container">
@@ -32,7 +32,7 @@
             <div class="col-md-12">
                 <div class="block">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Formulario Nuevo Aeropuerto</h3>
+                        <h3 class="block-title">Eliminar Aeropuerto</h3>
                         <div class="block-options">
                             <button type="button" class="btn-block-option">
                                 <i class="si si-wrench"></i>
@@ -151,4 +151,26 @@
 
         </div>
     </main>
+@endsection
+
+@section('js_after')
+    <!-- Page JS Plugins -->
+    <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- Page JS Code -->
+    <script src="{{ asset('js/pages/tables_datatables.js') }}"></script>
+
+@section('js_after')
+
+    <script src="{{ asset('/js/codebase.core.min.js') }}"></script>
+    <!--
+      Codebase JS
+
+      Custom functionality including Blocks/Layout API as well as other vital and optional helpers
+      webpack is putting everything together at assets/_es6/main/app.js
+  -->
+
+    <script src="{{ asset('/js/codebase.app.min.js') }}"></script>
+
 @endsection

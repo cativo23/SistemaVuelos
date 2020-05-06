@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.backend', ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer'])
 
 
 @section('css_before')
@@ -148,7 +148,7 @@
                                 <div class="col-md-9">
 
                                     <button type="submit" class="btn btn-square btn-outline-primary min-width-125 mb-10" data-toggle="click-ripple">Guardar</button>
-                                    <a href="#" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>
+                                    <a href="{{ url('/airport') }}" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>
                                 </div>
                             </div>
                         </form>
