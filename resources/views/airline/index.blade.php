@@ -16,11 +16,21 @@
 @endsection
 
 @section('content')
+    <div class="bg-image bg-image-bottom" style="background-image: url({{ asset('/media/photos/photo34@2x.jpg') }});">
+        <div class="bg-primary-dark-op">
+            <div class="content content-top text-center overflow-hidden">
+                <div class="pt-50 pb-20">
+                    <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
+                        data-class="animated fadeInUp">Aerolineas</h1>
+                    <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
+                        data-class="animated fadeInUp">Airlines</h2>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Page Content -->
     <div class="content">
         <div class="my-50 text-center">
-            <h2 class="font-w700 text-black mb-10">Aerolineas</h2>
-            <h3 class="h5 text-muted mb-0">Airlines</h3><br>
                     <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
         href="{{ route('airlines.create') }}">Nueva</a>
         </div>
@@ -51,19 +61,19 @@
             <div class="block-header block-header-default">
                 <h3 class="block-title">Aerolineas<small></small></h3>
             </div>
-            <div class="block-content block-content-full">
+            <div class="block-content block-content-full col-12">
                 <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
                 <table class="table table-responsive table-bordered table-striped table-vcenter js-dataTable-full">
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 80px;">#</th>
-                            <!--<<th>Código</th>-->
+                            <th>Código</th>
                             <th>Nombre</th>
                             <!--<<th>Nombre Oficial</th>-->
                             <th>E-mail</th>
                             <!--<<th>Ciudad Origen</th>-->
                             <!--<<th>Representante</th>-->
-                           	<!--<th class="text-center">Web</th>-->
+                           	<th class="text-center">Web</th>
                             <th class="text-center"><i class="fa fa-facebook-square"></th>
                             <th class="text-center"><i class="fa fa-instagram"></th>
                             <th class="text-center"><i class="fa fa-twitter"></th>
@@ -78,14 +88,14 @@
                         @foreach( $airlines as $airline)
                         <tr>
                             <td class="text-center">{{ $airline->id }}</td>
-                            <!--<<td>{{ $airline->code }}</td>-->
+                            <td>{{ $airline->code }}</td>
                             <td>{{ $airline->short_name }}</td>
                             <!--<<td>{{ $airline->oficial_name }}</td>-->
                             <td>{{ $airline->email }}</td>
 
                             <!--<<td>{{ $airline->origin_country }}</td>-->
                             <!--<<td>{{ $airline->representative }}</td>-->
-                            <!--<td>{{ $airline->web_page }}</td>-->
+                            <td>{{ $airline->web_page }}</td>
                             <td>{{ $airline->facebook }}</td>
                             <td>{{ $airline->instagram }}</td>
                             <td>{{ $airline->twitter }}</td>

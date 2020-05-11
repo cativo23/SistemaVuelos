@@ -89,22 +89,24 @@
                         </a>
                     </li>
                     <li class="nav-main-heading">
-                        <span class="sidebar-mini-visible">VR</span><span class="sidebar-mini-hidden">Various</span>
+                        <span class="sidebar-mini-visible">CRUDS</span><span class="sidebar-mini-hidden">CRUDS</span>
                     </li>
-                    <li class="{{ request()->is('pages/*') ? ' open' : '' }}">
-                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bulb"></i><span class="sidebar-mini-hide">Examples</span></a>
-                        <ul>
-                            <li>
-                                <a class="{{ request()->is('pages/datatables') ? ' active' : '' }}" href="/pages/datatables">DataTables</a>
-                            </li>
-                            <li>
-                                <a class="{{ request()->is('pages/slick') ? ' active' : '' }}" href="/pages/slick">Slick Slider</a>
-                            </li>
-                            <li>
-                                <a class="{{ request()->is('pages/blank') ? ' active' : '' }}" href="/pages/blank">Blank</a>
-                            </li>
-                        </ul>
-                    </li>
+                    @if($user->can('admin-line'))
+                        <li class="{{ request()->is('airplanes*', 'airlines*', 'airport*', 'destination*', 'seats*', 'terminals*') ? ' open' : '' }}">
+                            <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bulb"></i><span class="sidebar-mini-hide">Manejo de Aerppuertos</span></a>
+                            <ul>
+                                <li>
+                                    <a class="{{ request()->is('super/users*') ? ' active' : '' }}" href="{{route('super.users.index')}}">Usuarios</a>
+                                </li>
+                                <li>
+                                    <a class="{{ request()->is('super/roles*') ? ' active' : '' }}" href="{{route('super.roles.index')}}">Roles</a>
+                                </li>
+                                <li>
+                                    <a class="{{ request()->is('super/abilities*') ? ' active' : '' }}" href="{{route('super.abilities.index')}}">Permisos</a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
                     <li class="nav-main-heading">
                         <span class="sidebar-mini-visible">MR</span><span class="sidebar-mini-hidden">More</span>
                     </li>

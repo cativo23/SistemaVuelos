@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Cog\Contracts\Ban\Bannable as BannableContract;
+use Cog\Laravel\Ban\Traits\Bannable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -36,10 +38,11 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
  * @method static Builder|User whereUPDATEDAT($value)
  * @mixin \Eloquent
  */
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, BannableContract
 {
     use Notifiable;
     use HasRolesAndAbilities;
+    use Bannable;
 
     /**
      * The attributes that are mass assignable.
