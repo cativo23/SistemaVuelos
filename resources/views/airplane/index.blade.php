@@ -16,11 +16,21 @@
 @endsection
 
 @section('content')
+    <div class="bg-image bg-image-bottom" style="background-image: url({{ asset('/media/photos/photo34@2x.jpg') }});">
+        <div class="bg-primary-dark-op">
+            <div class="content content-top text-center overflow-hidden">
+                <div class="pt-50 pb-20">
+                    <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
+                        data-class="animated fadeInUp">Aviones</h1>
+                    <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
+                        data-class="animated fadeInUp">Airplanes</h2>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Page Content -->
     <div class="content">
         <div class="my-50 text-center">
-            <h2 class="font-w700 text-black mb-10">Aviones</h2>
-            <h3 class="h5 text-muted mb-0">Airplanes</h3><br>
                     <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
         href="{{ route('airplanes.create') }}">Nuevo</a>
         </div>

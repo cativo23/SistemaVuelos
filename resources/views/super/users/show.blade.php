@@ -1,5 +1,5 @@
 @extends('layouts.backend', ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer'])
-
+@section('section', 'Usuario '.$user->name)
 @section('content')
     <!-- Page Content -->
     <!-- Hero -->
@@ -55,7 +55,7 @@
                                     <div class="font-size-sm text-muted">{{$role->title}}</div>
                                 </div>
                                 <div class="block-content block-content-full">
-                                    <a class="btn btn-rounded btn-alt-secondary" href="javascript:void(0)">
+                                    <a class="btn btn-rounded btn-alt-secondary" href="{{route('super.roles.edit', $role->id)}}">
                                         <i class="fa fa-pencil mr-5"></i>Edit Role
                                     </a>
                                 </div>
