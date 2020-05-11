@@ -16,14 +16,23 @@
 @endsection
 {{--INICIO DE CONTENIDO--}}
 @section('content')
+    <div class="bg-image bg-image-bottom" style="background-image: url({{ asset('/media/photos/photo34@2x.jpg') }});">
+        <div class="bg-primary-dark-op">
+            <div class="content content-top text-center overflow-hidden">
+                <div class="pt-50 pb-20">
+                    <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
+                        data-class="animated fadeInUp">Aeropuertos</h1>
+                    <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
+                        data-class="animated fadeInUp">"Airports"</h2>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Page Content -->
     <div class="content">
         <div class="my-50 text-center">
-            <h2 class="font-w700 text-black mb-10">Aeropuertos</h2>
-            <h3 class="h5 text-muted mb-0">Airports</h3><br>
-
             <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
-               href="{{ route('airport.create') }}">Nuevo</a>
+               href="{{ route('airports.create') }}">Nuevo</a>
         </div>
 
     @if( session('datos'))
@@ -80,10 +89,10 @@
                             <td class="text-center">{{$Aipt->country}}</td>
                             <td class="text-center">
                                 <div class="btn-group">
-                                    <a href="{{ route('airport.edit', $Aipt->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
+                                    <a href="{{ route('airports.edit', $Aipt->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
                                         <i class="fa fa-pencil"></i>
                                     </a>
-                                    <a href="{{ route('airport.confirm', $Aipt->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Eliminar" data-original-title="Delete">
+                                    <a href="{{ route('airports.confirm', $Aipt->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Eliminar" data-original-title="Delete">
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </div>

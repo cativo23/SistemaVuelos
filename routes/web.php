@@ -18,30 +18,28 @@ Route::view('/', 'landing');
 
 Route::view('/pages/slick', 'pages.slick')->middleware('verified');
 Route::view('/pages/datatables', 'pages.datatables')->middleware('verified');
-Route::view('/pages/blank', 'pages.blank')->middleware('verified');;
-
+Route::view('/pages/blank', 'pages.blank')->middleware(['verified', 'logs-out-banned-user']);
+Route::view('/banned', 'auth.banned')->name('banned');
 
 /*
  * Cativo's Stuff START
  */
 
-Route::group(['middleware' => ['verified'], 'prefix' => 'super', 'as' => 'super.', 'namespace' => 'Super'], function () {
-    Route::get('/getadmin', 'RolesController@asign_admin');
+Route::group(['middleware' => ['verified', 'forbid-banned-user'], 'prefix' => 'super', 'as' => 'super.', 'namespace' => 'Super'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::post('abilities/destroy', 'AbilitiesController@massDestroy')->name('abilities.massDestroy');
+    Route::delete('abilities/mass_destroy', 'AbilitiesController@mass')->name('abilities.mass');
     Route::resource('abilities', 'AbilitiesController');
-    Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
+    Route::delete('roles/mass_destroy', 'RolesController@mass')->name('roles.mass');
     Route::resource('roles', 'RolesController');
-    Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
+    Route::delete('users/mass_destroy', 'UsersController@mass')->name('users.mass');
+    Route::delete('users/mass_destroy', 'UsersController@mass')->name('users.mass');
     Route::resource('users', 'UsersController');
 
 });
 
 Auth::routes(['verify' => true]); //Auth Routes
 
-Route::match(['get', 'post'], '/dashboard','DashboardController@index')->middleware('verified');
-
-Route::get('/roles', 'RolesController@index')->middleware('verified');
+Route::match(['get', 'post'], '/dashboard','DashboardController@index')->middleware('verified')->middleware('forbid-banned-user');
 
 
 /*
@@ -68,19 +66,11 @@ Route::get('/airlines/{id}/confirm', 'AirlineController@confirm')->name('airline
 # CRUD Airplane
 Route::resource('/airplanes', 'AirplaneController');
 
-Route::get('/cancelarAvion', function(){
-	return redirect()->route('airplanes.index');
-})->name('cancelarAvion');
 
 Route::get('/airplanes/{id}/confirm', 'AirplaneController@confirm')->name('airplanes.confirm');
 
-
 # CRUD Seat
 Route::resource('/seats', 'SeatController');
-
-Route::get('/cancelarAsiento', function(){
-	return redirect()->route('seats.index');
-})->name('cancelarAsiento');
 
 
 Route::get('/seats/{id}/confirm', 'SeatController@confirm')->name('seats.confirm');
@@ -89,9 +79,9 @@ Route::get('/seats/{id}/confirm', 'SeatController@confirm')->name('seats.confirm
 
 // Inicio ARIEL ZELAYA
 //AIRPORT
-Route::resource('/airport','AirportController');
-Route::get('/airport/{id}/confirm', 'AirportController@confirm')->name('airport.confirm');
+Route::resource('/airports','AirportController');
+Route::get('/airports/{id}/confirm', 'AirportController@confirm')->name('airport.confirm');
 //GATEWAY
-Route::resource('/gateway','TerminalController');
-Route::get('/gateway/{id}/confirm', 'TerminalController@confirm')->name('gateway.confirm');
+Route::resource('/gateways','TerminalController');
+Route::get('/gateways/{id}/confirm', 'TerminalController@confirm')->name('gateway.confirm');
 //FIN ARIEL ZELAYA

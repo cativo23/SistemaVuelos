@@ -3,37 +3,52 @@
 namespace App\Http\Controllers;
 
 use App\Destination;
+use App\Helper\Helper;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class DestinationController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
-        $Destionation = Destination::all();
-        //return dd($Destionation);
-        return view('destination.index', compact('Destionation'));
+        $destinations = Destination::all();
+
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+
+        return view('destination.index', compact('destinations', 'sidebar', 'header' , 'footer'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
-        return view('destination.create');
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+
+        return view('destination.create', compact('sidebar', 'header', 'footer'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -46,15 +61,13 @@ class DestinationController extends Controller
         $Destination->save();
 
         return redirect()->route('destinations.index')->with('datos', '¡El destino se guardó correctamente!');
-        //return 'Registro guardado';
-        //return dd($request); 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Destination  $destination
-     * @return \Illuminate\Http\Response
+     * @param Destination $destination
+     * @return void
      */
     public function show(Destination $destination)
     {
@@ -64,22 +77,26 @@ class DestinationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Destination  $destination
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return Application|Factory|View
      */
     public function edit($id)
     {
         $destino = Destination::findOrFail($id);
 
-        return view('destination.edit', compact('destino'));    
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+
+        return view('destination.edit', compact('destino', 'sidebar', 'header', 'footer'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Destination  $destination
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -91,21 +108,27 @@ class DestinationController extends Controller
         $Destination->code = $request->codigo;
         $Destination->save();
         return redirect()->route('destinations.index')->with('datos', '¡El destino se editó correctamente!');
-        
+
     }
 
 
     public function confirm($id)
     {
         $Destination = Destination::findOrFail($id);
-        return view('destination.confirm', compact('Destination'));
+
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+
+        return view('destination.confirm', compact('Destination', 'sidebar', 'header', 'footer'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Destination  $destination
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return RedirectResponse
+     * @throws Exception
      */
     public function destroy($id)
     {
@@ -113,6 +136,4 @@ class DestinationController extends Controller
         $Destination->delete();
         return redirect()->route('destinations.index')->with('datos', '¡El destino se eliminó correctamente!');
     }
-
-
 }

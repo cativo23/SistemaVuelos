@@ -2,6 +2,18 @@
 
 
 @section('content')
+    <div class="bg-image bg-image-bottom" style="background-image: url({{ asset('/media/photos/photo34@2x.jpg') }});">
+        <div class="bg-primary-dark-op">
+            <div class="content content-top text-center overflow-hidden">
+                <div class="pt-50 pb-20">
+                    <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
+                        data-class="animated fadeInUp">Eliminar Aerolinea</h1>
+                    <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
+                        data-class="animated fadeInUp">"{{ $airline->short_name }}"</h2>
+                </div>
+            </div>
+        </div>
+    </div>
 <!-- Page Content -->
     <main id="main-container">
         <!-- Page Content -->

@@ -215,6 +215,7 @@
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/graphviz" />
       <path value="$PROJECT_DIR$/vendor/beyondcode/laravel-er-diagram-generator" />
       <path value="$PROJECT_DIR$/vendor/silber/bouncer" />
+      <path value="$PROJECT_DIR$/vendor/cybercog/laravel-ban" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
