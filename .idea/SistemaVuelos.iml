@@ -112,6 +112,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/beyondcode/laravel-er-diagram-generator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/cybercog/laravel-ban" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dnoegel/php-xdg-base-dir" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/cache" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/dbal" />
@@ -217,5 +218,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="select.dataTables" level="application" />
+    <orderEntry type="library" name="pdfmake" level="application" />
+    <orderEntry type="library" name="vfs_fonts" level="application" />
+    <orderEntry type="library" name="jszip" level="application" />
+    <orderEntry type="library" name="dataTables.select" level="application" />
   </component>
 </module>

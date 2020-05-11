@@ -2,12 +2,24 @@
 
 
 @section('content')
+    <div class="bg-image bg-image-bottom" style="background-image: url({{ asset('/media/photos/photo34@2x.jpg') }});">
+        <div class="bg-primary-dark-op">
+            <div class="content content-top text-center overflow-hidden">
+                <div class="pt-50 pb-20">
+                    <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
+                        data-class="animated fadeInUp">Eliminar Asiento</h1>
+                    <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
+                        data-class="animated fadeInUp">"{{ $asiento->code }}"</h2>
+                </div>
+            </div>
+        </div>
+    </div>
 <!-- Page Content -->
     <main id="main-container">
         <!-- Page Content -->
         <div class="content">
             <h2 class="content-heading">¿Desea eliminar el asiento "{{ $asiento->code }}"?</h2>
-            
+
             <div class="col-md-7">
                 <div class="block">
                     <div class="block-header block-header-default">
@@ -48,14 +60,14 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="capacidad" name="capacidad"  disabled="" 
+                                        <input type="text" class="form-control" id="capacidad" name="capacidad"  disabled=""
 
                                             @if($asiento->status=='D')
                                                 value="Disponible"
                                             @elseif($asiento->status=='O')
                                                 value="Ocupado"
                                             @else
-                                               value="Reservado"                                               
+                                               value="Reservado"
                                             @endif
 
                                         >
@@ -82,7 +94,7 @@
                             <br>
                             <div class="form-group row">
                                 <div class="col-md-9">
-                                
+
                                     <button type="submit" class="btn btn-square btn-outline-primary min-width-125 mb-10" data-toggle="click-ripple">Eliminar</button>
                                     <a href="{{ route('cancelarAsiento')}}" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>
                                 </div>
@@ -93,14 +105,14 @@
             </div>
                             <!-- jQuery Validation functionality is initialized in js/pages/be_forms_validation.min.js which was auto compiled from _es6/pages/be_forms_validation.js -->
                             <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                           
 
 
 
 
-                                  
-                                
-                            
+
+
+
+
 
         </div>
     </main>

@@ -16,7 +16,7 @@
         </div>
     </div>
     <!-- END Hero -->
-    <div class="bg-primary-darker text-body-color-light">
+    <div class="bg-body text-body-color-dark">
         <div class="content">
             <!-- Row #1 -->
             <div class="row invisible" data-toggle="appear">
@@ -67,21 +67,25 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12 mt-5">
                                 <div class="form-group row {{ $errors->has('roles') ? 'has-error' : '' }}">
-                                    <label for="roles" class="col-12" for="example-select2-multiple">Roles *
-                                        <span class="btn btn-info btn-xs select-all">Select All</span>
-                                        <span class="btn btn-info btn-xs deselect-all">Deselect All</span></label>
-                                    <select name="roles[]" id="roles" class="form-control select2" multiple="multiple" required>
-                                        @foreach($roles as $id => $roles)
-                                            <option value="{{ $id }}" {{ (in_array($id, old('roles', [])) || isset($user) && $user->roles->contains($id)) ? 'selected' : '' }}>{{ $roles }}</option>
-                                        @endforeach
-                                    </select>
-                                    @if($errors->has('roles'))
-                                        <em class="invalid-feedback">
-                                            {{ $errors->first('roles') }}
-                                        </em>
-                                    @endif
+                                    <div class="col-lg-8">
+                                        <div class="form-material">
+                                            <select data-placeholder="Elija varios..." name="roles[]" id="roles" class="form-control select2" multiple="multiple" required>
+                                                @foreach($roles as $id => $roles)
+                                                    <option value="{{ $id }}" {{ (in_array($id, old('roles', [])) || isset($user) && $user->roles->contains($id)) ? 'selected' : '' }}>{{ $roles }}</option>
+                                                @endforeach
+                                            </select>
+                                            <label for="abilities">Roles * </label>
+                                            <span data-toggle="click-ripple" class="btn btn-alt-success btn-sm  select-all">Select All</span>
+                                            <span data-toggle="click-ripple" class="btn btn-alt-danger btn-sm deselect-all">Deselect All</span>
+                                            @if($errors->has('roles'))
+                                                <em class="invalid-feedback">
+                                                    {{ $errors->first('roles') }}
+                                                </em>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +96,7 @@
                                         class="btn btn-square btn-outline-primary min-width-125 mb-10"
                                         data-toggle="click-ripple">Guardar
                                 </button>
-                                <a href="{{ route('destinations.index')}}" type="button"
+                                <a href="{{ route('super.users.index')}}" type="button"
                                    class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>
                             </div>
                         </div>
@@ -132,12 +136,12 @@
             Codebase.helpers('select2');
 
             $('.select-all').click(function () {
-                let $select2 = $(this).parent().siblings('.select2')
+                let $select2 = $(this).siblings('.select2')
                 $select2.find('option').prop('selected', 'selected')
                 $select2.trigger('change')
             })
             $('.deselect-all').click(function () {
-                let $select2 = $(this).parent().siblings('.select2')
+                let $select2 = $(this).siblings('.select2')
                 $select2.find('option').prop('selected', '')
                 $select2.trigger('change')
             })

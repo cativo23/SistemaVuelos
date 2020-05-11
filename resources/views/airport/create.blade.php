@@ -16,35 +16,22 @@
 @endsection
 {{--INICIO CONTENIDO--}}
 @section('content')
+    <div class="bg-image bg-image-bottom" style="background-image: url({{ asset('/media/photos/photo34@2x.jpg') }});">
+        <div class="bg-primary-dark-op">
+            <div class="content content-top text-center overflow-hidden">
+                <div class="pt-50 pb-20">
+                    <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
+                        data-class="animated fadeInUp">Nuevo Aeropuerto</h1>
+                    <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
+                        data-class="animated fadeInUp">""</h2>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Page Content -->
     <main id="main-container">
         <!-- Page Content -->
         <div class="content">
-            <!--
-            <div class="my-50 text-center">
-                <h2 class="font-w700 text-black mb-10">Nuevo Destino</h2>
-                <h3 class="h5 text-muted mb-0">Plugin Integration</h3>
-            </div>
-            -->
-            <!-- Info -->
-            <!--
-         <div class="row justify-content-center">
-             <div class="col-md-6">
-                 <div class="block">
-                     <div class="block-content">
-                         <p class="text-muted">
-                             This page showcases how easily you can add a plugin’s JS/CSS assets and init it using custom JS code.
-                         </p>
-                     </div>
-                 </div>
-             </div>
-         </div>
-         -->
-            <!-- END Info -->
-
-
-            <h2 class="content-heading">Nuevo Aeropuerto</h2>
-
             <div class="col-md-12">
                 <div class="block">
                     <div class="block-header block-header-default">
@@ -58,7 +45,7 @@
 
                     <div class="block-content">
 
-                        <form action="{{ route('airport.store') }}" method="post">@csrf
+                        <form action="{{ route('airports.store') }}" method="post">@csrf
                             <div class="form-group row">
                                 <div class="col-md-4">
                                     <div class="form-material floating input-group">

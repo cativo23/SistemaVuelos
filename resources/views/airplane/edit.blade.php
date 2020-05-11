@@ -2,11 +2,22 @@
 
 
 @section('content')
+    <div class="bg-image bg-image-bottom" style="background-image: url({{ asset('/media/photos/photo34@2x.jpg') }});">
+        <div class="bg-primary-dark-op">
+            <div class="content content-top text-center overflow-hidden">
+                <div class="pt-50 pb-20">
+                    <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
+                        data-class="animated fadeInUp">Editar Avion</h1>
+                    <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
+                        data-class="animated fadeInUp">"{{ $airplane->model }}"</h2>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Page Content -->
     <main id="main-container">
         <!-- Page Content -->
         <div class="content">
-        	<h2 class="content-heading">Editar Avión "{{ $airplane->model}}"</h2>
 
     		<div class="col-md-9">
                 <div class="block">
@@ -92,7 +103,7 @@
                                 <div class="col-md-9">
 
                                     <button type="submit" class="btn btn-square btn-outline-primary min-width-125 mb-10" data-toggle="click-ripple">Guardar</button>
-                                    <a href="{{ route('cancelarAvion')}}" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>
+                                    <a href="{{ route('airplanes.index')}}" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>
                                 </div>
                             </div>
                         </form>

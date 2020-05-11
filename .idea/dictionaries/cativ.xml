@@ -2,9 +2,15 @@
   <dictionary name="cativ">
     <words>
       <w>authenticatable</w>
+      <w>cativo</w>
+      <w>csrf</w>
+      <w>datatables</w>
+      <w>destino</w>
       <w>endcomponent</w>
       <w>endsection</w>
       <w>fillable</w>
+      <w>jszip</w>
+      <w>rightsidebar</w>
       <w>whatsapp</w>
     </words>
   </dictionary>

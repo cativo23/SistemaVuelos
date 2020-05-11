@@ -3,39 +3,53 @@
 namespace App\Http\Controllers;
 
 use App\Airport;
+use App\Helper\Helper;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class AirportController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
-        //
         $Airports = Airport::all();
-        return view('airport.index', compact('Airports'));
+
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+
+        return view('airport.index', compact('Airports', 'sidebar', 'header', 'footer'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
-        //
-        return view('airport.create');
+        $user = Auth::user();
 
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+
+        return view('airport.create', compact('sidebar', 'header', 'footer'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -49,14 +63,14 @@ class AirportController extends Controller
         $Airport->city = $request->ciudad;
         $Airport->country = $request->pais;
         $Airport->save();
-        return redirect()->route('airport.index')->with('datos', '¡El aeropuerto se guardó correctamente!');
+        return redirect()->route('airports.index')->with('datos', '¡El aeropuerto se guardó correctamente!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Airport  $airport
-     * @return \Illuminate\Http\Response
+     * @param Airport $airport
+     * @return void
      */
     public function show(Airport $airport)
     {
@@ -66,28 +80,30 @@ class AirportController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Airport  $airport
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return Application|Factory|View
      */
     public function edit($id)
     {
-        //
         $Airport = Airport::findOrFail($id);
 
-        return view('airport.edit', compact('Airport'));
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+
+        return view('airports.edit', compact('Airport', 'sidebar', 'header', 'footer'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Airport  $airport
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Airport $airport
+     * @return RedirectResponse
      */
 
     public function update(Request $request, $id)
     {
-        //
         $Airport =  Airport::findOrFail($id);
         $Airport->name = $request->nombre;
         $Airport->telephone = $request->telefono;
@@ -97,26 +113,27 @@ class AirportController extends Controller
         $Airport->city = $request->ciudad;
         $Airport->country = $request->pais;
         $Airport->save();
-        return redirect()->route('airport.index')->with('datos', '¡El aeropuerto se guardó correctamente!');
+        return redirect()->route('airports.index')->with('datos', '¡El aeropuerto se guardó correctamente!');
     }
 
     public function confirm($id)
     {
         $Airport = Airport::findOrFail($id);
-        return view('airport.confirm', compact('Airport'));
+        return view('airports.confirm', compact('Airport'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Airport  $airport
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return RedirectResponse
+     * @throws Exception
      */
     public function destroy($id)
     {
         //
         $Airport = Airport::findOrFail($id);
         $Airport->delete();
-        return redirect()->route('airport.index')->with('datos','El aeropuerto se elimino correctamente');
+        return redirect()->route('airports.index')->with('datos','El aeropuerto se elimino correctamente');
     }
 }

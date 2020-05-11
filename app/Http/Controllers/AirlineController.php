@@ -3,37 +3,51 @@
 namespace App\Http\Controllers;
 
 use App\Airline;
+use App\Helper\Helper;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class AirlineController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|Response|View
      */
     public function index()
     {
-
         $airlines = Airline::all();
-        return view('airline.index', compact('airlines'));
+
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+
+        return view('airline.index', compact('airlines', 'sidebar', 'header', 'footer'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|Response|View
      */
     public function create()
     {
-        return view('airline.create');
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        return view('airline.create' , compact('sidebar', 'header', 'footer'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -58,33 +72,36 @@ class AirlineController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Airline  $airline
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return Application|Factory|View
      */
     public function show($id)
     {
         $airline = Airline::findOrFail($id);
-        return view('airline.show', compact('airline'));
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        return view('airline.show', compact('airline', 'sidebar', 'header', 'footer'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Airline  $airline
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return Application|Factory|View
      */
     public function edit($id)
     {
         $airline = Airline::findOrFail($id);
-        return view('airline.edit', compact('airline'));   
+        return view('airline.edit', compact('airline'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Airline  $airline
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -108,14 +125,19 @@ class AirlineController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Airline  $airline
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return Application|Factory|View
      */
 
     public function confirm($id)
     {
         $airline = Airline::findOrFail($id);
-        return view('airline.confirm', compact('airline'));
+
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+
+        return view('airline.confirm', compact('airline', 'sidebar', 'header', 'footer'));
     }
 
 
