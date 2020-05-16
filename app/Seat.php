@@ -34,6 +34,6 @@ class Seat extends Model
      * Airplane to which this Seat belongs
      */
     public function airplane(){
-        $this->belongsTo('App\Airplane');
+        return $this->belongsTo('App\Airplane');
     }
 }

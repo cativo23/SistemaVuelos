@@ -25,7 +25,7 @@ Route::view('/banned', 'auth.banned')->name('banned');
  * Cativo's Stuff START
  */
 
-Route::group(['middleware' => ['verified', 'forbid-banned-user'], 'prefix' => 'super', 'as' => 'super.', 'namespace' => 'Super'], function () {
+Route::group(['middleware' => ['verified', 'logs-out-banned-user'], 'prefix' => 'super', 'as' => 'super.', 'namespace' => 'Super'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::delete('abilities/mass_destroy', 'AbilitiesController@mass')->name('abilities.mass');
     Route::resource('abilities', 'AbilitiesController');
@@ -34,7 +34,6 @@ Route::group(['middleware' => ['verified', 'forbid-banned-user'], 'prefix' => 's
     Route::delete('users/mass_destroy', 'UsersController@mass')->name('users.mass');
     Route::delete('users/mass_destroy', 'UsersController@mass')->name('users.mass');
     Route::resource('users', 'UsersController');
-
 });
 
 Auth::routes(['verify' => true]); //Auth Routes
