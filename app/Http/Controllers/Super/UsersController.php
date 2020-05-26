@@ -193,4 +193,19 @@ class UsersController extends Controller
 
         return response()->noContent();
     }
+
+    public function ban($request, $id){
+        if (! Gate::allows('manage-users') && !Gate::allows('ban-user')) {
+            return abort(401);
+        }
+
+        $user = User::where('id', '=',$id);
+
+        $user->ban([
+            'expired_at' => '+1 month',
+            'comment'=> 'Prueba de ban'
+        ]);
+
+        return response()->redirectToRoute(route('super.users.index'));
+    }
 }

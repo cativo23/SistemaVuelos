@@ -38,6 +38,6 @@ class Destination extends Model
      * Airlines traveling to this destination
      */
     public function airlines(){
-        $this->belongsTo('App\Airline');
+        return $this->belongsTo('App\Airline');
     }
 }

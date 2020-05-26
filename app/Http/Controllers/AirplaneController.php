@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class AirplaneController extends Controller
@@ -23,6 +24,11 @@ class AirplaneController extends Controller
      */
     public function index()
     {
+
+        if (! Gate::allows('manage-airplanes')) {
+            return abort(401);
+        }
+
         $airplanes = Airplane::all();
 
         $user = Auth::user();
@@ -57,6 +63,7 @@ class AirplaneController extends Controller
      */
     public function store(Request $request)
     {
+
         $airplane = new Airplane;
         $airplane->model = $request->modelo;
         $airplane->type = $request->tipo;
@@ -64,7 +71,9 @@ class AirplaneController extends Controller
         $airplane->manufacturer = $request->fabricante;
 
         $airplane->airline_id = $request->aerolinea;
+
         $airplane->save();
+
         return redirect()->route('airplanes.index')->with('datos', '¡Avión guardado correctamente!');
         //return dd($request);
     }

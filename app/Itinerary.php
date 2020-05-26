@@ -50,17 +50,17 @@ class Itinerary extends Model
      * Flights for this Itinerary
      */
     public function flights(){
-        $this->hasMany('App\Flight');
+        return $this->hasMany('App\Flight');
     }
 
     /*
      * Reservations that have this Itinerary
      */
     public function reservations(){
-        $this->hasMany('App\Reservation');
+        return $this->hasMany('App\Reservation');
     }
 
     public function airline(){
-        return $this->belongsTo('App\Airline');
+         return $this->belongsTo('App\Airline');
     }
 }

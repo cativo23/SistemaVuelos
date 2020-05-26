@@ -39,6 +39,6 @@ class ClientNatural extends Model
      * Client Information for this Natural Client
      */
     public function client(){
-        $this->belongsTo('App\Client');
+        return $this->belongsTo('App\Client');
     }
 }

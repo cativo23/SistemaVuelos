@@ -57,7 +57,7 @@ class Airline extends Model
      * Airplanes that this airline has
      */
     public function airplanes(){
-        $this->hasMany('App\Airplane');
+        return $this->hasMany(Airplane::class);
     }
 
     public function itineraries(){
