@@ -38,14 +38,14 @@ class Airplane extends Model
      * Airline to which this plane belongs
      */
     public function airline(){
-        $this->belongsTo('App\Airline');
+        return $this->belongsTo('App\Airline');
     }
 
     /**
      *  Flight in which this plane is used
      */
     public function flight(){
-        $this->hasOne('App\Flight');
+        return $this->hasOne('App\Flight');
     }
 
 }

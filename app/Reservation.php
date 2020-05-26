@@ -38,13 +38,13 @@ class Reservation extends Model
      * Itineraries for this reservation
      */
     public function itineraries(){
-        $this->hasMany('App\Itinerary');
+        return $this->hasMany('App\Itinerary');
     }
 
     /*
      * Client of this Reservation
      */
     public function client(){
-        $this->belongsTo('App\Client');
+        return $this->belongsTo('App\Client');
     }
 }

@@ -44,14 +44,14 @@ class Client extends Model
      * If this client is from a company this will show the extra info
      */
     public function company(){
-        $this->hasOne('App\ClientCompany');
+        return $this->hasOne('App\ClientCompany');
     }
 
     /*
      * If this client is from a company this will show the extra info
      */
     public function natural(){
-        $this->hasOne('App\ClientNatural');
+        return $this->hasOne('App\ClientNatural');
     }
 
     /*

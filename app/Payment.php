@@ -35,6 +35,6 @@ class Payment extends Model
      * Reservation for this Payment
      */
     public function reservation(){
-        $this->belongsTo('App\Reservation');
+        return $this->belongsTo('App\Reservation');
     }
 }

@@ -76,17 +76,14 @@ class Flight extends Model
     * Airlines of this flight
     */
     public function landing_gateway(){
-        $this->belongsTo('App\Terminal', 'id', 'landing_terminal');
+        return $this->belongsTo('App\Terminal', 'id', 'landing_terminal');
     }
 
     public function boarding_gateway(){
-        $this->belongsTo('App\Terminal', 'id', 'boarding_terminal');
+        return $this->belongsTo('App\Terminal', 'id', 'boarding_terminal');
     }
 
     public function  itinerary(){
         return $this-> belongsTo('App\Itinerary');
     }
-
-
-
 }

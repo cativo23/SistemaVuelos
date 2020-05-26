@@ -40,7 +40,7 @@ class ForbidBannedUserCustom
 
 
         if ($user && $user instanceof BannableContract && $user->isBanned()) {
-           // Session::flush();
+            Session::flush();
             return redirect('banned');
         }
 

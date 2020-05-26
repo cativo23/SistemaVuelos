@@ -85,6 +85,11 @@ class AirportController extends Controller
      */
     public function edit($id)
     {
+
+        if (! Gate::allows('manage-airports')) {
+            return abort(401);
+        }
+
         $Airport = Airport::findOrFail($id);
 
         $user = Auth::user();

@@ -25,7 +25,7 @@ Route::view('/banned', 'auth.banned')->name('banned');
  * Cativo's Stuff START
  */
 
-Route::group(['middleware' => ['verified', 'forbid-banned-user'], 'prefix' => 'super', 'as' => 'super.', 'namespace' => 'Super'], function () {
+Route::group(['middleware' => ['verified', 'logs-out-banned-user'], 'prefix' => 'super', 'as' => 'super.', 'namespace' => 'Super'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::delete('abilities/mass_destroy', 'AbilitiesController@mass')->name('abilities.mass');
     Route::resource('abilities', 'AbilitiesController');
@@ -34,7 +34,7 @@ Route::group(['middleware' => ['verified', 'forbid-banned-user'], 'prefix' => 's
     Route::delete('users/mass_destroy', 'UsersController@mass')->name('users.mass');
     Route::delete('users/mass_destroy', 'UsersController@mass')->name('users.mass');
     Route::resource('users', 'UsersController');
-
+    Route::post('users/{user}/ban', 'UsersController@ban');
 });
 
 Auth::routes(['verify' => true]); //Auth Routes
@@ -80,7 +80,7 @@ Route::get('/seats/{id}/confirm', 'SeatController@confirm')->name('seats.confirm
 // Inicio ARIEL ZELAYA
 //AIRPORT
 Route::resource('/airports','AirportController');
-Route::get('/airports/{id}/confirm', 'AirportController@confirm')->name('airport.confirm');
+Route::get('/airports/{id}/confirm', 'AirportController@confirm')->name('airports.confirm');
 //GATEWAY
 Route::resource('/gateways','TerminalController');
 Route::get('/gateways/{id}/confirm', 'TerminalController@confirm')->name('gateway.confirm');
