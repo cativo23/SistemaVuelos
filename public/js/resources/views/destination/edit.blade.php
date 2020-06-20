@@ -2,42 +2,72 @@
 
 
 @section('content')
+
     <div class="bg-image bg-image-bottom" style="background-image: url({{ asset('/media/photos/photo34@2x.jpg') }});">
         <div class="bg-primary-dark-op">
             <div class="content content-top text-center overflow-hidden">
                 <div class="pt-50 pb-20">
                     <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">Agregar Avion</h1>
+                        data-class="animated fadeInUp">Editar</h1>
                     <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">"Ingrese un nuevo avión"</h2>
+                        data-class="animated fadeInUp">"{{ $destino->city }}"</h2>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Page Content -->
+
+
     <main id="main-container">
-        <!-- Page Content -->
-        <div class="content">
-
-    		<div class="col-md-9">
-                <div class="block">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title">Formulario Nuevo Avión</h3>
-                        <div class="block-options">
-                            <button type="button" class="btn-block-option">
-                                <i class="fa fa-plane"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="block-content">
-
-                        <form action="{{ route('airplanes.store') }}" method="post">@csrf
+    <!-- Page Content -->
+    <div class="content">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="block">
+			        <div class="block-header block-header-default">
+			            <h3 class="block-title">Información Destino <small></small></h3>
+			        </div>
+			        <div class="block-content">
+                        <form action="{{ route('destinations.update', $destino->id)}}" method="post">
+                        	@method('PUT')
+                        	@csrf
                             <div class="form-group row">
                                 <div class="col-md-4">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="modelo" name="modelo">
-                                        <label for="modelo">Modelo</label>
+                                        <input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ $destino->city }}">
+                                        <label for="ciudad">Ciudad</label>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-location-arrow"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-material floating input-group">
+                                        <input type="text" class="form-control" id="estado" name="estado" value="{{ $destino->state }}">
+                                        <label for="estado">Estado</label>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-location-arrow"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-material floating input-group">
+                                        <input type="text" class="form-control" id="pais" name="pais" value="{{ $destino->country }}">
+                                        <label for="pais">País</label>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-flag"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-material floating input-group">
+                                        <input type="text" class="form-control" id="codigo" name="codigo" value="{{ $destino->code }}">
+                                        <label for="codigo">Código de Destino</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-hashtag"></i>
@@ -46,65 +76,43 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="tipo" name="tipo">
-                                        <label for="tipo">Tipo</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-usd"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="capacidad" name="capacidad">
-                                        <label for="capacidad">Capacidad</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-users"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="fabricante" name="fabricante">
-                                        <label for="fabricante">Fabricante</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-wrench"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
                                     <div class="form-material floating">
-                                        <select class="form-control" id="aerolinea" name="aerolinea">
-                                            <option selected disabled></option>
-                                            @foreach($airlines as $airline)
-                                            <option value="{{ $airline->id }}">{{ $airline->short_name }}</option>
-                                            @endforeach
+
+                                    	@php ($continentes=['Asia', 'América', 'África', 'Antártida', 'Europa', 'Oceanía'])
+                                        <select class="form-control" id="continente" name="continente">
+                                            <!--<option selected="selected" value="{{ $destino->continent }}" >-->
+                                    		@foreach($continentes as $cont)
+                                    			<option value="{{ $cont }}"
+
+                                    			@if ($destino->continent== $cont)
+                                    				selected
+                                    			@endif
+                                    			>{{ $cont }}
+                                    			</option>
+                                    		@endforeach
+
                                         </select>
-                                        <label for="continente">Aerolínea</label>
+                                        <label for="continente">Continente</label>
                                     </div>
                                 </div>
                             </div>
-                            <br>
+
+
+
                             <div class="form-group row">
                                 <div class="col-md-9">
 
                                     <button type="submit" class="btn btn-square btn-outline-primary min-width-125 mb-10" data-toggle="click-ripple">Guardar</button>
-                                    <a href="{{ route('airplanes.index')}}" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>
+                                    <a href="{{ route('destinations.index')}}" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>
                                 </div>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-    	</div>
-    </main>
-    <!-- END Page Content -->
+			        </div>
+			    </div>
+			</div>
+		</div>
+	</div>
+</main>
 @endsection
 
 @section('css_before')

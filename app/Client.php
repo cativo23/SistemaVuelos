@@ -44,20 +44,20 @@ class Client extends Model
      * If this client is from a company this will show the extra info
      */
     public function company(){
-        return $this->hasOne('App\ClientCompany');
+        return $this->hasOne(ClientCompany::class);
     }
 
     /*
      * If this client is from a company this will show the extra info
      */
     public function natural(){
-        return $this->hasOne('App\ClientNatural');
+        return $this->hasOne(ClientNatural::class);
     }
 
     /*
      * This Client's Itineraries
      */
     public function itineraries(){
-        $this->hasMany('App\Itinerary');
+        $this->hasMany(Itinerary::class);
     }
 }

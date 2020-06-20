@@ -7,7 +7,7 @@
             <div class="content content-top text-center overflow-hidden">
                 <div class="pt-50 pb-20">
                     <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">Eliminar Avion</h1>
+                        data-class="animated fadeInUp">Eliminar Avión</h1>
                     <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
                         data-class="animated fadeInUp">"{{ $airplane->model }}"</h2>
                 </div>
