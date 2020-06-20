@@ -71,8 +71,9 @@ Route::get('/seats/{id}/confirm', 'SeatController@confirm')->name('seats.confirm
 
 # CRUD Cliente Natural
 Route::resource('/clientNaturals', 'ClientNaturalController');
-# CRUD Cliente Empresa
 
+# CRUD Cliente Empresa
+Route::resource('/clientCompany', 'ClientCompanyController');
 
 // Fin Ricardo Sosa
 
