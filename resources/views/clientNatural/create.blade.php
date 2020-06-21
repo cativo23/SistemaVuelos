@@ -94,7 +94,6 @@
                                         @enderror
                                         @error('primernombre') </div> @enderror
                                 </div>
-
                                 <div class="col-md-4">
                                     @error('segundonombre') <div class="form-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
@@ -185,6 +184,7 @@
                                         @enderror
                                         @error('segundoapellido') </div> @enderror
                                 </div>
+
                                 <div class="col-md-4">
                                     @error('genero')<div class="form-group is-invalid">@enderror
                                         <div class="form-material floating">
@@ -465,7 +465,7 @@
                                             <label for="whatsapp">Dirección</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
-                                                    <i class="fa fa-pencil"></i>
+                                                    <i class="fa fa-map-o"></i>
                                                 </span>
                                             </div>
                                         </div>

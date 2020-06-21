@@ -71,9 +71,11 @@ Route::get('/seats/{id}/confirm', 'SeatController@confirm')->name('seats.confirm
 
 # CRUD Cliente Natural
 Route::resource('/clientNaturals', 'ClientNaturalController');
+Route::get('/clientNaturals/{id}/confirm', 'ClientNaturalController@confirm')->name('clientNaturals.confirm');
 
 # CRUD Cliente Empresa
-Route::resource('/clientCompany', 'ClientCompanyController');
+Route::resource('/clientCompanys', 'ClientCompanyController');
+Route::get('/clientCompanys/{id}/confirm', 'ClientCompanyController@confirm')->name('clientCompanys.confirm');
 
 // Fin Ricardo Sosa
 
