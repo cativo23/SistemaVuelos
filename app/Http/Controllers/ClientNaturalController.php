@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ClientNatural;
 use App\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 
 class ClientNaturalController extends Controller
 {
@@ -16,10 +17,6 @@ class ClientNaturalController extends Controller
     public function index()
     {
         $clientesn = ClientNatural::all();
-        //$clientes = Client::all();
-        dd($clientesn[0]->client);
-        //dd($clientesn);
-
 
         return view('clientNatural.index', compact('clientesn'));
 
@@ -71,11 +68,12 @@ class ClientNaturalController extends Controller
         $cliente->save();
 
         $clienten = new ClientNatural();
+
         $clienten->gender = $request->genero;
         $clienten->marital_status = $request->estadocivil;
         $clienten->document_typ = $request->tipodocumento;
         $clienten->document_num = $request->ndocumento;
-        $clienten->birthday = $request->cumple;
+        $clienten->birthday = Date::make($request->cumple);
         $clienten->direction = $request->direccion;
         $clienten->id = $cliente->id;
         $clienten->save();

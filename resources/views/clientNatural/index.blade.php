@@ -93,7 +93,7 @@
                     @foreach( $clientesn as $clienten)
                         <tr>
 
-                            <td>{{ $clienten-->frequent_customer_car_num }}</td>
+                            <td>{{ $clienten->client->frequent_customer_car_num }}</td>
                             <td>{{ $clienten->document_typ }}</td>
                             <td>{{ $clienten->document_num }}</td>
 
