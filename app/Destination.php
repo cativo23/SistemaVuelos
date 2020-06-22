@@ -5,6 +5,7 @@ namespace App;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Destination
@@ -29,15 +30,27 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Destination whereSTATE($value)
  * @method static Builder|Destination whereUPDATEDAT($value)
  * @mixin Eloquent
+ * @property-read \App\Airline $airlines
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property-read int|null $activities_count
  */
 class Destination extends Model
 {
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+    protected static $logName = 'destination';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
+
 
     /*
      * Airlines traveling to this destination
      */
     public function airlines(){
-        return $this->belongsTo('App\Airline');
+        return $this->belongsTo(Airline::class);
     }
 }

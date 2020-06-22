@@ -2,7 +2,12 @@
 
 namespace App;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Seat
@@ -14,26 +19,37 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $STATUS
  * @property string $CODE
  * @property int $AIRPLANE_ID
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Seat newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Seat newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Seat query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Seat whereAIRPLANEID($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Seat whereCLASS($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Seat whereCODE($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Seat whereCREATEDAT($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Seat whereID($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Seat whereSTATUS($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Seat whereUPDATEDAT($value)
- * @mixin \Eloquent
+ * @method static Builder|Seat newModelQuery()
+ * @method static Builder|Seat newQuery()
+ * @method static Builder|Seat query()
+ * @method static Builder|Seat whereAIRPLANEID($value)
+ * @method static Builder|Seat whereCLASS($value)
+ * @method static Builder|Seat whereCODE($value)
+ * @method static Builder|Seat whereCREATEDAT($value)
+ * @method static Builder|Seat whereID($value)
+ * @method static Builder|Seat whereSTATUS($value)
+ * @method static Builder|Seat whereUPDATEDAT($value)
+ * @mixin Eloquent
+ * @property-read Airplane $airplane
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
  */
 class Seat extends Model
 {
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+    protected static $logName = 'seat';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
 
     /*
      * Airplane to which this Seat belongs
      */
     public function airplane(){
-        return $this->belongsTo('App\Airplane');
+        return $this->belongsTo(Airplane::class);
     }
 }

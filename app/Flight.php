@@ -4,7 +4,11 @@ namespace App;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
+use function Sodium\crypto_kx;
 
 /**
  * App\Flight
@@ -53,37 +57,58 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Flight whereSTATUS($value)
  * @method static Builder|Flight whereUPDATEDAT($value)
  * @mixin Eloquent
+ * @property int $ITINERARY_ID
+ * @property-read Terminal $boarding_gateway
+ * @property-read Terminal $landing_gateway
+ * @method static Builder|Flight whereITINERARYID($value)
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
  */
 class Flight extends Model
 {
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+     protected static $logName = 'flight';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
 
     /*
      * Airlines of this flight
      */
     public function airline(){
-        $this->belongsTo('App\Airline');
+        $this->belongsTo(Airline::class);
     }
 
     /*
     * Airplane of this flight
     */
     public function airplane(){
-        $this->belongsTo('App\Airplane');
+        $this->belongsTo(Airline::class);
     }
 
     /*
-    * Airlines of this flight
+    * Arrival Gateway of this flight
     */
     public function landing_gateway(){
-        return $this->belongsTo('App\Terminal', 'id', 'landing_terminal');
+        return $this->belongsTo(Terminal::class, 'id', 'landing_terminal');
     }
 
+    /*
+     * Boarding Gateway of this flight
+     */
     public function boarding_gateway(){
-        return $this->belongsTo('App\Terminal', 'id', 'boarding_terminal');
+        return $this->belongsTo(Terminal::class, 'id', 'boarding_terminal');
     }
 
+
+    /*
+     *   Itinerary of this flight
+     */
     public function  itinerary(){
-        return $this-> belongsTo('App\Itinerary');
+        return $this-> belongsTo(Itinerary::class);
     }
 }

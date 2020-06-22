@@ -4,7 +4,10 @@ namespace App;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Itinerary
@@ -41,26 +44,41 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Itinerary whereTYPE($value)
  * @method static Builder|Itinerary whereUPDATEDAT($value)
  * @mixin Eloquent
+ * @property-read Airline $airline
+ * @property-read Collection|Flight[] $flights
+ * @property-read int|null $flights_count
+ * @property-read Collection|Reservation[] $reservations
+ * @property-read int|null $reservations_count
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
  */
 class Itinerary extends Model
 {
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+    protected static $logName = 'itinerary';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
 
     /*
      * Flights for this Itinerary
      */
     public function flights(){
-        return $this->hasMany('App\Flight');
+        return $this->hasMany(Flight::class);
     }
 
     /*
      * Reservations that have this Itinerary
      */
     public function reservations(){
-        return $this->hasMany('App\Reservation');
+        return $this->hasMany(Reservation::class);
     }
 
     public function airline(){
-         return $this->belongsTo('App\Airline');
+         return $this->belongsTo(Airline::class);
     }
 }

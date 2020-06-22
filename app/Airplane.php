@@ -4,7 +4,10 @@ namespace App;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Airplane
@@ -29,23 +32,36 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Airplane whereTYPE($value)
  * @method static Builder|Airplane whereUPDATEDAT($value)
  * @mixin Eloquent
+ * @property-read Airline $airline
+ * @property-read Flight|null $flight
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
  */
 class Airplane extends Model
 {
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+    protected static $logName = 'airplane';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
+
 
     /**
      * Airline to which this plane belongs
      */
     public function airline(){
-        return $this->belongsTo('App\Airline');
+        return $this->belongsTo(Airline::class);
     }
 
     /**
      *  Flight in which this plane is used
      */
     public function flight(){
-        return $this->hasOne('App\Flight');
+        return $this->hasOne(Flight::class);
     }
 
 }

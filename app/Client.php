@@ -4,7 +4,10 @@ namespace App;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Client
@@ -35,29 +38,42 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Client whereSECONDSURNAME($value)
  * @method static Builder|Client whereUPDATEDAT($value)
  * @mixin Eloquent
+ * @property-read ClientCompany|null $company
+ * @property-read ClientNatural|null $natural
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
  */
 class Client extends Model
 {
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+    protected static $logName = 'client';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
+
 
     /*
      * If this client is from a company this will show the extra info
      */
     public function company(){
-        return $this->hasOne('App\ClientCompany');
+        return $this->hasOne(ClientCompany::class);
     }
 
     /*
      * If this client is from a company this will show the extra info
      */
     public function natural(){
-        return $this->hasOne('App\ClientNatural');
+        return $this->hasOne(ClientNatural::class);
     }
 
     /*
      * This Client's Itineraries
      */
     public function itineraries(){
-        $this->hasMany('App\Itinerary');
+        $this->hasMany(Itinerary::class);
     }
 }

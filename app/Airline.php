@@ -4,7 +4,10 @@ namespace App;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Airline
@@ -41,16 +44,31 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Airline whereWEBPAGE($value)
  * @method static Builder|Airline whereWHATSAPP($value)
  * @mixin Eloquent
+ * @property-read Collection|Airplane[] $airplanes
+ * @property-read int|null $airplanes_count
+ * @property-read Collection|Itinerary[] $itineraries
+ * @property-read int|null $itineraries_count
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
  */
 class Airline extends Model
 {
+
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+    protected static $logName = 'airline';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
 
     /**
      * Destinations that this airline serves flights to
      */
     public function destinations(){
-        $this->belongsToMany('App\Destination');
+        $this->belongsToMany(Destination::class);
     }
 
     /**
@@ -61,6 +79,6 @@ class Airline extends Model
     }
 
     public function itineraries(){
-        return $this->hasMany('App\Itinerary');
+        return $this->hasMany(Itinerary::class);
     }
 }

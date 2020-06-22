@@ -18,8 +18,8 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
-        "michaeldrennen/geonames": "^7.0",
         "silber/bouncer": "v1.0.0-rc.8",
+        "spatie/laravel-activitylog": "^3.14",
         "yajra/laravel-oci8": "7"
     },
     "require-dev": {

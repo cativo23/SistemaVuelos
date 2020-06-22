@@ -4,7 +4,10 @@ namespace App;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Payment
@@ -25,11 +28,21 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Payment whereTOTALPRICE($value)
  * @method static Builder|Payment whereUPDATEDAT($value)
  * @mixin Eloquent
+ * @property-read Reservation $reservation
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
  */
 class Payment extends Model
 {
+    use LogsActivity;
 
     protected $guarded = ['id'];
+
+    protected static $logName = 'payment';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
 
     /*
      * Reservation for this Payment

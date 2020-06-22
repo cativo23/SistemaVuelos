@@ -3,7 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Terminal
@@ -22,10 +25,21 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Terminal whereID($value)
  * @method static Builder|Terminal whereUPDATEDAT($value)
  * @mixin \Eloquent
+ * @property-read Airport $airport
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
  */
 class Terminal extends Model
 {
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+    protected static $logName = 'terminal';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
 
     /*
      * Airplane to which this Seat belongs
@@ -33,6 +47,6 @@ class Terminal extends Model
 
     public function airport()
     {
-        return $this->belongsTo('App\Airport', 'airport_id');
+        return $this->belongsTo(Airport::class, 'airport_id');
     }
 }

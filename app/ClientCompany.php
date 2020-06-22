@@ -4,7 +4,10 @@ namespace App;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\ClientCompany
@@ -27,15 +30,26 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|ClientCompany whereNIT($value)
  * @method static Builder|ClientCompany whereUPDATEDAT($value)
  * @mixin Eloquent
+ * @property-read Client $client
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
  */
 class ClientCompany extends Model
 {
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+    protected static $logName = 'client_company';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
 
     /*
      * Client Information for this Company Client
      */
     public function client(){
-        return $this->belongsTo('App\Client');
+        return $this->belongsTo(Client::class);
     }
 }

@@ -4,7 +4,10 @@ namespace App;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Airport
@@ -33,15 +36,28 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Airport whereTELEPHONE($value)
  * @method static Builder|Airport whereUPDATEDAT($value)
  * @mixin Eloquent
+ * @property-read Collection|Terminal[] $gateways
+ * @property-read int|null $gateways_count
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
  */
 class Airport extends Model
 {
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+    protected static $logName = 'airport';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
+
 
     /*
      * Gateways from this Airport
      */
     public function gateways(){
-        return $this->hasMany('App\Terminal');
+        return $this->hasMany(Terminal::class);
     }
 }

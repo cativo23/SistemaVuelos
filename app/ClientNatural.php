@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\ClientNatural
@@ -30,15 +31,27 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|ClientNatural whereMARITALSTATUS($value)
  * @method static Builder|ClientNatural whereUPDATEDAT($value)
  * @mixin \Eloquent
+ * @property-read \App\Client $client
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property-read int|null $activities_count
  */
 class ClientNatural extends Model
 {
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+    protected static $logName = 'client_natural';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
+
 
     /*
      * Client Information for this Natural Client
      */
     public function client(){
-        return $this->belongsTo('App\Client');
+        return $this->belongsTo(Client::class);
     }
 }

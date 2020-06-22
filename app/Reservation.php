@@ -4,7 +4,10 @@ namespace App;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Reservation
@@ -29,22 +32,37 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Reservation whereSUITCASENUM($value)
  * @method static Builder|Reservation whereUPDATEDAT($value)
  * @mixin Eloquent
+ * @property int $PASSENGERS
+ * @property-read Client $client
+ * @property-read Collection|Itinerary[] $itineraries
+ * @property-read int|null $itineraries_count
+ * @method static Builder|Reservation wherePASSENGERS($value)
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
  */
 class Reservation extends Model
 {
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+    protected static $logName = 'reservation';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
 
     /*
      * Itineraries for this reservation
      */
     public function itineraries(){
-        return $this->hasMany('App\Itinerary');
+        return $this->hasMany(Itinerary::class);
     }
 
     /*
      * Client of this Reservation
      */
     public function client(){
-        return $this->belongsTo('App\Client');
+        return $this->belongsTo(Client::class);
     }
 }
