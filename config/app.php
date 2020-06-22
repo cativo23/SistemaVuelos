@@ -182,7 +182,10 @@ return [
          * Laravel IDE Helper
          */
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
-
+        /*
+         * Geonames Service Provider
+         */
+        MichaelDrennen\Geonames\GeonamesServiceProvider::class,
     ],
 
     /*

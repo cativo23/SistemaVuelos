@@ -4,6 +4,67 @@
 @section('css_before')
     <!-- Page JS Plugins CSS -->
     <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
+    <style>
+        /***
+	TYPEAHEAD for MDB
+	by djibe
+***/
+
+        .typeahead {
+            z-index: 1051;
+        }
+
+
+        /*If using icon span before input, like <i class="fa fa-asterisk prefix"></i>*/
+
+        span.twitter-typeahead {
+            width: calc(100% - 3rem);
+            margin-left: 3rem;
+        }
+
+
+        /* Aspect of the dropdown of results*/
+
+        .typeahead.dropdown-menu,
+        span.twitter-typeahead .tt-menu {
+            min-width: 100%;
+            background: white;
+            /*as large as input*/
+            border: none;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+            border-radius: 0;
+            font-size: 1.2rem;
+        }
+
+
+        /*Aspect of results, done*/
+
+        span.twitter-typeahead .tt-suggestion {
+            color: #4285F4;
+            cursor: pointer;
+            padding: 1rem;
+            text-transform: capitalize;
+            font-weight: 400;
+        }
+
+
+        /*Hover a result, done*/
+
+        span.twitter-typeahead .active.tt-suggestion,
+        span.twitter-typeahead .tt-suggestion.tt-cursor,
+        span.twitter-typeahead .active.tt-suggestion:focus,
+        span.twitter-typeahead .tt-suggestion.tt-cursor:focus,
+        span.twitter-typeahead .active.tt-suggestion:hover,
+        span.twitter-typeahead .tt-suggestion.tt-cursor:hover {
+            background-color: #EEEEEE;
+            color: #4285F4;
+        }
+
+        label.active {
+            color: #4285F4 !important;
+        }
+
+    </style>
 @endsection
 
 @section('js_after')
@@ -13,6 +74,47 @@
 
     <!-- Page JS Code -->
     <script src="{{ asset('js/pages/tables_datatables.js') }}"></script>
+    <script src="{{asset('js/plugins/typeahead/typeahead.bundle.min.js')}}"></script>
+    <script>
+
+        $('#pais').on('focus', function() {
+            $(this).parent().siblings().addClass('active');
+        }).on('blur', function() {
+            if (!$(this).val()) {
+                $(this).parent().siblings().removeClass('active');
+            }
+        });
+
+        const countries = new Bloodhound({
+            datumTokenizer: datum => Bloodhound.tokenizers.whitespace(datum.value),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: {
+                wildcard: '%QUERY',
+                url: 'https://wft-geo-db.p.rapidapi.com/v1/geo/countries?namePrefix=%QUERY',
+                // Map the remote source JSON array to a JavaScript objct array
+                transform: response => $.map(response.data, country => ({
+                    value: country.name
+                })),
+                prepare: function (query, settings) {
+                    settings.url = settings.url.replace('%QUERY', query);
+                    settings.headers = {
+                        "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
+                        "x-rapidapi-key":"68c27db63bmsh025c862d9e8289dp1d894ajsn8bc66ab37e1d"
+                    };
+                    return settings;
+                },
+                templates: {
+                    empty: '<div class="empty-message">No results found</div>',
+                }
+            }
+        });
+
+        // Instantiate the Typeahead UI
+        $('#pais').typeahead(null, {
+            display: 'value',
+            source: countries
+        });
+    </script>
 @endsection
 {{--INICIO CONTENIDO--}}
 @section('content')
@@ -115,16 +217,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-material floating">
-                                        <select class="form-control" id="pais" name="pais">
-                                            <option selected="selected" disabled></option>
-                                            <option value="Usa">Usa</option>
-                                            <option value="Canada">Canada</option>
-                                            <option value="El Salvador">El Salvador</option>
-                                            <option value="Panama">Panama</option>
-                                            <option value="Guatemala">Guatemala</option>
-                                            <option value="Honduras">Honduras</option>
-                                        </select>
-                                        <label for="continente">Pais</label>
+                                        <input type="text" class="form-control" id="pais" name="pais">
+                                        <label for="pais">Pais</label>
                                     </div>
                                 </div>
                             </div>
@@ -145,30 +239,8 @@
             <!-- jQuery Validation functionality is initialized in js/pages/be_forms_validation.min.js which was auto compiled from _es6/pages/be_forms_validation.js -->
             <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
 
-
-
-
-
-
-
-
-
         </div>
     </main>
     <!-- END Page Content -->
 @endsection
 
-{{--FIN DE CONTENIDO--}}
-@section('js_after')
-
-    <script src="{{ asset('/js/codebase.core.min.js') }}"></script>
-    <!--
-      Codebase JS
-
-      Custom functionality including Blocks/Layout API as well as other vital and optional helpers
-      webpack is putting everything together at assets/_es6/main/app.js
-  -->
-
-    <script src="{{ asset('/js/codebase.app.min.js') }}"></script>
-
-@endsection

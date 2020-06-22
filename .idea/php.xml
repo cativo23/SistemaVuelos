@@ -216,6 +216,20 @@
       <path value="$PROJECT_DIR$/vendor/beyondcode/laravel-er-diagram-generator" />
       <path value="$PROJECT_DIR$/vendor/silber/bouncer" />
       <path value="$PROJECT_DIR$/vendor/cybercog/laravel-ban" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/vendor/curl/curl" />
+      <path value="$PROJECT_DIR$/vendor/fabpot/goutte" />
+      <path value="$PROJECT_DIR$/vendor/symfony/browser-kit" />
+      <path value="$PROJECT_DIR$/vendor/michaeldrennen/remote-file" />
+      <path value="$PROJECT_DIR$/vendor/michaeldrennen/geonames" />
+      <path value="$PROJECT_DIR$/vendor/michaeldrennen/local-file" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
