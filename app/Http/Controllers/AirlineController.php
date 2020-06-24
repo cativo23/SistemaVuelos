@@ -38,9 +38,11 @@ class AirlineController extends Controller
     public function create()
     {
         $user = Auth::user();
+        $lastAirline = Airline::latest('id')->first();
+        $idcode = $lastAirline->id +1;
 
         list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
-        return view('airline.create' , compact('sidebar', 'header', 'footer'));
+        return view('airline.create' , compact('sidebar', 'header', 'footer', 'idcode'));
     }
 
     /**
@@ -51,6 +53,20 @@ class AirlineController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'codigo' => 'required|string|max:100',
+            'nombrecorto' => 'required|string|max:150',
+            'nombreoficial' => 'required|string|max:255',
+            'email' => 'required|email:rfc,dns',
+            'paisorigen' => 'required|string|max:255',
+            'representante' => 'required|string',
+            'paginaweb' => 'required|url|string|max:255',
+            'facebook' => 'required|string|max:150',
+            'instagram' => 'required|string|max:150',
+            'twitter' => 'required|string|max:150',
+            'whatsapp' => 'required|string|max:16'
+        ]);
+
         $airline = new Airline;
         $airline->code = $request->codigo;
         $airline->short_name = $request->nombrecorto;
@@ -105,6 +121,20 @@ class AirlineController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'codigo' => 'required|string|max:100',
+            'nombrecorto' => 'required|string|max:150',
+            'nombreoficial' => 'required|string|max:255',
+            'email' => 'required|email:rfc,dns',
+            'paisorigen' => 'required|string|max:255',
+            'representante' => 'required|string',
+            'paginaweb' => 'required|url|string|max:255',
+            'facebook' => 'required|string|max:150',
+            'instagram' => 'required|string|max:150',
+            'twitter' => 'required|string|max:150',
+            'whatsapp' => 'required|string|max:16'
+        ]);
+
         $airline = Airline::findOrFail($id);
         $airline->code = $request->codigo;
         $airline->short_name = $request->nombrecorto;

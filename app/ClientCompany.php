@@ -36,6 +36,6 @@ class ClientCompany extends Model
      * Client Information for this Company Client
      */
     public function client(){
-        return $this->belongsTo('App\Client');
+        return $this->belongsTo(Client::class, 'id', 'id');
     }
 }

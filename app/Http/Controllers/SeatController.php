@@ -56,6 +56,13 @@ class SeatController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'codigo' => 'required|string|max:100',
+            'clase' => 'required|string|max:150',
+            'estado' => 'required|string|max:150',
+            'avion' => 'required|string|max:255'
+        ]);
+
         $seat = new Seat;
         $seat->code = $request->codigo;
         $seat->class = $request->clase;
@@ -104,6 +111,13 @@ class SeatController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'codigo' => 'required|string|max:100',
+            'clase' => 'required|string|max:150',
+            'estado' => 'required|string|max:150',
+            'avion' => 'required|string|max:255'
+        ]);
+
         $seat = Seat::findOrFail($id);
         $seat->code = $request->codigo;
         $seat->class = $request->clase;
