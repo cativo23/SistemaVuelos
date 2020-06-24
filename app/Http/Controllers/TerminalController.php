@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Terminal;
 use App\Airport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TerminalController extends Controller
 {
@@ -17,7 +19,10 @@ class TerminalController extends Controller
     {
         //
         $Terminal = Terminal::all();
-        return view('terminal.index', compact('Terminal'));
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        return view('terminal.index', compact('Terminal' ,'sidebar', 'header', 'footer'));
     }
 
     /**
@@ -28,8 +33,11 @@ class TerminalController extends Controller
     public function create()
     {
         //
-        $Airport = Airport::all();
-        return view('terminal.create')->with('Airports',$Airport);
+        $Airports = Airport::all();
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        return view('terminal.create', compact("Airports",'sidebar', 'header', 'footer'));
     }
 
     /**
@@ -46,7 +54,7 @@ class TerminalController extends Controller
         $Terminal->airport_id = $request->airport_id;
         $Terminal->save();
 
-        return redirect()->route('gateway.index')->with('datos', 'La terminal se guardó correctamente!');
+        return redirect()->route('gateways.index')->with('datos', 'La terminal se guardó correctamente!');
     }
 
     /**
@@ -71,8 +79,11 @@ class TerminalController extends Controller
         //
         $Terminal = Terminal::findOrFail($id);
         $Airport = Airport::all();
+        $user = Auth::user();
 
-        return view('terminal.edit')->with('Terminal',$Terminal)->with('Airport',$Airport);
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+
+        return view('terminal.edit', compact('Terminal','Airport', 'sidebar', 'header', 'footer'));
     }
 
     /**
@@ -90,7 +101,7 @@ class TerminalController extends Controller
         $Terminal->airport_id = $request->airport_id;
         $Terminal->save();
 
-        return redirect()->route('gateway.index')->with('datos', '¡La terminal se actualizo correctamente!');
+        return redirect()->route('gateways.index')->with('datos', '¡La terminal se actualizo correctamente!');
 
 
     }
