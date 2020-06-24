@@ -41,11 +41,6 @@
                                     <div class="form-material floating input-group">
                                         <input type="text" class="form-control" id="codigo" name="codigo" value="{{ $airline->code }}" disabled>
                                         <label for="codigo">Código</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-hashtag"></i>
-                                            </span>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">

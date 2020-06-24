@@ -23,14 +23,17 @@
                     <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
                         data-class="animated fadeInUp">Asientos de Avión</h1>
                     <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">Airplane Seats</h2>
+                        data-class="animated fadeInUp">"Airplane Seats"</h2>
                 </div>
             </div>
         </div>
     </div>
     <!-- Page Content -->
     <div class="content">
-
+        <div class="my-50 text-center">
+                    <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
+        href="{{ route('seats.create') }}">Nuevo</a>
+        </div>
 
         @if( session('datos'))
         <!-- Info -->
@@ -56,9 +59,7 @@
         <!-- Dynamic Table Full -->
         <div class="block">
             <div class="block-header block-header-default">
-                <h3 class="block-title">Asientos de Avión<small></small></h3>
-                <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
-                   href="{{ route('seats.create') }}">Nuevo</a>
+                <h3 class="block-title">Aviones<small></small></h3>
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
@@ -70,7 +71,7 @@
                             <th>Clase</th>
                             <th>Estado</th>
                             <th>Avión</th>
-                            <th style="width: 15%">Acciones</th>
+                            <th>Acciones</th>
                             <!--<th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>-->
                             <!--<th style="width: 15%;">Registered</th>-->
                         </tr>

@@ -92,7 +92,7 @@
                         <span class="sidebar-mini-visible">CRUDS</span><span class="sidebar-mini-hidden">CRUDS</span>
                     </li>
                     @if($user->can('admin-line'))
-                        <li class="{{ request()->is('airplanes*', 'airline*', 'airport*', 'destination*', 'seats*', 'terminals*') ? ' open' : '' }}">
+                        <li class="{{ request()->is('airplanes*', 'airlines*', 'airport*', 'destination*', 'seats*', 'terminals*') ? ' open' : '' }}">
                             <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bulb"></i><span class="sidebar-mini-hide">Manejo de Aerppuertos</span></a>
                             <ul>
                                 <li>

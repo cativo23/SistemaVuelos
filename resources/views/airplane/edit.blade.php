@@ -7,7 +7,7 @@
             <div class="content content-top text-center overflow-hidden">
                 <div class="pt-50 pb-20">
                     <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">Editar Avión</h1>
+                        data-class="animated fadeInUp">Editar Avion</h1>
                     <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
                         data-class="animated fadeInUp">"{{ $airplane->model }}"</h2>
                 </div>
@@ -37,108 +37,67 @@
                             @csrf
                             <div class="form-group row">
                                 <div class="col-md-4">
-                                    @error('modelo') <div class="form-group is-invalid"> @enderror
-                                        <div class="form-material floating input-group">
-                                            <input type="text" class="form-control" id="modelo" name="modelo"
-                                                   @error('modelo') value="{{ old('modelo') }}" @enderror
-                                                   @error('capacidad') value="{{ old('modelo') }}" @enderror
-                                                   @error('fabricante') value="{{ old('modelo') }}" @enderror
-                                                   value="{{ $airplane->model}}">
-                                            <label for="modelo">Modelo</label>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-hashtag"></i>
-                                                </span>
-                                            </div>
+                                    <div class="form-material floating input-group">
+                                        <input type="text" class="form-control" id="modelo" name="modelo" value="{{ $airplane->model}}">
+                                        <label for="modelo">Modelo</label>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-hashtag"></i>
+                                            </span>
                                         </div>
-                                        @error('modelo')
-                                        <div id="nombrecorto-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
-                                        @enderror
-                                        @error('modelo') </div> @enderror
+                                    </div>
                                 </div>
                                 <div class="col-md-4">
-                                    @error('tipo')<div class="form-group is-invalid">@enderror
-                                        <div class="form-material floating">
-                                            @php ($tipos=['Comercial', 'Carga', 'Militar'])
-
-                                            <select class="form-control" id="tipo" name="tipo">
-                                                @foreach($tipos as $tipo)
-                                                    <option value="{{ $tipo }}"
-                                                        @if ( old('tipo')  == $tipo)
-                                                            selected
-                                                        @elseif($airplane->type == $tipo)
-                                                            selected
-                                                        @endif
-                                                    >{{ $tipo }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <label for="tipo">Tipo</label>
+                                    <div class="form-material floating input-group">
+                                        <input type="text" class="form-control" id="tipo" name="tipo" value="{{ $airplane->type}}">
+                                        <label for="tipo">Tipo</label>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-usd"></i>
+                                            </span>
                                         </div>
-                                        @error('tipo')<div id="val-skill2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
-                                        @error('tipo')</div>@enderror
+                                    </div>
                                 </div>
-
-
-                                <div class="col-md-4">
-                                    @error('capacidad') <div class="form-group is-invalid"> @enderror
-                                        <div class="form-material floating input-group">
-                                            <input type="text" class="form-control" id="capacidad" name="capacidad"
-                                                   @error('modelo') value="{{ old('capacidad') }}" @enderror
-                                                   @error('capacidad') value="{{ old('capacidad') }}" @enderror
-                                                   @error('fabricante') value="{{ old('capacidad') }}" @enderror
-                                                   value="{{ $airplane->seat_capacity }}">
-                                            <label for="capacidad">Capacidad (Personas)</label>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-users"></i>
-                                                </span>
-                                            </div>
+                                <div class="col-md-3">
+                                    <div class="form-material floating input-group">
+                                        <input type="text" class="form-control" id="capacidad" name="capacidad" value="{{ $airplane->seat_capacity }}">
+                                        <label for="capacidad">Capacidad</label>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-users"></i>
+                                            </span>
                                         </div>
-                                        @error('capacidad')<div id="val-skill2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
-                                        @error('capacidad')</div>@enderror
+                                    </div>
                                 </div>
                                 <div class="col-md-4">
-                                    @error('fabricante') <div class="form-group is-invalid"> @enderror
-                                        <div class="form-material floating input-group">
-                                            <input type="text" class="form-control" id="fabricante" name="fabricante"
-                                                   @error('modelo') value="{{ old('fabricante') }}" @enderror
-                                                   @error('capacidad') value="{{ old('fabricante') }}" @enderror
-                                                   @error('fabricante') value="{{ old('fabricante') }}" @enderror
-                                                   value="{{ $airplane->manufacturer }}">
-                                            <label for="fabricante">Fabricante</label>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-wrench"></i>
-                                                </span>
-                                            </div>
+                                    <div class="form-material floating input-group">
+                                        <input type="text" class="form-control" id="fabricante" name="fabricante" value="{{ $airplane->manufacturer }}">
+                                        <label for="fabricante">Fabricante</label>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-wrench"></i>
+                                            </span>
                                         </div>
-                                        @error('fabricante')<div id="val-skill2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
-                                        @error('fabricante')</div>@enderror
+                                    </div>
                                 </div>
-
                                 <div class="col-md-4">
-                                    @error('aerolinea') <div class="form-group is-invalid"> @enderror
-                                        <div class="form-material floating">
-                                            <select class="form-control" id="aerolinea" name="aerolinea">
-                                                @foreach($airlines as $airline)
-                                                    <option value="{{ $airline->id }}"
-                                                        @if ( old('aerolinea') == $airline->id)
-                                                            selected
-                                                        @elseif($airplane->airline_id== $airline->id)
-                                                            selected
-                                                        @endif
-                                                        >{{ $airline->short_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <label for="aerolinea">Aerolínea</label>
-                                        </div>
-                                        @error('aerolinea')<div id="val-skill2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
-                                        @error('aerolinea')</div>@enderror
+                                    <div class="form-material floating">
+                                        <select class="form-control" id="aerolinea" name="aerolinea">
+                                            <option selected disabled></option>
+                                            @foreach($airlines as $airline)
+                                                <option value="{{ $airline->id }}"
+
+                                                @if ($airplane->airline_id== $airline->id)
+                                                    selected
+                                                @endif
+                                                >{{ $airline->short_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <label for="aerolinea">Aerolínea</label>
+                                    </div>
                                 </div>
                             </div>
-
                             <br>
                             <div class="form-group row">
                                 <div class="col-md-9">

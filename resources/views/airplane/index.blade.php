@@ -30,7 +30,10 @@
     </div>
     <!-- Page Content -->
     <div class="content">
-
+        <div class="my-50 text-center">
+            <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
+               href="{{ route('airplanes.create') }}">Nuevo</a>
+        </div>
 
     @if( session('datos'))
         <!-- Info -->
@@ -57,8 +60,6 @@
         <div class="block">
             <div class="block-header block-header-default">
                 <h3 class="block-title">Aviones<small></small></h3>
-                <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
-                       href="{{ route('airplanes.create') }}">Nuevo</a>
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
@@ -72,7 +73,7 @@
                             <th>Capacidad</th>
                             <th>Fabricante</th>
                             <th>Aerolinea</th>
-                            <th style="width: 15%">Acciones</th>
+                            <th>Acciones</th>
                             <!--<th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>-->
                             <!--<th style="width: 15%;">Registered</th>-->
                         </tr>
