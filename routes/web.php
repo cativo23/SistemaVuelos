@@ -89,5 +89,8 @@ Route::resource('/airports','AirportController');
 Route::get('/airports/{id}/confirm', 'AirportController@confirm')->name('airports.confirm');
 //GATEWAY
 Route::resource('/gateways','TerminalController');
-Route::get('/gateways/{id}/confirm', 'TerminalController@confirm')->name('gateway.confirm');
+Route::get('/gateways/{id}/confirm', 'TerminalController@confirm')->name('gateways.confirm');
+//PAYMENT
+Route::resource('/payments','PaymentController');
+//Route::get('/gateways/{id}/confirm', 'TerminalController@confirm')->name('gateway.confirm');
 //FIN ARIEL ZELAYA

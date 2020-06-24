@@ -35,7 +35,7 @@
 
                     <div class="block-content">
 
-                        <form action="{{ route('gateway.destroy', $Terminal->id) }}" method="post">@csrf
+                        <form action="{{ route('gateways.destroy', $Terminal->id) }}" method="post">@csrf
 
                             @method('DELETE')
                             @csrf
