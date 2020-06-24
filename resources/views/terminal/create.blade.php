@@ -45,7 +45,7 @@
 
                     <div class="block-content">
 
-                        <form action="{{ route('gateway.store') }}" method="post">@csrf
+                        <form action="{{ route('gateways.store') }}" method="post">@csrf
                             <div class="form-group row">
                                 <div class="col-md-4">
                                     <div class="form-material floating input-group">
