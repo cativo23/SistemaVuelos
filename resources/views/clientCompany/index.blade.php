@@ -22,9 +22,9 @@
             <div class="content content-top text-center overflow-hidden">
                 <div class="pt-50 pb-20">
                     <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">Clientes Naturales</h1>
+                        data-class="animated fadeInUp">Clientes de Empresas</h1>
                     <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">Client Naturals
+                        data-class="animated fadeInUp">Client Companys
                     </h2>
                 </div>
 
@@ -59,11 +59,11 @@
         <!-- Dynamic Table Full -->
         <div class="block">
             <div class="block-header block-header-default">
-                <h3 class="block-title">Clientes Naturales<small></small></h3>
+                <h3 class="block-title">Clientes de Empresas<small></small></h3>
 
 
                 <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
-                   href="{{ route('clientNaturals.create') }}">Nuevo</a>
+                   href="{{ route('clientCompanys.create') }}">Nuevo</a>
 
             </div>
 
@@ -76,10 +76,12 @@
                         <!--<th class="text-center" style="width: 80px;">#</th>-->
                         <th style="width: 15%">N° Cliente Frec</th>
                         <th>Nombre</th>
+                        <th>Compañia</th>
                         <th>Millas</th>
-                        <!--<th>Dirección</th>-->
-                        <th>Tipo Doc.</th>
-                        <th>N° Doc</th>
+
+                        <!--<th>NIC</th>-->
+                        <!--<th tyle="width: 15%">NIT</th>-->
+                        <!--<th>Contacto</th>-->
                         <th>Tel. Móvil</th>
                         <!--<th>Tel. Fijo</th>-->
                         <!--<th>Cumpleaños</th>-->
@@ -90,34 +92,30 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach( $clientesn as $clienten)
-                        <tr>
-                            <td>{{ $clienten->client->frequent_customer_num }}</td>
-                            <td>
-                                {{ $clienten->client->first_name }} {{ $clienten->client->second_name }}
-                                {{ $clienten->client->first_surname }} {{ $clienten->client->second_surname }}
-                            </td>
-                            <td> {{ $clienten->client->miles }}</td>
-                            <td>{{ $clienten->document_typ }}</td>
-                            <td>{{ $clienten->document_num }}</td>
-                            <td>{{ $clienten->client->mobile_phone }}</td>
+                        @foreach($clientes_c as $cliente)
+                            <tr>
+                                <td>{{ $cliente->client->frequent_customer_num }}</td>
+                                <td>{{ $cliente->client->first_name }} {{ $cliente->client->second_name }} {{ $cliente->client->first_surname }} {{ $cliente->client->second_surname }}</td>
+                                <td>{{ $cliente->company_name }}</td>
+                                <td>{{ $cliente->client->miles }}</td>
+                                <td>{{ $cliente->client->landline_phone }}</td>
 
 
-                            <td class="text-center">
-                                <div class="btn-group">
-                                    <a href="{{route('clientNaturals.show', $clienten->id)}}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Ver" data-original-title="Ver">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                    <a  href="{{route('clientNaturals.edit', $clienten->id)}}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                    <a href="{{route('clientNaturals.confirm', $clienten->id)}}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Eliminar" data-original-title="Delete">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <a href="{{ route('clientCompanys.show', $cliente->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Ver" data-original-title="Ver">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <a href="{{ route('clientCompanys.edit', $cliente->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a href="{{ route('clientCompanys.confirm', $cliente->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Eliminar" data-original-title="Delete">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
 
                     </tbody>
                 </table>

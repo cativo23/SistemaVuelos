@@ -40,16 +40,9 @@
                                 @error('codigo') <div class="form-group is-invalid"> @enderror
                                     <div class="form-material floating input-group">
                                         <input type="text" class="form-control" id="codigo2" name="codigo2"
-                                               @error('codigo') value="{{ old('codigo') }}" @enderror
-                                               @error('nombrecorto') value="{{ old('codigo') }}" @enderror
-                                               @error('nomreoficial') value="{{ old('codigo') }}" @enderror
-                                               @error('email') value="{{ old('codigo') }}" @enderror
-                                               @error('representante') value="{{ old('codigo') }}" @enderror
-                                               @error('paginaweb') value="{{ old('codigo') }}" @enderror
-                                               @error('facebook') value="{{ old('codigo') }}" @enderror
-                                               @error('instagram') value="{{ old('codigo') }}" @enderror
-                                               @error('twitter') value="{{ old('codigo') }}" @enderror
-                                               @error('whatsapp') value="{{ old('codigo') }}" @enderror
+                                               @foreach ($errors->all() as $error)
+                                                    value="{{ old('codigo') }}"
+                                               @endforeach
                                                value="{{ $airline->code }}" disabled>
                                         <input style="display: none" type="text" class="form-control" id="codigo" name="codigo"
                                                value="{{ $airline->id }}">
