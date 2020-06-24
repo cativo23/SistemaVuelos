@@ -21,7 +21,7 @@
     		<div class="col-md-11">
                 <div class="block">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Formulario Nueva Aerolinea</h3>
+                        <h3 class="block-title">Formulario Aerolinea</h3>
                         <div class="block-options">
                             <button type="button" class="btn-block-option">
                                 <i class="fa fa-plane"></i>
@@ -34,126 +34,206 @@
                         <form action="{{ route('airlines.store') }}" method="post">@csrf
                             <div class="form-group row">
                                 <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="codigo" name="codigo">
-                                        <label for="codigo">Código</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-hashtag"></i>
-                                            </span>
+                                    @error('codigo') <div class="form-group is-invalid"> @enderror
+                                        <div class="form-material floating input-group">
+                                            <input type="text" class="form-control" id="codigo2" name="codigo2"
+                                                   @error('codigo') value="{{ old('codigo') }}" @enderror
+                                                   @error('nombrecorto') value="{{ old('codigo') }}" @enderror
+                                                   @error('nomreoficial') value="{{ old('codigo') }}" @enderror
+                                                   @error('email') value="{{ old('codigo') }}" @enderror
+                                                   @error('representante') value="{{ old('codigo') }}" @enderror
+                                                   @error('paginaweb') value="{{ old('codigo') }}" @enderror
+                                                   @error('facebook') value="{{ old('codigo') }}" @enderror
+                                                   @error('instagram') value="{{ old('codigo') }}" @enderror
+                                                   @error('twitter') value="{{ old('codigo') }}" @enderror
+                                                   @error('whatsapp') value="{{ old('codigo') }}" @enderror
+                                                   value="{{ $idcode }}" disabled>
+                                            <input style="display: none" type="text" class="form-control" id="codigo" name="codigo"
+                                                   value="{{ $idcode }}">
+                                            <label for="codigo">Código</label>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-hashtag"></i>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="nombrecorto" name="nombrecorto">
-                                        <label for="nombrecorto">Nombre Corto</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-compress"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="nombreoficial" name="nombreoficial">
-                                        <label for="nombreoficial">Nombre Oficial</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-institution"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="paisorigen" name="paisorigen">
-                                        <label for="paisorigen">País Origen</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-flag"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="email" name="email">
-                                        <label for="email">Correo Electrónico</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-envelope"></i>
-                                            </span>
-                                        </div>
-                                    </div>
+                                        @error('codigo')
+                                        <div id="codigo-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @enderror
+                                    @error('codigo')  </div> @enderror
                                 </div>
 
                                 <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="representante" name="representante">
-                                        <label for="representante">Representante</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-user"></i>
-                                            </span>
+                                    @error('nombrecorto') <div class="form-group is-invalid"> @enderror
+                                        <div class="form-material floating input-group">
+                                            <input type="text" class="form-control" id="nombrecorto" name="nombrecorto"
+                                                    value="{{ old('nombrecorto') }}">
+                                            <label for="nombrecorto">Nombre Corto</label>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-compress"></i>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
+                                        @error('nombrecorto')
+                                        <div id="nombrecorto-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @enderror
+                                    @error('nombrecorto') </div> @enderror
+                                </div>
+
+                                <div class="col-md-4">
+                                    @error('nombreoficial') <div class="form-group is-invalid"> @enderror
+                                        <div class="form-material floating input-group">
+                                            <input type="text" class="form-control" id="nombreoficial" name="nombreoficial"
+                                                   value="{{ old('nombreoficial') }}">
+                                            <label for="nombreoficial">Nombre Oficial</label>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-institution"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        @error('nombreoficial')
+                                        <div id="nombreoficial-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @enderror
+                                    @error('nombreoficial') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="paginaweb" name="paginaweb">
-                                        <label for="paginaweb">Página Web</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-mouse-pointer"></i>
-                                            </span>
+                                    @error('paisorigen') <div class="form-group is-invalid"> @enderror
+                                        <div class="form-material floating input-group">
+                                            <input type="text" class="form-control" id="paisorigen" name="paisorigen"
+                                                   value="{{ old('paisorigen') }}">
+                                            <label for="paisorigen">País Origen</label>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-flag"></i>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
+                                        @error('paisorigen')
+                                        <div id="paisorigen-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @enderror
+                                    @error('paisorigen') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="facebook" name="facebook">
-                                        <label for="facebook">Facebook</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-facebook-square"></i>
-                                            </span>
+                                    @error('email') <div class="form-group is-invalid"> @enderror
+                                        <div class="form-material floating input-group">
+                                            <input type="text" class="form-control" id="email" name="email"
+                                                   value="{{ old('email') }}">
+                                            <label for="email">Correo Electrónico</label>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-envelope"></i>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
+                                        @error('email')
+                                        <div id="email-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @enderror
+                                    @error('email') </div> @enderror
+                                </div>
+
+                                <div class="col-md-4">
+                                    @error('representante') <div class="form-group is-invalid"> @enderror
+                                        <div class="form-material floating input-group">
+                                            <input type="text" class="form-control" id="representante" name="representante"
+                                                   value="{{ old('representante') }}">
+                                            <label for="representante">Representante</label>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-user"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        @error('representante')
+                                        <div id="representante-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @enderror
+                                    @error('representante') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="instagram" name="instagram">
-                                        <label for="instagram">Instagram</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-instagram"></i>
-                                            </span>
+                                    @error('paginaweb') <div class="form-group is-invalid"> @enderror
+                                        <div class="form-material floating input-group">
+                                            <input type="text" class="form-control" id="paginaweb" name="paginaweb"
+                                                   @error('paginaweb') 'http://' value="{{ old('paginaweb') }}" @enderror value="http://">
+                                            <label for="paginaweb">Página Web</label>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-mouse-pointer"></i>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
+                                        @error('paginaweb')
+                                        <div id="paginaweb-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @enderror
+                                    @error('paginaweb') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="twitter" name="twitter">
-                                        <label for="twitter">Twitter</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-twitter"></i>
-                                            </span>
+                                    @error('facebook') <div class="form-group is-invalid"> @enderror
+                                        <div class="form-material floating input-group">
+                                            <input type="text" class="form-control" id="facebook" name="facebook"
+                                                   value="{{ old('facebook') }}">
+                                            <label for="facebook">Facebook</label>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-facebook-square"></i>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
+                                        @error('facebook')
+                                        <div id="facebook-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @enderror
+                                    @error('facebook') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="whatsapp" name="whatsapp">
-                                        <label for="whatsapp">Whatsapp</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-whatsapp"></i>
-                                            </span>
+                                    @error('instagram') <div class="form-group is-invalid"> @enderror
+                                        <div class="form-material floating input-group">
+                                            <input type="text" class="form-control" id="instagram" name="instagram"
+                                                   value="{{ old('instagram') }}">
+                                            <label for="instagram">Instagram</label>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-instagram"></i>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
+                                        @error('instagram')
+                                        <div id="instagram-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @enderror
+                                    @error('instagram') </div> @enderror
+                                </div>
+                                <div class="col-md-4">
+                                    @error('twitter') <div class="form-group is-invalid"> @enderror
+                                        <div class="form-material floating input-group">
+                                            <input type="text" class="form-control" id="twitter" name="twitter"
+                                                   value="{{ old('twitter') }}">
+                                            <label for="twitter">Twitter</label>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-twitter"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        @error('twitter')
+                                        <div id="twitter-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @enderror
+                                    @error('twitter') </div> @enderror
+                                </div>
+                                <div class="col-md-4">
+                                    @error('whatsapp') <div class="form-group is-invalid"> @enderror
+                                        <div class="form-material floating input-group">
+                                            <input type="text" class="form-control" id="whatsapp" name="whatsapp"
+                                            value="{{ old('whatsapp') }}" data-mask="(000) 0000 0000">
+                                            <label for="whatsapp">Whatsapp</label>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-whatsapp"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        @error('whatsapp')
+                                        <div id="whatsapp-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @enderror
+                                    @error('whatsapp') </div> @enderror
                                 </div>
                             </div>
 
@@ -210,4 +290,10 @@
 
         <!-- Page JS Code -->
         <script src="{{ asset('/js/pages/be_forms_validation.min.js') }}"></script>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+        <script src="{{ asset('/js/airline/create.js') }}"></script>
+
 @endsection

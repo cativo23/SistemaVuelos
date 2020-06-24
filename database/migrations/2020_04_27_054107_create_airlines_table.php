@@ -13,7 +13,7 @@ class CreateAirlinesTable extends Migration
      */
     public function up()
     {
-        Schema::create('airlines', function (Blueprint $table) {
+        Schema::create('airline', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('code')->unique();
@@ -38,6 +38,6 @@ class CreateAirlinesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('airlines');
+        Schema::dropIfExists('airline');
     }
 }

@@ -57,7 +57,7 @@ class RoleSeed extends Seeder
         ]);
 
         $manage_airlines = Bouncer::ability()->firstOrCreate([
-            'name' => 'manage-airlines',
+            'name' => 'manage-airline',
             'title' => 'Manage Airlines',
         ]);
 

@@ -63,6 +63,13 @@ class AirplaneController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'modelo' => 'required|string|max:150',
+            'tipo' => 'required|max:150',
+            'capacidad' => 'required|integer',
+            'fabricante' => 'required|string|max:255',
+            'aerolinea' => 'required'
+        ]);
 
         $airplane = new Airplane;
         $airplane->model = $request->modelo;
@@ -111,6 +118,14 @@ class AirplaneController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'modelo' => 'required|string|max:150',
+            'tipo' => 'required|max:150',
+            'capacidad' => 'required|integer',
+            'fabricante' => 'required|string|max:255',
+            'aerolinea' => 'required'
+        ]);
+
         $airplane = Airplane::findOrFail($id);
         $airplane->model = $request->modelo;
         $airplane->type = $request->tipo;

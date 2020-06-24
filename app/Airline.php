@@ -50,7 +50,7 @@ class Airline extends Model
      * Destinations that this airline serves flights to
      */
     public function destinations(){
-        $this->belongsToMany('App\Destination');
+        $this->belongsToMany(Destination::class);
     }
 
     /**
@@ -61,6 +61,6 @@ class Airline extends Model
     }
 
     public function itineraries(){
-        return $this->hasMany('App\Itinerary');
+        return $this->hasMany(Itinerary::class);
     }
 }
