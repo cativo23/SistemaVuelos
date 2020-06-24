@@ -1,13 +1,5 @@
 @extends('layouts.backend')
 
-
-@section('css_before')
-    <!-- Page JS Plugins CSS -->
-    <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
-@endsection
-
-
-
 {{--INICIO DE CONTENIDO--}}
 @section('content')
     <div class="bg-image bg-image-bottom" style="background-image: url({{ asset('/media/photos/photo34@2x.jpg') }});">
@@ -15,9 +7,9 @@
             <div class="content content-top text-center overflow-hidden">
                 <div class="pt-50 pb-20">
                     <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">Terminal</h1>
+                        data-class="animated fadeInUp">Pagos</h1>
                     <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">"Gateways"</h2>
+                        data-class="animated fadeInUp">"Payments"</h2>
                 </div>
             </div>
         </div>
@@ -26,8 +18,8 @@
     <div class="content">
         <div class="my-50 text-center">
             <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
-               href="{{ route('gateways.create') }}">Nuevo</a>
-{{--  Check for this route its not working, it goes inside the nuevo button href   {{ route('gateway.create') }}--}}
+               href="{{ route('payments.create') }}">Nuevo</a>
+            {{--  Check for this route its not working, it goes inside the nuevo button href   {{ route('gateway.create') }}--}}
         </div>
 
 
@@ -51,7 +43,7 @@
     <!-- Dynamic Table Full -->
         <div class="block">
             <div class="block-header block-header-default">
-                <h3 class="block-title">Terminales <small></small></h3>
+                <h3 class="block-title">Pagos <small></small></h3>
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
@@ -59,37 +51,17 @@
                     <thead>
                     <tr>
 
-                        <th>Code</th>
-                        <th>Aeropuerto</th>
-                        <th>Pais</th>
-                        <th>Ciudad</th>
-                        <th>Acciones</th>
+                        <th>Creado</th>
+                        <th>Actualizado en</th>
+                        <th>Precio Total</th>
+                        <th>Pagado</th>
+                        <th>Codigo Reservacion</th>
                         <!--<th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>-->
                         <!--<th style="width: 15%;">Registered</th>-->
                     </tr>
                     </thead>
                     <tbody>
 
-                    @foreach( $Terminal as $Tmnl)
-                        <tr>
-                            <td class="text-center">{{$Tmnl->code}}</td>
-                            <td class="text-center">{{$Tmnl->airport->name}}</td>
-                            <td class="text-center">{{$Tmnl->airport->country}}</td>
-                            <td class="text-center">{{$Tmnl->airport->city}}</td>
-
-
-                            <td class="text-center">
-                                <div class="btn-group">
-                                    <a href="{{ route('gateways.edit', $Tmnl->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                    <a href="{{ route('gateways.confirm', $Tmnl->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Eliminar" data-original-title="Delete">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -99,6 +71,10 @@
     <!-- END Page Content -->
 @endsection
 {{--FIN DE CONTENIDO--}}
+@section('css_before')
+    <!-- Page JS Plugins CSS -->
+    <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
+@endsection
 
 @section('js_after')
     <!-- Page JS Plugins -->
