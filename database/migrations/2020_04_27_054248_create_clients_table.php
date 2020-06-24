@@ -23,7 +23,7 @@ class CreateClientsTable extends Migration
             $table->string('mobile_phone');
             $table->string('landline_phone');
             $table->bigInteger('miles');
-            $table->bigInteger('frequent_customer_car_num');
+            $table->bigInteger('frequent_customer_car_num')->autoIncrement();
         });
     }
 

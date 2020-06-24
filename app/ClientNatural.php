@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\ClientNatural
+ * App\clientNatural
  *
  * @property int $ID
  * @property string|null $CREATED_AT
@@ -39,6 +39,6 @@ class ClientNatural extends Model
      * Client Information for this Natural Client
      */
     public function client(){
-        return $this->belongsTo('App\Client');
+        return $this->belongsTo(Client::class, 'id', 'id');
     }
 }
