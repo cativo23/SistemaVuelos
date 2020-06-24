@@ -59,7 +59,7 @@
         <!-- Dynamic Table Full -->
         <div class="block">
             <div class="block-header block-header-default">
-                <h3 class="block-title">Clientes Naturales<small></small></h3>
+                <h3 class="block-title">Clientes de Empresas<small></small></h3>
 
 
                 <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
@@ -94,11 +94,11 @@
                     <tbody>
                         @foreach($clientes_c as $cliente)
                             <tr>
-                                <td></td>
-                                <td></td>
+                                <td>{{ $cliente->client->frequent_customer_num }}</td>
+                                <td>{{ $cliente->client->first_name }} {{ $cliente->client->second_name }} {{ $cliente->client->first_surname }} {{ $cliente->client->second_surname }}</td>
                                 <td>{{ $cliente->company_name }}</td>
-                                <td></td>
-                                <td></td>
+                                <td>{{ $cliente->client->miles }}</td>
+                                <td>{{ $cliente->client->landline_phone }}</td>
 
 
                                 <td class="text-center">

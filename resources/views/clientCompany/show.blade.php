@@ -9,7 +9,7 @@
                     <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
                         data-class="animated fadeInUp">Detalles de Cliente de Empresa</h1>
                     <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">"Nombre Cliente"</h2>
+                        data-class="animated fadeInUp">"{{ $cliente->client->first_name }} {{ $cliente->client->second_name }} {{ $cliente->client->first_surname }} {{ $cliente->client->second_surname }}"</h2>
                 </div>
             </div>
         </div>
@@ -32,10 +32,10 @@
                     <div class="block-content">
                         <form action="{{ route('clientCompanys.store') }}" method="post">@csrf
                             <div class="form-group row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="n_frecuente" name="n_frecuente"
-                                                   value="" disabled>
+                                                   value="{{ $cliente->client->frequent_customer_num }}" disabled>
                                             <label for="codigo">N° Cliente Frecuente</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
@@ -44,11 +44,11 @@
                                             </div>
                                         </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="primer_nombre" name="primer_nombre"
-                                                   value="{{ old('primer_nombre') }}" disabled>
-                                            <label for="nombrecorto">Primer Nombre</label>
+                                                   value="{{ $cliente->client->first_name }} {{ $cliente->client->second_name }} {{ $cliente->client->first_surname }} {{ $cliente->client->second_surname }}" disabled>
+                                            <label for="nombrecorto">Cliente</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-user"></i>
@@ -56,46 +56,11 @@
                                             </div>
                                         </div>
                                 </div>
-                                <div class="col-md-4">
-                                        <div class="form-material floating input-group">
-                                            <input type="text" class="form-control" id="segundo_nombre" name="segundo_nombre"
-                                                   value="{{ old('segundo_nombre') }}" disabled>
-                                            <label for="segundo_nombre">Segundo Nombre</label>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-user"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                </div>
-                                <div class="col-md-4">
-                                        <div class="form-material floating input-group">
-                                            <input type="text" class="form-control" id="primer_apellido" name="primer_apellido"
-                                                   value="{{ old('primer_apellido') }}" disabled>
-                                            <label for="primer_apellido">Primer Apellido</label>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-user"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                </div>
-                                <div class="col-md-4">
-                                        <div class="form-material floating input-group">
-                                            <input type="text" class="form-control" id="segundo_apellido" name="segundo_apellido"
-                                                   value="{{ old('segundo_apellido') }}" disabled>
-                                            <label for="segundo_apellido">Segundo Apellido</label>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-user"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                </div>
+
                                 <div class="col-md-4">
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="millas" name="millas"
-                                                   value="" disabled>
+                                                   value="{{ $cliente->client->miles }}" disabled>
                                             <label for="millas">Millas</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
@@ -105,10 +70,46 @@
                                         </div>
                                 </div>
                                 <div class="col-md-4">
+                                    <div class="form-material floating input-group">
+                                        <input type="text" class="form-control" id="tel_fijo" name="tel_fijo"
+                                               value="{{ $cliente->client->landline_phone }}" data-mask="(000) 0000 0000" disabled>
+                                        <label for="telfijo">Teléfono Fijo del Cliente</label>
+                                        <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-phone"></i>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-material floating input-group">
+                                        <input type="text" class="form-control" id="tel_movil" name="tel_movil"
+                                               value="{{ $cliente->client->mobile_phone }}" data-mask="(000) 0000 0000" disabled>
+                                        <label for="tel_movil">Teléfono Móvil del Cliente</label>
+                                        <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-mobile-phone"></i>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-material floating input-group">
+                                        <input type="text" class="form-control" id="nombre_contacto" name="nombre_contacto"
+                                               value="{{ $cliente->contact_name }}" disabled>
+                                        <label for="nombre_contacto">Nombre del Contacto</label>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-user-o"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="nombre_empresa" name="nombre_empresa"
                                                    value="{{ $cliente->company_name }}" disabled>
-                                            <label for="nombre_empresa">Nombre Empresa</label>
+                                            <label for="nombre_empresa">Nombre de Empresa</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-university"></i>
@@ -116,91 +117,32 @@
                                             </div>
                                         </div>
                                 </div>
-
                                 <div class="col-md-4">
-
-                                        <div class="form-material floating input-group">
-                                            <input type="text" class="form-control" id="nombre_contacto" name="nombre_contacto"
-                                                   value="{{ $cliente->contact_name }}" disabled>
-                                            <label for="nombre_contacto">Nombre del Contacto</label>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-user-o"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                </div>
-
-                                <div class="col-md-4">
-
-                                        <div class="form-material floating input-group">
-                                            <input type="text" class="form-control" id="nic" name="nic"
-                                                   value="{{ $cliente->nic  }}" data-mask="00000000-0" disabled>
-                                            <label for="nic">NIC</label>
-                                            <div class="input-group-append">
+                                    <div class="form-material floating input-group">
+                                        <input type="text" class="form-control" id="nit" name="nit"
+                                               value="{{ $cliente->nit  }}" data-mask="0000-000000-000-0" disabled>
+                                        <label for="nit">NIT de Empresa</label>
+                                        <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-id-card"></i>
                                                 </span>
-                                            </div>
                                         </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-4">
-
-                                        <div class="form-material floating input-group">
-                                            <input type="text" class="form-control" id="nit" name="nit"
-                                                   value="{{ $cliente->nit  }}" data-mask="0000-000000-000-0" disabled>
-                                            <label for="nit">NIT</label>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-id-card"></i>
-                                                </span>
-                                            </div>
+                                    <div class="form-material floating input-group">
+                                        <input type="text" class="form-control" id="nic" name="nic"
+                                               value="{{ $cliente->nic  }}" data-mask="00000000-0" disabled>
+                                        <label for="nic">NIC de Empresa</label>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-id-card"></i>
+                                            </span>
                                         </div>
+                                    </div>
                                 </div>
 
-                                <div class="col-md-4">
-                                        <div class="form-material floating input-group">
-                                            <input type="text" class="form-control" id="tel_fijo" name="tel_fijo"
-                                                   value="{{ old('tel_fijo') }}" data-mask="(000) 0000 0000" disabled>
-                                            <label for="telfijo">Teléfono fijo</label>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-phone"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                </div>
-                                <div class="col-md-4">
-                                        <div class="form-material floating input-group">
-                                            <input type="text" class="form-control" id="tel_movil" name="tel_movil"
-                                                   value="{{ old('tel_movil') }}" data-mask="(000) 0000 0000" disabled>
-                                            <label for="tel_movil">Teléfono Móvil</label>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-mobile-phone"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                </div>
 
-                            <!--<div class="col-md-8">
-                                    @error('direccion') <div class="form-group is-invalid"> @enderror
-                                <div class="form-material floating input-group">
-                                    <input type="text" class="form-control" id="direccion" name="direccion"
-                                       value="{{ old('direccion') }}">
-                                            <label for="whatsapp">Dirección</label>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-map-o"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        @error('direccion')
-                                <div id="whatsapp-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
-                                        @enderror
-                            @error('direccion') </div> @enderror
-                                </div>
-                            -->
 
                             </div>
 

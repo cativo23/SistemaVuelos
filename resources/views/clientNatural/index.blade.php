@@ -63,7 +63,7 @@
 
 
                 <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
-                   href="{{ route('clientNaturals.create') }}">Nueva</a>
+                   href="{{ route('clientNaturals.create') }}">Nuevo</a>
 
             </div>
 
@@ -92,20 +92,26 @@
                     <tbody>
                     @foreach( $clientesn as $clienten)
                         <tr>
-
-                            <td>{{ $clienten->client->frequent_customer_car_num }}</td>
+                            <td>{{ $clienten->client->frequent_customer_num }}</td>
+                            <td>
+                                {{ $clienten->client->first_name }} {{ $clienten->client->second_name }}
+                                {{ $clienten->client->first_surname }} {{ $clienten->client->second_surname }}
+                            </td>
+                            <td> {{ $clienten->client->miles }}</td>
                             <td>{{ $clienten->document_typ }}</td>
                             <td>{{ $clienten->document_num }}</td>
+                            <td>{{ $clienten->client->mobile_phone }}</td>
+
 
                             <td class="text-center">
                                 <div class="btn-group">
-                                    <a href="{{ route('clientNaturals.show') }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Ver" data-original-title="Ver">
+                                    <a href="{{route('clientNaturals.show', $clienten->id)}}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Ver" data-original-title="Ver">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('clientNaturals.edit') }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
+                                    <a  href="{{route('clientNaturals.edit', $clienten->id)}}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
                                         <i class="fa fa-pencil"></i>
                                     </a>
-                                    <a href="{{ route('clientNaturals.confirm') }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Eliminar" data-original-title="Delete">
+                                    <a href="{{route('clientNaturals.confirm', $clienten->id)}}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Eliminar" data-original-title="Delete">
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </div>

@@ -7,9 +7,9 @@
             <div class="content content-top text-center overflow-hidden">
                 <div class="pt-50 pb-20">
                     <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">Nuevo Cliente Empresa</h1>
+                        data-class="animated fadeInUp">Nuevo Cliente de Empresa</h1>
                     <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">Cree Un Nuevo Cliente Empresa</h2>
+                        data-class="animated fadeInUp">Cree Un Nuevo Cliente de Empresa</h2>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
             <div class="col-md-11">
                 <div class="block">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Formulario Cliente Empresa</h3>
+                        <h3 class="block-title">Formulario Cliente de Empresa</h3>
                         <div class="block-options">
                             <button type="button" class="btn-block-option">
                                 <i class="fa fa-university"></i>
@@ -35,8 +35,9 @@
                                 <div class="col-md-4">
                                     @error('n_frecuente') <div class="form-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
-                                            <input type="text" class="form-control" id="n_frecuente" name="n_frecuente"
-                                                   value="{{ old('n_frecuente') }}">
+                                            <input type="text" class="form-control" id="n_frecuente2" name="n_frecuente2"
+                                                   value="{{ $numero_cliente  }}" disabled>
+
                                             <label for="codigo">N° Cliente Frecuente</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
@@ -48,6 +49,8 @@
                                         <div id="nfrecuente2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
                                         @enderror
                                         @error('n_frecuente')  </div> @enderror
+                                    <input style="display: none" type="text" class="form-control"
+                                           id="n_frecuente" name="n_frecuente" value="{{ $numero_cliente  }}">
                                 </div>
                                 <div class="col-md-4">
                                     @error('primer_nombre') <div class="form-group is-invalid"> @enderror
@@ -118,23 +121,39 @@
                                     @error('segundo_apellido') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    @error('nombre_empresa') <div class="form-group is-invalid"> @enderror
+                                    @error('tel_fijo') <div class="form-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
-                                            <input type="text" class="form-control" id="nombre_empresa" name="nombre_empresa"
-                                                   value="{{ old('nombre_empresa') }}">
-                                            <label for="nombre_empresa">Nombre Empresa</label>
+                                            <input type="text" class="form-control" id="tel_fijo" name="tel_fijo"
+                                                   value="{{ old('tel_fijo') }}" data-mask="(000) 0000 0000">
+                                            <label for="telfijo">Teléfono Fijo del Cliente</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
-                                                    <i class="fa fa-university"></i>
+                                                    <i class="fa fa-phone"></i>
                                                 </span>
                                             </div>
                                         </div>
-                                        @error('nombre_empresa')
-                                        <div id="nombrecorto-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @error('tel_fijo')
+                                        <div id="twitter-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
                                         @enderror
-                                        @error('nombre_empresa') </div> @enderror
+                                        @error('tel_fijo') </div> @enderror
                                 </div>
-
+                                <div class="col-md-4">
+                                    @error('tel_movil') <div class="form-group is-invalid"> @enderror
+                                        <div class="form-material floating input-group">
+                                            <input type="text" class="form-control" id="tel_movil" name="tel_movil"
+                                                   value="{{ old('tel_movil') }}" data-mask="(000) 0000 0000">
+                                            <label for="tel_movil">Teléfono Móvil del Cliente</label>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-mobile-phone"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        @error('tel_movil')
+                                        <div id="whatsapp-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @enderror
+                                        @error('tel_movil') </div> @enderror
+                                </div>
                                 <div class="col-md-4">
                                     @error('nombre_contacto') <div class="form-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
@@ -154,11 +173,28 @@
                                 </div>
 
                                 <div class="col-md-4">
+                                    @error('nombre_empresa') <div class="form-group is-invalid"> @enderror
+                                        <div class="form-material floating input-group">
+                                            <input type="text" class="form-control" id="nombre_empresa" name="nombre_empresa"
+                                                   value="{{ old('nombre_empresa') }}">
+                                            <label for="nombre_empresa">Nombre Empresa</label>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-university"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        @error('nombre_empresa')
+                                        <div id="nombrecorto-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @enderror
+                                        @error('nombre_empresa') </div> @enderror
+                                </div>
+                                <div class="col-md-4">
                                     @error('nic') <div class="form-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="nic" name="nic"
                                                    value="{{ old('nic') }}" data-mask="00000000-0">
-                                            <label for="nic">NIC</label>
+                                            <label for="nic">NIC de Empresa</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-id-card"></i>
@@ -176,7 +212,7 @@
                                             <input type="text" class="form-control" id="nit" name="nit"
 
                                                    value="{{ old('nit') }}" data-mask="0000-000000-000-0">
-                                            <label for="nit">NIT</label>
+                                            <label for="nit">NIT de Empresa</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-id-card"></i>
@@ -189,59 +225,7 @@
                                         @error('nit') </div> @enderror
                                 </div>
 
-                                <div class="col-md-4">
-                                    @error('tel_fijo') <div class="form-group is-invalid"> @enderror
-                                        <div class="form-material floating input-group">
-                                            <input type="text" class="form-control" id="tel_fijo" name="tel_fijo"
-                                                   value="{{ old('tel_fijo') }}" data-mask="(000) 0000 0000">
-                                            <label for="telfijo">Teléfono fijo</label>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-phone"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        @error('tel_fijo')
-                                        <div id="twitter-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
-                                        @enderror
-                                        @error('tel_fijo') </div> @enderror
-                                </div>
-                                <div class="col-md-4">
-                                    @error('tel_movil') <div class="form-group is-invalid"> @enderror
-                                        <div class="form-material floating input-group">
-                                            <input type="text" class="form-control" id="tel_movil" name="tel_movil"
-                                                   value="{{ old('tel_movil') }}" data-mask="(000) 0000 0000">
-                                            <label for="tel_movil">Teléfono Móvil</label>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-mobile-phone"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        @error('tel_movil')
-                                        <div id="whatsapp-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
-                                        @enderror
-                                        @error('tel_movil') </div> @enderror
-                                </div>
 
-                                <!--<div class="col-md-8">
-                                    @error('direccion') <div class="form-group is-invalid"> @enderror
-                                        <div class="form-material floating input-group">
-                                            <input type="text" class="form-control" id="direccion" name="direccion"
-                                               value="{{ old('direccion') }}">
-                                            <label for="whatsapp">Dirección</label>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    <i class="fa fa-map-o"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        @error('direccion')
-                                        <div id="whatsapp-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
-                                        @enderror
-                                    @error('direccion') </div> @enderror
-                                </div>
-                            -->
 
                             </div>
 
@@ -302,7 +286,7 @@
 
 
 
-    <script src="{{ asset('/js/clientNatural/create.js') }}"></script>
+    <script src="{{ asset('/js/clientCompany/create.js') }}"></script>
 
 
     <script src="{{ asset('/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>

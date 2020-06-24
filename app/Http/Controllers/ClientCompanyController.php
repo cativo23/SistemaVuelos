@@ -30,7 +30,18 @@ class ClientCompanyController extends Controller
      */
     public function create()
     {
-        return view('clientCompany.create');
+        $last_clientCompany = ClientCompany::latest('id')->first();
+
+        if(empty($last_clientCompany)){
+            $numero_cliente = 1;
+        }else{
+            $numero = $last_clientCompany->client->frequent_customer_num;
+            $resultado = substr($numero, 2, 7);
+            $numero_cliente = (int)$resultado + 1;
+            //dd($numero_cliente);
+        }
+
+        return view('clientCompany.create', compact('numero_cliente'));
     }
 
     /**
@@ -42,7 +53,7 @@ class ClientCompanyController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'n_frecuente' => 'required|integer|max:1000000',
+            'n_frecuente' => 'required',
             'nombre_empresa' => 'required|string|max:150',
             'nombre_contacto' => 'required|string|max:150',
             'nic' => 'required',
@@ -53,13 +64,13 @@ class ClientCompanyController extends Controller
             'segundo_apellido' => 'required|string|max:150',
             'tel_fijo' => 'required|string|min:15|max:15',
             'tel_movil' => 'required|string|min:15|max:15',
-            'direccion' => 'required|string|max:255'
         ]);
 
         $cliente = new Client();
-        $cliente->frequent_customer_car_num = $request->n_frecuente;
+        $cliente->frequent_customer_car_num = 0;
+        $cliente->frequent_customer_num = $request->n_frecuente;
         $cliente->mobile_phone = $request->tel_movil;
-        $cliente->landline_phone =
+        $cliente->landline_phone = $request->tel_fijo;
         $cliente->first_name = $request->primer_nombre;;
         $cliente->second_name = $request->segundo_nombre;;
         $cliente->first_surname = $request->primer_apellido;
@@ -113,31 +124,25 @@ class ClientCompanyController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'n_frecuente' => 'required|integer',
             'nombre_empresa' => 'required|string|max:150',
             'nombre_contacto' => 'required|string|max:150',
-            'nic' => 'required',
+            'nic' => 'required|min:10|max:10',
             'nit' => 'required|min:17|max:17',
             'primer_nombre' => 'required|string|max:150',
             'segundo_nombre' => 'required|string|max:150',
             'primer_apellido' => 'required|string|max:150',
             'segundo_apellido' => 'required|string|max:150',
-            'millas' => 'required|integer',
             'tel_fijo' => 'required|string|min:15|max:15',
-            'tel_movil' => 'required|string|min:15|max:15',
-            'direccion' => 'required|string|max:255'
+            'tel_movil' => 'required|string|min:15|max:15'
         ]);
 
         $cliente = Client::findOrFail($id);
-        dd($cliente);
-        $cliente->frequent_customer_car_num = $request->n_frecuente;
         $cliente->mobile_phone = $request->tel_movil;
-        $cliente->landline_phone =
+        $cliente->landline_phone = $request->tel_fijo;
         $cliente->first_name = $request->primer_nombre;;
         $cliente->second_name = $request->segundo_nombre;;
         $cliente->first_surname = $request->primer_apellido;
         $cliente->second_surname = $request->segundo_apellido;;
-        $cliente->miles = 0;
         $cliente->save();
 
         $cliente_c = ClientCompany::findOrFail($id);
@@ -147,8 +152,7 @@ class ClientCompanyController extends Controller
         $cliente_c->nit = $request->nit;
         $cliente_c->id = $cliente->id;
         $cliente_c->save();
-        dd($cliente_c);
-        return redirect()->route('clientCompanys.index')->with('datos', '¡La aerolinea se editó correctamente!');
+        return redirect()->route('clientCompanys.index')->with('datos', '¡El cliente se editó correctamente!');
     }
 
     /**
@@ -170,7 +174,7 @@ class ClientCompanyController extends Controller
     {
         $cliente = ClientCompany::findOrFail($id);
         $cliente->delete();
-        return redirect()->route('clienteCompanys.index')->with('datos', '¡La aerolinea se eliminó correctamente!');
+        return redirect()->route('clientCompanys.index')->with('datos', '¡La aerolinea se eliminó correctamente!');
     }
 }
 
