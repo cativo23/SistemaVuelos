@@ -21,7 +21,7 @@
     		<div class="col-md-10">
                 <div class="block">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Formulario Nuevo Destino</h3>
+                        <h3 class="block-title">Formulario Destino</h3>
                         <div class="block-options">
                             <button type="button" class="btn-block-option">
                                 <i class="fa fa-map-o"></i>
@@ -33,41 +33,46 @@
 
                         <form action="{{ route('destinations.store') }}" method="post">@csrf
                             <div class="form-group row">
-                                                                <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="codigo" name="codigo">
-                                        <label for="codigo">Código de Destino</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-hashtag"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="ciudad" name="ciudad">
-                                        <label for="ciudad">Ciudad</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-location-arrow"></i>
-                                            </span>
+                                    @error('codigo') <div class="form-group is-invalid"> @enderror
+                                        <div class="form-material floating input-group">
+                                            <input type="text" class="form-control" id="codigo" name="codigo"
+                                                   value="{{ old('codigo') }}">
+                                            <label for="codigo">Código de Destino</label>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-hashtag"></i>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
+                                        @error('codigo')
+                                        <div id="codigo-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @enderror
+                                        @error('codigo')  </div> @enderror
                                 </div>
+
                                 <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="estado" name="estado">
-                                        <label for="estado">Estado</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-map-signs"></i>
-                                            </span>
+                                    @error('continente')<div class="form-group is-invalid">@enderror
+                                        <div class="form-material floating">
+                                            <select class="form-control" id="continente" name="continente">
+
+                                                <option selected="selected" disabled></option>
+                                                <option value="Asia">Asia</option>
+                                                <option value="América">América</option>
+                                                <option value="África">África</option>
+                                                <option value="Antártida">Antártida</option>
+                                                <option value="Europa">Europa</option>
+                                                <option value="Oceanía">Oceanía</option>
+                                            </select>
+                                            <label for="continente">Continente</label>
                                         </div>
-                                    </div>
+                                        @error('continente')<div id="val-skill2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
+                                    @error('continente')</div>@enderror
                                 </div>
+
                                 <div class="col-md-4">
-                                    <div class="form-material floating input-group">
+                                    @error('pais') <div class="form-group is-invalid"> @enderror
+                                        <div class="form-material floating input-group">
                                         <input type="text" class="form-control" id="pais" name="pais">
                                         <label for="pais">País</label>
                                         <div class="input-group-append">
@@ -76,25 +81,46 @@
                                             </span>
                                         </div>
                                     </div>
+                                        @error('pais')
+                                        <div id="codigo-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @enderror
+                                    @error('pais') </div> @enderror
                                 </div>
+
                                 <div class="col-md-4">
-                                    <div class="form-material floating">
-                                        <select class="form-control" id="continente" name="continente">
-                                            <option selected="selected" disabled></option>
-                                            <option value="Asia">Asia</option>
-                                            <option value="América">América</option>
-                                            <option value="África">África</option>
-                                            <option value="Antártida">Antártida</option>
-                                            <option value="Europa">Europa</option>
-                                            <option value="Oceanía">Oceanía</option>
-                                        </select>
-                                        <label for="continente">Continente</label>
+                                    @error('estado') <div class="form-group is-invalid"> @enderror
+                                        <div class="form-material floating input-group">
+                                        <input type="text" class="form-control" id="estado" name="estado">
+                                        <label for="estado">Estado</label>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-map-signs"></i>
+                                            </span>
+                                        </div>
                                     </div>
+                                        @error('estado')
+                                        <div id="codigo-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @enderror
+                                    @error('estado') </div> @enderror
+                                </div>
+
+                                <div class="col-md-4">
+                                    @error('ciudad') <div class="form-group is-invalid"> @enderror
+                                        <div class="form-material floating input-group">
+                                            <input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ old('ciudad') }}">
+                                            <label for="ciudad">Ciudad</label>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-location-arrow"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        @error('ciudad')
+                                        <div id="codigo-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        @enderror
+                                    @error('ciudad') </div> @enderror
                                 </div>
                             </div>
-
-
-
                             <div class="form-group row">
                                 <div class="col-md-9">
 
@@ -120,6 +146,8 @@
     	</div>
     </main>
     <!-- END Page Content -->
+
+
 @endsection
 
 @section('css_before')

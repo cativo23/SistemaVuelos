@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
- * App\ClientNatural
+ * App\clientNatural
  *
  * @property int $ID
  * @property string|null $CREATED_AT

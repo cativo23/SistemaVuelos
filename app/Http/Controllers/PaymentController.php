@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\Helper;
 use App\Payment;
+use App\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -15,6 +18,12 @@ class PaymentController extends Controller
     public function index()
     {
         //
+        $Payment = Payment::all();
+
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        return view('payment.index', compact('Payment', 'sidebar', 'header', 'footer'));
     }
 
     /**
@@ -25,6 +34,11 @@ class PaymentController extends Controller
     public function create()
     {
         //
+        $Reservation = Reservation::all();
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        return view('payment.create', compact("Reservation",'sidebar', 'header', 'footer'));
     }
 
     /**

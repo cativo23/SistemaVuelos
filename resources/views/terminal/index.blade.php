@@ -26,7 +26,8 @@
     <div class="content">
         <div class="my-50 text-center">
             <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
-               href="{{ route('gateway.create') }}">Nuevo</a>
+               href="{{ route('gateways.create') }}">Nuevo</a>
+{{--  Check for this route its not working, it goes inside the nuevo button href   {{ route('gateway.create') }}--}}
         </div>
 
 
@@ -79,10 +80,10 @@
 
                             <td class="text-center">
                                 <div class="btn-group">
-                                    <a href="{{ route('gateway.edit', $Tmnl->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
+                                    <a href="{{ route('gateways.edit', $Tmnl->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
                                         <i class="fa fa-pencil"></i>
                                     </a>
-                                    <a href="{{ route('gateway.confirm', $Tmnl->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Eliminar" data-original-title="Delete">
+                                    <a href="{{ route('gateways.confirm', $Tmnl->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Eliminar" data-original-title="Delete">
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </div>

@@ -52,6 +52,14 @@ class DestinationController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'codigo' => 'required',
+            'ciudad' => 'required',
+            'estado' => 'required',
+            'pais' => 'required',
+            'continente' => 'required'
+        ]);
+
         $Destination = new Destination;
         $Destination->CITY = $request->ciudad;
         $Destination->state = $request->estado;

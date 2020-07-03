@@ -9,7 +9,7 @@
  import jQuery from 'jquery';
  import SimpleBar from 'simplebar';
  import Cookies from 'js-cookie';
- import 'bootstrap';
+ import 'public/js/resources/js/codebase/bootstrap';
  import 'popper.js';
  import 'jquery.appear';
  import 'jquery-scroll-lock';

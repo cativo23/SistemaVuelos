@@ -37,7 +37,7 @@
 
                     <div class="block-content">
 
-                        <form action="{{ route('gateway.update', $Terminal->id) }}" method="post">@csrf
+                        <form action="{{ route('gateways.update', $Terminal->id) }}" method="post">@csrf
                             @method('PUT')
                             @csrf
                             <div class="form-group row">

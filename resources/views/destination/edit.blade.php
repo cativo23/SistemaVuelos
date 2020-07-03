@@ -31,7 +31,7 @@
                         	@method('PUT')
                         	@csrf
                             <div class="form-group row">
-                               <div class="col-md-4">
+                                <div class="col-md-4">
                                     <div class="form-material floating input-group">
                                         <input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ $destino->city }}">
                                         <label for="ciudad">Ciudad</label>
