@@ -79,6 +79,8 @@ class Flight extends Model
     /*
      * Airlines of this flight
      */
+
+
     public function airline(){
         $this->belongsTo(Airline::class);
     }

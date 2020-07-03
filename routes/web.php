@@ -41,6 +41,8 @@ Auth::routes(['verify' => true]); //Auth Routes
 
 Route::match(['get', 'post'], '/dashboard','DashboardController@index')->middleware('verified')->middleware('forbid-banned-user');
 
+Route::resource('/flights', 'FlightController')->middleware('verified', 'forbid-banned-user');
+
 
 /*
  * Cativo's Stuff END
@@ -59,8 +61,8 @@ Route::get('/destinations/{id}/confirm', 'DestinationController@confirm')->name(
 
 
 # CRUD Airline
-Route::resource('/airlines', 'AirlineController')->middleware('verified');
-Route::get('/airlines/{id}/confirm', 'AirlineController@confirm')->name('airlines.confirm')->middleware('verified');
+Route::resource('/airlines', 'AirlineController')->middleware(['verified']);
+Route::get('/airlines/{id}/confirm', 'AirlineController@confirm')->name('airlines.confirm')->middleware(['verified']);
 
 
 # CRUD Airplane

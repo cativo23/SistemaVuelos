@@ -20,7 +20,7 @@
         <div class="content">
             <h2 class="content-heading">Nuevo Asiento</h2>
 
-            <div class="col-md-7">
+            <div class="col-md-12">
                 <div class="block">
                     <div class="block-header block-header-default">
                         <h3 class="block-title">Formulario Asiento</h3>

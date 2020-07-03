@@ -97,11 +97,24 @@
         <!-- END Page Container -->
 
         <!-- Codebase Core JS -->
-        <script src="{{ mix('js/codebase.app.js') }}"></script>
+        <script src="{{ asset('/js/codebase.core.min.js') }}"></script>
+        <script src="{{ asset('/js/codebase.app.min.js') }}"></script>
 
         <!-- Laravel Scaffolding JS -->
         <!-- <script src="{{ mix('js/laravel.app.js') }}"></script> -->
-
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
         @yield('js_after')
+
+        <script>
+            $(document).ready(function() {
+                var interval = setInterval(function() {
+                    var momentNow = moment();
+                    $('#date-part').html(momentNow.format('YYYY MMMM DD') + ' '
+                        + momentNow.format('dddd')
+                            .substring(0,3).toUpperCase());
+                    $('#time-part').html(momentNow.format('A hh:mm:ss'));
+                }, 100);
+            });
+        </script>
     </body>
 </html>

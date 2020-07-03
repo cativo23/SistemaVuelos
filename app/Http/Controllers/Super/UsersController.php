@@ -12,8 +12,8 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
+use Auth;
+use Gate;
 use Illuminate\View\View;
 use Silber\Bouncer\Database\Role;
 
@@ -33,8 +33,6 @@ class UsersController extends Controller
         }
 
         $users = User::with('roles')->get();
-
-        $user = Auth::user();
 
         list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
 
@@ -97,9 +95,9 @@ class UsersController extends Controller
 
         $user->load('roles');
 
-        $user = Auth::user();
+        $user1 = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user1);
 
         return view('super.users.show', compact('user', 'sidebar', 'header', 'footer'));
     }
@@ -143,7 +141,7 @@ class UsersController extends Controller
 
         $request->password = $password;
 
-        $user->name = $request->input('name');
+        $user->NAME = $request->input('name');
         $user->username = $request->input('username');
         $user->email = $request->input('email');
         $user->password = $password;
@@ -168,7 +166,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        \Log::info('What');
         if (! Gate::allows('manage-users')) {
             return abort(401);
         }

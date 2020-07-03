@@ -53,7 +53,7 @@ class DestinationController extends Controller
     public function store(Request $request)
     {
         $Destination = new Destination;
-        $Destination->city = $request->ciudad;
+        $Destination->CITY = $request->ciudad;
         $Destination->state = $request->estado;
         $Destination->country = $request->pais;
         $Destination->continent = $request->continente;
@@ -71,7 +71,7 @@ class DestinationController extends Controller
      */
     public function show(Destination $destination)
     {
-        //
+
     }
 
     /**
@@ -101,7 +101,7 @@ class DestinationController extends Controller
     public function update(Request $request, $id)
     {
         $Destination = Destination::findOrFail($id);
-        $Destination->city = $request->ciudad;
+        $Destination->CITY = $request->ciudad;
         $Destination->state = $request->estado;
         $Destination->country = $request->pais;
         $Destination->continent = $request->continente;
