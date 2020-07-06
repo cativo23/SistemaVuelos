@@ -37,7 +37,7 @@
                                 <div class="col-md-3">
                                     <div class="form-material floating input-group">
                                         <input type="text" class="form-control" id="n_frecuente" name="n_frecuente"
-                                               value="{{ $cliente->client->frequent_customer_car_num }}" disabled>
+                                               value="{{ $cliente->client->frequent_customer_num }}" disabled>
                                         <label for="codigo">N° Cliente Frecuente</label>
                                         <div class="input-group-append">
                                                 <span class="input-group-text">

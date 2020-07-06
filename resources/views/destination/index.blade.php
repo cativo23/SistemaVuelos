@@ -23,13 +23,19 @@
                     <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
                         data-class="animated fadeInUp">Destinos</h1>
                     <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">Destinations</h2>
+                        data-class="animated fadeInUp">"Destinations"</h2>
                 </div>
             </div>
         </div>
     </div>
     <!-- Page Content -->
     <div class="content">
+        <div class="my-50 text-center">
+
+            <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
+            href="{{ route('destinations.create') }}">Nuevo</a>
+        </div>
+
         @if( session('datos'))
         <!-- Info -->
         <div class="row justify-content-center">
@@ -51,36 +57,53 @@
         <!-- Dynamic Table Full -->
         <div class="block">
             <div class="block-header block-header-default">
-                <h3 class="block-title">Destinos<small></small></h3>
-                <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
-                   href="{{ route('destinations.create') }}">Nuevo</a>
+                <h3 class="block-title">Destinos <small></small></h3>
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
-                <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                <table class="table table-responsive table-bordered table-striped table-vcenter js-dataTable-full">
                     <thead>
-                    <tr>
-                        <th class="text-center" style="width: 80px;">#</th>
-                        <th>Código</th>
-                        <th>Ciudad</th>
-                        <th>Estado</th>
-                        <th>País</th>
-                        <th>Contienete</th>
-
-                        <th style="width: 15%">Acciones</th>
-                        <!--<th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>-->
-                        <!--<th style="width: 15%;">Registered</th>-->
-                    </tr>
+                        <tr>
+                            <th class="text-center" style="width: 80px;">#</th>
+                            <th>Ciudad</th>
+                            <th>Estado</th>
+                            <th>País</th>
+                            <th>Contienete</th>
+                            <th>Código</th>
+                            <th>Acciones</th>
+                            <!--<th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>-->
+                            <!--<th style="width: 15%;">Registered</th>-->
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach( $destinations as $Destino)
+                        <!--@for ($i = 1; $i < 21; $i++)
+                        <tr>
+                            <td class="text-center"><?php echo $i; ?></td>
+                            <td class="font-w600">
+                                <a href="javascript:void(0)">John Doe</a>
+                            </td>
+                            <td class="d-none d-sm-table-cell">
+                                client{{ $i }}<em class="text-muted">@example.com</em>
+                            </td>
+                            <td>
+                                <em class="text-muted">{{ rand(2, 10) }} days ago</em>
+                            </td>
+                            <td class="text-center"><?php echo $i; ?></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        @endfor -->
+                        @foreach( $destinations as $Destino)
                         <tr>
                             <td class="text-center">{{ $Destino->id }}</td>
-                            <td>{{ $Destino->code }}</td>
                             <td>{{ $Destino->city }}</td>
                             <td>{{ $Destino->state }}</td>
                             <td>{{ $Destino->country }}</td>
                             <td>{{ $Destino->continent }}</td>
+                            <td>{{ $Destino->code }}</td>
                             <td class="text-center">
                                 <div class="btn-group">
                                     <a href="{{ route('destinations.edit', $Destino->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
@@ -91,16 +114,13 @@
                                     </a>
                                 </div>
                             </td>
-                        </tr>
-                    @endforeach
+                         </tr>
+                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
         <!-- END Dynamic Table Full -->
-
-
-
     </div>
     <!-- END Page Content -->
 @endsection

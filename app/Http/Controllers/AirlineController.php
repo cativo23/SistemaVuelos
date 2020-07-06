@@ -81,7 +81,8 @@ class AirlineController extends Controller
         $airline->whatsapp = $request->whatsapp;
         $airline->save();
 
-        return redirect()->route('airlines.index')->with('datos', '¡La aerolinea se guardó correctamente!');
+        return redirect()->route('airlines.index')->with('datos', '¡Aerolínea' .' ' .'"'
+            .$airline->short_name .' '.$airline->origin_country .'"' .' guardada correctamente!');
 
     }
 

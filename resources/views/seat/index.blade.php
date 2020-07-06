@@ -23,14 +23,17 @@
                     <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
                         data-class="animated fadeInUp">Asientos de Avión</h1>
                     <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">Airplane Seats</h2>
+                        data-class="animated fadeInUp">"Airplane Seats"</h2>
                 </div>
             </div>
         </div>
     </div>
     <!-- Page Content -->
     <div class="content">
-
+        <div class="my-50 text-center">
+                    <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
+        href="{{ route('seats.create') }}">Nuevo</a>
+        </div>
 
         @if( session('datos'))
         <!-- Info -->
@@ -56,9 +59,7 @@
         <!-- Dynamic Table Full -->
         <div class="block">
             <div class="block-header block-header-default">
-                <h3 class="block-title">Asientos de Avión<small></small></h3>
-                <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
-                   href="{{ route('seats.create') }}">Nuevo</a>
+                <h3 class="block-title">Aviones<small></small></h3>
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
@@ -67,9 +68,9 @@
                         <tr>
                             <th class="text-center" style="width: 80px;">#</th>
                             <th>Código</th>
-                            <th>Clase</th>
-                            <th>Estado</th>
-                            <th>Avión</th>
+                            <th  style="width: 15%">Clase</th>
+                            <th  style="width: 15%">Estado</th>
+                            <th style="width: 26%">Avión</th>
                             <th style="width: 15%">Acciones</th>
                             <!--<th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>-->
                             <!--<th style="width: 15%;">Registered</th>-->
@@ -81,13 +82,21 @@
                             <td class="text-center">{{ $seat->id }}</td>
                             <td>{{ $seat->code }}</td>
                             <td>{{ $seat->class }}</td>
-                            <td>{{ $seat->status }}</td>
+                            <td>
+                                @if( $seat->status  == '1')
+                                    Disponible
+                                @else
+                                    Ocupado
+                                @endif
+                            </td>
                             <td>{{ $seat->airplane_id }}</td>
 
 
                             <td class="text-center">
                                 <div class="btn-group">
-                                    <a href="{{ route('seats.edit', $seat->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
+                                    <a href="{{ route('seats.edit', $seat->id) }}" type="button"
+                                       class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip"
+                                       title="Editar" data-original-title="Edit">
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                     <a href="{{ route('seats.confirm', $seat->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Eliminar" data-original-title="Delete">

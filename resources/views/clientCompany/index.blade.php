@@ -98,7 +98,7 @@
                                 <td>{{ $cliente->client->first_name }} {{ $cliente->client->second_name }} {{ $cliente->client->first_surname }} {{ $cliente->client->second_surname }}</td>
                                 <td>{{ $cliente->company_name }}</td>
                                 <td>{{ $cliente->client->miles }}</td>
-                                <td>{{ $cliente->client->landline_phone }}</td>
+                                <td>{{ $cliente->client->mobile_phone }}</td>
 
 
                                 <td class="text-center">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Airport;
 use App\Helper\Helper;
+use App\Terminal;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -53,17 +54,38 @@ class AirportController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $Airport =  new  Airport();
-        $Airport->name = $request->nombre;
-        $Airport->telephone = $request->telefono;
-        $Airport->code = $request->codigo;
-        $Airport->num_gateways = $request->terminales;
-        $Airport->representative = $request->representante;
-        $Airport->city = $request->ciudad;
-        $Airport->country = $request->pais;
-        $Airport->save();
-        return redirect()->route('airports.index')->with('datos', '¡El aeropuerto se guardó correctamente!');
+
+        $request->validate([
+            'codigo' => 'required|string|max:150',
+            'nombre' => 'required|string|max:150',
+            'representante' => 'required|string|max:255',
+            'telefono' => 'required|string|min:15|max:15',
+            'pais' => 'required',
+            'ciudad' => 'required',
+            'terminales' => 'required|integer|min:1'
+        ]);
+
+        $airport =  new  Airport();
+        $airport->code = $request->codigo;
+        $airport->name = $request->nombre;
+        $airport->representative = $request->representante;
+        $airport->telephone = $request->telefono;
+        $airport->num_gateways = $request->terminales;
+        $airport->city = $request->ciudad;
+        $airport->country = $request->pais;
+        $airport->save();
+
+        //dd($airport->num_gateways);
+        for ($i = 0; $i < $airport->num_gateways; $i++){
+            $terminal = new Terminal;
+            $id = $i +1;
+            $terminal->code = $airport->id .'-' .$id;  //Aqui va el codigo que dice cat
+            $terminal->airport_id = $airport->id;
+            $terminal->save();
+        }
+        //dd(Terminal::all());
+        return redirect()->route('airports.index')->with('datos', '¡Aeropuerto' .' ' .'"'. $airport->name .'"' .' guardado correctamente!');
+
     }
 
     /**
@@ -85,18 +107,18 @@ class AirportController extends Controller
      */
     public function edit($id)
     {
-
+/*
         if (! Gate::allows('manage-airports')) {
             return abort(401);
         }
-
+*/
         $Airport = Airport::findOrFail($id);
 
         $user = Auth::user();
 
         list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
 
-        return view('airports.edit', compact('Airport', 'sidebar', 'header', 'footer'));
+        return view('airport.edit', compact('Airport', 'sidebar', 'header', 'footer'));
     }
 
     /**
@@ -109,22 +131,63 @@ class AirportController extends Controller
 
     public function update(Request $request, $id)
     {
-        $Airport =  Airport::findOrFail($id);
-        $Airport->name = $request->nombre;
-        $Airport->telephone = $request->telefono;
-        $Airport->code = $request->codigo;
-        $Airport->num_gateways = $request->terminales;
-        $Airport->representative = $request->representante;
-        $Airport->city = $request->ciudad;
-        $Airport->country = $request->pais;
-        $Airport->save();
-        return redirect()->route('airports.index')->with('datos', '¡El aeropuerto se guardó correctamente!');
+        $request->validate([
+            'codigo' => 'required|string|max:150',
+            'nombre' => 'required|string|max:150',
+            'representante' => 'required|string|max:255',
+            'telefono' => 'required|string|min:15|max:15',
+            'pais' => 'required',
+            'ciudad' => 'required',
+            'terminales' => 'required|integer|min:1'
+        ]);
+
+
+        $airport =  Airport::findOrFail($id);
+
+        $n_terminales = count(Terminal::where("airport_id","=", $airport->id)->get());
+        //dd($n_terminales);
+        if($airport->num_gateways != $request->terminales){
+            //dd('es diferente');
+            if($airport->num_gateways < $request->terminales){
+                //Hay que agregar terminales
+                //dd('2do if');
+                //dd($request->terminales, $airport->num_gateways, $n_terminales);
+                for($i = 0; $i < ($request->terminales - $airport->num_gateways); $i++){
+                    //dd('for');
+                    $terminal = new Terminal;
+                    $id = $n_terminales + $i + 1;
+                    $terminal->code = $airport->id .'-' .$id;
+                    $terminal->airport_id = $airport->id;
+                    $terminal->save();
+                }
+            }else{
+                //Hay que quitar termianles
+                //dd($request->terminales, $airport->num_gateways, $n_terminales);
+                for($i = 0; $i < ($airport->num_gateways - $request->terminales); $i++){
+                    //dd('for ite 0');
+                    $terminal = Terminal::where("airport_id","=", $airport->id)->orderBy("id", "asc")->get()->last();
+                    //dd($terminal);
+                    $terminal->delete();
+                }
+            }
+        }
+
+
+        $airport->name = $request->nombre;
+        $airport->telephone = $request->telefono;
+        $airport->code = $request->codigo;
+        $airport->num_gateways = $request->terminales;
+        $airport->representative = $request->representante;
+        $airport->city = $request->ciudad;
+        $airport->country = $request->pais;
+        $airport->save();
+        return redirect()->route('airports.index')->with('datos', '¡Aeropuerto' .' ' .'"'.$airport->name .'"' .' editado correctamente!');
     }
 
     public function confirm($id)
     {
-        $Airport = Airport::findOrFail($id);
-        return view('airports.confirm', compact('Airport'));
+        $airport = Airport::findOrFail($id);
+        return view('airport.confirm', compact('airport'));
     }
 
     /**
@@ -137,8 +200,16 @@ class AirportController extends Controller
     public function destroy($id)
     {
         //
-        $Airport = Airport::findOrFail($id);
-        $Airport->delete();
-        return redirect()->route('airports.index')->with('datos','El aeropuerto se elimino correctamente');
+        $airport = Airport::findOrFail($id);
+        $terminales = Terminal::where("airport_id","=", $airport->id)->get();
+        //dd($asientos);
+        foreach ($terminales as $terminal){
+            $terminal->delete();
+        }
+
+        $nombre = $airport->name;
+        $airport->delete();
+
+        return redirect()->route('airports.index')->with('datos', '¡Aeropuerto' .' ' .'"' .$nombre .'"' .' eliminado correctamente!');
     }
 }
