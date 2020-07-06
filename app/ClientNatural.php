@@ -34,6 +34,24 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read \App\Client $client
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read int|null $activities_count
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $direction
+ * @property string $document_typ
+ * @property string $document_num
+ * @property string $birthday
+ * @property string $gender
+ * @property string $marital_status
+ * @method static Builder|ClientNatural whereBirthday($value)
+ * @method static Builder|ClientNatural whereCreatedAt($value)
+ * @method static Builder|ClientNatural whereDirection($value)
+ * @method static Builder|ClientNatural whereDocumentNum($value)
+ * @method static Builder|ClientNatural whereDocumentTyp($value)
+ * @method static Builder|ClientNatural whereGender($value)
+ * @method static Builder|ClientNatural whereId($value)
+ * @method static Builder|ClientNatural whereMaritalStatus($value)
+ * @method static Builder|ClientNatural whereUpdatedAt($value)
  */
 class ClientNatural extends Model
 {

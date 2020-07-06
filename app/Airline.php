@@ -6,6 +6,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -50,6 +51,20 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read int|null $itineraries_count
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
+ * @property int $id
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property string $code
+ * @property string $email
+ * @property string $official_name
+ * @property string $short_name
+ * @property string $origin_country
+ * @property string $representative
+ * @property string|null $web_page
+ * @property string|null $facebook
+ * @property string|null $instagram
+ * @property string|null $twitter
+ * @property string|null $whatsapp
  */
 class Airline extends Model
 {

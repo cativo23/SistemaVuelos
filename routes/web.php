@@ -43,6 +43,7 @@ Route::match(['get', 'post'], '/dashboard','DashboardController@index')->middlew
 
 Route::resource('/flights', 'FlightController')->middleware('verified', 'forbid-banned-user');
 
+Route::resource('/backups', 'BackupController')->middleware('verified', 'forbid-banned-user');
 
 /*
  * Cativo's Stuff END

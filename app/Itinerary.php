@@ -51,6 +51,34 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read int|null $reservations_count
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $total_price
+ * @property int $num_connections
+ * @property string $arrival_date
+ * @property string $arrival_time
+ * @property string $departure_date
+ * @property string $departure_time
+ * @property string $total_duration
+ * @property string $destination
+ * @property string $origin
+ * @property string $type
+ * @property int $airline_id
+ * @method static Builder|Itinerary whereAirlineId($value)
+ * @method static Builder|Itinerary whereArrivalDate($value)
+ * @method static Builder|Itinerary whereArrivalTime($value)
+ * @method static Builder|Itinerary whereCreatedAt($value)
+ * @method static Builder|Itinerary whereDepartureDate($value)
+ * @method static Builder|Itinerary whereDepartureTime($value)
+ * @method static Builder|Itinerary whereDestination($value)
+ * @method static Builder|Itinerary whereId($value)
+ * @method static Builder|Itinerary whereNumConnections($value)
+ * @method static Builder|Itinerary whereOrigin($value)
+ * @method static Builder|Itinerary whereTotalDuration($value)
+ * @method static Builder|Itinerary whereTotalPrice($value)
+ * @method static Builder|Itinerary whereType($value)
+ * @method static Builder|Itinerary whereUpdatedAt($value)
  */
 class Itinerary extends Model
 {

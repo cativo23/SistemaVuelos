@@ -37,6 +37,26 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @mixin \Eloquent
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $origin
+ * @property string $destination
+ * @property string $date_booking
+ * @property string $date_cancellation
+ * @property string $seat_num
+ * @property string $class_seat
+ * @property int $passenger_id
+ * @method static Builder|Ticket whereClassSeat($value)
+ * @method static Builder|Ticket whereCreatedAt($value)
+ * @method static Builder|Ticket whereDateBooking($value)
+ * @method static Builder|Ticket whereDateCancellation($value)
+ * @method static Builder|Ticket whereDestination($value)
+ * @method static Builder|Ticket whereId($value)
+ * @method static Builder|Ticket whereOrigin($value)
+ * @method static Builder|Ticket wherePassengerId($value)
+ * @method static Builder|Ticket whereSeatNum($value)
+ * @method static Builder|Ticket whereUpdatedAt($value)
  */
 class Ticket extends Model
 {

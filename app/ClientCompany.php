@@ -33,6 +33,20 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read Client $client
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $company_name
+ * @property string $contact_name
+ * @property string $nic
+ * @property string $nit
+ * @method static Builder|ClientCompany whereCompanyName($value)
+ * @method static Builder|ClientCompany whereContactName($value)
+ * @method static Builder|ClientCompany whereCreatedAt($value)
+ * @method static Builder|ClientCompany whereId($value)
+ * @method static Builder|ClientCompany whereNic($value)
+ * @method static Builder|ClientCompany whereNit($value)
+ * @method static Builder|ClientCompany whereUpdatedAt($value)
  */
 class ClientCompany extends Model
 {

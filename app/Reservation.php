@@ -39,6 +39,24 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder|Reservation wherePASSENGERS($value)
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $number
+ * @property int $suitcase_num
+ * @property int $payed
+ * @property int $passengers
+ * @property int $client_id
+ * @property int $itinerary_id
+ * @method static Builder|Reservation whereClientId($value)
+ * @method static Builder|Reservation whereCreatedAt($value)
+ * @method static Builder|Reservation whereId($value)
+ * @method static Builder|Reservation whereItineraryId($value)
+ * @method static Builder|Reservation whereNumber($value)
+ * @method static Builder|Reservation wherePassengers($value)
+ * @method static Builder|Reservation wherePayed($value)
+ * @method static Builder|Reservation whereSuitcaseNum($value)
+ * @method static Builder|Reservation whereUpdatedAt($value)
  */
 class Reservation extends Model
 {

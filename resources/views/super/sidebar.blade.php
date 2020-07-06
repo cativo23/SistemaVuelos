@@ -135,7 +135,7 @@
                 @if($user->can('manage-airline'))
                     <li>
                         <a class="{{ request()->is('airline*') ? ' active' : '' }}"
-                           href="{{route('airline.index')}}">
+                           href="{{route('airlines.index')}}">
                             <i class="si si-paper-plane"></i><span class="sidebar-mini-hide">Aerolineas</span>
                         </a>
                     </li>

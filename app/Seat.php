@@ -33,6 +33,20 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read Airplane $airplane
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $class
+ * @property int $status
+ * @property string $code
+ * @property int $airplane_id
+ * @method static Builder|Seat whereAirplaneId($value)
+ * @method static Builder|Seat whereClass($value)
+ * @method static Builder|Seat whereCode($value)
+ * @method static Builder|Seat whereCreatedAt($value)
+ * @method static Builder|Seat whereId($value)
+ * @method static Builder|Seat whereStatus($value)
+ * @method static Builder|Seat whereUpdatedAt($value)
  */
 class Seat extends Model
 {

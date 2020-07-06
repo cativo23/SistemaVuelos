@@ -28,6 +28,16 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read Airport $airport
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $code
+ * @property int $airport_id
+ * @method static Builder|Terminal whereAirportId($value)
+ * @method static Builder|Terminal whereCode($value)
+ * @method static Builder|Terminal whereCreatedAt($value)
+ * @method static Builder|Terminal whereId($value)
+ * @method static Builder|Terminal whereUpdatedAt($value)
  */
 class Terminal extends Model
 {

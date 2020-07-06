@@ -33,6 +33,22 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read \App\Airline $airlines
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read int|null $activities_count
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $city
+ * @property string $state
+ * @property string $country
+ * @property string $continent
+ * @property string $code
+ * @method static Builder|Destination whereCity($value)
+ * @method static Builder|Destination whereCode($value)
+ * @method static Builder|Destination whereContinent($value)
+ * @method static Builder|Destination whereCountry($value)
+ * @method static Builder|Destination whereCreatedAt($value)
+ * @method static Builder|Destination whereId($value)
+ * @method static Builder|Destination whereState($value)
+ * @method static Builder|Destination whereUpdatedAt($value)
  */
 class Destination extends Model
 {

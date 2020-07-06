@@ -40,6 +40,26 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read int|null $gateways_count
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $name
+ * @property string $telephone
+ * @property string $representative
+ * @property int $num_gateways
+ * @property string $city
+ * @property string $country
+ * @property string $code
+ * @method static Builder|Airport whereCity($value)
+ * @method static Builder|Airport whereCode($value)
+ * @method static Builder|Airport whereCountry($value)
+ * @method static Builder|Airport whereCreatedAt($value)
+ * @method static Builder|Airport whereId($value)
+ * @method static Builder|Airport whereName($value)
+ * @method static Builder|Airport whereNumGateways($value)
+ * @method static Builder|Airport whereRepresentative($value)
+ * @method static Builder|Airport whereTelephone($value)
+ * @method static Builder|Airport whereUpdatedAt($value)
  */
 class Airport extends Model
 {

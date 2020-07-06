@@ -39,7 +39,11 @@ class AirlineController extends Controller
     {
         $user = Auth::user();
         $lastAirline = Airline::latest('id')->first();
-        $idcode = $lastAirline->id +1;
+        $idcode = 1;
+        if ($lastAirline){
+            $idcode = $lastAirline->id +1;
+        }
+
 
         list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
         return view('airline.create' , compact('sidebar', 'header', 'footer', 'idcode'));
@@ -175,7 +179,11 @@ class AirlineController extends Controller
     public function destroy($id)
     {
         $airline = Airline::findOrFail($id);
-        $airline->delete();
+        try {
+            $airline->delete();
+        } catch (\Exception $e) {
+            return redirect()->route('airlines.index')->with('datos', '¡error!');
+        }
         return redirect()->route('airlines.index')->with('datos', '¡La aerolinea se eliminó correctamente!');
     }
 }

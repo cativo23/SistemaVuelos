@@ -31,6 +31,18 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read Reservation $reservation
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $total_price
+ * @property string $paid
+ * @property int $reservation_id
+ * @method static Builder|Payment whereCreatedAt($value)
+ * @method static Builder|Payment whereId($value)
+ * @method static Builder|Payment wherePaid($value)
+ * @method static Builder|Payment whereReservationId($value)
+ * @method static Builder|Payment whereTotalPrice($value)
+ * @method static Builder|Payment whereUpdatedAt($value)
  */
 class Payment extends Model
 {

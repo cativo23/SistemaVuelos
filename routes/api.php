@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });*/
+
+Route::get('/create_backup', 'APIController@aws_make_backup');
+Route::get('/describe_backups','APIController@aws_describe_backups');
+Route::get('/restore_backup', 'APIController@aws_restore_backup');
+Route::get('/airlines', 'APIController@get_airlines');
+Route::get('/airports', 'APIController@get_airports');
+Route::get('/airplanes', 'APIController@get_airplanes');

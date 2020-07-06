@@ -36,6 +36,14 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read Flight|null $flight
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $type
+ * @property string $manufacturer
+ * @property int $seat_capacity
+ * @property string $model
+ * @property int $airline_id
  */
 class Airplane extends Model
 {

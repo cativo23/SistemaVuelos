@@ -182,6 +182,7 @@ return [
          * Laravel IDE Helper
          */
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+        Aws\Laravel\AwsServiceProvider::class,
     ],
 
     /*
@@ -234,7 +235,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Bouncer'=> Silber\Bouncer\Bouncer::class, //Adding Bouncer alias
-        'Helper'=> App\Helper\Helper::class
+        'Helper'=> App\Helper\Helper::class,
+        'AWS' => Aws\Laravel\AwsFacade::class,
     ],
 
 ];
