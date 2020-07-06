@@ -18,8 +18,6 @@
     <main id="main-container">
         <!-- Page Content -->
         <div class="content">
-            <h2 class="content-heading">Detalles de aerolinea "{{ $airline->short_name }}"</h2>
-
             <div class="col-md-11">
                 <div class="block">
                     <div class="block-header block-header-default">
@@ -41,11 +39,6 @@
                                     <div class="form-material floating input-group">
                                         <input type="text" class="form-control" id="codigo" name="codigo" value="{{ $airline->code }}" disabled>
                                         <label for="codigo">Código</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-hashtag"></i>
-                                            </span>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
