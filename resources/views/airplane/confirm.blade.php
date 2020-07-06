@@ -7,7 +7,7 @@
             <div class="content content-top text-center overflow-hidden">
                 <div class="pt-50 pb-20">
                     <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">Eliminar Avión</h1>
+                        data-class="animated fadeInUp">¿Desea eliminar el avión?</h1>
                     <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
                         data-class="animated fadeInUp">"{{ $airplane->model }}"</h2>
                 </div>
@@ -18,8 +18,6 @@
     <main id="main-container">
         <!-- Page Content -->
         <div class="content">
-            <h2 class="content-heading">¿Desea eliminar el avión "{{ $airplane->model }}"?</h2>
-
             <div class="col-md-11">
                 <div class="block">
                     <div class="block-header block-header-default">
@@ -31,71 +29,137 @@
                         </div>
                     </div>
 
+
                     <div class="block-content">
 
                         <form action="{{ route('airplanes.destroy', $airplane->id) }}" method="post">
                             @method('DELETE')
                             @csrf
                             <div class="form-group row">
-                                <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="modelo" name="modelo" value="{{ $airplane->model }}" disabled="">
-                                        <label for="modelo">Modelo</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-hashtag"></i>
-                                            </span>
+
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                                <div class="form-material floating input-group">
+                                                    <input type="text" class="form-control" id="modelo" name="modelo"
+                                                           value="{{ $airplane->model}}" disabled>
+                                                    <label for="modelo">Modelo</label>
+                                                    <div class="input-group-append">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-hashtag"></i>
+                                                    </span>
+                                                    </div>
+                                                </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="tipo" name="tipo" value="{{ $airplane->type }}" disabled="">
-                                        <label for="tipo">Tipo</label>
-                                        <div class="input-group-append">
+                                        <div class="col-md-6">
+
+                                            <div class="form-material floating input-group">
+                                                <input type="text" class="form-control" id="tipo" name="tipo" value="{{ $airplane->type }}" disabled="">
+                                                <label for="tipo">Tipo</label>
+                                                <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-usd"></i>
                                             </span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="capacidad" name="capacidad" value="{{ $airplane->seat_capacity }}" disabled="">
-                                        <label for="capacidad">Capacidad</label>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-users"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="fabricante" name="fabricante" value="{{ $airplane->manufacturer }}" disabled="">
-                                        <label for="fabricante">Fabricante</label>
-                                        <div class="input-group-append">
+                                        <div class="col-md-6">
+                                            <div class="form-material floating input-group">
+                                                <input type="text" class="form-control" id="fabricante" name="fabricante" value="{{ $airplane->manufacturer }}" disabled="">
+                                                <label for="fabricante">Fabricante</label>
+                                                <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-wrench"></i>
                                             </span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="fabricante" name="fabricante" value="{{ $airplane->airline_id }}" disabled="">
-                                        <label for="fabricante">Aerolínea</label>
-                                        <div class="input-group-append">
+                                        <div class="col-md-6">
+                                            <div class="form-material floating input-group">
+                                                <input type="text" class="form-control" id="fabricante" name="fabricante"
+                                                       value="{{ $airplane->airline_id }}" disabled="">
+                                                <label for="fabricante">Aerolínea</label>
+                                                <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-plane"></i>
                                             </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-material floating input-group">
+                                                <input type="text" class="form-control" id="capacidad" name="capacidad"
+                                                       value="{{ $airplane->seat_capacity }}" disabled="">
+                                                <label for="fabricante">Capacidad Total (Pasajeros)</label>
+                                                <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-users"></i>
+                                            </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+
+
+                                    <div class="row  col-md-16  col-sm-16 justify-content-center  text-center">
+                                        <div class="col-md-9">
+                                            <div class="d-flex align-items-center">
+
+                                                    <div class="form-material floating input-group">
+                                                        <input type="text" class="form-control" id="fabricante"
+                                                               name="fabricante"  value="{{ $economicos }}" disabled="">
+                                                        <label for="economica">Asientos Clase Económica</label>
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="fa fa-ticket"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-9">
+                                            <div class="d-flex align-items-center">
+
+                                                <div class="form-material floating input-group">
+                                                    <input type="text" class="form-control" id="fabricante"
+                                                           name="fabricante"  value="{{ $ejecutivos }}" disabled="">
+                                                    <label for="economica">Asientos Clase Ejecutiva</label>
+                                                    <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="fa fa-suitcase"></i>
+                                                            </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-9">
+                                            <div class="d-flex align-items-center">
+
+                                                <div class="form-material floating input-group">
+                                                    <input type="text" class="form-control" id="fabricante"
+                                                           name="fabricante"  value="{{ $primera }}" disabled="">
+                                                    <label for="economica">Asientos Primera Clase </label>
+                                                    <div class="input-group-append">
+                                                            <span class="input-group-text">
+                                                                <i class="fa fa-star"></i>
+                                                            </span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                             <br>
                             <div class="form-group row">
-                                <div class="col-md-9">
+                                <div class="col-md-12">
 
                                     <button type="submit" class="btn btn-square btn-outline-primary min-width-125 mb-10" data-toggle="click-ripple">Eliminar</button>
                                     <a href="{{ route('airplanes.index')}}" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>

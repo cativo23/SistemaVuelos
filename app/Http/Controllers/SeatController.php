@@ -68,6 +68,7 @@ class SeatController extends Controller
         $seat->class = $request->clase;
         $seat->status = $request->estado;
         $seat->airplane_id = $request->avion;
+        dd($request);
         $seat->save();
 
         return redirect()->route('seats.index')->with('datos', '¡Asiento guardado correctamente!');
