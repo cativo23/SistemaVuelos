@@ -18,8 +18,6 @@
     <main id="main-container">
         <!-- Page Content -->
         <div class="content">
-            <h2 class="content-heading">Detalles de aerolinea "{{ $airline->short_name }}"</h2>
-
             <div class="col-md-11">
                 <div class="block">
                     <div class="block-header block-header-default">

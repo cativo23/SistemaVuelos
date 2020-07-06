@@ -7,9 +7,9 @@
             <div class="content content-top text-center overflow-hidden">
                 <div class="pt-50 pb-20">
                     <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">Eliminar Aerolinea</h1>
+                        data-class="animated fadeInUp">¿Desea eliminar la aerolinea?</h1>
                     <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">"{{ $airline->short_name }}"</h2>
+                        data-class="animated fadeInUp">"{{ $airline->official_name }}"</h2>
                 </div>
             </div>
         </div>
@@ -18,8 +18,6 @@
     <main id="main-container">
         <!-- Page Content -->
         <div class="content">
-            <h2 class="content-heading">¿Desea eliminar la aerolinea "{{ $airline->short_name }}"?</h2>
-
             <div class="col-md-11">
                 <div class="block">
                     <div class="block-header block-header-default">

@@ -72,6 +72,10 @@
                             <th>Estado</th>
                             <th>Avión</th>
                             <th>Acciones</th>
+                            <th  style="width: 15%">Clase</th>
+                            <th  style="width: 15%">Estado</th>
+                            <th style="width: 26%">Avión</th>
+                            <th style="width: 15%">Acciones</th>
                             <!--<th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>-->
                             <!--<th style="width: 15%;">Registered</th>-->
                         </tr>
@@ -82,13 +86,21 @@
                             <td class="text-center">{{ $seat->id }}</td>
                             <td>{{ $seat->code }}</td>
                             <td>{{ $seat->class }}</td>
-                            <td>{{ $seat->status }}</td>
+                            <td>
+                                @if( $seat->status  == '1')
+                                    Disponible
+                                @else
+                                    Ocupado
+                                @endif
+                            </td>
                             <td>{{ $seat->airplane_id }}</td>
 
 
                             <td class="text-center">
                                 <div class="btn-group">
-                                    <a href="{{ route('seats.edit', $seat->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
+                                    <a href="{{ route('seats.edit', $seat->id) }}" type="button"
+                                       class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip"
+                                       title="Editar" data-original-title="Edit">
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                     <a href="{{ route('seats.confirm', $seat->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Eliminar" data-original-title="Delete">
