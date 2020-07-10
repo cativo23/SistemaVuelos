@@ -7,7 +7,7 @@
             <div class="content content-top text-center overflow-hidden">
                 <div class="pt-50 pb-20">
                     <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">Eliminar Asiento</h1>
+                        data-class="animated fadeInUp">¿Desea eliminar el asiento?</h1>
                     <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
                         data-class="animated fadeInUp">"{{ $asiento->code }}"</h2>
                 </div>
@@ -18,8 +18,6 @@
     <main id="main-container">
         <!-- Page Content -->
         <div class="content">
-            <h2 class="content-heading">¿Desea eliminar el asiento "{{ $asiento->code }}"?</h2>
-
             <div class="col-md-7">
                 <div class="block">
                     <div class="block-header block-header-default">
@@ -96,7 +94,7 @@
                                 <div class="col-md-9">
 
                                     <button type="submit" class="btn btn-square btn-outline-primary min-width-125 mb-10" data-toggle="click-ripple">Eliminar</button>
-                                    <a href="{{ route('seats.index')}}" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>
+                                    <a href="{{ route('cancelarAsiento')}}" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>
                                 </div>
                             </div>
                         </form>

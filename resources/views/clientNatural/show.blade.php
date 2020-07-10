@@ -164,7 +164,7 @@
                                         <label for="direccion">Dirección</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
-                                                <i class="fa fa-map-o"></i>
+                                                <i class="fa fa-map"></i>
                                             </span>
                                         </div>
                                     </div>

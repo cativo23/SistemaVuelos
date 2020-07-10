@@ -33,12 +33,12 @@
                         <form action="{{ route('clientNaturals.store') }}" method="post">@csrf
                             <div class="form-group row">
                                 <div class="col-md-4">
-                                    @error('n_frecuente') <div class="form-group is-invalid"> @enderror
+                                    @error('n_frecuente') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="n_frecuente2" name="n_frecuente2"
                                                    value="{{ $numero_cliente }}" disabled>
 
-                                            <label for="codigo">N° Cliente Frecuente</label>
+                                            <label for="n_frecuente2">N° Cliente Frecuente</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-hashtag"></i>
@@ -54,11 +54,11 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    @error('primer_nombre') <div class="form-group is-invalid"> @enderror
+                                    @error('primer_nombre') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="primer_nombre" name="primer_nombre"
                                                    value="{{ old('primer_nombre') }}">
-                                            <label for="nombrecorto">Primer Nombre</label>
+                                            <label for="primer_nombre">Primer Nombre</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-user"></i>
@@ -71,11 +71,11 @@
                                         @error('primer_nombre') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    @error('segundo_nombre') <div class="form-group is-invalid"> @enderror
+                                    @error('segundo_nombre') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="segundo_nombre" name="segundo_nombre"
                                                    value="{{ old('segundo_nombre') }}">
-                                            <label for="nombreoficial">Segundo Nombre</label>
+                                            <label for="segundo_nombre">Segundo Nombre</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-user"></i>
@@ -88,11 +88,11 @@
                                         @error('segundo_nombre') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    @error('primer_apellido') <div class="form-group is-invalid"> @enderror
+                                    @error('primer_apellido') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="primer_apellido" name="primer_apellido"
                                                    value="{{ old('primer_apellido') }}">
-                                            <label for="paisorigen">Primer Apellido</label>
+                                            <label for="primer_apellido">Primer Apellido</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-user"></i>
@@ -105,11 +105,11 @@
                                         @error('primer_apellido') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    @error('segundo_apellido') <div class="form-group is-invalid"> @enderror
+                                    @error('segundo_apellido') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="segundo_apellido" name="segundo_apellido"
                                                    value="{{ old('segundo_apellido') }}">
-                                            <label for="email">Segundo Apellido</label>
+                                            <label for="segundo_apellido">Segundo Apellido</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-user"></i>
@@ -123,7 +123,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    @error('cumple') <div class="form-group is-invalid"> @enderror
+                                    @error('cumple') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input ttype="text" class="form-control"  data-allow-input="true" id="cumple" name="cumple"
                                                    value="{{ old('cumple') }}" data-mask="00-00-0000">
@@ -141,7 +141,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    @error('genero')<div class="form-group is-invalid">@enderror
+                                    @error('genero')<div class="form-group input-group is-invalid">@enderror
                                         <div class="form-material floating">
                                             @php ($generos=['Femenino', 'Masculino', 'Otro'])
                                             <select class="form-control" id="genero" name="genero">
@@ -165,7 +165,7 @@
 
 
                                 <div class="col-md-4">
-                                    @error('estado_civil')<div class="form-group is-invalid">@enderror
+                                    @error('estado_civil')<div class="form-group input-group is-invalid">@enderror
                                         <div class="form-material floating">
                                             @php ($estados=['Casado/a', 'Comprometido/a', 'Divorciado/a','Noviazgo', 'Separado/a', 'Soltero/a', 'Viudo/a', 'Unión libre'])
                                             <select class="form-control" id="estado_civil" name="estado_civil">
@@ -179,14 +179,14 @@
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            <label for="estadocivil">Estado Civil</label>
+                                            <label for="estado_civil">Estado Civil</label>
                                         </div>
                                         @error('estado_civil')<div id="val-skill2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
                                         @error('estado_civil')</div>@enderror
                                 </div>
 
                                 <div class="col-md-4">
-                                    @error('tipo_documento')<div class="form-group is-invalid">@enderror
+                                    @error('tipo_documento')<div class="form-group input-group is-invalid">@enderror
                                         <div class="form-material floating">
                                             @php ($documentos=['DUI', 'NIT', 'Pasaporte'])
                                             <select class="form-control" id="tipo_documento" name="tipo_documento">
@@ -202,7 +202,7 @@
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            <label for="tipodocumento">Tipo de Documento</label>
+                                            <label for="tipo_documento">Tipo de Documento</label>
                                         </div>
                                         @error('tipo_documento')<div id="val-skill2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
                                         @error('tipo_documento')</div>@enderror
@@ -210,12 +210,12 @@
 
 
                                 <div id="formatodui" style="display: inline" class="col-md-4">
-                                    @error('n_documento') <div class="form-group is-invalid"> @enderror
+                                    @error('n_documento') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="n_documento1" name="n_documento1"
                                                    value="{{ old('n_documento') }}" data-mask="00000000-0" maxlength="10"
                                             minlength="10">
-                                            <label for="facebook">N° Documento</label>
+                                            <label for="n_documento1">N° Documento</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-id-card"></i>
@@ -228,11 +228,11 @@
                                         @error('n_documento') </div> @enderror
                                 </div>
                                 <div id="formatonit" style="display: none" class="col-md-4">
-                                    @error('n_documento') <div class="form-group is-invalid"> @enderror
+                                    @error('n_documento') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="n_documento2" name="n_documento2"
                                                    value="{{ old('n_documento') }}" data-mask="0000-000000-000-0">
-                                            <label for="facebook">N° Documento</label>
+                                            <label for="n_documento2">N° Documento</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-id-card"></i>
@@ -246,11 +246,11 @@
                                 </div>
 
                                 <div id="formatopasaporte" style="display: none" class="col-md-4" >
-                                    @error('n_documento') <div class="form-group is-invalid"> @enderror
+                                    @error('n_documento') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="n_documento3" name="n_documento3"
                                                    value="{{ old('n_documento') }}" data-mask="A-00000000">
-                                            <label for="facebook">N° Documento</label>
+                                            <label for="n_documento3">N° Documento</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-id-card"></i>
@@ -263,11 +263,11 @@
                                         @error('n_documento') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    @error('tel_fijo') <div class="form-group is-invalid"> @enderror
+                                    @error('tel_fijo') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="tel_fijo" name="tel_fijo"
                                                    value="{{ old('tel_fijo') }}" data-mask="(000) 0000 0000">
-                                            <label for="telfijo">Teléfono fijo</label>
+                                            <label for="tel_fijo">Teléfono fijo</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-phone"></i>
@@ -280,11 +280,11 @@
                                         @error('tel_fijo') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    @error('tel_movil') <div class="form-group is-invalid"> @enderror
+                                    @error('tel_movil') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="tel_movil" name="tel_movil"
                                                    value="{{ old('tel_movil') }}" data-mask="(000) 0000 0000">
-                                            <label for="whatsapp">Teléfono Móvil</label>
+                                            <label for="tel_movil">Teléfono Móvil</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-mobile-phone"></i>
@@ -298,14 +298,14 @@
                                 </div>
 
                                 <div class="col-md-8">
-                                    @error('direccion') <div class="form-group is-invalid"> @enderror
+                                    @error('direccion') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="direccion" name="direccion"
                                                    value="{{ old('direccion') }}">
                                             <label for="direccion">Dirección</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
-                                                    <i class="fa fa-map-o"></i>
+                                                    <i class="fa fa-map"></i>
                                                 </span>
                                             </div>
                                         </div>

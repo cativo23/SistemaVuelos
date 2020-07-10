@@ -33,12 +33,12 @@
                         <form action="{{ route('clientCompanys.store') }}" method="post">@csrf
                             <div class="form-group row">
                                 <div class="col-md-4">
-                                    @error('n_frecuente') <div class="form-group is-invalid"> @enderror
+                                    @error('n_frecuente') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="n_frecuente2" name="n_frecuente2"
                                                    value="{{ $numero_cliente  }}" disabled>
 
-                                            <label for="codigo">N° Cliente Frecuente</label>
+                                            <label for="n_frecuente2">N° Cliente Frecuente</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-hashtag"></i>
@@ -53,11 +53,11 @@
                                            id="n_frecuente" name="n_frecuente" value="{{ $numero_cliente  }}">
                                 </div>
                                 <div class="col-md-4">
-                                    @error('primer_nombre') <div class="form-group is-invalid"> @enderror
+                                    @error('primer_nombre') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="primer_nombre" name="primer_nombre"
                                                    value="{{ old('primer_nombre') }}">
-                                            <label for="nombrecorto">Primer Nombre</label>
+                                            <label for="primer_nombre">Primer Nombre</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-user"></i>
@@ -65,12 +65,12 @@
                                             </div>
                                         </div>
                                         @error('primer_nombre')
-                                        <div id="nombrecorto-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        <div id="primer_nombre-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
                                         @enderror
                                     @error('primer_nombre') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    @error('segundo_nombre') <div class="form-group is-invalid"> @enderror
+                                    @error('segundo_nombre') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="segundo_nombre" name="segundo_nombre"
                                                    value="{{ old('segundo_nombre') }}">
@@ -82,12 +82,12 @@
                                             </div>
                                         </div>
                                         @error('segundo_nombre')
-                                        <div id="nombreoficial-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        <div id="segundo_nombre-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
                                         @enderror
                                     @error('segundo_nombre') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    @error('primer_apellido') <div class="form-group is-invalid"> @enderror
+                                    @error('primer_apellido') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="primer_apellido" name="primer_apellido"
                                                    value="{{ old('primer_apellido') }}">
@@ -99,12 +99,12 @@
                                             </div>
                                         </div>
                                         @error('primer_apellido')
-                                        <div id="paisorigen-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        <div id="primer_apellido-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
                                         @enderror
                                         @error('primer_apellido') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    @error('segundo_apellido') <div class="form-group is-invalid"> @enderror
+                                    @error('segundo_apellido') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="segundo_apellido" name="segundo_apellido"
                                                    value="{{ old('segundo_apellido') }}">
@@ -116,16 +116,16 @@
                                             </div>
                                         </div>
                                         @error('segundo_apellido')
-                                        <div id="email-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        <div id="segundo_apellido-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
                                         @enderror
                                     @error('segundo_apellido') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    @error('tel_fijo') <div class="form-group is-invalid"> @enderror
+                                    @error('tel_fijo') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="tel_fijo" name="tel_fijo"
                                                    value="{{ old('tel_fijo') }}" data-mask="(000) 0000 0000">
-                                            <label for="telfijo">Teléfono Fijo del Cliente</label>
+                                            <label for="tel_fijo">Teléfono Fijo del Cliente</label>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-phone"></i>
@@ -133,12 +133,12 @@
                                             </div>
                                         </div>
                                         @error('tel_fijo')
-                                        <div id="twitter-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        <div id="tel_fijo-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
                                         @enderror
                                         @error('tel_fijo') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    @error('tel_movil') <div class="form-group is-invalid"> @enderror
+                                    @error('tel_movil') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="tel_movil" name="tel_movil"
                                                    value="{{ old('tel_movil') }}" data-mask="(000) 0000 0000">
@@ -150,12 +150,12 @@
                                             </div>
                                         </div>
                                         @error('tel_movil')
-                                        <div id="whatsapp-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        <div id="tel_movil-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
                                         @enderror
                                         @error('tel_movil') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    @error('nombre_contacto') <div class="form-group is-invalid"> @enderror
+                                    @error('nombre_contacto') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="nombre_contacto" name="nombre_contacto"
                                                    value="{{ old('nombre_contacto') }}">
@@ -167,13 +167,13 @@
                                             </div>
                                         </div>
                                         @error('nombre_contacto')
-                                        <div id="email-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        <div id="nombre_contacto-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
                                         @enderror
                                         @error('nombre_contacto') </div> @enderror
                                 </div>
 
                                 <div class="col-md-4">
-                                    @error('nombre_empresa') <div class="form-group is-invalid"> @enderror
+                                    @error('nombre_empresa') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="nombre_empresa" name="nombre_empresa"
                                                    value="{{ old('nombre_empresa') }}">
@@ -185,12 +185,12 @@
                                             </div>
                                         </div>
                                         @error('nombre_empresa')
-                                        <div id="nombrecorto-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        <div id="nombre_empresa-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
                                         @enderror
                                         @error('nombre_empresa') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    @error('nic') <div class="form-group is-invalid"> @enderror
+                                    @error('nic') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="nic" name="nic"
                                                    value="{{ old('nic') }}" data-mask="00000000-0">
@@ -202,12 +202,12 @@
                                             </div>
                                         </div>
                                         @error('nic')
-                                        <div id="facebook-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        <div id="nic-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
                                         @enderror
                                         @error('nic') </div> @enderror
                                 </div>
                                 <div class="col-md-4">
-                                    @error('nit') <div class="form-group is-invalid"> @enderror
+                                    @error('nit') <div class="form-group input-group is-invalid"> @enderror
                                         <div class="form-material floating input-group">
                                             <input type="text" class="form-control" id="nit" name="nit"
 
@@ -220,7 +220,7 @@
                                             </div>
                                         </div>
                                         @error('nit')
-                                        <div id="facebook-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+                                        <div id="nit-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
                                         @enderror
                                         @error('nit') </div> @enderror
                                 </div>

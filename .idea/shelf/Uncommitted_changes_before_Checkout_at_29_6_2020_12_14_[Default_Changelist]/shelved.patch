@@ -1,0 +1,266 @@
+Index: app/Http/Controllers/AirplaneController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nnamespace App\\Http\\Controllers;\r\n\r\nuse App\\Airplane;\r\nuse App\\Airline;\r\nuse App\\Helper\\Helper;\r\nuse Exception;\r\nuse Illuminate\\Contracts\\Foundation\\Application;\r\nuse Illuminate\\Contracts\\View\\Factory;\r\nuse Illuminate\\Http\\RedirectResponse;\r\nuse Illuminate\\Http\\Request;\r\nuse Illuminate\\Http\\Response;\r\nuse Illuminate\\Support\\Facades\\Auth;\r\nuse Illuminate\\Support\\Facades\\Gate;\r\nuse Illuminate\\View\\View;\r\n\r\nclass AirplaneController extends Controller\r\n{\r\n    /**\r\n     * Display a listing of the resource.\r\n     *\r\n     * @return Application|Factory|View\r\n     */\r\n    public function index()\r\n    {\r\n\r\n        if (! Gate::allows('manage-airplanes')) {\r\n            return abort(401);\r\n        }\r\n\r\n        $airplanes = Airplane::all();\r\n\r\n        $user = Auth::user();\r\n\r\n        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);\r\n\r\n        return view('airplane.index', compact('airplanes', 'sidebar' , 'header', 'footer'));\r\n    }\r\n\r\n    /**\r\n     * Show the form for creating a new resource.\r\n     *\r\n     * @return Application|Factory|View\r\n     */\r\n    public function create()\r\n    {\r\n        $airlines = Airline::all();\r\n\r\n        $user = Auth::user();\r\n\r\n        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);\r\n\r\n        return view('airplane.create', compact('airlines', 'sidebar' , 'header', 'footer'));\r\n\r\n    }\r\n\r\n    /**\r\n     * Store a newly created resource in storage.\r\n     *\r\n     * @param Request $request\r\n     * @return RedirectResponse\r\n     */\r\n    public function store(Request $request)\r\n    {\r\n        $request->validate([\r\n            'modelo' => 'required|string|max:150',\r\n            'tipo' => 'required|max:150',\r\n            'capacidad' => 'required|integer',\r\n            'fabricante' => 'required|string|max:255',\r\n            'aerolinea' => 'required'\r\n        ]);\r\n\r\n        $airplane = new Airplane;\r\n        $airplane->model = $request->modelo;\r\n        $airplane->type = $request->tipo;\r\n        $airplane->seat_capacity = $request->capacidad;\r\n        $airplane->manufacturer = $request->fabricante;\r\n\r\n        $airplane->airline_id = $request->aerolinea;\r\n\r\n        $airplane->save();\r\n\r\n        return redirect()->route('airplanes.index')->with('datos', '¡Avión guardado correctamente!');\r\n        //return dd($request);\r\n    }\r\n\r\n    /**\r\n     * Display the specified resource.\r\n     *\r\n     * @param  \\App\\Airplane  $airplane\r\n     * @return Response\r\n     */\r\n    public function show(Airplane $airplane)\r\n    {\r\n        //\r\n    }\r\n\r\n    /**\r\n     * Show the form for editing the specified resource.\r\n     *\r\n     * @param  \\App\\Airplane  $airplane\r\n     * @return Response\r\n     */\r\n    public function edit($id)\r\n    {\r\n        $airplane = Airplane::findOrFail($id);\r\n        $airlines = Airline::all();\r\n        return view('airplane.edit', compact('airplane', 'airlines'));\r\n    }\r\n\r\n    /**\r\n     * Update the specified resource in storage.\r\n     *\r\n     * @param Request $request\r\n     * @param $id\r\n     * @return RedirectResponse\r\n     */\r\n    public function update(Request $request, $id)\r\n    {\r\n        $request->validate([\r\n            'modelo' => 'required|string|max:150',\r\n            'tipo' => 'required|max:150',\r\n            'capacidad' => 'required|integer',\r\n            'fabricante' => 'required|string|max:255',\r\n            'aerolinea' => 'required'\r\n        ]);\r\n\r\n        $airplane = Airplane::findOrFail($id);\r\n        $airplane->model = $request->modelo;\r\n        $airplane->type = $request->tipo;\r\n        $airplane->seat_capacity = $request->capacidad;\r\n        $airplane->manufacturer = $request->fabricante;\r\n\r\n        $airplane->airline_id = $request->aerolinea;\r\n        $airplane->save();\r\n        return redirect()->route('airplanes.index')->with('datos', '¡Avión editado correctamente!');    }\r\n\r\n    public function confirm($id)\r\n    {\r\n        $airplane = Airplane::findOrFail($id);\r\n\r\n        $user = Auth::user();\r\n\r\n        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);\r\n\r\n        return view('airplane.confirm', compact('airplane', 'sidebar', 'header', 'footer'));\r\n    }\r\n\r\n    /**\r\n     * Remove the specified resource from storage.\r\n     *\r\n     * @param $id\r\n     * @return RedirectResponse\r\n     * @throws Exception\r\n     */\r\n    public function destroy($id)\r\n    {\r\n        $airplane = Airplane::findOrFail($id);\r\n        $airplane->delete();\r\n        return redirect()->route('airplanes.index')->with('datos', '¡Avión eliminado correctamente!');\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/Http/Controllers/AirplaneController.php	(revision 38a221862985c1ae1edd679aaeaea3847710a8a1)
++++ app/Http/Controllers/AirplaneController.php	(date 1593453985330)
+@@ -66,9 +66,9 @@
+         $request->validate([
+             'modelo' => 'required|string|max:150',
+             'tipo' => 'required|max:150',
+-            'capacidad' => 'required|integer',
++            'capacidad[0]' => 'required|integer|min:1',
+             'fabricante' => 'required|string|max:255',
+-            'aerolinea' => 'required'
++            'aerolinea' => 'required',
+         ]);
+ 
+         $airplane = new Airplane;
+Index: resources/views/airplane/create.blade.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>@extends('layouts.backend', ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer'])\r\n\r\n\r\n@section('content')\r\n    <div class=\"bg-image bg-image-bottom\" style=\"background-image: url({{ asset('/media/photos/photo34@2x.jpg') }});\">\r\n        <div class=\"bg-primary-dark-op\">\r\n            <div class=\"content content-top text-center overflow-hidden\">\r\n                <div class=\"pt-50 pb-20\">\r\n                    <h1 class=\"font-w700 text-white mb-10 invisible\" data-toggle=\"appear\"\r\n                        data-class=\"animated fadeInUp\">Agregar Avion</h1>\r\n                    <h2 class=\"h4 font-w400 text-white-op invisible\" data-toggle=\"appear\"\r\n                        data-class=\"animated fadeInUp\">Ingrese un nuevo avión</h2>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <!-- Page Content -->\r\n    <main id=\"main-container\">\r\n        <!-- Page Content -->\r\n        <div class=\"content\">\r\n\r\n    \t\t<div class=\"col-md-9\">\r\n                <div class=\"block\">\r\n                    <div class=\"block-header block-header-default\">\r\n                        <h3 class=\"block-title\">Formulario Avión</h3>\r\n                        <div class=\"block-options\">\r\n                            <button type=\"button\" class=\"btn-block-option\">\r\n                                <i class=\"fa fa-plane\"></i>\r\n                            </button>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class=\"block-content\">\r\n\r\n                        <form action=\"{{ route('airplanes.store') }}\" method=\"post\">@csrf\r\n                            <div class=\"form-group row\">\r\n                                <div class=\"col-md-4\">\r\n                                    @error('modelo') <div class=\"form-group is-invalid\"> @enderror\r\n                                        <div class=\"form-material floating input-group\">\r\n                                            <input type=\"text\" class=\"form-control\" id=\"modelo\" name=\"modelo\"\r\n                                                   value=\"{{ old('modelo') }}\">\r\n                                            <label for=\"modelo\">Modelo</label>\r\n                                            <div class=\"input-group-append\">\r\n                                                <span class=\"input-group-text\">\r\n                                                    <i class=\"fa fa-hashtag\"></i>\r\n                                                </span>\r\n                                            </div>\r\n                                        </div>\r\n                                        @error('modelo')\r\n                                        <div id=\"nombrecorto-error\" class=\"invalid-feedback animated fadeInDown\">{{ $message }}</div>\r\n                                        @enderror\r\n                                    @error('modelo') </div> @enderror\r\n                                </div>\r\n\r\n                                <div class=\"col-md-4\">\r\n                                    @error('tipo')<div class=\"form-group is-invalid\">@enderror\r\n                                        <div class=\"form-material floating\">\r\n                                            @php ($tipos=['Comercial', 'Carga', 'Militar'])\r\n\r\n                                            <select class=\"form-control\" id=\"tipo\" name=\"tipo\">\r\n                                                <option selected=\"selected\" disabled></option>\r\n                                                @foreach($tipos as $tipo)\r\n                                                    <option value=\"{{ $tipo }}\"\r\n                                                            @if ( old('tipo')  == $tipo)\r\n                                                            selected\r\n                                                        @endif\r\n                                                    >{{ $tipo }}\r\n                                                    </option>\r\n                                                @endforeach\r\n                                            </select>\r\n                                            <label for=\"tipo\">Tipo</label>\r\n                                        </div>\r\n                                        @error('tipo')<div id=\"val-skill2-error\" class=\"invalid-feedback animated fadeInDown\">{{ $message }}</div>@enderror\r\n                                    @error('tipo')</div>@enderror\r\n                                </div>\r\n\r\n\r\n\r\n                                <div class=\"col-md-4\">\r\n                                    @error('capacidad') <div class=\"form-group is-invalid\"> @enderror\r\n                                        <div class=\"form-material floating input-group\">\r\n                                            <input type=\"text\" class=\"form-control\" id=\"capacidad\" name=\"capacidad\"\r\n                                                   value=\"{{ old('capacidad') }}\">\r\n                                            <label for=\"capacidad\">Capacidad (Personas)</label>\r\n                                            <div class=\"input-group-append\">\r\n                                                <span class=\"input-group-text\">\r\n                                                    <i class=\"fa fa-users\"></i>\r\n                                                </span>\r\n                                            </div>\r\n                                        </div>\r\n                                        @error('capacidad')<div id=\"val-skill2-error\" class=\"invalid-feedback animated fadeInDown\">{{ $message }}</div>@enderror\r\n                                    @error('capacidad')</div>@enderror\r\n                                </div>\r\n                                <div class=\"col-md-4\">\r\n                                    @error('fabricante') <div class=\"form-group is-invalid\"> @enderror\r\n                                        <div class=\"form-material floating input-group\">\r\n                                            <input type=\"text\" class=\"form-control\" id=\"fabricante\" name=\"fabricante\"\r\n                                                   value=\"{{ old('fabricante') }}\">\r\n                                            <label for=\"fabricante\">Fabricante</label>\r\n                                            <div class=\"input-group-append\">\r\n                                                <span class=\"input-group-text\">\r\n                                                    <i class=\"fa fa-wrench\"></i>\r\n                                                </span>\r\n                                            </div>\r\n                                        </div>\r\n                                        @error('fabricante')<div id=\"val-skill2-error\" class=\"invalid-feedback animated fadeInDown\">{{ $message }}</div>@enderror\r\n                                    @error('fabricante')</div>@enderror\r\n                                </div>\r\n                                <div class=\"col-md-4\">\r\n                                    @error('aerolinea') <div class=\"form-group is-invalid\"> @enderror\r\n                                        <div class=\"form-material floating\">\r\n                                            <select class=\"form-control\" id=\"aerolinea\" name=\"aerolinea\">\r\n                                                <option selected=\"\" disabled></option>\r\n                                                @foreach($airlines as $airline)\r\n                                                    <option value=\"{{ $airline->id }}\"\r\n                                                            @if ( old('aerolinea') == $airline->id)\r\n                                                                selected\r\n                                                            @endif\r\n                                                            >{{ $airline->short_name }}\r\n                                                    </option>\r\n                                                @endforeach\r\n                                            </select>\r\n                                            <label for=\"aerolinea\">Aerolínea</label>\r\n                                        </div>\r\n                                        @error('aerolinea')<div id=\"val-skill2-error\" class=\"invalid-feedback animated fadeInDown\">{{ $message }}</div>@enderror\r\n                                    @error('aerolinea')</div>@enderror\r\n                                </div>\r\n                            </div>\r\n                            <br>\r\n                            <div class=\"form-group row\">\r\n                                <div class=\"col-md-9\">\r\n\r\n                                    <button type=\"submit\" class=\"btn btn-square btn-outline-primary min-width-125 mb-10\" data-toggle=\"click-ripple\">Guardar</button>\r\n                                    <a href=\"{{ route('airplanes.index')}}\" type=\"button\" class=\"btn btn-square btn-outline-danger min-width-125 mb-10\">Cancelar</a>\r\n                                </div>\r\n                            </div>\r\n                        </form>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n    \t</div>\r\n    </main>\r\n    <!-- END Page Content -->\r\n@endsection\r\n\r\n@section('css_before')\r\n@endsection\r\n\r\n@section('js_after')\r\n\t\t<script src=\"{{ asset('/js/codebase.core.min.js') }}\"></script>\r\n          <!--\r\n            Codebase JS\r\n\r\n            Custom functionality including Blocks/Layout API as well as other vital and optional helpers\r\n            webpack is putting everything together at assets/_es6/main/app.js\r\n        -->\r\n\r\n        <script src=\"{{ asset('/js/codebase.app.min.js') }}\"></script>\r\n\r\n        <!-- Page JS Plugins -->\r\n        <script src=\"{{ asset('/js/plugins/select2/js/select2.full.min.js') }}\"></script>\r\n        <script src=\"{{ asset('/js/plugins/jquery-validation/jquery.validate.min.js') }}\"></script>\r\n\t\t<script src=\"{{ asset('/js/plugins/jquery-validation/additional-methods.js') }}\"></script>\r\n\r\n        <!-- Page JS Helpers (Select2 plugin) -->\r\n        <script>jQuery(function(){ Codebase.helpers('select2'); });</script>\r\n\r\n        <!-- Page JS Code -->\r\n        <script src=\"{{ asset('/js/pages/be_forms_validation.min.js') }}\"></script>\r\n@endsection\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- resources/views/airplane/create.blade.php	(revision 38a221862985c1ae1edd679aaeaea3847710a8a1)
++++ resources/views/airplane/create.blade.php	(date 1593453874849)
+@@ -19,7 +19,7 @@
+         <!-- Page Content -->
+         <div class="content">
+ 
+-    		<div class="col-md-9">
++    		<div class="col-md-11">
+                 <div class="block">
+                     <div class="block-header block-header-default">
+                         <h3 class="block-title">Formulario Avión</h3>
+@@ -34,101 +34,137 @@
+ 
+                         <form action="{{ route('airplanes.store') }}" method="post">@csrf
+                             <div class="form-group row">
+-                                <div class="col-md-4">
+-                                    @error('modelo') <div class="form-group is-invalid"> @enderror
+-                                        <div class="form-material floating input-group">
+-                                            <input type="text" class="form-control" id="modelo" name="modelo"
+-                                                   value="{{ old('modelo') }}">
+-                                            <label for="modelo">Modelo</label>
+-                                            <div class="input-group-append">
+-                                                <span class="input-group-text">
+-                                                    <i class="fa fa-hashtag"></i>
+-                                                </span>
+-                                            </div>
+-                                        </div>
+-                                        @error('modelo')
+-                                        <div id="nombrecorto-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
+-                                        @enderror
+-                                    @error('modelo') </div> @enderror
+-                                </div>
+-
+-                                <div class="col-md-4">
+-                                    @error('tipo')<div class="form-group is-invalid">@enderror
+-                                        <div class="form-material floating">
+-                                            @php ($tipos=['Comercial', 'Carga', 'Militar'])
++
++                                <div class="col-md-8">
++                                    <div class="row">
++                                        <div class="col-md-6">
++                                            @error('modelo') <div class="form-group is-invalid"> @enderror
++                                                <div class="form-material floating input-group">
++                                                    <input type="text" class="form-control" id="modelo" name="modelo"
++                                                           value="{{ old('modelo') }}">
++                                                    <label for="modelo">Modelo</label>
++                                                    <div class="input-group-append">
++                                                    <span class="input-group-text">
++                                                        <i class="fa fa-hashtag"></i>
++                                                    </span>
++                                                    </div>
++                                                </div>
++                                                @error('modelo')
++                                                <div id="nombrecorto-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>
++                                                @enderror
++                                                @error('modelo') </div> @enderror
++                                        </div>
++                                        <div class="col-md-6">
++                                            @error('tipo')<div class="form-group is-invalid">@enderror
++                                                <div class="form-material floating">
++                                                    @php ($tipos=['Comercial', 'Carga', 'Militar'])
+ 
+-                                            <select class="form-control" id="tipo" name="tipo">
+-                                                <option selected="selected" disabled></option>
+-                                                @foreach($tipos as $tipo)
+-                                                    <option value="{{ $tipo }}"
+-                                                            @if ( old('tipo')  == $tipo)
+-                                                            selected
+-                                                        @endif
+-                                                    >{{ $tipo }}
+-                                                    </option>
+-                                                @endforeach
+-                                            </select>
+-                                            <label for="tipo">Tipo</label>
+-                                        </div>
+-                                        @error('tipo')<div id="val-skill2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
+-                                    @error('tipo')</div>@enderror
+-                                </div>
+-
+-
+-
+-                                <div class="col-md-4">
+-                                    @error('capacidad') <div class="form-group is-invalid"> @enderror
+-                                        <div class="form-material floating input-group">
+-                                            <input type="text" class="form-control" id="capacidad" name="capacidad"
+-                                                   value="{{ old('capacidad') }}">
+-                                            <label for="capacidad">Capacidad (Personas)</label>
+-                                            <div class="input-group-append">
+-                                                <span class="input-group-text">
+-                                                    <i class="fa fa-users"></i>
+-                                                </span>
+-                                            </div>
++                                                    <select class="form-control" id="tipo" name="tipo">
++                                                        <option selected="selected" disabled></option>
++                                                        @foreach($tipos as $tipo)
++                                                            <option value="{{ $tipo }}"
++                                                                    @if ( old('tipo')  == $tipo)
++                                                                    selected
++                                                                @endif
++                                                            >{{ $tipo }}
++                                                            </option>
++                                                        @endforeach
++                                                    </select>
++                                                    <label for="tipo">Tipo</label>
++                                                </div>
++                                                @error('tipo')<div id="val-skill2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
++                                                @error('tipo')</div>@enderror
+                                         </div>
+-                                        @error('capacidad')<div id="val-skill2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
+-                                    @error('capacidad')</div>@enderror
+-                                </div>
+-                                <div class="col-md-4">
+-                                    @error('fabricante') <div class="form-group is-invalid"> @enderror
+-                                        <div class="form-material floating input-group">
+-                                            <input type="text" class="form-control" id="fabricante" name="fabricante"
+-                                                   value="{{ old('fabricante') }}">
+-                                            <label for="fabricante">Fabricante</label>
+-                                            <div class="input-group-append">
+-                                                <span class="input-group-text">
+-                                                    <i class="fa fa-wrench"></i>
+-                                                </span>
+-                                            </div>
+-                                        </div>
+-                                        @error('fabricante')<div id="val-skill2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
+-                                    @error('fabricante')</div>@enderror
+-                                </div>
+-                                <div class="col-md-4">
+-                                    @error('aerolinea') <div class="form-group is-invalid"> @enderror
+-                                        <div class="form-material floating">
+-                                            <select class="form-control" id="aerolinea" name="aerolinea">
+-                                                <option selected="" disabled></option>
+-                                                @foreach($airlines as $airline)
+-                                                    <option value="{{ $airline->id }}"
+-                                                            @if ( old('aerolinea') == $airline->id)
+-                                                                selected
+-                                                            @endif
++                                        <div class="col-md-6">
++                                            @error('fabricante') <div class="form-group is-invalid"> @enderror
++                                                <div class="form-material floating input-group">
++                                                    <input type="text" class="form-control" id="fabricante" name="fabricante"
++                                                           value="{{ old('fabricante') }}">
++                                                    <label for="fabricante">Fabricante</label>
++                                                    <div class="input-group-append">
++                                                    <span class="input-group-text">
++                                                        <i class="fa fa-wrench"></i>
++                                                    </span>
++                                                    </div>
++                                                </div>
++                                                @error('fabricante')<div id="val-skill2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
++                                                @error('fabricante')</div>@enderror
++                                        </div>
++                                        <div class="col-md-6">
++                                            @error('aerolinea') <div class="form-group is-invalid"> @enderror
++                                                <div class="form-material floating">
++                                                    <select class="form-control" id="aerolinea" name="aerolinea">
++                                                        <option selected="" disabled></option>
++                                                        @foreach($airlines as $airline)
++                                                            <option value="{{ $airline->id }}"
++                                                                    @if ( old('aerolinea') == $airline->id)
++                                                                    selected
++                                                                @endif
+                                                             >{{ $airline->short_name }}
+-                                                    </option>
+-                                                @endforeach
+-                                            </select>
+-                                            <label for="aerolinea">Aerolínea</label>
+-                                        </div>
+-                                        @error('aerolinea')<div id="val-skill2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
+-                                    @error('aerolinea')</div>@enderror
+-                                </div>
++                                                            </option>
++                                                        @endforeach
++                                                    </select>
++                                                    <label for="aerolinea">Aerolínea</label>
++                                                </div>
++                                                @error('aerolinea')<div id="val-skill2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
++                                                @error('aerolinea')</div>@enderror
++                                        </div>
++                                    </div>
++                                </div>
++                                <div class="col-md-4">
++                                    <div class="row">
++                                        <div class="col-md-12">
++                                            @error('capacidad') <div class="form-group is-invalid"> @enderror
++                                                <div class="form-material floating input-group">
++                                                    <input type="text" class="form-control" id="capacidad" name="capacidad[]"
++                                                           value="0">
++                                                    <label for="capacidad">Ejecutiva (Personas)</label>
++                                                    <div class="input-group-append">
++                                                <span class="input-group-text">
++                                                    <i class="fa fa-users"></i>
++                                                </span>
++                                                    </div>
++                                                </div>
++                                                @error('capacidad')<div id="val-skill2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
++                                                @error('capacidad')</div>@enderror
++                                        </div>
++                                        <div class="col-md-12">
++                                            @error('capacidad') <div class="form-group is-invalid"> @enderror
++                                                <div class="form-material floating input-group">
++                                                    <input type="text" class="form-control" id="capacidad" name="capacidad[]"
++                                                           value="0">
++                                                    <label for="capacidad">Económica (Personas)</label>
++                                                    <div class="input-group-append">
++                                                <span class="input-group-text">
++                                                    <i class="fa fa-users"></i>
++                                                </span>
++                                                    </div>
++                                                </div>
++                                                @error('capacidad')<div id="val-skill2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
++                                                @error('capacidad')</div>@enderror
++                                        </div>
++                                        <div class="col-md-12">
++                                            @error('capacidad') <div class="form-group is-invalid"> @enderror
++                                                <div class="form-material floating input-group">
++                                                    <input type="text" class="form-control" id="capacidad" name="capacidad[]"
++                                                    value="0">
++                                                    <label for="capacidad">Primera (Personas)</label>
++                                                    <div class="input-group-append">
++                                                <span class="input-group-text">
++                                                    <i class="fa fa-users"></i>
++                                                </span>
++                                                    </div>
++                                                </div>
++                                                @error('capacidad')<div id="val-skill2-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
++                                                @error('capacidad')</div>@enderror
++                                        </div>
++                                    </div>
++                                </div>
++
+                             </div>
+                             <br>
+                             <div class="form-group row">
+-                                <div class="col-md-9">
++                                <div class="col-md-12">
+ 
+                                     <button type="submit" class="btn btn-square btn-outline-primary min-width-125 mb-10" data-toggle="click-ripple">Guardar</button>
+                                     <a href="{{ route('airplanes.index')}}" type="button" class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>

@@ -30,24 +30,19 @@
     </div>
     <!-- Page Content -->
     <div class="content">
-        <div class="my-50 text-center">
-            <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
-               href="{{ route('airports.create') }}">Nuevo</a>
-        </div>
-
     @if( session('datos'))
         <!-- Info -->
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="alert alert-success alert-dismissable" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                        <h3 class="alert-heading font-size-h4 font-w400">¡Exito!</h3>
-                        <p class="mb-0">{{ session('datos') }}</a></p>
-                    </div>
-                </div>
-
+            <div id="notificacion" data-notify="container" class="col-xs-11 col-sm-4 alert alert-success animated fadeIn"
+                 role="alert" data-notify-position="top-right" style="display: inline-block; margin: 0px auto;
+                 position: fixed; transition: all 0.5s ease-in-out 0s; z-index: 1033; top: 20px; right: 20px;
+                 animation-iteration-count: 1;">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position:
+                    absolute; right: 10px; top: 5px; z-index: 1035;">×
+                </button>
+                <span data-notify="icon" class="fa fa-check"></span>
+                <span data-notify="title"></span>
+                <span data-notify="message">{{ session('datos') }}</span>
+                <a href="#" target="_blank" data-notify="url"></a>
             </div>
             <!-- END Info -->
     @endif
@@ -56,56 +51,64 @@
     <!-- Dynamic Table Full -->
         <div class="block">
             <div class="block-header block-header-default">
-                <h3 class="block-title">Aeropuertos <small></small></h3>
+                <h3 class="block-title">Aviones<small></small></h3>
+                <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float"
+                   href="{{ route('airports.create') }}">Nuevo</a>
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
-                <table class="table table-bordered table-responsive table-striped table-vcenter js-dataTable-full">
-                    <thead>
-                    <tr>
-
-                        <th>Code</th>
-                        <th>Nombre</th>
-                        <th>TElefono</th>
-                        <th>Representante</th>
-                        <th>N. Terminales</th>
-                        <th>Ciudad</th>
-                        <th>Pais</th>
-                        <th>Acciones</th>
-                        <!--<th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>-->
-                        <!--<th style="width: 15%;">Registered</th>-->
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    @foreach( $Airports as $Aipt)
+                <div class="table-responsive"><br>
+                    <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                        <thead>
                         <tr>
-                            <td class="text-center">{{$Aipt->code}}</td>
-                            <td class="text-center">{{$Aipt->name}}</td>
-                            <td class="text-center">{{$Aipt->telephone}}</td>
-                            <td class="text-center">{{$Aipt->representative}}</td>
-                            <td class="text-center">{{$Aipt->num_gateways}}</td>
-                            <td class="text-center">{{$Aipt->city}}</td>
-                            <td class="text-center">{{$Aipt->country}}</td>
-                            <td class="text-center">
-                                <div class="btn-group">
-                                    <a href="{{ route('airports.edit', $Aipt->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                    <a href="{{ route('airports.confirm', $Aipt->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Eliminar" data-original-title="Delete">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                </div>
-                            </td>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th class="text-center" data-toggle="tooltip" data-placement="top" title="Terminales">
+                                <i class="fa fa-sitemap"></i>
+                            </th>
+                            <!--<th>Ciudad</th>-->
+                            <th>Pais</th>
+                            <th>Representante</th>
+                            <th>Teléfono</th>
+
+                            <th  style="width: 15%">Acciones</th>
+                            <!--<th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>-->
+                            <!--<th style="width: 15%;">Registered</th>-->
                         </tr>
+                        </thead>
+                        <tbody>
+                        @foreach( $Airports as $Aipt)
+                            <tr>
+                                <td>{{$Aipt->code}}</td>
+                                <td>{{$Aipt->name}}</td>
+                                <td>{{$Aipt->num_gateways}}</td>
+                                <!--<td>{{$Aipt->city}}</td>-->
+                                <td>{{$Aipt->country}}</td>
+                                <td>{{$Aipt->representative}}</td>
+                                <td>{{$Aipt->telephone}}</td>
+
+
+
+                                <td  class="text-center">
+                                    <div class="btn-group">
+                                        <a href="{{ route('airports.edit', $Aipt->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a href="{{ route('airports.confirm', $Aipt->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Eliminar" data-original-title="Delete">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
                         @endforeach
-                    </tbody>
-                </table>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <!-- END Dynamic Table Full -->
-    </div>
-    <!-- END Page Content -->
+
+        <!-- END Page Content -->
 @endsection
 {{--FIN DE CONTENIDO--}}
 
