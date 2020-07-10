@@ -19,10 +19,19 @@ class TerminalController extends Controller
     {
         //
         $Terminal = Terminal::all();
+<<<<<<< HEAD
         $user = Auth::user();
 
         list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
         return view('terminal.index', compact('Terminal' ,'sidebar', 'header', 'footer'));
+=======
+
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+
+        return view('terminal.index', compact('Terminal', 'sidebar', 'header', 'footer'));
+>>>>>>> ricky-2
     }
 
     /**
@@ -33,11 +42,22 @@ class TerminalController extends Controller
     public function create()
     {
         //
+<<<<<<< HEAD
         $Airports = Airport::all();
         $user = Auth::user();
 
         list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
         return view('terminal.create', compact("Airports",'sidebar', 'header', 'footer'));
+=======
+        $Airport = Airport::all();
+
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+
+        //return view('terminal.create')->with('Airports',$Airport, 'sidebar', $sidebar,'header', 'footer');
+        return view('terminal.create', compact( 'sidebar', 'header', 'footer'))->with('Airports');;
+>>>>>>> ricky-2
     }
 
     /**

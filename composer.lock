@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "a3fcff2275e9fc64acc40c41335d343d",
+=======
+    "content-hash": "10af86b6cab94c30ae83b7de8bf819c1",
+>>>>>>> ricky-2
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -700,6 +704,7 @@
                 "Xdebug",
                 "performance"
             ],
+<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://packagist.com",
@@ -715,6 +720,9 @@
                 }
             ],
             "time": "2020-06-04T11:16:35+00:00"
+=======
+            "time": "2020-03-01T12:26:26+00:00"
+>>>>>>> ricky-2
         },
         {
             "name": "cybercog/laravel-ban",
@@ -4719,6 +4727,7 @@
                     "homepage": "https://symfony.com/contributors"
                 }
             ],
+<<<<<<< HEAD
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
             "funding": [
@@ -4736,6 +4745,16 @@
                 }
             ],
             "time": "2020-05-20T17:43:50+00:00"
+=======
+            "description": "JSON Linter",
+            "keywords": [
+                "json",
+                "linter",
+                "parser",
+                "validator"
+            ],
+            "time": "2020-04-30T19:05:18+00:00"
+>>>>>>> ricky-2
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -5002,6 +5021,7 @@
             ],
             "description": "Generic abstractions related to dispatching event",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "keywords": [
                 "abstractions",
                 "contracts",
@@ -5025,6 +5045,9 @@
                 }
             ],
             "time": "2020-05-20T17:43:50+00:00"
+=======
+            "time": "2020-03-30T11:42:42+00:00"
+>>>>>>> ricky-2
         },
         {
             "name": "symfony/filesystem",
@@ -5074,6 +5097,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5089,6 +5113,9 @@
                 }
             ],
             "time": "2020-05-30T20:35:19+00:00"
+=======
+            "time": "2020-03-27T16:56:45+00:00"
+>>>>>>> ricky-2
         },
         {
             "name": "symfony/finder",
@@ -5137,6 +5164,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5152,6 +5180,9 @@
                 }
             ],
             "time": "2020-05-20T17:43:50+00:00"
+=======
+            "time": "2020-03-30T14:14:32+00:00"
+>>>>>>> ricky-2
         },
         {
             "name": "symfony/http-foundation",
@@ -5212,6 +5243,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5227,6 +5259,9 @@
                 }
             ],
             "time": "2020-06-15T06:52:54+00:00"
+=======
+            "time": "2020-03-27T16:56:45+00:00"
+>>>>>>> ricky-2
         },
         {
             "name": "symfony/http-kernel",
@@ -5398,6 +5433,7 @@
             ],
             "description": "A library to manipulate MIME messages",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "keywords": [
                 "mime",
                 "mime-type"
@@ -5417,6 +5453,9 @@
                 }
             ],
             "time": "2020-06-09T15:07:35+00:00"
+=======
+            "time": "2020-04-12T14:40:17+00:00"
+>>>>>>> ricky-2
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -5472,6 +5511,7 @@
             ],
             "description": "Symfony polyfill for ctype functions",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "keywords": [
                 "compatibility",
                 "ctype",
@@ -5493,6 +5533,9 @@
                 }
             ],
             "time": "2020-06-06T08:46:27+00:00"
+=======
+            "time": "2020-03-27T16:56:45+00:00"
+>>>>>>> ricky-2
         },
         {
             "name": "symfony/polyfill-iconv",
@@ -5548,6 +5591,7 @@
             ],
             "description": "Symfony polyfill for the Iconv extension",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "keywords": [
                 "compatibility",
                 "iconv",
@@ -5570,6 +5614,9 @@
                 }
             ],
             "time": "2020-06-06T08:46:27+00:00"
+=======
+            "time": "2020-04-18T20:50:06+00:00"
+>>>>>>> ricky-2
         },
         {
             "name": "symfony/polyfill-intl-grapheme",
@@ -5625,6 +5672,7 @@
             ],
             "description": "Symfony polyfill for intl's grapheme_* functions",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "keywords": [
                 "compatibility",
                 "grapheme",
@@ -5648,6 +5696,9 @@
                 }
             ],
             "time": "2020-06-06T08:46:27+00:00"
+=======
+            "time": "2020-04-28T18:53:25+00:00"
+>>>>>>> ricky-2
         },
         {
             "name": "symfony/polyfill-intl-idn",
@@ -5713,6 +5764,7 @@
                 "portable",
                 "shim"
             ],
+<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5728,6 +5780,9 @@
                 }
             ],
             "time": "2020-06-06T08:46:27+00:00"
+=======
+            "time": "2020-04-17T03:29:44+00:00"
+>>>>>>> ricky-2
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
@@ -6230,6 +6285,7 @@
                     "homepage": "http://symfony.com/contributors"
                 }
             ],
+<<<<<<< HEAD
             "description": "PSR HTTP message bridge",
             "homepage": "http://symfony.com",
             "keywords": [
@@ -6253,6 +6309,11 @@
                 }
             ],
             "time": "2020-06-25T08:21:47+00:00"
+=======
+            "description": "Symfony Process Component",
+            "homepage": "https://symfony.com",
+            "time": "2020-04-15T15:59:10+00:00"
+>>>>>>> ricky-2
         },
         {
             "name": "symfony/routing",
@@ -6330,6 +6391,7 @@
                 "uri",
                 "url"
             ],
+<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -6345,6 +6407,9 @@
                 }
             ],
             "time": "2020-06-10T11:49:58+00:00"
+=======
+            "time": "2020-04-21T21:02:50+00:00"
+>>>>>>> ricky-2
         },
         {
             "name": "symfony/service-contracts",
@@ -6579,6 +6644,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -6594,6 +6660,9 @@
                 }
             ],
             "time": "2020-05-30T20:35:19+00:00"
+=======
+            "time": "2020-04-12T16:45:47+00:00"
+>>>>>>> ricky-2
         },
         {
             "name": "symfony/translation-contracts",
@@ -6740,6 +6809,7 @@
                 "debug",
                 "dump"
             ],
+<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -6755,6 +6825,9 @@
                 }
             ],
             "time": "2020-05-30T20:35:19+00:00"
+=======
+            "time": "2020-04-12T16:45:47+00:00"
+>>>>>>> ricky-2
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

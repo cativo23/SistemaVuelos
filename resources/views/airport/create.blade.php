@@ -1,6 +1,7 @@
 @extends('layouts.backend', ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer'])
 
 
+<<<<<<< HEAD
 @section('css_before')
     <!-- Page JS Plugins CSS -->
     <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
@@ -117,6 +118,8 @@
     </script>
 @endsection
 {{--INICIO CONTENIDO--}}
+=======
+>>>>>>> ricky-2
 @section('content')
     <div class="bg-image bg-image-bottom" style="background-image: url({{ asset('/media/photos/photo34@2x.jpg') }});">
         <div class="bg-primary-dark-op">
@@ -301,6 +304,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
+<<<<<<< HEAD
                                     <div class="form-material floating">
                                         <input type="text" class="form-control" id="pais" name="pais">
                                         <label for="pais">Pais</label>
@@ -327,6 +331,10 @@
     <!-- END Page Content -->
 @endsection
 
+<<<<<<< HEAD
+=======
+@section('css_before')
+@endsection
 
 @section('css_before')
 @endsection
