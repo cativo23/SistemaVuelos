@@ -22,6 +22,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property string $CITY
  * @property string $COUNTRY
  * @property string $CODE
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
+ * @property-read Collection|\App\Terminal[] $gateways
+ * @property-read int|null $gateways_count
  * @method static Builder|Airport newModelQuery()
  * @method static Builder|Airport newQuery()
  * @method static Builder|Airport query()
@@ -36,30 +40,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder|Airport whereTELEPHONE($value)
  * @method static Builder|Airport whereUPDATEDAT($value)
  * @mixin Eloquent
- * @property-read Collection|Terminal[] $gateways
- * @property-read int|null $gateways_count
- * @property-read Collection|Activity[] $activities
- * @property-read int|null $activities_count
- * @property int $id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string $name
- * @property string $telephone
- * @property string $representative
- * @property int $num_gateways
- * @property string $city
- * @property string $country
- * @property string $code
- * @method static Builder|Airport whereCity($value)
- * @method static Builder|Airport whereCode($value)
- * @method static Builder|Airport whereCountry($value)
- * @method static Builder|Airport whereCreatedAt($value)
- * @method static Builder|Airport whereId($value)
- * @method static Builder|Airport whereName($value)
- * @method static Builder|Airport whereNumGateways($value)
- * @method static Builder|Airport whereRepresentative($value)
- * @method static Builder|Airport whereTelephone($value)
- * @method static Builder|Airport whereUpdatedAt($value)
  */
 class Airport extends Model
 {

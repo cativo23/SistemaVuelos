@@ -6,7 +6,7 @@ use App\Airline;
 use App\Airplane;
 use App\Destination;
 use App\Flight;
-use App\Helper\Helper;
+use App\Helper\VoyargeHelper;
 use App\Itinerary;
 use App\Terminal;
 use App\User;
@@ -46,7 +46,7 @@ class FlightController extends Controller
 
         $flights = Flight::all();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard(Auth::user());
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard(Auth::user());
 
         return view('flights.index', compact('flights', 'sidebar', 'header', 'footer'));
     }
@@ -66,7 +66,7 @@ class FlightController extends Controller
         $airlines = Airline::all();
         $itinerary = Itinerary::all();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard(Auth::user());
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard(Auth::user());
 
         return view('flights.create', compact('sidebar', 'header', 'footer', 'destinations', 'airlines', 'airplanes', 'itinerary', 'gateways'))->with('success', '¡El vuelo se guardó correctamente!');
     }
@@ -81,7 +81,7 @@ class FlightController extends Controller
     {
 
         $this->getPermissions();
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard(Auth::user());
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard(Auth::user());
 
         $request->validate([
             'arrival_date' => 'required',
@@ -145,7 +145,7 @@ class FlightController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('flights.show', compact('flight', 'sidebar', 'header', 'footer'));
     }
@@ -164,7 +164,7 @@ class FlightController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('flights.edit', compact('flight', 'sidebar', 'header', 'footer'));
     }

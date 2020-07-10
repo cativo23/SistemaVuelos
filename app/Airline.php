@@ -27,6 +27,12 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property string|null $INSTAGRAM
  * @property string|null $TWITTER
  * @property string|null $WHATSAPP
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
+ * @property-read Collection|\App\Airplane[] $airplanes
+ * @property-read int|null $airplanes_count
+ * @property-read Collection|\App\Itinerary[] $itineraries
+ * @property-read int|null $itineraries_count
  * @method static Builder|Airline newModelQuery()
  * @method static Builder|Airline newQuery()
  * @method static Builder|Airline query()
@@ -45,26 +51,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder|Airline whereWEBPAGE($value)
  * @method static Builder|Airline whereWHATSAPP($value)
  * @mixin Eloquent
- * @property-read Collection|Airplane[] $airplanes
- * @property-read int|null $airplanes_count
- * @property-read Collection|Itinerary[] $itineraries
- * @property-read int|null $itineraries_count
- * @property-read Collection|Activity[] $activities
- * @property-read int|null $activities_count
- * @property int $id
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property string $code
- * @property string $email
- * @property string $official_name
- * @property string $short_name
- * @property string $origin_country
- * @property string $representative
- * @property string|null $web_page
- * @property string|null $facebook
- * @property string|null $instagram
- * @property string|null $twitter
- * @property string|null $whatsapp
  */
 class Airline extends Model
 {

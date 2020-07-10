@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
- * App\clientNatural
+ * App\ClientNatural
  *
  * @property int $ID
  * @property string|null $CREATED_AT
@@ -18,6 +18,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property string $BIRTHDAY
  * @property string $GENDER
  * @property string $MARITAL_STATUS
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\Client $client
  * @method static Builder|ClientNatural newModelQuery()
  * @method static Builder|ClientNatural newQuery()
  * @method static Builder|ClientNatural query()
@@ -31,27 +34,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder|ClientNatural whereMARITALSTATUS($value)
  * @method static Builder|ClientNatural whereUPDATEDAT($value)
  * @mixin \Eloquent
- * @property-read \App\Client $client
- * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
- * @property-read int|null $activities_count
- * @property int $id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string $direction
- * @property string $document_typ
- * @property string $document_num
- * @property string $birthday
- * @property string $gender
- * @property string $marital_status
- * @method static Builder|ClientNatural whereBirthday($value)
- * @method static Builder|ClientNatural whereCreatedAt($value)
- * @method static Builder|ClientNatural whereDirection($value)
- * @method static Builder|ClientNatural whereDocumentNum($value)
- * @method static Builder|ClientNatural whereDocumentTyp($value)
- * @method static Builder|ClientNatural whereGender($value)
- * @method static Builder|ClientNatural whereId($value)
- * @method static Builder|ClientNatural whereMaritalStatus($value)
- * @method static Builder|ClientNatural whereUpdatedAt($value)
  */
 class ClientNatural extends Model
 {

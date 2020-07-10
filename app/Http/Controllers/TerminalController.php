@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helper\Helper;
+use App\Helper\VoyargeHelper;
 use App\Terminal;
 use App\Airport;
 use Illuminate\Http\Request;
@@ -22,7 +22,7 @@ class TerminalController extends Controller
 <<<<<<< HEAD
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
         return view('terminal.index', compact('Terminal' ,'sidebar', 'header', 'footer'));
 =======
 
@@ -46,7 +46,7 @@ class TerminalController extends Controller
         $Airports = Airport::all();
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
         return view('terminal.create', compact("Airports",'sidebar', 'header', 'footer'));
 =======
         $Airport = Airport::all();
@@ -101,7 +101,7 @@ class TerminalController extends Controller
         $Airport = Airport::all();
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('terminal.edit', compact('Terminal','Airport', 'sidebar', 'header', 'footer'));
     }

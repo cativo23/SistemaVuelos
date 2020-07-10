@@ -124,9 +124,59 @@ var pageTablesDatatables = /*#__PURE__*/function () {
       }); // Init full DataTable
 
       jQuery('.js-dataTable-full').dataTable({
-        pageLength: 5,
+        pageLength: 510,
         lengthMenu: [[5, 10, 20], [5, 10, 20]],
-        autoWidth: false
+        autoWidth: false,
+        buttons: [
+              {
+                  extend: 'copy',
+                  className: 'btn-default',
+                  text: 'Copiar',
+                  exportOptions: {
+                      columns: [1,2,3,4]
+                  }
+              },
+              {
+                  extend: 'csv',
+                  className: 'btn-default',
+                  text: 'CSV',
+                  exportOptions: {
+                      columns: [1,2,3,4]
+                  }
+              },
+              {
+                  extend: 'excel',
+                  className: 'btn-default',
+                  text: 'Excel',
+                  exportOptions: {
+                      columns: [1,2,3,4]
+                  }
+              },
+              {
+                  extend: 'pdf',
+                  className: 'btn-default',
+                  text: 'PDF',
+                  exportOptions: {
+                      columns: [1,2,3,4]
+                  }
+              },
+              {
+                  extend: 'print',
+                  className: 'btn-default',
+                  text: 'Imprimir',
+                  exportOptions: {
+                      columns: [1,2,3,4]
+                  }
+              },
+              {
+                  extend: 'colvis',
+                  className: 'btn-default',
+                  text: 'Visibilidad de Columnas',
+                  exportOptions: {
+                      columns: ':visible'
+                  }
+              }
+          ]
       });
     }
     /*

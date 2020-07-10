@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Backup;
-use App\Helper\Helper;
+use App\Helper\VoyargeHelper;
 use App\Restores;
 use Auth;
 use Illuminate\Contracts\Foundation\Application;
@@ -25,7 +25,7 @@ class BackupController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('backups.index', compact('backups', 'restores', 'sidebar', 'header', 'footer'));
     }

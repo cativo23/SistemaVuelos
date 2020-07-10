@@ -70,7 +70,6 @@ class LoginController extends Controller
      */
     public function username()
     {
-        \Log::info($this->username);
         return $this->username;
     }
 }

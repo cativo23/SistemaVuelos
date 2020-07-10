@@ -23,6 +23,11 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property string $LANDLINE_PHONE
  * @property int $MILES
  * @property int $FREQUENT_CUSTOMER_CAR_NUM
+ * @property string $FREQUENT_CUSTOMER_NUM
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\ClientCompany|null $company
+ * @property-read \App\ClientNatural|null $natural
  * @method static Builder|Client newModelQuery()
  * @method static Builder|Client newQuery()
  * @method static Builder|Client query()
@@ -30,6 +35,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder|Client whereFIRSTNAME($value)
  * @method static Builder|Client whereFIRSTSURNAME($value)
  * @method static Builder|Client whereFREQUENTCUSTOMERCARNUM($value)
+ * @method static Builder|Client whereFREQUENTCUSTOMERNUM($value)
  * @method static Builder|Client whereID($value)
  * @method static Builder|Client whereLANDLINEPHONE($value)
  * @method static Builder|Client whereMILES($value)
@@ -38,34 +44,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder|Client whereSECONDSURNAME($value)
  * @method static Builder|Client whereUPDATEDAT($value)
  * @mixin Eloquent
- * @property-read ClientCompany|null $company
- * @property-read ClientNatural|null $natural
- * @property-read Collection|Activity[] $activities
- * @property-read int|null $activities_count
- * @property int $id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string $first_name
- * @property string $second_name
- * @property string $first_surname
- * @property string $second_surname
- * @property string $mobile_phone
- * @property string $landline_phone
- * @property int $miles
- * @property string $frequent_customer_num
- * @property int $frequent_customer_car_num
- * @method static Builder|Client whereCreatedAt($value)
- * @method static Builder|Client whereFirstName($value)
- * @method static Builder|Client whereFirstSurname($value)
- * @method static Builder|Client whereFrequentCustomerCarNum($value)
- * @method static Builder|Client whereFrequentCustomerNum($value)
- * @method static Builder|Client whereId($value)
- * @method static Builder|Client whereLandlinePhone($value)
- * @method static Builder|Client whereMiles($value)
- * @method static Builder|Client whereMobilePhone($value)
- * @method static Builder|Client whereSecondName($value)
- * @method static Builder|Client whereSecondSurname($value)
- * @method static Builder|Client whereUpdatedAt($value)
  */
 class Client extends Model
 {

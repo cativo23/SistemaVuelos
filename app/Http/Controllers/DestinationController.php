@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Destination;
-use App\Helper\Helper;
+use App\Helper\VoyargeHelper;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -25,7 +25,7 @@ class DestinationController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('destination.index', compact('destinations', 'sidebar', 'header' , 'footer'));
     }
@@ -39,7 +39,7 @@ class DestinationController extends Controller
     {
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('destination.create', compact('sidebar', 'header', 'footer'));
     }
@@ -94,7 +94,7 @@ class DestinationController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('destination.edit', compact('destino', 'sidebar', 'header', 'footer'));
     }
@@ -126,7 +126,7 @@ class DestinationController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('destination.confirm', compact('Destination', 'sidebar', 'header', 'footer'));
     }

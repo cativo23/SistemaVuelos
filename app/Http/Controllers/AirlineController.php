@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Airline;
-use App\Helper\Helper;
+use App\Helper\VoyargeHelper;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -25,7 +25,7 @@ class AirlineController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('airline.index', compact('airlines', 'sidebar', 'header', 'footer'));
     }
@@ -45,7 +45,7 @@ class AirlineController extends Controller
         }
 
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
         return view('airline.create' , compact('sidebar', 'header', 'footer', 'idcode'));
     }
 
@@ -101,7 +101,7 @@ class AirlineController extends Controller
         $airline = Airline::findOrFail($id);
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
         return view('airline.show', compact('airline', 'sidebar', 'header', 'footer'));
     }
 
@@ -170,7 +170,7 @@ class AirlineController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('airline.confirm', compact('airline', 'sidebar', 'header', 'footer'));
     }

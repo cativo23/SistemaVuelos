@@ -19,6 +19,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property string $STATUS
  * @property string $CODE
  * @property int $AIRPLANE_ID
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\Airplane $airplane
  * @method static Builder|Seat newModelQuery()
  * @method static Builder|Seat newQuery()
  * @method static Builder|Seat query()
@@ -30,23 +33,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder|Seat whereSTATUS($value)
  * @method static Builder|Seat whereUPDATEDAT($value)
  * @mixin Eloquent
- * @property-read Airplane $airplane
- * @property-read Collection|Activity[] $activities
- * @property-read int|null $activities_count
- * @property int $id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string $class
- * @property int $status
- * @property string $code
- * @property int $airplane_id
- * @method static Builder|Seat whereAirplaneId($value)
- * @method static Builder|Seat whereClass($value)
- * @method static Builder|Seat whereCode($value)
- * @method static Builder|Seat whereCreatedAt($value)
- * @method static Builder|Seat whereId($value)
- * @method static Builder|Seat whereStatus($value)
- * @method static Builder|Seat whereUpdatedAt($value)
  */
 class Seat extends Model
 {

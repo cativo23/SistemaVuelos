@@ -6,15 +6,6 @@
     <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
 @endsection
 
-@section('js_after')
-    <!-- Page JS Plugins -->
-    <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
-
-    <!-- Page JS Code -->
-    <script src="{{ asset('js/pages/tables_datatables.js') }}"></script>
-@endsection
-
 @section('content')
     <div class="bg-image bg-image-bottom" style="background-image: url({{ asset('/media/photos/photo34@2x.jpg') }});">
         <div class="bg-primary-dark-op">
@@ -63,7 +54,7 @@
             </div>
             <div class="block-content block-content-full col-12">
                 <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
-                <table class="table table-responsive table-bordered table-striped table-vcenter js-dataTable-full">
+                <table class="table table-bordered table-striped table-center js-dataTable-full">
                     <thead>
                     <tr>
                         <!--<th class="text-center" style="width: 80px;">#</th>-->
@@ -139,5 +130,12 @@
         -->
 
         <script src="{{ asset('/js/codebase.app.min.js') }}"></script>
+
+        <!-- Page JS Plugins -->
+        <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('js/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+        <!-- Page JS Code -->
+        <script src="{{ asset('js/pages/tables_datatables.js') }}"></script>
 
 @endsection

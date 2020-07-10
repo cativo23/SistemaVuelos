@@ -13,23 +13,23 @@ use Spatie\Activitylog\Traits\LogsActivity;
 /**
  * App\Backup
  *
- * @property int $id
- * @property string $name
- * @property string $status
- * @property Carbon $created_at_aws
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property int $ID
+ * @property string $NAME
+ * @property string $STATUS
+ * @property string $CREATED_AT_AWS
+ * @property string|null $CREATED_AT
+ * @property string|null $UPDATED_AT
  * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
  * @method static Builder|Backup newModelQuery()
  * @method static Builder|Backup newQuery()
  * @method static Builder|Backup query()
- * @method static Builder|Backup whereCreatedAt($value)
- * @method static Builder|Backup whereCreatedAtAws($value)
- * @method static Builder|Backup whereId($value)
- * @method static Builder|Backup whereName($value)
- * @method static Builder|Backup whereStatus($value)
- * @method static Builder|Backup whereUpdatedAt($value)
+ * @method static Builder|Backup whereCREATEDAT($value)
+ * @method static Builder|Backup whereCREATEDATAWS($value)
+ * @method static Builder|Backup whereID($value)
+ * @method static Builder|Backup whereNAME($value)
+ * @method static Builder|Backup whereSTATUS($value)
+ * @method static Builder|Backup whereUPDATEDAT($value)
  * @mixin Eloquent
  */
 class Backup extends Model

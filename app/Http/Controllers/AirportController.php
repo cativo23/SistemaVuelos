@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Airport;
-use App\Helper\Helper;
-use App\Terminal;
+use App\Helper\VoyargeHelper;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -27,7 +26,7 @@ class AirportController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('airport.index', compact('Airports', 'sidebar', 'header', 'footer'));
     }
@@ -41,7 +40,7 @@ class AirportController extends Controller
     {
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('airport.create', compact('sidebar', 'header', 'footer'));
     }
@@ -116,7 +115,7 @@ class AirportController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('airport.edit', compact('Airport', 'sidebar', 'header', 'footer'));
     }

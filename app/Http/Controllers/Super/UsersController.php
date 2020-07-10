@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Super;
 
-use App\Helper\Helper;
+use App\Helper\VoyargeHelper;
 use App\Http\Controllers\Controller;
 use App\User;
 use Exception;
@@ -14,8 +14,11 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Auth;
 use Gate;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Silber\Bouncer\Database\Role;
+use App\Rules\StrongPassword;
+use Validator;
 
 class UsersController extends Controller
 {
@@ -34,7 +37,7 @@ class UsersController extends Controller
 
         $users = User::with('roles')->get();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('super.users.index', compact('users', 'sidebar', 'header', 'footer'));
     }
@@ -51,11 +54,12 @@ class UsersController extends Controller
         if (!$user->can('manage-users'))  {
             return abort(401);
         }
+
         $roles = Role::get()->pluck('name', 'name');
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('super.users.create', compact('roles', 'sidebar', 'header', 'footer'));
     }
@@ -72,6 +76,15 @@ class UsersController extends Controller
         if (!$user->can('manage-users')) {
             return abort(401);
         }
+
+       $request->validate([
+            'name'=>['required', 'string', 'max:191'],
+            'username'=>['required', 'alpha_num', 'max:191', 'unique:users'],
+            'email'=>['required', 'email', 'max:191', 'unique:users'],
+            'password'=>['required', 'string', 'min:10', 'max:30', new StrongPassword],
+            'roles'=>['required', 'array']
+        ]);
+
         $user = User::create($request->all());
 
         foreach ($request->input('roles') as $role) {
@@ -95,9 +108,9 @@ class UsersController extends Controller
 
         $user->load('roles');
 
-        $user1 = Auth::user();
+        $user_auth = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user1);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user_auth);
 
         return view('super.users.show', compact('user', 'sidebar', 'header', 'footer'));
     }
@@ -113,11 +126,16 @@ class UsersController extends Controller
         if (! Gate::allows('manage-users')) {
             return abort(401);
         }
+
         $roles = Role::get()->pluck('name', 'name');
 
         $user = User::findOrFail($id);
 
-        return view('super.users.edit', compact('user', 'roles'));
+        $user_auth = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user_auth);
+
+        return view('super.users.edit', compact('user', 'roles', 'sidebar', 'header', 'footer'));
     }
 
     /**
@@ -129,22 +147,38 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         if (! Gate::allows('manage-users')) {
             return abort(401);
         }
+
         $user = User::findOrFail($id);
+
+        $rules = [
+            'name'=>['required', 'string', 'max:191'],
+            'username'=>['required', 'alpha_num', 'max:191', Rule::unique('users')->ignore($user->id)],
+            'email'=>['required', 'email', 'max:191', Rule::unique('users')->ignore($user->id)],
+            'password'=>[ 'nullable','string', 'min:10', 'max:30', new StrongPassword],
+            'roles'=>['required', 'array']
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->route('super.users.edit', $id)
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         if ($request->input('password'))
             $password = Hash::make($request->input('password'));
         else
             $password = $user->getAuthPassword();
 
-        $request->password = $password;
-
         $user->NAME = $request->input('name');
-        $user->username = $request->input('username');
-        $user->email = $request->input('email');
-        $user->password = $password;
+        $user->USERNAME = $request->input('username');
+        $user->EMAIL = $request->input('email');
+        $user->PASSWORD = $password;
 
         $user->save();
 
@@ -154,6 +188,7 @@ class UsersController extends Controller
         foreach ($request->input('roles') as $role) {
             $user->assign($role);
         }
+
         return redirect()->route('super.users.index');
     }
 

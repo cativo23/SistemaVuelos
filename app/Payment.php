@@ -15,9 +15,12 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property int $ID
  * @property string|null $CREATED_AT
  * @property string|null $UPDATED_AT
- * @property float $TOTAL_PRICE
+ * @property string $TOTAL_PRICE
  * @property string $PAID
  * @property int $RESERVATION_ID
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\Reservation $reservation
  * @method static Builder|Payment newModelQuery()
  * @method static Builder|Payment newQuery()
  * @method static Builder|Payment query()
@@ -28,21 +31,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder|Payment whereTOTALPRICE($value)
  * @method static Builder|Payment whereUPDATEDAT($value)
  * @mixin Eloquent
- * @property-read Reservation $reservation
- * @property-read Collection|Activity[] $activities
- * @property-read int|null $activities_count
- * @property int $id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string $total_price
- * @property string $paid
- * @property int $reservation_id
- * @method static Builder|Payment whereCreatedAt($value)
- * @method static Builder|Payment whereId($value)
- * @method static Builder|Payment wherePaid($value)
- * @method static Builder|Payment whereReservationId($value)
- * @method static Builder|Payment whereTotalPrice($value)
- * @method static Builder|Payment whereUpdatedAt($value)
  */
 class Payment extends Model
 {

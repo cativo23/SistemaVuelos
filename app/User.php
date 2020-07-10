@@ -24,63 +24,43 @@ use Spatie\Activitylog\Traits\LogsActivity;
  *
  * @property int $ID
  * @property string $NAME
+ * @property string|null $USERNAME
  * @property string $EMAIL
  * @property string|null $EMAIL_VERIFIED_AT
  * @property string $PASSWORD
  * @property string|null $REMEMBER_TOKEN
  * @property string|null $CREATED_AT
  * @property string|null $UPDATED_AT
+ * @property string|null $BANNED_AT
+ * @property-read Collection|Ability[] $abilities
+ * @property-read int|null $abilities_count
+ * @property-read Collection|Activity[] $actions
+ * @property-read int|null $actions_count
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
+ * @property-read Collection|Ban[] $bans
+ * @property-read int|null $bans_count
  * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
+ * @property-read Collection|Role[] $roles
+ * @property-read int|null $roles_count
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()
+ * @method static Builder|User whereBANNEDAT($value)
  * @method static Builder|User whereCREATEDAT($value)
  * @method static Builder|User whereEMAIL($value)
  * @method static Builder|User whereEMAILVERIFIEDAT($value)
  * @method static Builder|User whereID($value)
+ * @method static Builder|User whereIs($role)
+ * @method static Builder|User whereIsAll($role)
+ * @method static Builder|User whereIsNot($role)
  * @method static Builder|User whereNAME($value)
  * @method static Builder|User wherePASSWORD($value)
  * @method static Builder|User whereREMEMBERTOKEN($value)
  * @method static Builder|User whereUPDATEDAT($value)
- * @mixin \Eloquent
- * @property string|null $USERNAME
- * @property string|null $BANNED_AT
- * @property-read Collection|Ability[] $abilities
- * @property-read int|null $abilities_count
- * @property-read Collection|Ban[] $bans
- * @property-read int|null $bans_count
- * @property-read Collection|Role[] $roles
- * @property-read int|null $roles_count
- * @method static Builder|User whereBANNEDAT($value)
- * @method static Builder|User whereIs($role)
- * @method static Builder|User whereIsAll($role)
- * @method static Builder|User whereIsNot($role)
  * @method static Builder|User whereUSERNAME($value)
- * @property-read Collection|Activity[] $activities
- * @property-read int|null $activities_count
- * @property int $id
- * @property string $name
- * @property string|null $username
- * @property string $email
- * @property \Illuminate\Support\Carbon|null $email_verified_at
- * @property string $password
- * @property string|null $remember_token
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $banned_at
- * @property-read Collection|Activity[] $actions
- * @property-read int|null $actions_count
- * @method static Builder|User whereBannedAt($value)
- * @method static Builder|User whereCreatedAt($value)
- * @method static Builder|User whereEmail($value)
- * @method static Builder|User whereEmailVerifiedAt($value)
- * @method static Builder|User whereId($value)
- * @method static Builder|User whereName($value)
- * @method static Builder|User wherePassword($value)
- * @method static Builder|User whereRememberToken($value)
- * @method static Builder|User whereUpdatedAt($value)
- * @method static Builder|User whereUsername($value)
+ * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail, BannableContract
 {

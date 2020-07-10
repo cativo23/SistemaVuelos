@@ -20,6 +20,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property int $SEAT_CAPACITY
  * @property string $MODEL
  * @property int $AIRLINE_ID
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\Airline $airline
+ * @property-read \App\Flight|null $flight
  * @method static Builder|Airplane newModelQuery()
  * @method static Builder|Airplane newQuery()
  * @method static Builder|Airplane query()
@@ -32,18 +36,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder|Airplane whereTYPE($value)
  * @method static Builder|Airplane whereUPDATEDAT($value)
  * @mixin Eloquent
- * @property-read Airline $airline
- * @property-read Flight|null $flight
- * @property-read Collection|Activity[] $activities
- * @property-read int|null $activities_count
- * @property int $id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string $type
- * @property string $manufacturer
- * @property int $seat_capacity
- * @property string $model
- * @property int $airline_id
  */
 class Airplane extends Model
 {

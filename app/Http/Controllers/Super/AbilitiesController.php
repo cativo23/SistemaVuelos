@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Super;
 
-use App\Helper\Helper;
+use App\Helper\VoyargeHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Super\StoreAbilitiesRequest;
 use App\Http\Requests\Super\UpdateAbilitiesRequest;
@@ -31,7 +31,7 @@ class AbilitiesController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         $abilities = Ability::all();
 
@@ -51,7 +51,7 @@ class AbilitiesController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('super.abilities.create', compact('sidebar', 'header', 'footer'));
     }
@@ -89,7 +89,7 @@ class AbilitiesController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('super.abilities.edit', compact('ability', 'sidebar', 'header', 'footer'));
     }
@@ -123,7 +123,7 @@ class AbilitiesController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('super.abilities.show', compact('ability', 'sidebar', 'header', 'footer'));
     }

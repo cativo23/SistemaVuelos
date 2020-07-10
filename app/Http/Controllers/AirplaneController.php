@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Airplane;
 use App\Airline;
-use App\Seat;
-use App\Helper\Helper;
+use App\Helper\VoyargeHelper;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -34,7 +33,7 @@ class AirplaneController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('airplane.index', compact('airplanes', 'sidebar' , 'header', 'footer'));
     }
@@ -50,7 +49,7 @@ class AirplaneController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('airplane.create', compact('airlines', 'sidebar' , 'header', 'footer'));
 
@@ -309,7 +308,7 @@ class AirplaneController extends Controller
         //dd($economicos, $ejecutivos);
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('airplane.confirm', compact('airplane', 'sidebar', 'header', 'footer', 'economicos', 'ejecutivos', 'primera'));
     }

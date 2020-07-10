@@ -140,12 +140,12 @@
     <script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
     <script>
         $(function() {
-            let copyButtonTrans = 'Copiar'
-            let csvButtonTrans = 'CSV'
-            let excelButtonTrans = 'Excel'
-            let pdfButtonTrans = 'PDF'
-            let printButtonTrans = 'Imprimir'
-            let colvisButtonTrans = 'Visibilidad de Columnas'
+            let copyButtonTrans = 'Copiar';
+            let csvButtonTrans = 'CSV';
+            let excelButtonTrans = 'Excel';
+            let pdfButtonTrans = 'PDF';
+            let printButtonTrans = 'Imprimir';
+            let colvisButtonTrans = 'Visibilidad de Columnas';
 
             let languages = {
                 'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json'
@@ -179,7 +179,7 @@
                         className: 'btn-default',
                         text: copyButtonTrans,
                         exportOptions: {
-                            columns: ':visible'
+                            columns: [1,2,3,4]
                         }
                     },
                     {
@@ -187,7 +187,7 @@
                         className: 'btn-default',
                         text: csvButtonTrans,
                         exportOptions: {
-                            columns: ':visible'
+                            columns: [1,2,3,4]
                         }
                     },
                     {
@@ -195,7 +195,7 @@
                         className: 'btn-default',
                         text: excelButtonTrans,
                         exportOptions: {
-                            columns: ':visible'
+                            columns: [1,2,3,4]
                         }
                     },
                     {
@@ -203,7 +203,7 @@
                         className: 'btn-default',
                         text: pdfButtonTrans,
                         exportOptions: {
-                            columns: ':visible'
+                            columns: [1,2,3,4]
                         }
                     },
                     {
@@ -211,7 +211,7 @@
                         className: 'btn-default',
                         text: printButtonTrans,
                         exportOptions: {
-                            columns: ':visible'
+                            columns: [1,2,3,4]
                         }
                     },
                     {
@@ -241,7 +241,7 @@
         }
         $(function () {
             let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-            let deleteButtonTrans = 'Delete'
+            let deleteButtonTrans = 'Borrar'
             let deleteButton = {
                 text: deleteButtonTrans,
                 url: "{{ route('super.users.mass') }}",

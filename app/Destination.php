@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+
 /**
  * App\Destination
  *
@@ -18,6 +19,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property string $COUNTRY
  * @property string $CONTINENT
  * @property string $CODE
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\Airline $airlines
  * @method static Builder|Destination newModelQuery()
  * @method static Builder|Destination newQuery()
  * @method static Builder|Destination query()
@@ -30,25 +34,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @method static Builder|Destination whereSTATE($value)
  * @method static Builder|Destination whereUPDATEDAT($value)
  * @mixin Eloquent
- * @property-read \App\Airline $airlines
- * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
- * @property-read int|null $activities_count
- * @property int $id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string $city
- * @property string $state
- * @property string $country
- * @property string $continent
- * @property string $code
- * @method static Builder|Destination whereCity($value)
- * @method static Builder|Destination whereCode($value)
- * @method static Builder|Destination whereContinent($value)
- * @method static Builder|Destination whereCountry($value)
- * @method static Builder|Destination whereCreatedAt($value)
- * @method static Builder|Destination whereId($value)
- * @method static Builder|Destination whereState($value)
- * @method static Builder|Destination whereUpdatedAt($value)
  */
 class Destination extends Model
 {
