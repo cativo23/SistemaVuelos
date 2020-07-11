@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Airport;
 use App\Helper\VoyargeHelper;
 use App\Terminal;
+use App\User;
 use Exception;
+use Gate;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -211,5 +213,24 @@ class AirportController extends Controller
         $airport->delete();
 
         return redirect()->route('airports.index')->with('datos', '¡Aeropuerto' .' ' .'"' .$nombre .'"' .' eliminado correctamente!');
+    }
+
+    public function index_user(Airport $airport, User $user){
+        if (!Gate::allows('manage-airport-'.$airport->id)){
+            abort(401);
+        }
+        $gateways = $airport->gateways;
+
+        $auth_user = Auth::user();
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($auth_user);
+
+        return view('airport.index_user', compact('gateways', 'airport','sidebar', 'header', 'footer'));
+    }
+
+    public function edit_user(Airport $airport){
+        if (!Gate::allows('manage-airport-'.$airport->id)){
+            abort(401);
+        }
+        dd('editar aeropuerto '.$airport->name);
     }
 }

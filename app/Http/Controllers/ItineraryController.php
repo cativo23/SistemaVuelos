@@ -170,7 +170,7 @@ class ItineraryController extends Controller
                 'price'=>$request->input('price')[$i],
                 'flight_miles'=>$request->input('flight_miles')[$i],
                 'airline_id'=>$airline->id,
-                'status'=>'unready'
+                'status'=>'unready',
                 ''
             ]);
 
