@@ -97,6 +97,8 @@ Route::get('/clientCompanys/{id}/confirm', 'ClientCompanyController@confirm')->n
 // Inicio ARIEL ZELAYA
 //AIRPORT
 Route::resource('/airports','AirportController');
+Route::get('/terminals/{airport}/user/{user}/edit/{flight}', 'AirportController@user_terminals_edit')->name('airports.user_terminal_edit');
+Route::get('/terminals/{airport}/user/{user}', 'AirportController@user_terminals')->name('airports.user_terminal');
 Route::get('/airports/{id}/confirm', 'AirportController@confirm')->name('airports.confirm');
 Route::get('/airports/{airport}/user/{user}', 'AirportController@index_user')->name('airports.user');
 Route::get('/airports/{airport}/user/{user}/edit', 'AirportController@edit_user')->name('airports.edit_user');

@@ -22,8 +22,7 @@
         "laravel/ui": "^2.0",
         "silber/bouncer": "v1.0.0-rc.8",
         "spatie/laravel-activitylog": "^3.14",
-        "spatie/laravel-backup": "^6.11",
-        "yajra/laravel-oci8": "7"
+        "spatie/laravel-backup": "^6.11"
     },
     "require-dev": {
         "beyondcode/laravel-er-diagram-generator": "^1.4",
