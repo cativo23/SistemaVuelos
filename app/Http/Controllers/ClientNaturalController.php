@@ -7,6 +7,7 @@ use App\ClientNatural;
 use App\Client;
 use App\Helper\VoyargeHelper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 
 class ClientNaturalController extends Controller
@@ -191,6 +192,10 @@ class ClientNaturalController extends Controller
     public function confirm($id)
     {
         $cliente = ClientNatural::findOrFail($id);
+
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('clientNatural.confirm', compact('cliente','sidebar', 'header', 'footer'));
     }
