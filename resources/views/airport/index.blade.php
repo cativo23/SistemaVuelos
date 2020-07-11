@@ -57,8 +57,8 @@
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
-                <div class="table-responsive"><br>
-                    <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                <div class="table-responsive">
+                    <table class="table table-borderless table-striped table-vcenter js-dataTable-full">
                         <thead>
                         <tr>
                             <th>Código</th>
@@ -115,13 +115,20 @@
 @section('js_after')
 
     <script src="{{ asset('/js/codebase.core.min.js') }}"></script>
-    <!--
-      Codebase JS
-
-      Custom functionality including Blocks/Layout API as well as other vital and optional helpers
-      webpack is putting everything together at assets/_es6/main/app.js
-  -->
-
     <script src="{{ asset('/js/codebase.app.min.js') }}"></script>
+    <script src="{{asset('js/plugins/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
+    <script>jQuery(function () {
+            Codebase.helpers('notify');
+            @if(session('datos'))
+            Codebase.helpers('notify', {
+                align: 'right',             // 'right', 'left', 'center'
+                from: 'top',                // 'top', 'bottom'
+                type: 'success',               // 'info', 'success', 'warning', 'danger'
+                icon: 'fa fa-info mr-5',    // Icon class
+                message: '{{session('datos')}}'
+            });
+            @endif
+        });</script>
+    <script>
 
 @endsection

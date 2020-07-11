@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Super;
 
-use App\Helper\Helper;
+use App\Helper\VoyargeHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Super\StoreRolesRequest;
 use App\Http\Requests\Super\UpdateRolesRequest;
@@ -32,7 +32,7 @@ class RolesController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         $roles = Role::all();
 
@@ -54,7 +54,7 @@ class RolesController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('super.roles.create', compact('abilities', 'sidebar', 'header', 'footer'));
     }
@@ -94,7 +94,7 @@ class RolesController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('super.roles.edit', compact('role', 'abilities', 'sidebar', 'header', 'footer'));
     }
@@ -134,7 +134,7 @@ class RolesController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);;
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);;
 
         return view('super.roles.show', compact('role', 'sidebar', 'header', 'footer'));
     }

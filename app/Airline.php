@@ -4,7 +4,11 @@ namespace App;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Airline
@@ -23,6 +27,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $INSTAGRAM
  * @property string|null $TWITTER
  * @property string|null $WHATSAPP
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
+ * @property-read Collection|\App\Airplane[] $airplanes
+ * @property-read int|null $airplanes_count
+ * @property-read Collection|\App\Itinerary[] $itineraries
+ * @property-read int|null $itineraries_count
  * @method static Builder|Airline newModelQuery()
  * @method static Builder|Airline newQuery()
  * @method static Builder|Airline query()
@@ -44,7 +54,16 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Airline extends Model
 {
+
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+    protected static $logName = 'airline';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
 
     /**
      * Destinations that this airline serves flights to

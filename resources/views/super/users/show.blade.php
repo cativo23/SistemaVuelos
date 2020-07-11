@@ -25,11 +25,19 @@
 
                 <!-- Actions -->
                 <a class="btn btn-rounded btn-hero btn-alt-danger btn-sm btn-alt-secondary mb-5 px-20">
-                    <i class="fa fa-close"></i>
+                    <i class="fa fa-close"></i>Eliminar
                 </a>
                 <a class="btn btn-rounded btn-hero btn-sm btn-alt-secondary mb-5 px-20" href="{{route('super.users.edit', $user)}}">
-                    <i class="fa fa-pencil"></i>
+                    <i class="fa fa-pencil"></i>Editar
                 </a>
+                @if($user->can('manage-airport'))
+                <a class="btn btn-rounded btn-hero btn-sm btn-alt-info mb-5 px-20" href="{{route('super.show_give_airport', $user)}}">
+                    <i class="fa fa-shield"></i>Permiso de Aeropuerto
+                </a>
+                <a class="btn btn-rounded btn-hero btn-sm btn-alt-info mb-5 px-20" href="{{route('super.remove_airport', $user)}}">
+                    <i class="fa fa-user-times"></i>Remover Permiso de Aeropuerto
+                </a>
+            @endif
                 <!-- END Actions -->
             </div>
         </div>

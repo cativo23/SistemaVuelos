@@ -132,7 +132,7 @@
                         </a>
                     </li>
                 @endif
-                @if($user->can('manage-airlines'))
+                @if($user->can('manage-airline'))
                     <li>
                         <a class="{{ request()->is('airlines*') ? ' active' : '' }}"
                            href="{{route('airlines.index')}}">

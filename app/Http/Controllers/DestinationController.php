@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Destination;
-use App\Helper\Helper;
+use App\Helper\VoyargeHelper;
 use Exception;
+use Illuminate\Validation\Rule;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -25,7 +26,7 @@ class DestinationController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('destination.index', compact('destinations', 'sidebar', 'header' , 'footer'));
     }
@@ -39,7 +40,7 @@ class DestinationController extends Controller
     {
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('destination.create', compact('sidebar', 'header', 'footer'));
     }
@@ -53,7 +54,7 @@ class DestinationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'codigo' => 'required',
+            'codigo' => 'required|unique:destinations,code',
             'ciudad' => 'required',
             'estado' => 'required',
             'pais' => 'required',
@@ -61,7 +62,7 @@ class DestinationController extends Controller
         ]);
 
         $Destination = new Destination;
-        $Destination->city = $request->ciudad;
+        $Destination->CITY = $request->ciudad;
         $Destination->state = $request->estado;
         $Destination->country = $request->pais;
         $Destination->continent = $request->continente;
@@ -79,7 +80,7 @@ class DestinationController extends Controller
      */
     public function show(Destination $destination)
     {
-        //
+
     }
 
     /**
@@ -94,7 +95,7 @@ class DestinationController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('destination.edit', compact('destino', 'sidebar', 'header', 'footer'));
     }
@@ -109,7 +110,14 @@ class DestinationController extends Controller
     public function update(Request $request, $id)
     {
         $Destination = Destination::findOrFail($id);
-        $Destination->city = $request->ciudad;
+        $request->validate([
+            'codigo' => ['required', Rule::unique('destinations', 'code')->ignore($Destination->id)],
+            'ciudad' => 'required',
+            'estado' => 'required',
+            'pais' => 'required',
+            'continente' => 'required'
+        ]);
+        $Destination->CITY = $request->ciudad;
         $Destination->state = $request->estado;
         $Destination->country = $request->pais;
         $Destination->continent = $request->continente;
@@ -126,7 +134,7 @@ class DestinationController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('destination.confirm', compact('Destination', 'sidebar', 'header', 'footer'));
     }
