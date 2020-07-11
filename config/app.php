@@ -177,7 +177,7 @@ return [
         /*
          * Oracle Database Service Provider
          */
-//        Yajra\Oci8\Oci8ServiceProvider::class,
+       /* Yajra\Oci8\Oci8ServiceProvider::class,
         /*
          * Laravel IDE Helper
          */

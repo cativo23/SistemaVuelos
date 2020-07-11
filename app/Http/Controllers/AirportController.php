@@ -227,7 +227,20 @@ class AirportController extends Controller
         return view('airport.index_user', compact('gateways', 'airport','sidebar', 'header', 'footer'));
     }
 
-    public function edit_user(Airport $airport, Request $request){
+    public function user_terminals(Airport $airport, User $user){
+
+        if (!Gate::allows('manage-airport-'.$airport->id)){
+            abort(401);
+        }
+
+        $gateways = $airport->gateways;
+
+        $auth_user = Auth::user();
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($auth_user);
+
+        return view('airport.user_terminal', compact('gateways', 'airport','sidebar', 'header', 'footer'));
+    }
+    public function edit_user(Airport $airport){
         if (!Gate::allows('manage-airport-'.$airport->id)){
             abort(401);
         }
