@@ -7,8 +7,8 @@
         <div class="bg-primary-dark-op">
             <div class="content content-top text-center overflow-hidden">
                 <div class="pt-50 pb-20">
-                    <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear" data-class="animated fadeInUp">Usuarios</h1>
-                    <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear" data-class="animated fadeInUp">Administre usuarios</h2>
+                    <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear" data-class="animated fadeInUp">Vuelos</h1>
+                    <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear" data-class="animated fadeInUp">Administre Vuelos</h2>
                 </div>
             </div>
         </div>
@@ -21,8 +21,8 @@
                 <!-- Dynamic Table Full -->
                 <div class="block col-md-12">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Listado de Usuarios</h3>
-                        <a class="btn btn-success" href="{{ route("super.users.create") }}">Add User</a>
+                        <h3 class="block-title">Listado de Vuelos</h3>
+
                     </div>
                     <div class="block-content block-content-full">
                         <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
@@ -30,45 +30,45 @@
                             <thead>
                             <tr>
                                 <td></td>
-                                <th class="text-center" style="width: 80px;">#</th>
-                                <th style="width: 150px;">Nombre</th>
-                                <th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>
-                                <th class="text-center" style="width: 25%;">Roles</th>
-                                <th>Banneado</th>
+                                <th class="text-center" style="width: 80px;">ID</th>
+                                <th style="width: 150px;">Origen</th>
+                                <th class="d-none d-sm-table-cell" style="width: 30%;">Destino</th>
+                                <th class="text-center" style="width: 25%;">Date</th>
+                                <th>Terminal</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($users as $key => $user1)
-                                <tr data-entry-id="{{ $user1->id }}">
+
+
+                            @foreach($flights as $f)
+                                <tr data-entry-id="{{ $f->id }}">
                                     <td></td>
-                                    <td class="text-center">{{ $user1->id ?? '' }}</td>
+                                    <td class="text-center">{{ $f->id }}</td>
                                     <td class="font-w600">
-                                        <a href="{{ route('super.users.show', $user1->id) }}">{{ $user1->name ?? '' }}</a>
+{{--                                        origin--}}
+                                        {{ $f->origin }}
                                     </td>
                                     <td class="d-none d-sm-table-cell">
-                                        {{ $user1->email ?? '' }}
+{{--                                        Destination--}}
+                                        {{ $f->destination }}
                                     </td>
                                     <td class="text-center d-none d-sm-table-cell">
-                                        @if(count($user1->roles)>0)
-                                            @foreach($user1->roles->pluck('name') as $role)
-                                                <span class="badge badge-info">{{ $role }}</span>
-                                            @endforeach
-                                        @else
-                                            No roles asignados
-                                        @endif
+{{--                                        date--}}
+                                        {{ $f->arrival_date }}
                                     </td>
-                                    <td>{{$user1->isBanned() ? "Si" : "No"}}</td>
+{{--                                    landing terminal--}}
+                                    <td>{{ $f->landing_terminal_id }}</td>
                                     <td class="text-center">
                                         <div class="btn-group">
-                                            <a href="{{ route('super.users.show', $user1->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Ver" data-original-title="Ver">
+                                            <a href="" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Ver" data-original-title="Ver">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('super.users.edit', $user1->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Editar">
+                                            <a href="" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Editar">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
                                             <button type="button" class="btn btn-sm btn-secondary js-tooltip-enabled"
-                                                    data-toggle="modal" onclick="deleteData({{$user1->id}}, '{{$user1->name}}')"
+                                                    data-toggle="modal" onclick="deleteData({{ $f->id }}, '{{ $f->id }}"
                                                     data-target="#modal-fadein"><i class="fa fa-trash"></i></button>
                                         </div>
                                     </td>

@@ -8,6 +8,7 @@ use App\Terminal;
 use App\User;
 use Exception;
 use Gate;
+use App\Flight;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -235,10 +236,28 @@ class AirportController extends Controller
 
         $gateways = $airport->gateways;
 
+        $flights = Flight::where('status','unready')->whereIn('landing_terminal_id',$gateways)->get();
+
         $auth_user = Auth::user();
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($auth_user);
 
-        return view('airport.user_terminal', compact('gateways', 'airport','sidebar', 'header', 'footer'));
+        return view('airport.user_terminal', compact('gateways', 'airport','sidebar', 'header', 'footer','flights'));
+    }
+    public function user_terminals_edit(Airport $airport, User $user,Flight $flight){
+
+        if (!Gate::allows('manage-airport-'.$airport->id)){
+            abort(401);
+        }
+
+        $gateways = $airport->gateways;
+
+//        $fli = Flight::where('id',$flight->id)->get();
+        $fli = $flight;
+
+        $auth_user = Auth::user();
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($auth_user);
+
+        return view('airport.edit_user_terminal', compact('gateways', 'airport','sidebar', 'header', 'footer','fli'));
     }
     public function edit_user(Airport $airport){
         if (!Gate::allows('manage-airport-'.$airport->id)){
