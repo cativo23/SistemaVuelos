@@ -41,7 +41,6 @@ class ClientCompanyController extends Controller
             $numero = $last_clientCompany->client->frequent_customer_num;
             $resultado = substr($numero, 2, 7);
             $numero_cliente = (int)$resultado + 1;
-            //dd($numero_cliente);
         }
 
         $user = Auth::user();

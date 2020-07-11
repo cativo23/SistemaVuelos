@@ -153,7 +153,11 @@ class ItineraryController extends Controller
             $client = new GuzzleHttp\Client();
 
             $res_origin = $client->request('GET', 'http://127.0.0.1:8001/api/countries?q='.$flight_origin->country);
+
+            dd($res_origin);
             $res_destination = $client->request('GET', 'http://127.0.0.1:8001/api/countries?q='.$flight_destination->country);
+
+
 
             $flight_country =
 
