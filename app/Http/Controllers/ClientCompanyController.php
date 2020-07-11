@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
+use App\Helper\VoyargeHelper;
 use App\ClientCompany;
 use App\Client;
 use Illuminate\Http\Request;
@@ -17,10 +18,11 @@ class ClientCompanyController extends Controller
     {
         //
         $clientes_c = ClientCompany::all();
+        $user = Auth::user();
 
-        dd($clientes_c[0]->client);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
-        return view('clientCompany.index', compact('clientes_c'));
+        return view('clientCompany.index', compact('clientes_c','sidebar', 'header', 'footer'));
 
     }
 
@@ -42,7 +44,10 @@ class ClientCompanyController extends Controller
             //dd($numero_cliente);
         }
 
-        return view('clientCompany.create', compact('numero_cliente'));
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+        return view('clientCompany.create', compact('numero_cliente','sidebar', 'header', 'footer'));
     }
 
     /**
@@ -100,6 +105,10 @@ class ClientCompanyController extends Controller
     {
         $cliente = ClientCompany::findOrFail($id);
 
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+
         return view('clientCompany.show', compact('cliente'));
     }
 
@@ -112,7 +121,10 @@ class ClientCompanyController extends Controller
     public function edit($id)
     {
         $cliente = ClientCompany::findOrFail($id);
-        return view('ClientCompany.edit', compact('cliente'));
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+        return view('ClientCompany.edit', compact('cliente','sidebar', 'header', 'footer'));
     }
 
     /**
@@ -166,7 +178,10 @@ class ClientCompanyController extends Controller
     {
         $cliente = ClientCompany::findOrFail($id);
 
-        return view('clientCompany.confirm', compact('cliente'));
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+        return view('clientCompany.confirm', compact('cliente','sidebar', 'header', 'footer'));
     }
 
 

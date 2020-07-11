@@ -14,6 +14,31 @@
 
     <!-- Page JS Code -->
     <script src="{{ asset('js/pages/tables_datatables.js') }}"></script>
+
+    <script src="{{ asset('/js/codebase.core.min.js') }}"></script>
+    <!--
+      Codebase JS
+
+      Custom functionality including Blocks/Layout API as well as other vital and optional helpers
+      webpack is putting everything together at assets/_es6/main/app.js
+  -->
+
+    <script src="{{ asset('/js/codebase.app.min.js') }}"></script>
+    <script src="{{asset('js/plugins/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
+    <script>jQuery(function () {
+            Codebase.helpers('notify');
+            @if(session('datos'))
+            Codebase.helpers('notify', {
+                align: 'right',             // 'right', 'left', 'center'
+                from: 'top',                // 'top', 'bottom'
+                type: 'success',               // 'info', 'success', 'warning', 'danger'
+                icon: 'fa fa-info mr-5',    // Icon class
+                message: '{{session('datos')}}'
+            });
+            @endif
+        });</script>
+    <script>
+
 @endsection
 
 @section('content')
@@ -35,22 +60,6 @@
     <div class="content">
 
 
-    @if( session('datos'))
-        <!-- Info -->
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="alert alert-success alert-dismissable" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                        <h3 class="alert-heading font-size-h4 font-w400">¡Exito!</h3>
-                        <p class="mb-0">{{ session('datos') }}</a></p>
-                    </div>
-                </div>
-
-            </div>
-            <!-- END Info -->
-    @endif
 
     <!--
         <a type="button" class="btn btn-square btn-primary min-width-125 mb-10 float-right"
@@ -96,7 +105,7 @@
                             <tr>
                                 <td>{{ $cliente->client->frequent_customer_num }}</td>
                                 <td>{{ $cliente->client->first_name }} {{ $cliente->client->second_name }} {{ $cliente->client->first_surname }} {{ $cliente->client->second_surname }}</td>
-                                <td>{{ $cliente->client->company_name }}</td>
+                                <td>{{ $cliente->company_name }}</td>
                                 <td>{{ $cliente->client->miles }}</td>
                                 <td>{{ $cliente->client->mobile_phone }}</td>
 
@@ -130,30 +139,5 @@
     <!-- END Page Content -->
 @endsection
 
-@section('js_after')
 
-    <script src="{{ asset('/js/codebase.core.min.js') }}"></script>
-    <!--
-      Codebase JS
 
-      Custom functionality including Blocks/Layout API as well as other vital and optional helpers
-      webpack is putting everything together at assets/_es6/main/app.js
-  -->
-
-    <script src="{{ asset('/js/codebase.app.min.js') }}"></script>
-    <script src="{{asset('js/plugins/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
-    <script>jQuery(function () {
-            Codebase.helpers('notify');
-            @if(session('datos'))
-            Codebase.helpers('notify', {
-                align: 'right',             // 'right', 'left', 'center'
-                from: 'top',                // 'top', 'bottom'
-                type: 'success',               // 'info', 'success', 'warning', 'danger'
-                icon: 'fa fa-info mr-5',    // Icon class
-                message: '{{session('datos')}}'
-            });
-            @endif
-        });</script>
-    <script>
-
-@endsection

@@ -33,53 +33,73 @@
 
                         <form action="{{ route('destinations.store') }}" method="post">@csrf
                             <div class="form-group row">
-                                                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('codigo')) is-invalid @endif">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="codigo" name="codigo">
+                                        <input type="text" class="form-control" id="codigo" value="{{ old('codigo', isset($destination) ? $destination->codigo : '') }}" name="codigo">
                                         <label for="codigo">Código de Destino</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-hashtag"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('codigo'))
+                                            @foreach($errors->get('codigo') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('ciudad')) is-invalid @endif">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="ciudad" name="ciudad">
+                                        <input type="text" class="form-control" id="ciudad" value="{{ old('ciudad', isset($destination)? destination>ciudad : '') }}" name="ciudad">
                                         <label for="ciudad">Ciudad</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-location-arrow"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('ciudad'))
+                                            @foreach($errors->get('ciudad') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('estado')) is-invalid @endif">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="estado" name="estado">
+                                        <input type="text" class="form-control" id="estado" value="{{ old('estado', isset($destination)? destination>estado : '') }}" name="estado">
                                         <label for="estado">Estado</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-map-signs"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('estado'))
+                                            @foreach($errors->get('estado') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('pais')) is-invalid @endif">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="pais" name="pais">
+                                        <input type="text" class="form-control" id="pais" value="{{ old('pais', isset($destination)? destination>pais : '') }}" name="pais">
                                         <label for="pais">País</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-flag"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('pais'))
+                                            @foreach($errors->get('pais') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('continente')) is-invalid @endif">
                                     <div class="form-material floating">
-                                        <select class="form-control" id="continente" name="continente">
+                                        <select class="form-control" id="continente" value="{{ old('continente', isset($destination)? destination>continente : '') }}" name="continente">
                                             <option selected="selected" disabled></option>
                                             <option value="Asia">Asia</option>
                                             <option value="América">América</option>
@@ -90,6 +110,11 @@
                                         </select>
                                         <label for="continente">Continente</label>
                                     </div>
+                                    @if($errors->has('continente'))
+                                            @foreach($errors->get('continente') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                 </div>
                             </div>
 
