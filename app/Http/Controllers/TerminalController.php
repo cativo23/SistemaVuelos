@@ -129,10 +129,12 @@ class TerminalController extends Controller
         return redirect()->route('gateway.index')->with('datos', '¡La terminal se eliminó correctamente!');
     }
 
-    public function create_user(Airport $airport){
+    public function create_user(Airport $airport, Request $request){
+
         if (!Gate::allows('manage-airport-'.$airport->id)){
             abort(401);
         }
+
         dd("create terminal for airport ".$airport->name);
     }
 }

@@ -151,9 +151,12 @@ class ItineraryController extends Controller
             }
 
             $client = new GuzzleHttp\Client();
-            $res = $client->request('GET', 'http://127.0.0.1:8001/api/countries?q=');
+
+            $res_origin = $client->request('GET', 'http://127.0.0.1:8001/api/countries?q='.$flight_origin->country);
+            $res_destination = $client->request('GET', 'http://127.0.0.1:8001/api/countries?q='.$flight_destination->country);
 
             $flight_country =
+
 
             $client1 = new GuzzleHttp\Client();
             $res = $client1->request('GET', 'http://127.0.0.1:8001/api/cities?q='.$flight_origin->city.'San%20Salvador&country=');
@@ -244,5 +247,27 @@ class ItineraryController extends Controller
         Itinerary::whereIn('id', request('ids'))->delete();
 
         return response()->noContent();
+    }
+
+    function distance($lat1, $lon1, $lat2, $lon2, $unit) {
+        if (($lat1 == $lat2) && ($lon1 == $lon2)) {
+            return 0;
+        }
+        else {
+            $theta = $lon1 - $lon2;
+            $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+            $dist = acos($dist);
+            $dist = rad2deg($dist);
+            $miles = $dist * 60 * 1.1515;
+            $unit = strtoupper($unit);
+
+            if ($unit == "K") {
+                return ($miles * 1.609344);
+            } else if ($unit == "N") {
+                return ($miles * 0.8684);
+            } else {
+                return $miles;
+            }
+        }
     }
 }

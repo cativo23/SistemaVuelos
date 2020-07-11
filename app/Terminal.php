@@ -49,8 +49,4 @@ class Terminal extends Model
     {
         return $this->belongsTo(Airport::class, 'airport_id');
     }
-
-    public function flights(){
-        return $this->belongsToMany();
-    }
 }

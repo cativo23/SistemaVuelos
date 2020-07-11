@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Helper\VoyargeHelper;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use App\Airport;
@@ -21,7 +20,7 @@ class DashboardController extends Controller
 
         $user = Auth::user();
         $view = 'client.dashboard';
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         if (Gate::allows('super-admin-dash')){
             Log::info('This is a super user');

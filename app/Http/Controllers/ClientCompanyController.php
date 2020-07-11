@@ -17,7 +17,8 @@ class ClientCompanyController extends Controller
     {
         //
         $clientes_c = ClientCompany::all();
-        //$clientes = Client::all();
+
+        dd($clientes_c[0]->client);
 
         return view('clientCompany.index', compact('clientes_c'));
 
