@@ -9,7 +9,7 @@
                     <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
                         data-class="animated fadeInUp">Nueva Aerolínea</h1>
                     <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">Cree una nueva aerolinea {{$errors}}</h2>
+                        data-class="animated fadeInUp">Cree una nueva aerolinea</h2>
                 </div>
             </div>
         </div>
@@ -40,15 +40,20 @@
 
                         <div class="block-content">
                             <div class="form-group row">
-                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('codigo')) is-invalid @endif">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="codigo" name="codigo">
+                                        <input type="text" class="form-control" id="codigo" value="{{ old('codigo', isset($airline) ? $airline->codigo : '') }}" name="codigo">
                                         <label for="codigo">Código</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-hashtag"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('codigo'))
+                                            @foreach($errors->get('codigo') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-4">
