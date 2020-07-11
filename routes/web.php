@@ -21,6 +21,7 @@ Route::view('/pages/datatables', 'pages.datatables')->middleware('verified');
 Route::view('/pages/blank', 'pages.blank')->middleware(['verified', 'logs-out-banned-user']);
 Route::view('/banned', 'auth.banned')->name('banned');
 
+Route::get('/buy', 'BookingController@index')->name('buy');
 /*
  * Cativo's Stuff START
  */
@@ -43,9 +44,9 @@ Auth::routes(['verify' => true]); //Auth Routes
 
 Route::match(['get', 'post'], '/dashboard','DashboardController@index')->middleware('verified')->middleware('forbid-banned-user');
 
-Route::resource('/flights', 'FlightController')->middleware('verified', 'forbid-banned-user');
+Route::resource('/flights', 'FlightController')->middleware('verified')->middleware('forbid-banned-user');
 
-Route::resource('/backups', 'BackupController')->middleware('verified', 'forbid-banned-user');
+Route::resource('/backups', 'BackupController')->middleware('verified')->middleware('forbid-banned-user');
 
 Route::delete('itineraries/mass_destroy', 'ItineraryController@mass')->name('itineraries.mass');
 Route::resource('/itineraries', 'ItineraryController')->middleware('verified', 'forbid-banned-user');

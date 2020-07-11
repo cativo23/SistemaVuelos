@@ -11,6 +11,7 @@ use Auth;
 use Carbon\Carbon;
 use DateTime;
 use Gate;
+use GuzzleHttp\Client;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
@@ -52,7 +53,7 @@ class ItineraryController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -62,12 +63,8 @@ class ItineraryController extends Controller
             'vuelo'=>['required', 'array'],
             'departure_date'=>['required','array'],
             'arrival_date'=>['required','array'],
-            'departure_time'=>['required','array'],
-            'arrival_time'=>['required','array'],
             'departure_date.*.*'=>['required', 'date', 'after_or_equal:today'],
             'arrival_date.*.*'=>['required', 'date', 'after_or_equal:today', 'after_or_equal:departure_date'],
-            'departure_time.*.*'=>['required','regex:/([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?/'],
-            'arrival_time.*.*'=>['required','regex:/([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?/'],
             'origin'=>['required','array'],
             'destination'=>['required','array'],
             'cost'=>['required','array'],
@@ -92,8 +89,6 @@ class ItineraryController extends Controller
         $origins = $request->input('origin');
         $departure_dates = $request->input('departure_date');
         $arrival_dates = $request->input('arrival_date');
-        $departure_times= $request->input('departure_time');
-        $arrival_times = $request->input('arrival_time');
         $type = $request->input('type');
         $last_destination = end($destinations);
         $first_origin = reset($origins);
@@ -115,14 +110,7 @@ class ItineraryController extends Controller
         }
 
         $last_arrival_date = end($arrival_dates);
-        $last_arrival_time = end($arrival_times);
         $first_departure_date = reset($departure_dates);
-        $first_departure_time = reset($departure_times);
-
-        $arrival_dt = new DateTime( $last_arrival_date.' '.$last_arrival_time);
-        $departure_dt = new DateTime($first_departure_date.' '.$first_departure_time);
-        $diff= $arrival_dt->getTimestamp() - $departure_dt->getTimestamp();
-        $duration = $diff / ( 60 * 60 );
 
         $itinerary = new Itinerary([
             'total_price'=>$total_price,
@@ -130,15 +118,15 @@ class ItineraryController extends Controller
             'origin'=>$origin2->country,
             'departure_date'=>$first_departure_date,
             'arrival_date'=>$last_arrival_date,
-            'departure_time'=>$first_departure_time,
-            'arrival_time'=>$last_arrival_time,
+            'departure_time'=>null,
+            'arrival_time'=>null,
             'num_connections'=>count($request->input('vuelo')),
-            'duration'=>$duration,
+            'total_duration'=>0,
             'airline_id'=>$request->input('airline_id')[0],
             'type'=>$request->input('type')
         ]);
 
-        //$itinerary->save();
+       //$itinerary->save();
 
         for($i=0;count($request->input('vuelo'))>$i; $i++){
             $flight_origin = Airport::findOrFail($request->input('origin')[$i]);
@@ -150,26 +138,26 @@ class ItineraryController extends Controller
                 $last_code = $last_vuelo->id;
             }
 
-            $client = new GuzzleHttp\Client();
+            $client = new Client();
 
-            $res_origin = $client->request('GET', 'http://127.0.0.1:8001/api/countries?q='.$flight_origin->country);
+            $country_origin = json_decode($client->request('GET', 'http://127.0.0.1:8001/api/countries?q='.$flight_origin->country)->getBody(), 'true')[0];
+            $country_destination = json_decode($client->request('GET', 'http://127.0.0.1:8001/api/countries?q='.$flight_destination->country)->getBody(), 'true')[0];
 
-            dd($res_origin);
-            $res_destination = $client->request('GET', 'http://127.0.0.1:8001/api/countries?q='.$flight_destination->country);
+            $city_destination = json_decode($client->request('GET', 'http://127.0.0.1:8001/api/cities?q='.$flight_destination->city.'&country='.$country_destination['country_code'])->getBody(), 'true')[0];
+            $city_origin = json_decode($client->request('GET', 'http://127.0.0.1:8001/api/cities?q='.$flight_origin->city.'&country='.$country_origin['country_code'])->getBody(), 'true')[0];
 
+            $latitude_origin = $city_origin['latitude'];
+            $latitude_destination = $city_destination['latitude'];
+            $longitude_origin = $city_origin['longitude'];
+            $longitude_destination = $city_destination['longitude'];
 
-
-            $flight_country =
-
-
-            $client1 = new GuzzleHttp\Client();
-            $res = $client1->request('GET', 'http://127.0.0.1:8001/api/cities?q='.$flight_origin->city.'San%20Salvador&country=');
+            $destance = $this->distance($latitude_origin, $longitude_origin, $latitude_destination, $longitude_destination, 'M');
 
             $vuelo = new Flight([
                 'arrival_date'=>$request->input('arrival_date')[$i],
                 'departure_date'=>$request->input('departure_date')[$i],
-                'departure_time'=>$request->input('departure_time')[$i],
-                'arrival_time'=>$request->input('arrival_time')[$i],
+                'departure_time'=>null,
+                'arrival_time'=>null,
                 'origin'=>$flight_origin->name,
                 'destination'=>$flight_destination->name,
                 'code'=>$airline->code.$last_code,
@@ -178,18 +166,16 @@ class ItineraryController extends Controller
                 'flight_miles'=>$request->input('flight_miles')[$i],
                 'airline_id'=>$airline->id,
                 'status'=>'unready',
-                ''
+                'duration'=>2,
+                'distance_miles'=>intval($destance),
+                'airplane_id'=>$airline->airplanes[0]->id,
+                'itinerary_id'=>1,
+                'boarding_terminal_id'=>$flight_origin->id,
+                'landing_terminal_id'=>$flight_destination->id
             ]);
-
-            dd($vuelo);
-
+            $vuelo->save();
         }
-
-
-
-
-        dd($request);
-
+        return redirect()->route('itineraries.index')->with('datos', 'Itinerario Creado Correctamente');
     }
 
     /**

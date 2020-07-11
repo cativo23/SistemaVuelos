@@ -37,7 +37,7 @@
                         </div>
 
                         <div class="block-content">
-                            <h4>Ingrese los Datos para este itinerario
+                            <h4>Ingrese los Datos para este itinerario {{count($errors)}}
                             </h4>
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-4">
