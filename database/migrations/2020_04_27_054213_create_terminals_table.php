@@ -18,7 +18,7 @@ class CreateTerminalsTable extends Migration
             $table->timestamps();
             $table->string('code')->unique();
 
-            $table->foreignId('airport_id')->constrained();
+            $table->foreignId('airport_id')->constrained()->cascadeOnDelete();
         });
     }
 

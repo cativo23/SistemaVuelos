@@ -31,7 +31,8 @@
         <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
     </head>
     <body>
-        <!-- Page Container -->
+    <div id="page-loader" class="show bg-"></div>
+    <!-- Page Container -->
         <!--
             Available classes for #page-container:
 

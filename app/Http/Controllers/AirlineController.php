@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Airline;
 use App\Helper\VoyargeHelper;
+use Exception;
+use Gate;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class AirlineController extends Controller
@@ -38,15 +41,9 @@ class AirlineController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $lastAirline = Airline::latest('id')->first();
-        $idcode = 1;
-        if ($lastAirline){
-            $idcode = $lastAirline->id +1;
-        }
-
-
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
-        return view('airline.create' , compact('sidebar', 'header', 'footer', 'idcode'));
+
+        return view('airline.create', compact('sidebar', 'header', 'footer'));
     }
 
     /**
@@ -58,35 +55,37 @@ class AirlineController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'codigo' => 'required|string|max:100',
-            'nombrecorto' => 'required|string|max:150',
-            'nombreoficial' => 'required|string|max:255',
-            'email' => 'required|email:rfc,dns',
-            'paisorigen' => 'required|string|max:255',
-            'representante' => 'required|string',
-            'paginaweb' => 'required|url|string|max:255',
-            'facebook' => 'required|string|max:150',
-            'instagram' => 'required|string|max:150',
-            'twitter' => 'required|string|max:150',
+            'codigo' => 'required|alpha_num|max:2|unique:airlines,code|regex:/^[A-Z0-9]{2}$/',
+            'nombrecorto' => 'required|alpha|max:100',
+            'nombreoficial' => 'required|string|max:191',
+            'email' => 'required|email:rfc,dns,spoof',
+            'paisorigen' => 'required|string|max:191',
+            'representante' => 'required|string|max:191',
+            'paginaweb' => 'required|regex:/^[a-zA-Z0-9].{3,}$/|string|max:191',
+            'facebook' => 'required|string|max:150|regex:/^[a-zA-Z0-9].{3,}$/',
+            'instagram' => 'required|alpha_num|max:150|regex:/^[a-zA-Z0-9].{3,}$/',
+            'twitter' => 'required|alpha_num|max:150|regex:/^[a-zA-Z0-9].{3,}$/',
             'whatsapp' => 'required|string|max:16'
         ]);
 
-        $airline = new Airline;
-        $airline->code = $request->codigo;
-        $airline->short_name = $request->nombrecorto;
-        $airline->official_name = $request->nombreoficial;
-        $airline->email = $request->email;
-        $airline->origin_country = $request->paisorigen;
-        $airline->representative = $request->representante;
-        $airline->web_page = $request->paginaweb;
-        $airline->facebook = $request->facebook;
-        $airline->instagram = $request->instagram;
-        $airline->twitter = $request->twitter;
-        $airline->whatsapp = $request->whatsapp;
+        $airline = new Airline([
+            'code' => $request->codigo,
+            'short_name' => $request->nombrecorto,
+            'official_name' => $request->nombreoficial,
+            'email' => $request->email,
+            'origin_country' => $request->paisorigen,
+            'representative' => $request->representante,
+            'web_page' => 'https://'.$request->paginaweb,
+            'facebook' => $request->facebook,
+            'instagram' => $request->instagram,
+            'twitter' => $request->twitter,
+            'whatsapp' => $request->whatsapp,
+        ]);
+
         $airline->save();
 
-        return redirect()->route('airlines.index')->with('datos', '¡Aerolínea' .' ' .'"'
-            .$airline->short_name .' '.$airline->origin_country .'"' .' guardada correctamente!');
+        return redirect()->route('airlines.index')->with('datos', '¡Aerolínea' . ' ' . '"'
+            . $airline->short_name . ' ' . $airline->origin_country . '"' . ' guardada correctamente!');
 
     }
 
@@ -114,7 +113,11 @@ class AirlineController extends Controller
     public function edit($id)
     {
         $airline = Airline::findOrFail($id);
-        return view('airline.edit', compact('airline'));
+
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+        return view('airline.edit', compact('airline', 'sidebar', 'header', 'footer'));
     }
 
     /**
@@ -126,17 +129,20 @@ class AirlineController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $airline = Airline::findOrFail($id);
+
         $request->validate([
-            'codigo' => 'required|string|max:100',
-            'nombrecorto' => 'required|string|max:150',
-            'nombreoficial' => 'required|string|max:255',
-            'email' => 'required|email:rfc,dns',
-            'paisorigen' => 'required|string|max:255',
-            'representante' => 'required|string',
-            'paginaweb' => 'required|url|string|max:255',
-            'facebook' => 'required|string|max:150',
-            'instagram' => 'required|string|max:150',
-            'twitter' => 'required|string|max:150',
+            'codigo' => ['required','alpha_num','max:2','regex:/^[A-Z0-9]{2}$/', Rule::unique('airlines', 'code')->ignore($airline->id)],
+            'nombrecorto' => 'required|alpha|max:100',
+            'nombreoficial' => 'required|string|max:191',
+            'email' => 'required|email:rfc,dns,spoof',
+            'paisorigen' => 'required|string|max:191',
+            'representante' => 'required|string|max:191',
+            'paginaweb' => 'required|regex:/^[a-zA-Z0-9].{3,}$/|string|max:191',
+            'facebook' => 'required|string|max:150|regex:/^[a-zA-Z0-9].{3,}$/',
+            'instagram' => 'required|alpha_num|max:150|regex:/^[a-zA-Z0-9].{3,}$/',
+            'twitter' => 'required|alpha_num|max:150|regex:/^[a-zA-Z0-9].{3,}$/',
             'whatsapp' => 'required|string|max:16'
         ]);
 
@@ -147,7 +153,7 @@ class AirlineController extends Controller
         $airline->email = $request->email;
         $airline->origin_country = $request->paisorigen;
         $airline->representative = $request->representante;
-        $airline->web_page = $request->paginaweb;
+        $airline->web_page = 'https://'.$request->paginaweb;
         $airline->facebook = $request->facebook;
         $airline->instagram = $request->instagram;
         $airline->twitter = $request->twitter;
@@ -176,15 +182,30 @@ class AirlineController extends Controller
     }
 
 
-
     public function destroy($id)
     {
         $airline = Airline::findOrFail($id);
         try {
             $airline->delete();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return redirect()->route('airlines.index')->with('datos', '¡error!');
         }
         return redirect()->route('airlines.index')->with('datos', '¡La aerolinea se eliminó correctamente!');
+    }
+
+    /**
+     * Delete all selected User at once.
+     *
+     * @param Request $request
+     * @return Response|void
+     */
+    public function mass(Request $request)
+    {
+        if (!Gate::allows('manage-airline')) {
+            return abort(401);
+        }
+        Airline::whereIn('id', request('ids'))->delete();
+
+        return response()->noContent();
     }
 }

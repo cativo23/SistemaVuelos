@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Airport;
 use App\Helper\VoyargeHelper;
+use App\Terminal;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;

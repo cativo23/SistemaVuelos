@@ -18,8 +18,8 @@ class CreateAirlineDestinationTable extends Migration
             $table->timestamps();
 
 
-            $table->foreignId('destination_id')->constrained();
-            $table->foreignId('airline_id')->constrained();
+            $table->foreignId('destination_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('airline_id')->constrained()->cascadeOnDelete();
 
         });
     }

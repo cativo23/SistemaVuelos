@@ -34,6 +34,14 @@
                                     <a href="{{ route('super.users.index')}}" type="reset" class="btn btn-sm btn-alt-danger">
                                         <i class="fa fa-times"></i> Cancelar
                                     </a>
+                                    @if($user->can('manage-airport'))
+                                        <a href="{{ route('super.show_give_airport', $user->id)}}" type="reset" class="btn btn-sm btn-alt-info">
+                                            <i class="fa fa-shield"></i>Permiso de Aeropuerto
+                                        </a>
+                                        <a href="{{ route('super.remove_airport', $user->id)}}" type="reset" class="btn btn-sm btn-alt-info">
+                                            <i class="fa fa-user-times"></i>Quitar Permiso de Aeropuerto
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                             <div class="block-content">

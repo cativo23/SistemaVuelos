@@ -57,8 +57,8 @@
             </div>
             <div class="block-content block-content-full">
                 <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
-                <div class="table-responsive"><br>
-                    <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                <div class="table-responsive">
+                    <table class="table table-borderless table-striped table-vcenter js-dataTable-full">
                         <thead>
                         <tr>
                             <th>Código</th>

@@ -19,7 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->decimal('total_price', 10, 2);
             $table->date('paid');
 
-            $table->foreignId('reservation_id')->constrained();
+            $table->foreignId('reservation_id')->constrained()->cascadeOnDelete();
         });
     }
 

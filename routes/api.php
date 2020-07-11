@@ -24,3 +24,4 @@ Route::get('/restore_backup', 'APIController@aws_restore_backup');
 Route::get('/airlines', 'APIController@get_airlines');
 Route::get('/airports', 'APIController@get_airports');
 Route::get('/airplanes', 'APIController@get_airplanes');
+Route::get('/users', 'APIController@get_users');

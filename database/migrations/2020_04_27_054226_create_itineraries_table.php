@@ -27,7 +27,7 @@ class CreateItinerariesTable extends Migration
             $table->string('origin');
             $table->string('type');
 
-            $table->foreignId('airline_id');
+            $table->foreignId('airline_id')->constrained()->cascadeOnDelete();
         });
     }
 

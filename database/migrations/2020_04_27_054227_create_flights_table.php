@@ -32,11 +32,11 @@ class CreateFlightsTable extends Migration
             $table->unsignedBigInteger('landing_terminal_id');
             $table->unsignedBigInteger('boarding_terminal_id');
 
-            $table->foreign('boarding_terminal_id')->references('id')->on('terminals');
-            $table->foreign('landing_terminal_id')->references('id')->on('terminals');
-            $table->foreignId('airplane_id')->constrained();
-            $table->foreignId('airline_id')->constrained();
-            $table->foreignId('itinerary_id')->constrained();
+            $table->foreign('boarding_terminal_id')->references('id')->on('terminals')->cascadeOnDelete();
+            $table->foreign('landing_terminal_id')->references('id')->on('terminals')->cascadeOnDelete();
+            $table->foreignId('airplane_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('airline_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('itinerary_id')->constrained()->cascadeOnDelete();
         });
     }
 

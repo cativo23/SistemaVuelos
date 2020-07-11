@@ -8,6 +8,7 @@ use App\Airport;
 use App\Backup;
 use App\Jobs\RestoreDB;
 use App\Restores;
+use App\User;
 use Artisan;
 use Carbon\Carbon;
 use DB;
@@ -188,13 +189,13 @@ class APIController extends Controller
 
     public function get_airlines(Request $request){
         $term = '%'.$request->input('term').'%';
-        $airlines = Airline::whereRaw("upper(CODE) like upper('".$term."')")->orWhereRaw("upper(OFFICIAL_NAME) like upper('".$term."')")->orWhereRaw("upper(SHORT_NAME) like upper('".$term."')")->get();
+        $airlines = Airline::selectRaw('SHORT_NAME as label, ID as value')->whereRaw("upper(CODE) like upper('".$term."')")->orWhereRaw("upper(OFFICIAL_NAME) like upper('".$term."')")->orWhereRaw("upper(SHORT_NAME) like upper('".$term."')")->get();
         return response()->json($airlines);
     }
 
     public function get_airports(Request $request){
         $term = '%'.$request->input('term').'%';
-        $airports = Airport::whereRaw("upper(CODE) like upper('".$term."')")->orWhereRaw("upper(NAME) like upper('".$term."')")->get();
+        $airports = Airport::selectRaw('NAME as label, ID as value')->whereRaw("upper(CODE) like upper('".$term."')")->orWhereRaw("upper(NAME) like upper('".$term."')")->get();
         return response()->json($airports);
     }
 
@@ -202,11 +203,17 @@ class APIController extends Controller
         $airline_term = $request->input('airline');
         $airline = Airline::select('id')->whereRaw("upper(CODE) like upper('".$airline_term."')")->orWhereRaw("upper(OFFICIAL_NAME) like upper('".$airline_term."')")->orWhereRaw("upper(SHORT_NAME) like upper('".$airline_term."')")->get()->first();
         $term = '%'.$request->input('term').'%';
-        $airplanes= Airplane::WhereRaw("upper(MODEL) like upper('".$term."')");
+        $airplanes= Airplane::selectRaw("CONCAT(CONCAT(CONCAT(CONCAT(MANUFACTURER,' '),MODEL), ' #'),ID) as label, ID as value")->whereRaw("upper(MODEL) like upper('".$term."')");
         if ($airline){
             $airplanes = $airplanes->where('AIRLINE_ID', '=', $airline->id);
         }
         $airplanes = $airplanes->get();
         return response()->json($airplanes);
+    }
+
+    public function get_users(Request $request){
+        $term = '%'.$request->input('term').'%';
+        $usernames = User::selectRaw('NAME as label, ID as value')->whereRaw("upper(USERNAME) like upper('".$term."')")->orWhereRaw("upper(NAME) like upper('".$term."')")->get();
+        return response()->json($usernames);
     }
 }

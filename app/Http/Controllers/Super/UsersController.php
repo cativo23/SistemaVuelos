@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers\Super;
 
+use App\Airport;
 use App\Helper\VoyargeHelper;
 use App\Http\Controllers\Controller;
+use App\Rules\StrongPassword;
 use App\User;
+use Auth;
+use Bouncer;
 use Exception;
+use Gate;
 use Hash;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Auth;
-use Gate;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Silber\Bouncer\Database\Role;
-use App\Rules\StrongPassword;
 use Validator;
 
 class UsersController extends Controller
@@ -27,11 +29,12 @@ class UsersController extends Controller
      *
      * @return Application|Factory|View|void
      */
-    public function index(){
+    public function index()
+    {
 
         $user = Auth::user();
 
-        if (! $user->can('manage-users')) {
+        if (!$user->can('manage-users')) {
             return abort(401);
         }
 
@@ -51,7 +54,7 @@ class UsersController extends Controller
     {
         $user = Auth::user();
 
-        if (!$user->can('manage-users'))  {
+        if (!$user->can('manage-users')) {
             return abort(401);
         }
 
@@ -77,12 +80,12 @@ class UsersController extends Controller
             return abort(401);
         }
 
-       $request->validate([
-            'name'=>['required', 'string', 'max:191'],
-            'username'=>['required', 'alpha_num', 'max:191', 'unique:users'],
-            'email'=>['required', 'email', 'max:191', 'unique:users'],
-            'password'=>['required', 'string', 'min:10', 'max:30', new StrongPassword],
-            'roles'=>['required', 'array']
+        $request->validate([
+            'name' => ['required', 'string', 'max:191'],
+            'username' => ['required', 'alpha_num', 'max:191', 'unique:users'],
+            'email' => ['required', 'email', 'max:191', 'unique:users'],
+            'password' => ['required', 'string', 'min:10', 'max:30', new StrongPassword],
+            'roles' => ['required', 'array']
         ]);
 
         $user = User::create($request->all());
@@ -102,7 +105,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        if (! Gate::allows('manage-users')) {
+        if (!Gate::allows('manage-users')) {
             return abort(401);
         }
 
@@ -123,7 +126,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        if (! Gate::allows('manage-users')) {
+        if (!Gate::allows('manage-users')) {
             return abort(401);
         }
 
@@ -142,24 +145,24 @@ class UsersController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
+     * @param int $id
      * @return RedirectResponse|Response|void
      */
     public function update(Request $request, $id)
     {
 
-        if (! Gate::allows('manage-users')) {
+        if (!Gate::allows('manage-users')) {
             return abort(401);
         }
 
         $user = User::findOrFail($id);
 
         $rules = [
-            'name'=>['required', 'string', 'max:191'],
-            'username'=>['required', 'alpha_num', 'max:191', Rule::unique('users')->ignore($user->id)],
-            'email'=>['required', 'email', 'max:191', Rule::unique('users')->ignore($user->id)],
-            'password'=>[ 'nullable','string', 'min:10', 'max:30', new StrongPassword],
-            'roles'=>['required', 'array']
+            'name' => ['required', 'string', 'max:191'],
+            'username' => ['required', 'alpha_num', 'max:191', Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', 'email', 'max:191', Rule::unique('users')->ignore($user->id)],
+            'password' => ['nullable', 'string', 'min:10', 'max:30', new StrongPassword],
+            'roles' => ['required', 'array']
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -201,7 +204,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        if (! Gate::allows('manage-users')) {
+        if (!Gate::allows('manage-users')) {
             return abort(401);
         }
         $user = User::findOrFail($id);
@@ -218,7 +221,7 @@ class UsersController extends Controller
      */
     public function mass(Request $request)
     {
-        if (! Gate::allows('manage-users')) {
+        if (!Gate::allows('manage-users')) {
             return abort(401);
         }
         User::whereIn('id', request('ids'))->delete();
@@ -226,18 +229,62 @@ class UsersController extends Controller
         return response()->noContent();
     }
 
-    public function ban($request, $id){
-        if (! Gate::allows('manage-users') && !Gate::allows('ban-user')) {
+    public function ban($request, $id)
+    {
+        if (!Gate::allows('manage-users') && !Gate::allows('ban-user')) {
             return abort(401);
         }
 
-        $user = User::where('id', '=',$id);
+        $user = User::where('id', '=', $id);
 
         $user->ban([
             'expired_at' => '+1 month',
-            'comment'=> 'Prueba de ban'
+            'comment' => 'Prueba de ban'
         ]);
 
         return response()->redirectToRoute(route('super.users.index'));
+    }
+
+    public function showGiveAirportPermission(User $user)
+    {
+        $user_auth = Auth::user();
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user_auth);
+        return view('super.users.give_airport', compact('user', 'sidebar', 'header', 'footer'));
+    }
+
+    public function giveAirportPermission(Request $request, User $user)
+    {
+        $request->validate([
+            'airport_id' => 'required|integer|exists:airports,id'
+        ]);
+        if ($user->can('manage-airports')) {
+            $airport = Airport::findOrFail($request->input('airport_id'));
+
+            $manage_airport = Bouncer::ability()->firstOrCreate([
+                'name' => 'manage-airport-' . $airport->id,
+                'title' => 'Manage Airport ' . $airport->name,
+            ]);
+
+            $abilities = $user->getAbilities();
+            foreach ($abilities as $ability) {
+                if (strpos($ability->name, 'manage-airport-') !== false) {
+                    Bouncer::disallow($user)->to($ability);
+                }
+            }
+            Bouncer::allow($user)->to($manage_airport);
+            return redirect()->route('super.users.index')->with('success', 'Permisos de usuario actualizados');
+        }
+        return redirect()->route('super.users.index')->with('error', 'Este usuario no tiene rol de administrado de aeropuerto');
+    }
+
+    public function removeAirportPermission(User $user)
+    {
+        $abilities = $user->getAbilities();
+        foreach ($abilities as $ability) {
+            if (strpos($ability->name, 'manage-airport-') !== false) {
+                Bouncer::disallow($user)->to($ability);
+            }
+        }
+        return redirect()->route('super.users.index')->with('success', 'Permisos del usuario para el aeropuerto removidos!');
     }
 }

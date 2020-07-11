@@ -21,7 +21,7 @@ class CreateAirplanesTable extends Migration
             $table->integer('seat_capacity');
             $table->string('model');
 
-            $table->foreignId('airline_id')->constrained();
+            $table->foreignId('airline_id')->constrained()->cascadeOnDelete();
         });
     }
 
