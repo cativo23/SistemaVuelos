@@ -56,129 +56,179 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('nombrecorto')) is-invalid @endif"">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="nombrecorto" name="nombrecorto">
+                                        <input type="text" class="form-control" id="nombrecorto" value="{{ old('nombrecorto', isset($airline) ? $airline->codnombrecortoigo : '') }}" name="nombrecorto">
                                         <label for="nombrecorto">Nombre Corto</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-compress"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('nombrecorto'))
+                                            @foreach($errors->get('nombrecorto') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4  @if($errors->has('nombreoficial')) is-invalid @endif">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="nombreoficial" name="nombreoficial">
+                                        <input type="text" class="form-control" id="nombreoficial" value="{{ old('nombreoficial', isset($airline) ? $airline->nombreoficial : '') }}" name="nombreoficial">
                                         <label for="nombreoficial">Nombre Oficial</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-institution"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('nombreoficial'))
+                                            @foreach($errors->get('nombreoficial') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('paisorigen')) is-invalid @endif">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="paisorigen" name="paisorigen">
+                                        <input type="text" class="form-control" id="paisorigen" value="{{ old('paisorigen', isset($airline) ? $airline->paisorigen : '') }}" name="paisorigen">
                                         <label for="paisorigen">País Origen</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-flag"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('paisorigen'))
+                                            @foreach($errors->get('paisorigen') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('email')) is-invalid @endif">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="email" name="email">
+                                        <input type="text" class="form-control" id="email" value="{{ old('email', isset($airline) ? $airline->email : '') }}" name="email">
                                         <label for="email">Correo Electrónico</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-envelope"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('email'))
+                                            @foreach($errors->get('email') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('representante')) is-invalid @endif">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="representante" name="representante">
+                                        <input type="text" class="form-control" id="representante" value="{{ old('representante', isset($airline) ? $airline->representante : '') }}" name="representante">
                                         <label for="representante">Representante</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-user"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('representante'))
+                                            @foreach($errors->get('representante') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('twitter')) is-invalid @endif">
                                     <div class="form-material input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">@</span>
                                         </div>
-                                        <input type="text" class="form-control" id="twitter" name="twitter">
+                                        <input type="text" class="form-control" id="twitter" value="{{ old('twitter', isset($airline) ? $airline->twitter : '') }}" name="twitter">
                                         <label for="twitter">Twitter</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-twitter"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('twitter'))
+                                            @foreach($errors->get('twitter') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('facebook')) is-invalid @endif">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="facebook" name="facebook">
+                                        <input type="text" class="form-control" id="facebook" value="{{ old('facebook', isset($airline) ? $airline->facebook : '') }}"name="facebook">
                                         <label for="facebook">Facebook</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-facebook-square"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('Facebook'))
+                                            @foreach($errors->get('facebook') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('instagram')) is-invalid @endif">
                                     <div class="form-material input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">@</span>
                                         </div>
-                                        <input type="text" class="form-control" id="instagram" name="instagram">
+                                        <input type="text" class="form-control" id="instagram" value="{{ old('instagram', isset($airline) ? $airline->instagram : '') }}" name="instagram">
                                         <label for="instagram">Instagram</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-instagram"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('instagram'))
+                                            @foreach($errors->get('instagram') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-6">
+                                <div class="col-md-6 @if($errors->has('paginaweb')) is-invalid @endif">
                                     <div class="form-material input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">http://wwww.</span>
                                         </div>
-                                        <input type="text" class="form-control" id="paginaweb" name="paginaweb">
+                                        <input type="text" class="form-control" id="paginaweb" value="{{ old('paginaweb', isset($airline) ? $airline->paginaweb : '') }}" name="paginaweb">
                                         <label for="paginaweb">Página Web</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-mouse-pointer"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('paginaweb'))
+                                            @foreach($errors->get('paginaweb') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 @if($errors->has('whatsapp')) is-invalid @endif">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="whatsapp" name="whatsapp">
+                                        <input type="text" class="form-control" id="whatsapp" value="{{ old('whatsapp', isset($airline) ? $airline->whatsapp : '') }}" name="whatsapp">
                                         <label for="whatsapp">Whatsapp</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-whatsapp"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('whatsapp'))
+                                            @foreach($errors->get('whatsapp') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>

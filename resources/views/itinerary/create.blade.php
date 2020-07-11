@@ -59,9 +59,9 @@
                                     <div
                                         class="form-material floating input-group">
                                         <input type="text" class="form-control destnapi2"
-                                               name="destination_fake2">
+                                        name="destination_fake2">
                                         <input type="text" hidden class="form-control destination_real2"
-                                               name="destination2">
+                                        name="destination2">
                                         <label for="destination2">Destination</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
@@ -158,7 +158,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row justify-content-center">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 ">
                                                 <div
                                                     class="form-material floating input-group">
                                                     <input type="text"
@@ -190,7 +190,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row justify-content-center">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 ">
                                                 <div
                                                     class="form-material floating input-group">
                                                     <input type="text" class="form-control money"
@@ -594,5 +594,20 @@
         });
 
     </script>
+    
+    <script src="{{asset('js/plugins/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
+    <script>jQuery(function () {
+            Codebase.helpers('notify');
+            @if(count($errors)>0) 
+            Codebase.helpers('notify', {
+                align: 'right',             // 'right', 'left', 'center'
+                from: 'top',                // 'top', 'bottom'
+                type: 'warning',               // 'info', 'success', 'warning', 'danger'
+                icon: 'fa fa-info mr-5',    // Icon class
+                message: 'Error en Creación de Itinerario'
+            });
+            @endif
+        });</script>
+    <script>
 
 @endsection
