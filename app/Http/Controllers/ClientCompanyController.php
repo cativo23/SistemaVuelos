@@ -17,7 +17,6 @@ class ClientCompanyController extends Controller
     {
         //
         $clientes_c = ClientCompany::all();
-        //$clientes = Client::all();
 
         return view('clientCompany.index', compact('clientes_c'));
 

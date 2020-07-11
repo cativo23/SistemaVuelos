@@ -48,6 +48,6 @@ class Payment extends Model
      * Reservation for this Payment
      */
     public function reservation(){
-        return $this->belongsTo('App\Reservation');
+        return $this->belongsTo(Reservation::class);
     }
 }

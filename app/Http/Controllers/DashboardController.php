@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Helper\VoyargeHelper;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use App\Airport;

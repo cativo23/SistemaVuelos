@@ -227,7 +227,7 @@ class AirportController extends Controller
         return view('airport.index_user', compact('gateways', 'airport','sidebar', 'header', 'footer'));
     }
 
-    public function edit_user(Airport $airport){
+    public function edit_user(Airport $airport, Request $request){
         if (!Gate::allows('manage-airport-'.$airport->id)){
             abort(401);
         }
