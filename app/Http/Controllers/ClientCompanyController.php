@@ -174,7 +174,7 @@ class ClientCompanyController extends Controller
     {
         $cliente = ClientCompany::findOrFail($id);
         $cliente->delete();
-        return redirect()->route('clientCompanys.index')->with('datos', '¡La aerolinea se eliminó correctamente!');
+        return redirect()->route('clientCompanys.index')->with('datos', '¡El cliente se eliminó correctamente!');
     }
 }
 

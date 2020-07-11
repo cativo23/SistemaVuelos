@@ -24,7 +24,7 @@
                     <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
                         data-class="animated fadeInUp">Clientes de Empresas</h1>
                     <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">Client Companys
+                        data-class="animated fadeInUp">Client Companies
                     </h2>
                 </div>
 
@@ -96,7 +96,7 @@
                             <tr>
                                 <td>{{ $cliente->client->frequent_customer_num }}</td>
                                 <td>{{ $cliente->client->first_name }} {{ $cliente->client->second_name }} {{ $cliente->client->first_surname }} {{ $cliente->client->second_surname }}</td>
-                                <td>{{ $cliente->company_name }}</td>
+                                <td>{{ $cliente->client->company_name }}</td>
                                 <td>{{ $cliente->client->miles }}</td>
                                 <td>{{ $cliente->client->mobile_phone }}</td>
 
@@ -141,5 +141,19 @@
   -->
 
     <script src="{{ asset('/js/codebase.app.min.js') }}"></script>
+    <script src="{{asset('js/plugins/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
+    <script>jQuery(function () {
+            Codebase.helpers('notify');
+            @if(session('datos'))
+            Codebase.helpers('notify', {
+                align: 'right',             // 'right', 'left', 'center'
+                from: 'top',                // 'top', 'bottom'
+                type: 'success',               // 'info', 'success', 'warning', 'danger'
+                icon: 'fa fa-info mr-5',    // Icon class
+                message: '{{session('datos')}}'
+            });
+            @endif
+        });</script>
+    <script>
 
 @endsection
