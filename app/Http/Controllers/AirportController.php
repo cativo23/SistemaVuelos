@@ -214,9 +214,11 @@ class AirportController extends Controller
     }
 
     public function index_user(Airport $airport, User $user){
+
         if (!Gate::allows('manage-airport-'.$airport->id)){
             abort(401);
         }
+
         $gateways = $airport->gateways;
 
         $auth_user = Auth::user();
