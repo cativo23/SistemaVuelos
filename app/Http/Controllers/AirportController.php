@@ -14,6 +14,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class AirportController extends Controller
@@ -56,7 +57,6 @@ class AirportController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'codigo' => 'required|string|max:150',
             'nombre' => 'required|string|max:150',
@@ -85,9 +85,7 @@ class AirportController extends Controller
             $terminal->airport_id = $airport->id;
             $terminal->save();
         }
-        //dd(Terminal::all());
         return redirect()->route('airports.index')->with('datos', '¡Aeropuerto' .' ' .'"'. $airport->name .'"' .' guardado correctamente!');
-
     }
 
     /**

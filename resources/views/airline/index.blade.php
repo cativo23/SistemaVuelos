@@ -28,52 +28,59 @@
                     </div>
                     <div class="block-content block-content-full">
                         <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/tables_datatables.js -->
-                                <table class="table table-borderless table-striped table-vcenter js-dataTable-full datatable-Airlines col-md-12" style="width:100%">
-                                    <thead>
-                                    <tr>
-                                        <td></td>
-                                        <th data-priority="1">Código</th>
-                                        <th>Nombre</th>
-                                        <th>E-mail</th>
-                                        <th class="text-center">Web</th>
-                                        <th class="text-center" data-toggle="tooltip" data-placement="top" title="Facebook">
-                                            <i class="fa fa-facebook-square"></i>
-                                        </th>
-                                        <th class="text-center"><i class="fa fa-instagram"></i></th>
-                                        <th class="text-center" data-toggle="tooltip" data-placement="top" title="Whatsapp">
-                                            <i class="fa fa-whatsapp"></i>
-                                        </th>
-                                        <th style="width: 15%">Acciones</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach( $airlines as $airline)
-                                        <tr data-entry-id="{{$airline->id}}">
-                                            <td></td>
-                                            <td>{{ $airline->code }}</td>
-                                            <td>{{ $airline->short_name }}</td>
-                                            <td>{{ $airline->email }}</td>
-                                            <td>{{ $airline->web_page }}</td>
-                                            <td>{{ $airline->facebook }}</td>
-                                            <td>{{ $airline->instagram }}</td>
-                                            <td>{{ $airline->whatsapp }}</td>
-                                            <td class="text-center">
-                                                <div class="btn-group">
-                                                    <a href="{{ route('airlines.show', $airline->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Ver" data-original-title="Ver">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>
-                                                    <a href="{{ route('airlines.edit', $airline->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Edit">
-                                                        <i class="fa fa-pencil"></i>
-                                                    </a>
-                                                    <button type="button" class="btn btn-sm btn-secondary js-tooltip-enabled"
-                                                            data-toggle="modal" onclick="deleteData({{$airline->id}}, '{{$airline->short_name}}')"
-                                                            data-target="#modal-fadein"><i class="fa fa-trash"></i></button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                        <table
+                            class="table table-borderless table-striped table-vcenter js-dataTable-full datatable-Airlines col-md-12"
+                            style="width:100%">
+                            <thead>
+                            <tr>
+                                <td></td>
+                                <th data-priority="1">Código</th>
+                                <th>Nombre</th>
+                                <th>E-mail</th>
+                                <th class="text-center">Web</th>
+                                <th class="text-center" data-toggle="tooltip" data-placement="top" title="Facebook">
+                                    <i class="fa fa-facebook-square"></i>
+                                </th>
+                                <th class="text-center"><i class="fa fa-instagram"></i></th>
+                                <th class="text-center" data-toggle="tooltip" data-placement="top" title="Whatsapp">
+                                    <i class="fa fa-whatsapp"></i>
+                                </th>
+                                <th style="width: 15%">Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach( $airlines as $airline)
+                                <tr data-entry-id="{{$airline->id}}">
+                                    <td></td>
+                                    <td>{{ $airline->code }}</td>
+                                    <td>{{ $airline->short_name }}</td>
+                                    <td>{{ $airline->email }}</td>
+                                    <td>{{ $airline->web_page }}</td>
+                                    <td>{{ $airline->facebook }}</td>
+                                    <td>{{ $airline->instagram }}</td>
+                                    <td>{{ $airline->whatsapp }}</td>
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <a href="{{ route('airlines.show', $airline->id) }}" type="button"
+                                               class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip"
+                                               title="Ver" data-original-title="Ver">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('airlines.edit', $airline->id) }}" type="button"
+                                               class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip"
+                                               title="Editar" data-original-title="Edit">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-sm btn-secondary js-tooltip-enabled"
+                                                    data-toggle="modal"
+                                                    onclick="deleteData({{$airline->id}}, '{{$airline->short_name}}')"
+                                                    data-target="#modal-fadein"><i class="fa fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <!-- END Dynamic Table Full -->
@@ -86,7 +93,8 @@
     <div class="modal fade" id="modal-fadein" tabindex="-1" role="dialog" aria-labelledby="modal-fadein"
          aria-hidden="true">
         <div class="modal-dialog modal-sm" role="document">
-            <form action="" method="POST" id="deleteForm" onsubmit="return confirm('Estas seguro?');" style="display: inline-block;">
+            <form action="" method="POST" id="deleteForm" onsubmit="return confirm('Estas seguro?');"
+                  style="display: inline-block;">
                 <div class="modal-content">
                     <div class="block block-themed block-transparent mb-0">
                         <div class="block-header bg-primary-dark">
@@ -120,7 +128,7 @@
     <!-- Page JS Plugins CSS -->
     <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{asset('js/plugins/datatables/buttons-bs4/buttons.bootstrap4.min.css')}}">
-    <link href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css" rel="stylesheet"/>
 @endsection
 
 @section('js_after')
@@ -138,8 +146,9 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+    <script src="{{asset('js/plugins/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
     <script>
-        $(function() {
+        $(function () {
             let copyButtonTrans = 'Copiar';
             let csvButtonTrans = 'CSV';
             let excelButtonTrans = 'Excel';
@@ -151,7 +160,7 @@
                 'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json'
             };
 
-            $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'btn' })
+            $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, {className: 'btn'})
             $.extend(true, $.fn.dataTable.defaults, {
                 language: {
                     url: languages['{{ app()->getLocale() }}']
@@ -167,7 +176,7 @@
                     targets: -1,
                 }],
                 select: {
-                    style:    'multi+shift',
+                    style: 'multi+shift',
                     selector: 'td:first-child'
                 },
                 order: [],
@@ -180,7 +189,7 @@
                         className: 'btn-default',
                         text: copyButtonTrans,
                         exportOptions: {
-                            columns: [0,1,2,3,4,5,6]
+                            columns: [0, 1, 2, 3, 4, 5, 6]
                         }
                     },
                     {
@@ -188,7 +197,7 @@
                         className: 'btn-default',
                         text: csvButtonTrans,
                         exportOptions: {
-                            columns: [0,1,2,3,4,5,6]
+                            columns: [0, 1, 2, 3, 4, 5, 6]
                         }
                     },
                     {
@@ -196,7 +205,7 @@
                         className: 'btn-default',
                         text: excelButtonTrans,
                         exportOptions: {
-                            columns: [0,1,2,3,4,5,6]
+                            columns: [0, 1, 2, 3, 4, 5, 6]
                         }
                     },
                     {
@@ -204,7 +213,7 @@
                         className: 'btn-default',
                         text: pdfButtonTrans,
                         exportOptions: {
-                            columns: [0,1,2,3,4,5,6]
+                            columns: [0, 1, 2, 3, 4, 5, 6]
                         }
                     },
                     {
@@ -212,7 +221,7 @@
                         className: 'btn-default',
                         text: printButtonTrans,
                         exportOptions: {
-                            columns: [0,1,2,3,4,5,6]
+                            columns: [0, 1, 2, 3, 4, 5, 6]
                         }
                     },
                     {
@@ -230,9 +239,20 @@
         });
     </script>
     <!-- Page JS Code -->
+    <script>jQuery(function () {
+            Codebase.helpers('notify');
+            @if(session('datos'))
+            Codebase.helpers('notify', {
+                align: 'right',             // 'right', 'left', 'center'
+                from: 'top',                // 'top', 'bottom'
+                type: 'success',               // 'info', 'success', 'warning', 'danger'
+                icon: 'fa fa-info mr-5',    // Icon class
+                message: '{{session('datos')}}'
+            });
+            @endif
+        });</script>
     <script>
-        function deleteData(id, airline_name)
-        {
+        function deleteData(id, airline_name) {
             console.log(airline_name);
             let id_n = id;
             var url = '{{ route("airlines.destroy", ":id") }}';
@@ -240,6 +260,7 @@
             $("#deleteForm").attr('action', url);
             $('#airline_name').append(airline_name);
         }
+
         $(function () {
             let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons);
             let deleteButtonTrans = 'Borrar';
@@ -277,7 +298,7 @@
             $.extend(true, $.fn.dataTable.defaults, {
                 order: [[1, 'desc']],
                 pageLength: 100,
-                responsive:true
+                responsive: true
             });
             $('.datatable-Airlines:not(.ajaxTable)').DataTable({buttons: dtButtons, responsive: true});
             $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
