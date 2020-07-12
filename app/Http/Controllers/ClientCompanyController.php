@@ -108,7 +108,7 @@ class ClientCompanyController extends Controller
 
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
-        return view('clientCompany.show', compact('cliente'));
+        return view('clientCompany.show', compact('cliente','sidebar', 'header', 'footer'));
     }
 
     /**
@@ -123,7 +123,7 @@ class ClientCompanyController extends Controller
         $user = Auth::user();
 
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
-        return view('ClientCompany.edit', compact('cliente','sidebar', 'header', 'footer'));
+        return view('clientCompany.edit', compact('cliente','sidebar', 'header', 'footer'));
     }
 
     /**
