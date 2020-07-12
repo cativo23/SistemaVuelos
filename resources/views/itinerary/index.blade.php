@@ -36,8 +36,8 @@
                                         <th data-priority="1">Origen</th>
                                         <th>Destino</th>
                                         <th>Fecha de Salida</th>
-                                        <th class="text-center">Aerolinea</th>
                                         <th class="text-center">Tipo</th>
+                                        <th class="text-center">Aerolinea</th>
                                         <th style="width: 15%">Acciones</th>
                                     </tr>
                                     </thead>
@@ -48,9 +48,8 @@
                                             <td>{{ $itinerary->id }}</td>
                                             <td>{{ $itinerary->origin }}</td>
                                             <td>{{ $itinerary->destination }}</td>
-                                            <td>{{ $itinerary->departure_date }}</td>
+                                            <td>{{ date('d/m/Y', strtotime($itinerary->departure_date)) }}</td>
                                             <td>{{ $itinerary->type }}</td>
-                                            <td>{{ $itinerary->instagram }}</td>
                                             <td>{{ $itinerary->airline->short_name }}</td>
                                             <td class="text-center">
                                                 <div class="btn-group">

@@ -13,8 +13,97 @@
                             <h1 class="font-w600 font-size-h2 mb-20">
                                 Busque Vuelos.
                             </h1>
-
+                                <div class="block block-themed">
+                                    <div class="block-header bg-gd-sea">
+                                        <h3 class="block-title">Ingrese los datos de su vuelo</h3>
+                                    </div>
+                                    <div class="block-content">
+                                        <form action="{{route('search')}}" method="POST" onsubmit="return false;">
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <div class="form-material floating">
+                                                        <input type="text" class="form-control" id="login3-username" name="login3-username">
+                                                        <label for="login3-username">Username</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <div class="form-material floating">
+                                                        <input type="password" class="form-control" id="login3-password" name="login3-password">
+                                                        <label for="login3-password">Password</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <label class="css-control css-control-sm css-control-primary css-switch">
+                                                        <input type="checkbox" class="css-control-input" id="login3-remember-me" name="login3-remember-me">
+                                                        <span class="css-control-indicator"></span> Remember Me?
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-alt-primary">
+                                                        <i class="fa fa-arrow-right mr-5"></i> Log in
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab3">
+                                                <form method="POST" action="#">
+                                                    <div class="input-group">
+                                                        <label class="label">origin:</label>
+                                                        <input class="input--style-1" type="text" name="origin" placeholder="City or airport" required="required">
+                                                    </div>
+                                                    <div class="input-group">
+                                                        <label class="label">destination:</label>
+                                                        <input class="input--style-1" type="text" name="destination" placeholder="City or airport" required="required">
+                                                    </div>
+                                                    <div class="row row-space">
+                                                        <div class="col-2">
+                                                            <div class="input-group">
+                                                                <label class="label">Departing:</label>
+                                                                <input class="input--style-1" type="text" name="check-in" placeholder="mm/dd/yyyy" id="input-start-2">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <div class="input-group">
+                                                                <label class="label">returning:</label>
+                                                                <input class="input--style-1" type="text" name="check-out" placeholder="mm/dd/yyyy" id="input-end-2">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-t-5">
+                                                        <label class="checkbox-container m-r-45">First Class
+                                                            <input type="checkbox" name="first-class">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="checkbox-container m-r-45">Business
+                                                            <input type="checkbox" name="business">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="checkbox-container">Economy
+                                                            <input type="checkbox" checked="checked" name="economy">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                    <button class="btn-submit" type="submit">search</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
+                    </div>
+                    <div class="col-md-7 py-30 d-none d-md-flex align-items-md-center justify-content-md-end invisible" data-toggle="appear" data-class="animated fadeInRight">
+                        <img class="img-fluid" src="{{asset('media/photos/flight-1.png')}}" srcset="{{asset('media/photos/flight-1@2x.png')}}" alt="Hero">
                     </div>
                 </div>
             </div>

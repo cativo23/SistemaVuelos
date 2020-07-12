@@ -26,4 +26,7 @@ class BookingController extends Controller
     public function book(Request $request){
         return view('booking.book');
     }
+    public function completed(Request $request){
+        return view('booking.completed');
+    }
 }

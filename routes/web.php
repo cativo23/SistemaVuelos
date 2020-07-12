@@ -22,6 +22,10 @@ Route::view('/pages/blank', 'pages.blank')->middleware(['verified', 'logs-out-ba
 Route::view('/banned', 'auth.banned')->name('banned');
 
 Route::get('/buy', 'BookingController@index')->name('buy');
+Route::get('/search', 'BookingController@search')->name('search');
+Route::get('/check', 'BookingController@check')->name('check');
+Route::get('/booking', 'BookingController@book')->name('booking');
+Route::get('/booking/completed', 'BookingController@completed')->name('completed');
 /*
  * Cativo's Stuff START
  */
@@ -62,6 +66,7 @@ Route::resource('/itineraries', 'ItineraryController')->middleware(['verified','
 /*
  * CRUD Destinations
  */
+Route::delete('destinations/mass_destroy', 'DestinationController@mass')->name('destinations.mass')->middleware(['verified','forbid-banned-user']);
 Route::resource('/destinations', 'DestinationController')->middleware(['verified','forbid-banned-user']);
 Route::get('/destinations/{id}/confirm', 'DestinationController@confirm')->name('destinations.confirm')->middleware(['verified','forbid-banned-user']);
 

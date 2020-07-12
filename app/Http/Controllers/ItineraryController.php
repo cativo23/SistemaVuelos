@@ -126,7 +126,7 @@ class ItineraryController extends Controller
             'type'=>$request->input('type')
         ]);
 
-       //$itinerary->save();
+       $itinerary->save();
 
         for($i=0;count($request->input('vuelo'))>$i; $i++){
             $flight_origin = Airport::findOrFail($request->input('origin')[$i]);
@@ -151,7 +151,7 @@ class ItineraryController extends Controller
             $longitude_origin = $city_origin['longitude'];
             $longitude_destination = $city_destination['longitude'];
 
-            $destance = $this->distance($latitude_origin, $longitude_origin, $latitude_destination, $longitude_destination, 'M');
+            $distance = $this->distance($latitude_origin, $longitude_origin, $latitude_destination, $longitude_destination, 'M');
 
             $vuelo = new Flight([
                 'arrival_date'=>$request->input('arrival_date')[$i],
@@ -161,15 +161,15 @@ class ItineraryController extends Controller
                 'origin'=>$flight_origin->name,
                 'destination'=>$flight_destination->name,
                 'code'=>$airline->code.$last_code,
-                'cost'=>$request->input('cost')[$i],
-                'price'=>$request->input('price')[$i],
-                'flight_miles'=>$request->input('flight_miles')[$i],
+                'cost'=>str_replace(',', '', $request->input('cost')[$i]),
+                'price'=>str_replace(',', '', $request->input('price')[$i] ),
+                'flight_miles'=>str_replace(',', '', $request->input('flight_miles')[$i]),
                 'airline_id'=>$airline->id,
                 'status'=>'unready',
                 'duration'=>2,
-                'distance_miles'=>intval($destance),
+                'distance_miles'=>intval($distance),
                 'airplane_id'=>$airline->airplanes[0]->id,
-                'itinerary_id'=>1,
+                'itinerary_id'=>$itinerary->id,
                 'boarding_terminal_id'=>$flight_origin->id,
                 'landing_terminal_id'=>$flight_destination->id
             ]);

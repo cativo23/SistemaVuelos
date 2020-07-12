@@ -276,7 +276,9 @@
         $('#whatsapp').mask('+(000) 0000 0000');
         jQuery(function () {
             $('.originapi').autoComplete({
-                minChars: 1,
+                cache: true,
+                minChars: 2,
+                delay: 100,
                 source:
                     function (term, response) {
                         var settings = {
@@ -311,6 +313,7 @@
                                 response(res);
                             }
                         };
+                        try { xhr.abort(); } catch(e){}
                         $.ajax(settings).done(function (response) {
                         });
                     },
@@ -559,11 +562,11 @@
         });
 
     </script>
-    
+
     <script src="{{asset('js/plugins/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
     <script>jQuery(function () {
             Codebase.helpers('notify');
-            @if(count($errors)>0) 
+            @if(count($errors)>0)
             Codebase.helpers('notify', {
                 align: 'right',             // 'right', 'left', 'center'
                 from: 'top',                // 'top', 'bottom'
