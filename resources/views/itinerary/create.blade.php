@@ -576,6 +576,5 @@
             });
             @endif
         });</script>
-    <script>
 
 @endsection
