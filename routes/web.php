@@ -94,6 +94,9 @@ Route::delete('clientCompanys/mass_destroy', 'ClientCompanyController@mass')->na
 Route::resource('/clientCompanys', 'ClientCompanyController')->middleware(['verified','forbid-banned-user']);
 Route::get('/clientCompanys/{id}/confirm', 'ClientCompanyController@confirm')->name('clientCompanys.confirm')->middleware(['verified','forbid-banned-user']);
 
+Route::resource('/activities', 'ActivityController');
+
+
 // Fin Ricardo Sosa
 
 
