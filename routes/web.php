@@ -87,6 +87,9 @@ Route::get('/clientNaturals/{id}/confirm', 'ClientNaturalController@confirm')->n
 Route::resource('/clientCompanys', 'ClientCompanyController');
 Route::get('/clientCompanys/{id}/confirm', 'ClientCompanyController@confirm')->name('clientCompanys.confirm');
 
+Route::resource('/activities', 'ActivityController');
+
+
 // Fin Ricardo Sosa
 
 
