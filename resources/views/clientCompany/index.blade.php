@@ -33,18 +33,12 @@
                             style="width:100%">
                             <thead>
                             <tr>
-                            <th style="width: 15%">N° Cliente Frec</th>
+                            <td></td>
+                            <th data-priority="1">N° Cliente Frec</td>
                             <th>Nombre</th>
                             <th>Compañia</th>
                             <th>Millas</th>
-                            <!--<th>NIC</th>-->
-                            <!--<th tyle="width: 15%">NIT</th>-->
-                            <!--<th>Contacto</th>-->
                             <th>Tel. Móvil</th>
-                            <!--<th>Tel. Fijo</th>-->
-                            <!--<th>Cumpleaños</th>-->
-                            <!--<th>Género</th>-->
-                            <!--<th class="text-center">Estado Civil</th>-->
                             <th style="width: 15%">Acciones</th>
                             </tr>
                             </thead>
