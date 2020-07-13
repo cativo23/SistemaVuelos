@@ -97,7 +97,10 @@ class AirportController extends Controller
      */
     public function show(Airport $airport)
     {
-        //
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+        return view('airport.show', compact('airport', 'sidebar', 'header', 'footer'));
     }
 
     /**

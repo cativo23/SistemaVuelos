@@ -101,6 +101,7 @@ Route::get('/clientCompanys/{id}/confirm', 'ClientCompanyController@confirm')->n
 
 // Inicio ARIEL ZELAYA
 //AIRPORT
+Route::delete('airports/mass_destroy', 'AirportController@mass')->name('airports.mass')->middleware(['verified','forbid-banned-user']);
 Route::resource('/airports','AirportController')->middleware(['verified','forbid-banned-user']);
 Route::get('/terminals/{airport}/user/{user}/edit/{flight}', 'AirportController@user_terminals_edit')->name('airports.user_terminal_edit')->middleware(['verified','forbid-banned-user']);
 Route::get('/terminals/{airport}/user/{user}', 'AirportController@user_terminals')->name('airports.user_terminal')->middleware(['verified','forbid-banned-user']);

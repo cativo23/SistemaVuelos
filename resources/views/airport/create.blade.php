@@ -41,7 +41,7 @@
 
                                 <div class="col-md-8">
                                     <div class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-6">
                                             @error('codigo')
                                             <div class="form-group is-invalid"> @enderror
                                                 <div class="form-material floating input-group">
@@ -62,7 +62,7 @@
                                                 @enderror
                                                 @error('codigo') </div> @enderror
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-6">
                                             @error('nombre')
                                             <div class="form-group is-invalid input-group"> @enderror
                                                 <div class="form-material floating input-group">

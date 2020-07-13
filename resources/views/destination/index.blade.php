@@ -39,9 +39,7 @@
                                 <th>Estado</th>
                                 <th>Pais</th>
                                 <th class="text-center">Continente</th>
-                                <th class="text-center">
-                                    Código
-                                </th>
+                                <th class="text-center">Código</th>
                                 <th style="width: 15%">Acciones</th>
                             </tr>
                             </thead>
