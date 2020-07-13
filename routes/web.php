@@ -86,6 +86,7 @@ Route::resource('/seats', 'SeatController')->middleware(['verified','forbid-bann
 Route::get('/seats/{id}/confirm', 'SeatController@confirm')->name('seats.confirm')->middleware(['verified','forbid-banned-user']);
 
 # CRUD Cliente Natural
+Route::delete('clientNaturals/mass_destroy', 'ClientNaturalController@mass')->name('clientNaturals.mass')->middleware(['verified','forbid-banned-user']);
 Route::resource('/clientNaturals', 'ClientNaturalController')->middleware(['verified','forbid-banned-user']);
 Route::get('/clientNaturals/{id}/confirm', 'ClientNaturalController@confirm')->name('clientNaturals.confirm')->middleware(['verified','forbid-banned-user']);
 
