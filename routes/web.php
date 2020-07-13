@@ -114,6 +114,7 @@ Route::get('/airports/{id}/confirm', 'AirportController@confirm')->name('airport
 Route::get('/airports/{airport}/user/{user}', 'AirportController@index_user')->name('airports.user')->middleware(['verified','forbid-banned-user']);
 Route::get('/airports/{airport}/user/{user}/edit', 'AirportController@edit_user')->name('airports.edit_user')->middleware(['verified','forbid-banned-user']);
 //GATEWAY
+Route::delete('gateways/mass_destroy', 'TerminalController@mass')->name('gateways.mass')->middleware(['verified','forbid-banned-user']);
 Route::resource('/gateways','TerminalController')->middleware(['verified','forbid-banned-user']);
 Route::get('/gateways/{id}/confirm', 'TerminalController@confirm')->name('gateways.confirm')->middleware(['verified','forbid-banned-user']);
 Route::get('/gateways/{airport}/create', 'TerminalController@create_user')->name('gateways.create_user')->middleware(['verified','forbid-banned-user']);

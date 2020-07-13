@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-material floating input-group">
                                     <input type="text" class="form-control" id="pais" name="pais"
                                            value="{{ $airport->country }}" disabled>
@@ -79,7 +79,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
+                                <div class="form-material floating input-group">
+                                    <input type="text" class="form-control" id="city" name="city"
+                                           value="{{ $airport->city }}" disabled>
+                                    <label for="city">city</label>
+                                    <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-map-marker"></i>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-material floating input-group">
                                     <input type="text" class="form-control" id="representativo" name="representativo"
                                            value="{{ $airport->representative }}" disabled="">
@@ -91,7 +103,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-material floating input-group">
                                     <input type="text" class="form-control" id="telefono" name="cotelefonode"
                                            value="{{ $airport->telephone }}" disabled="">

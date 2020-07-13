@@ -23,7 +23,7 @@
                 <!-- Dynamic Table Full -->
                 <div class="block col-md-12">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Listado de Clientes Empresa</h3>
+                        <h3 class="block-title">Listado de Clientes Natural</h3>
                         <a class="btn btn-success" href="{{ route("clientNaturals.create") }}">Agregar Clientes</a>
                     </div>
                     <div class="block-content block-content-full">
