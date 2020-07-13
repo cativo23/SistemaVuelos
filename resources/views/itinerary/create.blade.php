@@ -37,7 +37,7 @@
                         </div>
 
                         <div class="block-content">
-                            <h4>Ingrese los Datos para este itinerario
+                            <h4>Ingrese los Datos para este itinerario {{count($errors)}}
                             </h4>
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-4">
@@ -59,9 +59,9 @@
                                     <div
                                         class="form-material floating input-group">
                                         <input type="text" class="form-control destnapi2"
-                                               name="destination_fake2">
+                                        name="destination_fake2">
                                         <input type="text" hidden class="form-control destination_real2"
-                                               name="destination2">
+                                        name="destination2">
                                         <label for="destination2">Destination</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
@@ -92,7 +92,7 @@
                                     <td>
                                         <h5 class="content-heading">Vuelo <span class="vuelo_num"></span></h5>
                                         <div class="form-group row justify-content-center">
-                                            <div class="col-md-3">
+                                            <div class="col-md-6">
                                                 <div
                                                     class="form-material input-group">
                                                     <input type="hidden" name="vuelo[]">
@@ -109,21 +109,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <div class="form-material floating input-group">
-                                                    <input type="text" class="js-flatpickr form-control departure_time"
-                                                           name="departure_time[]" data-allow-input="true"
-                                                           data-enable-time="true" data-no-calendar="true"
-                                                           data-date-format="H:i" time_24hr="true">
-                                                    <label for="departure_time">Departure Time</label>
-                                                    <div class="input-group-append">
-                                                    <span class="input-group-text">
-                                                        <i class="fa fa-clock-o"></i>
-                                                    </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-6">
                                                 <div
                                                     class="form-material input-group">
                                                     <input type="text"
@@ -140,25 +126,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <div
-                                                    class="form-material floating input-group ">
-                                                    <input type="text"
-                                                           class="js-flatpickr form-control arrival_time"
-                                                           name="arrival_time[]" data-allow-input="true"
-                                                           data-enable-time="true" data-no-calendar="true"
-                                                           data-date-format="H:i" time_24hr="true">
-                                                    <label for="arrival_time">Arrival Time</label>
-                                                    <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-clock-o"></i>
-                                            </span>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="form-group row justify-content-center">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 ">
                                                 <div
                                                     class="form-material floating input-group">
                                                     <input type="text"
@@ -190,7 +160,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row justify-content-center">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 ">
                                                 <div
                                                     class="form-material floating input-group">
                                                     <input type="text" class="form-control money"
@@ -306,7 +276,9 @@
         $('#whatsapp').mask('+(000) 0000 0000');
         jQuery(function () {
             $('.originapi').autoComplete({
-                minChars: 1,
+                cache: true,
+                minChars: 2,
+                delay: 100,
                 source:
                     function (term, response) {
                         var settings = {
@@ -341,6 +313,7 @@
                                 response(res);
                             }
                         };
+                        try { xhr.abort(); } catch(e){}
                         $.ajax(settings).done(function (response) {
                         });
                     },
@@ -485,11 +458,6 @@
                     }
                     fp_arrival.set('maxDate', dateStr);
                 });
-
-                let flat3 = document.querySelector(".arrival_time_new");
-                let fp2 = flatpickr(flat3, {enableTime: true, noCalendar: true, dateFormat: "H:i",});
-                let flat4 = document.querySelector(".departure_time_new");
-                let fp3 = flatpickr(flat4, {enableTime: true, noCalendar: true, dateFormat: "H:i",});
                 $(element).find('.origin_api').autoComplete({
                     minChars: 1,
                     source:
@@ -569,7 +537,7 @@
             }
 
             function newMenuItem() {
-                var newElem = '<tr class="flight-list-item"><td class="new_vuelo_:id"> <h5 class="content-heading">Vuelo <span class="vuelo_num"></span></h5> <div class="form-group row justify-content-center"> <div class="col-md-3"> <div class="form-material input-group "> <input type="hidden" name="vuelo[]"> <input type="hidden" value="2020-07-15" class="js-flatpickr form-control departure_date js-flatpickr-enabled flatpickr-input departure_date_new" name="departure_date[]" data-allow-input="true" data-alt-input="true" data-date-format="Y-m-d" data-alt-format="F j, Y"> <label for="departure_date">Departure Date</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-fw fa-calendar-check-o"></i> </span> </div></div></div><div class="col-md-3"> <div class="form-material input-group "> <input type="text" class="js-flatpickr form-control departure_time_new js-flatpickr-enabled flatpickr-input" value="" name="departure_time[]" data-allow-input="true" data-enable-time="true" data-no-calendar="true" data-date-format="H:i" time_24hr="true"> <label for="departure_time">Departure Time</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-clock-o"></i> </span> </div></div></div><div class="col-md-3"> <div class="form-material input-group "> <input type="hidden" value="2020-07-17" class="js-flatpickr form-control_new js-flatpickr-enabled arrival_date_new flatpickr-input " name="arrival_date[]" data-allow-input="true" data-alt-input="true" data-date-format="Y-m-d" data-alt-format="F j, Y"> <label for="arrival_date">Date Arrival</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-fw fa-calendar-check-o"></i> </span> </div></div></div><div class="col-md-3"> <div class="form-material input-group "> <input type="text" value="" class="js-flatpickr form-control arrival_time_new js-flatpickr-enabled flatpickr-input" name="arrival_time[]" data-allow-input="true" data-enable-time="true" data-no-calendar="true" data-date-format="H:i" time_24hr="true"> <label for="arrival_time">Arrival Time</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-clock-o"></i> </span> </div></div></div></div><div class="form-group row justify-content-center"> <div class="col-md-6"> <div class="form-material  input-group "> <input type="text" value="" class="form-control origin_api" name="origin_fake[]"> <input type="text" value="" hidden class="form-control origin_real" name="origin[]"> <label for="origin">Origin</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-paper-plane"></i> </span> </div></div></div><div class="col-md-6"> <div class="form-material  input-group "> <input type="text" class="form-control destinationapi" value="" name="destination_fake[]"> <input type="text" hidden class="form-control destination_real" value="" name="destination[]"> <label for="destination">Destination</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-map-marker"></i> </span> </div></div></div></div><div class="form-group row justify-content-center"> <div class="col-md-6"> <div class="form-material  input-group "> <input type="text" class="form-control money" value="" name="cost[]"> <label for="cost">Cost</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-money"></i> </span> </div></div></div><div class="col-md-6"> <div class="form-material  input-group "> <input type="text" class="form-control money" value="" name="price[]"> <label for="price">Price</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-dollar"></i> </span> </div></div></div></div><div class="form-group row justify-content-center"> <div class="col-md-6"> <div class="form-material input-group "> <input type="text" class="form-control distance" value="" name="flight_miles[]"> <label for="flight_miles">Flight Miles</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-tachometer"></i> </span> </div></div></div><div class="col-md-6"> <div class="form-material  input-group "> <input type="text" class="form-control airlinenapi" value="" name="airline_id_fake[]"> <input type="text" hidden class="form-control airline_real" value="" name="airline_id[]"><label for="airline_id">Aerolinea</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-tachometer"></i> </span> </div></div></div></div><div class="form-group row justify-content-center"><a class="delete" href="#"><i class="fa fa-fw fa-remove"></i>Remover Vuelo</a></div></td></tr>';
+                var newElem = '<tr class="flight-list-item"><td class="new_vuelo_:id"> <h5 class="content-heading">Vuelo <span class="vuelo_num"></span></h5> <div class="form-group row justify-content-center"> <div class="col-md-6"> <div class="form-material input-group "> <input type="hidden" name="vuelo[]"> <input type="hidden" value="2020-07-15" class="js-flatpickr form-control departure_date js-flatpickr-enabled flatpickr-input departure_date_new" name="departure_date[]" data-allow-input="true" data-alt-input="true" data-date-format="Y-m-d" data-alt-format="F j, Y"> <label for="departure_date">Departure Date</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-fw fa-calendar-check-o"></i> </span> </div></div></div><div class="col-md-6"> <div class="form-material input-group "> <input type="hidden" value="2020-07-17" class="js-flatpickr form-control_new js-flatpickr-enabled arrival_date_new flatpickr-input " name="arrival_date[]" data-allow-input="true" data-alt-input="true" data-date-format="Y-m-d" data-alt-format="F j, Y"> <label for="arrival_date">Date Arrival</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-fw fa-calendar-check-o"></i> </span> </div></div></div></div><div class="form-group row justify-content-center"> <div class="col-md-6"> <div class="form-material  input-group "> <input type="text" value="" class="form-control origin_api" name="origin_fake[]"> <input type="text" value="" hidden class="form-control origin_real" name="origin[]"> <label for="origin">Origin</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-paper-plane"></i> </span> </div></div></div><div class="col-md-6"> <div class="form-material  input-group "> <input type="text" class="form-control destinationapi" value="" name="destination_fake[]"> <input type="text" hidden class="form-control destination_real" value="" name="destination[]"> <label for="destination">Destination</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-map-marker"></i> </span> </div></div></div></div><div class="form-group row justify-content-center"> <div class="col-md-6"> <div class="form-material  input-group "> <input type="text" class="form-control money" value="" name="cost[]"> <label for="cost">Cost</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-money"></i> </span> </div></div></div><div class="col-md-6"> <div class="form-material  input-group "> <input type="text" class="form-control money" value="" name="price[]"> <label for="price">Price</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-dollar"></i> </span> </div></div></div></div><div class="form-group row justify-content-center"> <div class="col-md-6"> <div class="form-material input-group "> <input type="text" class="form-control distance" value="" name="flight_miles[]"> <label for="flight_miles">Flight Miles</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-tachometer"></i> </span> </div></div></div><div class="col-md-6"> <div class="form-material  input-group "> <input type="text" class="form-control airlinenapi" value="" name="airline_id_fake[]"> <input type="text" hidden class="form-control airline_real" value="" name="airline_id[]"><label for="airline_id">Aerolinea</label> <div class="input-group-append"> <span class="input-group-text"> <i class="fa fa-tachometer"></i> </span> </div></div></div></div><div class="form-group row justify-content-center"><a class="delete" href="#"><i class="fa fa-fw fa-remove"></i>Remover Vuelo</a></div></td></tr>';
                 vuelos_num++;
                 newElem = newElem.replace(':id', vuelos_num.toString());
                 var selec = ".new_vuelo_" + vuelos_num;
@@ -594,5 +562,19 @@
         });
 
     </script>
+
+    <script src="{{asset('js/plugins/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
+    <script>jQuery(function () {
+            Codebase.helpers('notify');
+            @if(count($errors)>0)
+            Codebase.helpers('notify', {
+                align: 'right',             // 'right', 'left', 'center'
+                from: 'top',                // 'top', 'bottom'
+                type: 'warning',               // 'info', 'success', 'warning', 'danger'
+                icon: 'fa fa-info mr-5',    // Icon class
+                message: 'Error en Creación de Itinerario'
+            });
+            @endif
+        });</script>
 
 @endsection

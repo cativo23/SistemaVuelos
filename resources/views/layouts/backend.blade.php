@@ -77,8 +77,6 @@
             'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
         -->
         <div id="page-container" class="sidebar-o sidebar-inverse enable-page-overlay side-scroll page-header-fixed page-header-glass page-header-inverse main-content-boxed enable-cookies">
-            @component('layouts.rightsidebar')
-            @endcomponent
 
             @component($sidebar, ['user'=>Auth::user()])
             @endcomponent

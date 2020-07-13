@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Airline;
 use App\Destination;
 use App\Helper\VoyargeHelper;
 use Exception;
+use Gate;
+use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -53,7 +57,7 @@ class DestinationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'codigo' => 'required',
+            'codigo' => 'required|unique:destinations,code',
             'ciudad' => 'required',
             'estado' => 'required',
             'pais' => 'required',
@@ -79,7 +83,10 @@ class DestinationController extends Controller
      */
     public function show(Destination $destination)
     {
+        $user = Auth::user();
 
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+        return view('destination.show', compact('destination', 'sidebar', 'header', 'footer'));
     }
 
     /**
@@ -109,6 +116,13 @@ class DestinationController extends Controller
     public function update(Request $request, $id)
     {
         $Destination = Destination::findOrFail($id);
+        $request->validate([
+            'codigo' => ['required', Rule::unique('destinations', 'code')->ignore($Destination->id)],
+            'ciudad' => 'required',
+            'estado' => 'required',
+            'pais' => 'required',
+            'continente' => 'required'
+        ]);
         $Destination->CITY = $request->ciudad;
         $Destination->state = $request->estado;
         $Destination->country = $request->pais;
@@ -143,5 +157,18 @@ class DestinationController extends Controller
         $Destination = Destination::findOrFail($id);
         $Destination->delete();
         return redirect()->route('destinations.index')->with('datos', '¡El destino se eliminó correctamente!');
+    }
+
+    /**
+     * Delete all selected User at once.
+     *
+     * @param Request $request
+     * @return Response|void
+     */
+    public function mass(Request $request)
+    {
+        Destination::whereIn('id', request('ids'))->delete();
+
+        return response()->noContent();
     }
 }

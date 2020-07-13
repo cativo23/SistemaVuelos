@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
+use App\Helper\VoyargeHelper;
 use App\ClientCompany;
 use App\Client;
 use Illuminate\Http\Request;
@@ -17,8 +18,11 @@ class ClientCompanyController extends Controller
     {
         //
         $clientes_c = ClientCompany::all();
+        $user = Auth::user();
 
-        return view('clientCompany.index', compact('clientes_c'));
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+
+        return view('clientCompany.index', compact('clientes_c','sidebar', 'header', 'footer'));
 
     }
 
@@ -37,10 +41,12 @@ class ClientCompanyController extends Controller
             $numero = $last_clientCompany->client->frequent_customer_num;
             $resultado = substr($numero, 2, 7);
             $numero_cliente = (int)$resultado + 1;
-            //dd($numero_cliente);
         }
 
-        return view('clientCompany.create', compact('numero_cliente'));
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+        return view('clientCompany.create', compact('numero_cliente','sidebar', 'header', 'footer'));
     }
 
     /**
@@ -98,7 +104,11 @@ class ClientCompanyController extends Controller
     {
         $cliente = ClientCompany::findOrFail($id);
 
-        return view('clientCompany.show', compact('cliente'));
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+
+        return view('clientCompany.show', compact('cliente','sidebar', 'header', 'footer'));
     }
 
     /**
@@ -110,7 +120,10 @@ class ClientCompanyController extends Controller
     public function edit($id)
     {
         $cliente = ClientCompany::findOrFail($id);
-        return view('ClientCompany.edit', compact('cliente'));
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+        return view('clientCompany.edit', compact('cliente','sidebar', 'header', 'footer'));
     }
 
     /**
@@ -164,7 +177,10 @@ class ClientCompanyController extends Controller
     {
         $cliente = ClientCompany::findOrFail($id);
 
-        return view('clientCompany.confirm', compact('cliente'));
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+        return view('clientCompany.confirm', compact('cliente','sidebar', 'header', 'footer'));
     }
 
 
@@ -173,7 +189,7 @@ class ClientCompanyController extends Controller
     {
         $cliente = ClientCompany::findOrFail($id);
         $cliente->delete();
-        return redirect()->route('clientCompanys.index')->with('datos', '¡La aerolinea se eliminó correctamente!');
+        return redirect()->route('clientCompanys.index')->with('datos', '¡El cliente se eliminó correctamente!');
     }
 }
 

@@ -17,9 +17,9 @@ class CreateFlightsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->date('arrival_date');
-            $table->time('arrival_time');
+            $table->time('arrival_time')->nullable();
             $table->date('departure_date');
-            $table->time('departure_time');
+            $table->time('departure_time')->nullable();
             $table->string('origin');
             $table->string('destination');
             $table->string('code');
