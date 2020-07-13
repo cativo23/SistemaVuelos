@@ -142,7 +142,7 @@ class TerminalController extends Controller
     }
     public function mass(Request $request)
     {
-        Destination::whereIn('id', request('ids'))->delete();
+        Terminal::whereIn('id', request('ids'))->delete();
 
         return response()->noContent();
     }

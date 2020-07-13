@@ -90,6 +90,7 @@ Route::resource('/clientNaturals', 'ClientNaturalController')->middleware(['veri
 Route::get('/clientNaturals/{id}/confirm', 'ClientNaturalController@confirm')->name('clientNaturals.confirm')->middleware(['verified','forbid-banned-user']);
 
 # CRUD Cliente Empresa
+Route::delete('clientCompanys/mass_destroy', 'ClientCompanyController@mass')->name('clientCompanys.mass')->middleware(['verified','forbid-banned-user']);
 Route::resource('/clientCompanys', 'ClientCompanyController')->middleware(['verified','forbid-banned-user']);
 Route::get('/clientCompanys/{id}/confirm', 'ClientCompanyController@confirm')->name('clientCompanys.confirm')->middleware(['verified','forbid-banned-user']);
 
