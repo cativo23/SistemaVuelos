@@ -61,15 +61,11 @@
                                     <td>{{ $f->landing_terminal_id }}</td>
                                     <td class="text-center">
                                         <div class="btn-group">
-                                            <a href="" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Ver" data-original-title="Ver">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a href="" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Editar">
+
+                                            <a href="{{ route('airports.user_terminal_edit',['airport'=>$airport->id, 'user'=>$user, 'flight'=>$f->id]) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Editar">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
-                                            <button type="button" class="btn btn-sm btn-secondary js-tooltip-enabled"
-                                                    data-toggle="modal" onclick="deleteData({{ $f->id }}, '{{ $f->id }}"
-                                                    data-target="#modal-fadein"><i class="fa fa-trash"></i></button>
+
                                         </div>
                                     </td>
                                 </tr>

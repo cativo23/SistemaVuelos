@@ -137,4 +137,6 @@ class TerminalController extends Controller
 
         dd("create terminal for airport ".$airport->name);
     }
+
+
 }
