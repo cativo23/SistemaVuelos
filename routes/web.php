@@ -90,6 +90,7 @@ Route::resource('/clientNaturals', 'ClientNaturalController')->middleware(['veri
 Route::get('/clientNaturals/{id}/confirm', 'ClientNaturalController@confirm')->name('clientNaturals.confirm')->middleware(['verified','forbid-banned-user']);
 
 # CRUD Cliente Empresa
+Route::delete('clientCompanys/mass_destroy', 'ClientCompanyController@mass')->name('clientCompanys.mass')->middleware(['verified','forbid-banned-user']);
 Route::resource('/clientCompanys', 'ClientCompanyController')->middleware(['verified','forbid-banned-user']);
 Route::get('/clientCompanys/{id}/confirm', 'ClientCompanyController@confirm')->name('clientCompanys.confirm')->middleware(['verified','forbid-banned-user']);
 
@@ -104,6 +105,7 @@ Route::resource('/activities', 'ActivityController');
 
 // Inicio ARIEL ZELAYA
 //AIRPORT
+Route::delete('airports/mass_destroy', 'AirportController@mass')->name('airports.mass')->middleware(['verified','forbid-banned-user']);
 Route::resource('/airports','AirportController')->middleware(['verified','forbid-banned-user']);
 Route::get('/terminals/{airport}/user/{user}/edit/{flight}', 'AirportController@user_terminals_edit')->name('airports.user_terminal_edit')->middleware(['verified','forbid-banned-user']);
 Route::get('/terminals/{airport}/user/{user}', 'AirportController@user_terminals')->name('airports.user_terminal')->middleware(['verified','forbid-banned-user']);

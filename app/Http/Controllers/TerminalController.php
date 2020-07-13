@@ -69,7 +69,10 @@ class TerminalController extends Controller
      */
     public function show(Terminal $gateway)
     {
-        //
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+        return view('gateways.show', compact('gateway', 'sidebar', 'header', 'footer'));
     }
 
     /**
@@ -136,5 +139,11 @@ class TerminalController extends Controller
         }
 
         dd("create terminal for airport ".$airport->name);
+    }
+    public function mass(Request $request)
+    {
+        Terminal::whereIn('id', request('ids'))->delete();
+
+        return response()->noContent();
     }
 }
