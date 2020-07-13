@@ -289,6 +289,8 @@
                                 response(res);
                             }
                         };
+
+                        try { xhr.abort(); } catch(e){}
                         $.ajax(settings).done(function (response) {
                         });
                     },

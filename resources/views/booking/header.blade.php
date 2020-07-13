@@ -6,7 +6,7 @@
             <!-- Logo -->
             <div class="content-header-item">
                 <a class="link-effect font-w700 mr-5" href="/">
-                    <span class="font-size-xl text-dual-primary-dark">voyarge</span>
+                    <span class="font-size-xl {{ isset($site) ? 'text-dual-primary-dark':'text-primary-light'  }}">voyarge</span>
                     <img style="height: 90%" src="{{ asset('media/favicons/voyarge_logo.png') }}" alt="">
                     <span class="font-size-xl text-primary"></span>
                 </a>
@@ -23,6 +23,11 @@
                 </a>
             @endif
             @if($user)
+
+                    <a class="btn btn-sm btn-hero btn-noborder btn-primary px-20" href="{{route('dashboard')}}"
+                       onclick="event.preventDefault();">
+                        <i class="si si-user"></i> <span class="ml-5 d-none d-sm-inline-block">{{$user->name}}</span>
+                    </a>
                 <a class="btn btn-sm btn-hero btn-noborder btn-alt-success px-20" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                                document.getElementById('logout-form2').submit();">

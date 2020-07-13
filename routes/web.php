@@ -22,10 +22,10 @@ Route::view('/pages/blank', 'pages.blank')->middleware(['verified', 'logs-out-ba
 Route::view('/banned', 'auth.banned')->name('banned');
 
 Route::get('/buy', 'BookingController@index')->name('buy');
-Route::get('/search', 'BookingController@search')->name('search');
-Route::get('/check', 'BookingController@check')->name('check');
+Route::match(['get', 'post'],'/search', 'BookingController@search')->name('search');
+Route::match(['get', 'post'],'/check', 'BookingController@check')->name('check');
 Route::get('/booking', 'BookingController@book')->name('booking');
-Route::get('/booking/completed', 'BookingController@completed')->name('completed');
+Route::post('/booking/completed', 'BookingController@completed')->name('completed');
 /*
  * Cativo's Stuff START
  */
@@ -46,7 +46,7 @@ Route::group(['middleware' => ['verified', 'logs-out-banned-user'], 'prefix' => 
 
 Auth::routes(['verify' => true]); //Auth Routes
 
-Route::match(['get', 'post'], '/dashboard','DashboardController@index')->middleware(['verified','forbid-banned-user']);
+Route::match(['get', 'post'], '/dashboard','DashboardController@index')->middleware(['verified','forbid-banned-user'])->name('dashboard');
 
 Route::resource('/flights', 'FlightController')->middleware(['verified','forbid-banned-user']);
 

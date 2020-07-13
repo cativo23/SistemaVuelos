@@ -64,4 +64,8 @@ class Airplane extends Model
         return $this->hasOne(Flight::class);
     }
 
+    public function seats(){
+        return $this->hasMany(Seat::class);
+    }
+
 }

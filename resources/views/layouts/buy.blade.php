@@ -70,10 +70,10 @@ MAIN CONTENT LAYOUT
     'main-content-boxed'                        Full width Main Content with a specific maximum width (screen width > 1200px)
     'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
 -->
-<div id="page-container" class="page-header-fixed page-header-glass main-content-boxed">
+<div id="page-container" class="page-header-fixed page-header-glass main-content-narrow">
 
     <!-- Header -->
-    @component('booking.header', ['user'=>Auth::user()])
+    @component('booking.header', ['user'=>Auth::user(), 'site'=>$site??null])
     @endcomponent
     <!-- END Header -->
 
@@ -121,5 +121,6 @@ MAIN CONTENT LAYOUT
 <!-- Codebase Core JS -->
 <script src="{{ asset('/js/codebase.core.min.js') }}"></script>
 <script src="{{ asset('/js/codebase.app.min.js') }}"></script>
+@yield('js_after')
 </body>
 </html>
