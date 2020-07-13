@@ -211,4 +211,10 @@ class ClientNaturalController extends Controller
         $cliente->delete();
         return redirect()->route('clientNaturals.index')->with('datos', '¡El cliente se eliminó correctamente!');
     }
+    public function mass(Request $request)
+    {
+        ClientNatural::whereIn('id', request('ids'))->delete();
+
+        return response()->noContent();
+    }
 }

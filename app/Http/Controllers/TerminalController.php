@@ -72,7 +72,7 @@ class TerminalController extends Controller
         $user = Auth::user();
 
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
-        return view('gateways.show', compact('gateway', 'sidebar', 'header', 'footer'));
+        return view('terminal.show', compact('gateway', 'sidebar', 'header', 'footer'));
     }
 
     /**
