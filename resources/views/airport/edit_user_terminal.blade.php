@@ -147,7 +147,13 @@
                                                         @endif
                                                     @endforeach
                                                 </select>
-                                                <label for="material-select">Seleccione la terminal</label>
+                                                <label for="material-select">Seleccione la terminal de
+                                                    @if($type !="Arrival")
+                                                        despegue
+                                                    @else
+                                                        llegada
+                                                    @endif
+                                                </label>
                                             </div>
 
 

@@ -62,7 +62,7 @@
                                     <td class="text-center">
                                         <div class="btn-group">
 
-                                            <a href="{{ route('airports.user_terminal_edit',['airport'=>$airport->id, 'user'=>$user, 'flight'=>$f->id]) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Editar">
+                                            <a href="@if($type != 'Arrival'){{{ route('airports.user_terminal_edit',['airport'=>$airport->id, 'user'=>$user, 'flight'=>$f->id]) }}}@else{{{ route('airports.arrival_user_terminal_edit',['airport'=>$airport->id, 'user'=>$user, 'flight'=>$f->id])}}}@endif" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Editar">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
 

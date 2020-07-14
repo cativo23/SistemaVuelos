@@ -240,12 +240,12 @@ class AirportController extends Controller
         }
         $gateways = Terminal::where('airport_id',$airport->id)->get();
 
-        $flights = Flight::where('status','unready')->whereIn('landing_terminal_id',$gateways);
-        dd(count($flights));
+        $flights = Flight::where('status','unready')->whereIn('landing_terminal_id',$gateways)->get();
+//        dd(count($flights));
         $auth_user = Auth::user();
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($auth_user);
-
-        return view('airport.user_terminal', compact('gateways', 'airport','sidebar', 'header', 'footer','flights','user'));
+        $type = "Departure";
+        return view('airport.user_terminal', compact('gateways', 'airport','sidebar', 'header', 'footer','flights','user','type'));
     }
     public function arrival_user_terminals(Airport $airport, User $user){
 
@@ -254,12 +254,13 @@ class AirportController extends Controller
         }
         $gateways = Terminal::where('airport_id',$airport->id)->get();
 
-        $flights = Flight::where('status','unready')->whereIn('landing_terminal_id',$gateways);
-        dd(count($flights));
+        $flights = Flight::where('status','unready')->whereIn('boarding_terminal_id',$gateways)->get();
+//dd(count($flights));
         $auth_user = Auth::user();
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($auth_user);
+        $type = "Arrival";
 
-        return view('airport.user_terminal', compact('gateways', 'airport','sidebar', 'header', 'footer','flights','user'));
+        return view('airport.user_terminal', compact('gateways', 'airport','sidebar', 'header', 'footer','flights','user','type'));
     }
     public function user_terminals_edit(Airport $airport, User $user,Flight $flight){
 
@@ -271,11 +272,11 @@ class AirportController extends Controller
 
 //        $fli = Flight::where('id',$flight->id)->get();
         $fli = $flight;
-
+        $type = "Departure";
         $auth_user = Auth::user();
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($auth_user);
 
-        return view('airport.edit_user_terminal', compact('gateways', 'airport','sidebar', 'header', 'footer','fli', 'user'));
+        return view('airport.edit_user_terminal', compact('gateways', 'airport','sidebar', 'header', 'footer','fli', 'user','type'));
     }
     public function arrival_user_terminals_edit(Airport $airport, User $user,Flight $flight){
 
@@ -287,11 +288,11 @@ class AirportController extends Controller
 
 //        $fli = Flight::where('id',$flight->id)->get();
         $fli = $flight;
-
+        $type = "Arrival";
         $auth_user = Auth::user();
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($auth_user);
 
-        return view('airport.edit_user_terminal', compact('gateways', 'airport','sidebar', 'header', 'footer','fli', 'user'));
+        return view('airport.edit_user_terminal', compact('gateways', 'airport','sidebar', 'header', 'footer','fli', 'user','type'));
     }
     public function edit_user(Airport $airport){
         if (!Gate::allows('manage-airport-'.$airport->id)){
