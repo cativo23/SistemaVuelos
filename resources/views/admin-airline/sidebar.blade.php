@@ -94,29 +94,37 @@
                         </a>
                     </li>
                     <li class="nav-main-heading">
-                        <span class="sidebar-mini-visible">VR</span><span class="sidebar-mini-hidden">Various</span>
+                        <span class="sidebar-mini-visible">AR</span><span class="sidebar-mini-hidden">Airline</span>
                     </li>
-                    <li class="{{ request()->is('pages/*') ? ' open' : '' }}">
-                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bulb"></i><span class="sidebar-mini-hide">Examples</span></a>
+                    <li class="{{ request()->is('admin-airline/'.$airline->id.'/airplanes*') ? ' open' : '' }}">
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-plane"></i><span class="sidebar-mini-hide">Aviones</span></a>
                         <ul>
                             <li>
-                                <a class="{{ request()->is('pages/datatables') ? ' active' : '' }}" href="/pages/datatables">DataTables</a>
+                                <a class="{{ request()->is('*airplanes/create*') ? ' active' : '' }}" href="{{route('admin-airline.airplanes_create', $airline)}}">Crear</a>
                             </li>
                             <li>
-                                <a class="{{ request()->is('pages/slick') ? ' active' : '' }}" href="/pages/slick">Slick Slider</a>
-                            </li>
-                            <li>
-                                <a class="{{ request()->is('pages/blank') ? ' active' : '' }}" href="/pages/blank">Blank</a>
+                                <a class="{{ request()->is('*airplanes') ? ' active' : '' }}" href="{{route('admin-airline.airplanes_index', $airline)}}">Todos</a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-main-heading">
-                        <span class="sidebar-mini-visible">MR</span><span class="sidebar-mini-hidden">More</span>
+                    <li class="{{ request()->is('admin-airline/'.$airline->id.'/itineraries*') ? ' open' : '' }}">
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-calendar"></i><span class="sidebar-mini-hide">Itinerarios</span></a>
+                        <ul>
+                            <li>
+                                <a class="{{ request()->is('*itineraries/create*') ? ' active' : '' }}" href="{{route('admin.airline.itineraries_create', $airline)}}">Crear</a>
+                            </li>
+                            <li>
+                                <a class="{{ request()->is('*itineraries') ? ' active' : '' }}" href="{{route('admin.airline.itineraries', $airline)}}">Todos</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li>
-                        <a href="/">
-                            <i class="si si-globe"></i><span class="sidebar-mini-hide">Landing</span>
-                        </a>
+                    <li class="{{ request()->is('admin-airline/'.$airline->id.'/report*') ? ' open' : '' }}">
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-paper-clip"></i><span class="sidebar-mini-hide">Reportes</span></a>
+                        <ul>
+                            <li>
+                                <a class="{{ request()->is('*/report') ? ' active' : '' }}" href="{{route('admin.airline.report', $airline)}}">Ganancias y Costos</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
