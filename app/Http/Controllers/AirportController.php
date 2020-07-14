@@ -29,6 +29,10 @@ class AirportController extends Controller
      */
     public function index()
     {
+        if (!Gate::allows('manage-airport')) {
+            return abort(401);
+        }
+
         $Airports = Airport::all();
 
         $user = Auth::user();
@@ -46,6 +50,10 @@ class AirportController extends Controller
     public function create()
     {
         $user = Auth::user();
+
+        if (!Gate::allows('manage-airport')) {
+            return abort(401);
+        }
 
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
@@ -101,6 +109,10 @@ class AirportController extends Controller
     {
         $user = Auth::user();
 
+        if (!Gate::allows('manage-airport')) {
+            return abort(401);
+        }
+
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
         return view('airport.show', compact('airport', 'sidebar', 'header', 'footer'));
     }
@@ -113,11 +125,11 @@ class AirportController extends Controller
      */
     public function edit($id)
     {
-/*
+
         if (! Gate::allows('manage-airports')) {
             return abort(401);
         }
-*/
+
         $Airport = Airport::findOrFail($id);
 
         $user = Auth::user();
@@ -137,6 +149,10 @@ class AirportController extends Controller
 
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('manage-airport')) {
+            return abort(401);
+        }
+
         $request->validate([
             'codigo' => 'required|string|max:150',
             'nombre' => 'required|string|max:150',

@@ -111,18 +111,18 @@ Route::resource('/activities', 'ActivityController');
 //EL ZELAYA
 //AIRPORT
 Route::delete('airports/mass_destroy', 'AirportController@mass')->name('airports.mass')->middleware(['verified','forbid-banned-user']);
-Route::resource('/airports','AirportController');
-Route::get('/airports/{id}/confirm', 'AirportController@confirm')->name('airports.confirm');
+Route::resource('/airports','AirportController')->middleware(['verified','forbid-banned-user']);
+Route::get('/airports/{id}/confirm', 'AirportController@confirm')->name('airports.confirm')->middleware(['verified','forbid-banned-user']);;
 
-Route::post('/terminals/airport/update', 'AirportController@update_date_terminal')->name('airports.update_date_terminal');
-Route::get('/terminals/{airport}/user/{user}/edit/{flight}', 'AirportController@user_terminals_edit')->name('airports.user_terminal_edit');
-Route::get('/terminals/{airport}/user/{user}', 'AirportController@user_terminals')->name('airports.user_terminal');
+Route::post('/terminals/airport/update', 'AirportController@update_date_terminal')->name('airports.update_date_terminal')->middleware(['verified','forbid-banned-user']);;
+Route::get('/terminals/{airport}/user/{user}/edit/{flight}', 'AirportController@user_terminals_edit')->name('airports.user_terminal_edit')->middleware(['verified','forbid-banned-user']);;
+Route::get('/terminals/{airport}/user/{user}', 'AirportController@user_terminals')->name('airports.user_terminal')->middleware(['verified','forbid-banned-user']);;
 //Arrival
-Route::post('/terminals_arrival/airport/update', 'AirportController@arrival_update_date_terminal')->name('airports.arrival_update_date_terminal');
-Route::get('/terminals_arrival/{airport}/user/{user}/edit/{flight}', 'AirportController@arrival_user_terminals_edit')->name('airports.arrival_user_terminal_edit');
-Route::get('/terminals_arrival/{airport}/user/{user}', 'AirportController@arrival_user_terminals')->name('airports.arrival_user_terminal');
-Route::get('/airports/{airport}/user/{user}', 'AirportController@index_user')->name('airports.user');
-Route::get('/airports/{airport}/user/{user}/edit', 'AirportController@edit_user')->name('airports.edit_user');
+Route::post('/terminals_arrival/airport/update', 'AirportController@arrival_update_date_terminal')->name('airports.arrival_update_date_terminal')->middleware(['verified','forbid-banned-user']);;
+Route::get('/terminals_arrival/{airport}/user/{user}/edit/{flight}', 'AirportController@arrival_user_terminals_edit')->name('airports.arrival_user_terminal_edit')->middleware(['verified','forbid-banned-user']);;
+Route::get('/terminals_arrival/{airport}/user/{user}', 'AirportController@arrival_user_terminals')->name('airports.arrival_user_terminal')->middleware(['verified','forbid-banned-user']);;
+Route::get('/airports/{airport}/user/{user}', 'AirportController@index_user')->name('airports.user')->middleware(['verified','forbid-banned-user']);;
+Route::get('/airports/{airport}/user/{user}/edit', 'AirportController@edit_user')->name('airports.edit_user')->middleware(['verified','forbid-banned-user']);;
 //GATEWAY
 Route::delete('gateways/mass_destroy', 'TerminalController@mass')->name('gateways.mass')->middleware(['verified','forbid-banned-user']);
 Route::resource('/gateways','TerminalController')->middleware(['verified','forbid-banned-user']);
@@ -134,17 +134,17 @@ Route::get('/payments/{id}/confirm', 'PaymentController@confirm')->name('payment
 //FIN ARIEL ZELAYA
 
 
-Route::get('/admin-airline/{airline}/airplanes/create', 'AirlineAdminController@airplanes_create')->name('admin-airline.airplanes_create');
-Route::get('/admin-airline/{airline}/airplanes', 'AirlineAdminController@airplanes')->name('admin-airline.airplanes_index');
-Route::post('/admin-airline/{airline}/airplanes/store', 'AirlineAdminController@airplanes_store')->name('admin-airline.airplanes_store');
-Route::get('/admin-airline/{airline}/airplanes/{airplane}/edit', 'AirlineAdminController@airplanes_edit')->name('admin-airline.airplanes_edit');
-Route::patch('/admin-airline/{airline}/airplanes/update', 'AirlineAdminController@airplanes_update')->name('admin-airline.airplanes_update');
-Route::delete('/admin-airline/{airline}/airplanes/{airplane}/delete', 'AirlineAdminController@airplanes_destroy')->name('admin-airline.airplanes_destroy');
-Route::post('/admin-airline/{airline}/airplanes/mass', 'AirlineAdminController@airplanes_mass_destroy')->name('admin-airline.airplanes_mass_destroy');
-Route::get('/admin-airline/{airline}/edit', 'AirlineAdminController@edit_airline')->name('admin-airline.edit');
-Route::put('/admin-airline/{airline}/update', 'AirlineAdminController@update_airline')->name('admin-airline.update');
-Route::get('/admin-airline/{airline}/itineraries', 'AirlineAdminController@itineraries_index')->name('admin.airline.itineraries');
-Route::get('/admin-airline/{airline}/itineraries/create', 'AirlineAdminController@itineraries_create')->name('admin.airline.itineraries_create');
-Route::post('/admin-airline/{airline}/itineraries', 'AirlineAdminController@itineraries_store')->name('admin.airline.itineraries_store');
-Route::get('/admin-airline/{airline}/report', 'AirlineAdminController@form_report')->name('admin.airline.report');
-Route::post('/admin-airline/{airline}/report', 'AirlineAdminController@report')->name('admin.airline.report_get');
+Route::get('/admin-airline/{airline}/airplanes/create', 'AirlineAdminController@airplanes_create')->name('admin-airline.airplanes_create')->middleware(['verified','forbid-banned-user']);;
+Route::get('/admin-airline/{airline}/airplanes', 'AirlineAdminController@airplanes')->name('admin-airline.airplanes_index')->middleware(['verified','forbid-banned-user']);;
+Route::post('/admin-airline/{airline}/airplanes/store', 'AirlineAdminController@airplanes_store')->name('admin-airline.airplanes_store')->middleware(['verified','forbid-banned-user']);;
+Route::get('/admin-airline/{airline}/airplanes/{airplane}/edit', 'AirlineAdminController@airplanes_edit')->name('admin-airline.airplanes_edit')->middleware(['verified','forbid-banned-user']);;
+Route::patch('/admin-airline/{airline}/airplanes/update', 'AirlineAdminController@airplanes_update')->name('admin-airline.airplanes_update')->middleware(['verified','forbid-banned-user']);;
+Route::delete('/admin-airline/{airline}/airplanes/{airplane}/delete', 'AirlineAdminController@airplanes_destroy')->name('admin-airline.airplanes_destroy')->middleware(['verified','forbid-banned-user']);;
+Route::post('/admin-airline/{airline}/airplanes/mass', 'AirlineAdminController@airplanes_mass_destroy')->name('admin-airline.airplanes_mass_destroy')->middleware(['verified','forbid-banned-user']);;
+Route::get('/admin-airline/{airline}/edit', 'AirlineAdminController@edit_airline')->name('admin-airline.edit')->middleware(['verified','forbid-banned-user']);;
+Route::put('/admin-airline/{airline}/update', 'AirlineAdminController@update_airline')->name('admin-airline.update')->middleware(['verified','forbid-banned-user']);;
+Route::get('/admin-airline/{airline}/itineraries', 'AirlineAdminController@itineraries_index')->name('admin.airline.itineraries')->middleware(['verified','forbid-banned-user']);;
+Route::get('/admin-airline/{airline}/itineraries/create', 'AirlineAdminController@itineraries_create')->name('admin.airline.itineraries_create')->middleware(['verified','forbid-banned-user']);;
+Route::post('/admin-airline/{airline}/itineraries', 'AirlineAdminController@itineraries_store')->name('admin.airline.itineraries_store')->middleware(['verified','forbid-banned-user']);;
+Route::get('/admin-airline/{airline}/report', 'AirlineAdminController@form_report')->name('admin.airline.report')->middleware(['verified','forbid-banned-user']);;
+Route::post('/admin-airline/{airline}/report', 'AirlineAdminController@report')->name('admin.airline.report_get')->middleware(['verified','forbid-banned-user']);;
