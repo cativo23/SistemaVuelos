@@ -1,4 +1,4 @@
-@extends('layouts.backend', ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer', 'airline', $airline])
+@extends('layouts.backend', ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer', 'airline'=> $airline])
 
 @section('content')
     <!-- Page Content -->

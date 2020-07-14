@@ -96,7 +96,7 @@
                     <li class="nav-main-heading">
                         <span class="sidebar-mini-visible">AR</span><span class="sidebar-mini-hidden">Airline</span>
                     </li>
-                    <li class="{{ request()->is('admin-airline/'.$airline->id.'/airplanes*') ? ' open' : '' }}">
+                    <li class="{{ request()->is('admin-airline/'. ($airline ? $airline->id : '').'/airplanes*') ? ' open' : '' }}">
                         <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-plane"></i><span class="sidebar-mini-hide">Aviones</span></a>
                         <ul>
                             <li>
@@ -107,7 +107,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="{{ request()->is('admin-airline/'.$airline->id.'/itineraries*') ? ' open' : '' }}">
+                    <li class="{{ request()->is('admin-airline/'.($airline ? $airline->id : '').'/itineraries*') ? ' open' : '' }}">
                         <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-calendar"></i><span class="sidebar-mini-hide">Itinerarios</span></a>
                         <ul>
                             <li>
@@ -118,7 +118,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="{{ request()->is('admin-airline/'.$airline->id.'/report*') ? ' open' : '' }}">
+                    <li class="{{ request()->is('admin-airline/'.($airline ? $airline->id : '').'/report*') ? ' open' : '' }}">
                         <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-paper-clip"></i><span class="sidebar-mini-hide">Reportes</span></a>
                         <ul>
                             <li>
