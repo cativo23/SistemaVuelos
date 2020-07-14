@@ -219,6 +219,22 @@ class AirportController extends Controller
         return redirect()->route('airports.index')->with('datos', '¡Aeropuerto' .' ' .'"' .$nombre .'"' .' eliminado correctamente!');
     }
 
+    /**
+     * Delete all selected User at once.
+     *
+     * @param Request $request
+     * @return Response|void
+     */
+    public function mass(Request $request)
+    {
+        if (!Gate::allows('manage-airport')) {
+            return abort(401);
+        }
+        Airport::whereIn('id', request('ids'))->delete();
+
+        return response()->noContent();
+    }
+
     public function index_user(Airport $airport, User $user){
 
         if (!Gate::allows('manage-airport-'.$airport->id)){

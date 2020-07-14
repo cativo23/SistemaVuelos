@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Example Routes
-Route::view('/', 'landing');
+Route::redirect('/buy', '300');
 
 Route::view('/pages/slick', 'pages.slick')->middleware('verified');
 Route::view('/pages/datatables', 'pages.datatables')->middleware('verified');
@@ -26,7 +26,6 @@ Route::match(['get', 'post'],'/search', 'BookingController@search')->name('searc
 Route::match(['get', 'post'],'/check', 'BookingController@check')->name('check');
 Route::get('/booking', 'BookingController@book')->name('booking');
 Route::post('/booking/completed', 'BookingController@completed')->name('completed');
-Route::view('/test_completed', 'booking.completed');
 /*
  * Cativo's Stuff START
  */
@@ -108,9 +107,13 @@ Route::resource('/activities', 'ActivityController');
 
 
 
-// Inicio ARIEL ZELAYA
+// Inicio ARI
+//EL ZELAYA
 //AIRPORT
+Route::delete('airports/mass_destroy', 'AirportController@mass')->name('airports.mass')->middleware(['verified','forbid-banned-user']);
 Route::resource('/airports','AirportController');
+Route::get('/airports/{id}/confirm', 'AirportController@confirm')->name('airports.confirm');
+
 Route::post('/terminals/airport/update', 'AirportController@update_date_terminal')->name('airports.update_date_terminal');
 Route::get('/terminals/{airport}/user/{user}/edit/{flight}', 'AirportController@user_terminals_edit')->name('airports.user_terminal_edit');
 Route::get('/terminals/{airport}/user/{user}', 'AirportController@user_terminals')->name('airports.user_terminal');
@@ -118,7 +121,6 @@ Route::get('/terminals/{airport}/user/{user}', 'AirportController@user_terminals
 Route::post('/terminals_arrival/airport/update', 'AirportController@arrival_update_date_terminal')->name('airports.arrival_update_date_terminal');
 Route::get('/terminals_arrival/{airport}/user/{user}/edit/{flight}', 'AirportController@arrival_user_terminals_edit')->name('airports.arrival_user_terminal_edit');
 Route::get('/terminals_arrival/{airport}/user/{user}', 'AirportController@arrival_user_terminals')->name('airports.arrival_user_terminal');
-Route::get('/airports/{id}/confirm', 'AirportController@confirm')->name('airports.confirm');
 Route::get('/airports/{airport}/user/{user}', 'AirportController@index_user')->name('airports.user');
 Route::get('/airports/{airport}/user/{user}/edit', 'AirportController@edit_user')->name('airports.edit_user');
 //GATEWAY
