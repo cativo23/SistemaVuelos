@@ -19,15 +19,15 @@ class CreateItinerariesTable extends Migration
             $table->integer('total_price');
             $table->integer('num_connections');
             $table->date('arrival_date');
-            $table->time('arrival_time');
+            $table->time('arrival_time')->nullable();
             $table->date('departure_date');
-            $table->time('departure_time');
+            $table->time('departure_time')->nullable();
             $table->decimal('total_duration', 10, 2);
             $table->string('destination');
             $table->string('origin');
             $table->string('type');
 
-            $table->foreignId('airline_id');
+            $table->foreignId('airline_id')->constrained()->cascadeOnDelete();
         });
     }
 

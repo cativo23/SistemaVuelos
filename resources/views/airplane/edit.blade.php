@@ -277,7 +277,7 @@
 		<script src="{{ asset('/js/plugins/jquery-validation/additional-methods.js') }}"></script>
 
         <!-- Page JS Helpers (Select2 plugin) -->
-        <script>jQuery(function(){ Codebase.helpers('select2'); });</script>
+        <script>jQuery(function(){ Codebase.helpers('select2', 'notify');});</script>
 
         <!-- Page JS Code -->
         <script src="{{ asset('/js/pages/be_forms_validation.min.js') }}"></script>

@@ -4,7 +4,10 @@ namespace App;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Airplane
@@ -17,6 +20,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $SEAT_CAPACITY
  * @property string $MODEL
  * @property int $AIRLINE_ID
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\Airline $airline
+ * @property-read \App\Flight|null $flight
  * @method static Builder|Airplane newModelQuery()
  * @method static Builder|Airplane newQuery()
  * @method static Builder|Airplane query()
@@ -32,20 +39,37 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Airplane extends Model
 {
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+    protected static $logName = 'airplane';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
+
 
     /**
      * Airline to which this plane belongs
      */
     public function airline(){
-        return $this->belongsTo('App\Airline');
+        return $this->belongsTo(Airline::class);
     }
 
     /**
      *  Flight in which this plane is used
      */
     public function flight(){
-        return $this->hasOne('App\Flight');
+        return $this->hasOne(Flight::class);
+    }
+
+    public function seats(){
+        return $this->hasMany(Seat::class);
+    }
+
+    public function to_string(){
+        return 'Avion ' .$this->model. ' of'.$this->airline->short_name;
     }
 
 }

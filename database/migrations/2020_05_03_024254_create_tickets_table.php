@@ -24,7 +24,7 @@ class CreateTicketsTable extends Migration
             $table->string('class_seat');
             $table->unsignedBigInteger('passenger_id');
 
-            $table->foreign('passenger_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->foreign('passenger_id')->references('id')->on('clients')->cascadeOnDelete();
         });
     }
 

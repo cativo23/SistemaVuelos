@@ -3,15 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Airport;
-use App\Helper\Helper;
+use App\Helper\VoyargeHelper;
 use App\Terminal;
+use App\User;
 use Exception;
+use DateTime;
+Use Gate;
+use App\Flight;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class AirportController extends Controller
@@ -27,7 +33,7 @@ class AirportController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('airport.index', compact('Airports', 'sidebar', 'header', 'footer'));
     }
@@ -41,7 +47,7 @@ class AirportController extends Controller
     {
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('airport.create', compact('sidebar', 'header', 'footer'));
     }
@@ -54,7 +60,6 @@ class AirportController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'codigo' => 'required|string|max:150',
             'nombre' => 'required|string|max:150',
@@ -83,9 +88,7 @@ class AirportController extends Controller
             $terminal->airport_id = $airport->id;
             $terminal->save();
         }
-        //dd(Terminal::all());
         return redirect()->route('airports.index')->with('datos', '¡Aeropuerto' .' ' .'"'. $airport->name .'"' .' guardado correctamente!');
-
     }
 
     /**
@@ -96,7 +99,10 @@ class AirportController extends Controller
      */
     public function show(Airport $airport)
     {
-        //
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+        return view('airport.show', compact('airport', 'sidebar', 'header', 'footer'));
     }
 
     /**
@@ -116,7 +122,7 @@ class AirportController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('airport.edit', compact('Airport', 'sidebar', 'header', 'footer'));
     }
@@ -211,5 +217,118 @@ class AirportController extends Controller
         $airport->delete();
 
         return redirect()->route('airports.index')->with('datos', '¡Aeropuerto' .' ' .'"' .$nombre .'"' .' eliminado correctamente!');
+    }
+
+    public function index_user(Airport $airport, User $user){
+
+        if (!Gate::allows('manage-airport-'.$airport->id)){
+            abort(401);
+        }
+
+        $gateways = $airport->gateways;
+
+        $auth_user = Auth::user();
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($auth_user);
+
+        return view('airport.index_user', compact('gateways', 'airport','sidebar', 'header', 'footer'));
+    }
+
+    public function user_terminals(Airport $airport, User $user){
+
+        if (!Gate::allows('manage-airport-'.$airport->id)){
+            abort(401);
+        }
+        $gateways = Terminal::where('airport_id',$airport->id)->get();
+
+        $flights = Flight::where('status','=', 'unready')->whereIn('landing_terminal_id', $gateways->pluck('id'))->get();
+//        dd(count($flights));
+        $auth_user = Auth::user();
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($auth_user);
+        $type = "Departure";
+        return view('airport.user_terminal', compact('gateways', 'airport','sidebar', 'header', 'footer','flights','user','type'));
+    }
+    public function arrival_user_terminals(Airport $airport, User $user){
+
+        if (!Gate::allows('manage-airport-'.$airport->id)){
+            abort(401);
+        }
+        $gateways = Terminal::where('airport_id',$airport->id)->get();
+
+        $flights = Flight::where('status','=','unready')->whereIn('boarding_terminal_id',$gateways->pluck('id'))->get();
+//dd(count($flights));
+        $auth_user = Auth::user();
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($auth_user);
+        $type = "Arrival";
+
+        return view('airport.user_terminal', compact('gateways', 'airport','sidebar', 'header', 'footer','flights','user','type'));
+    }
+    public function user_terminals_edit(Airport $airport, User $user,Flight $flight){
+
+        if (!Gate::allows('manage-airport-'.$airport->id)){
+            abort(401);
+        }
+
+        $gateways = $airport->gateways;
+
+//        $fli = Flight::where('id',$flight->id)->get();
+        $fli = $flight;
+        $type = "Departure";
+        $auth_user = Auth::user();
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($auth_user);
+
+        return view('airport.edit_user_terminal', compact('gateways', 'airport','sidebar', 'header', 'footer','fli', 'user','type'));
+    }
+    public function arrival_user_terminals_edit(Airport $airport, User $user,Flight $flight){
+
+        if (!Gate::allows('manage-airport-'.$airport->id)){
+            abort(401);
+        }
+
+        $gateways = $airport->gateways;
+
+//        $fli = Flight::where('id',$flight->id)->get();
+        $fli = $flight;
+        $type = "Arrival";
+        $auth_user = Auth::user();
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($auth_user);
+
+        return view('airport.edit_user_terminal', compact('gateways', 'airport','sidebar', 'header', 'footer','fli', 'user','type'));
+    }
+    public function edit_user(Airport $airport){
+        if (!Gate::allows('manage-airport-'.$airport->id)){
+            abort(401);
+        }
+        dd('editar aeropuerto '.$airport->name);
+    }
+
+    public function update_date_terminal(Request $request){
+        $fli = $request->flight;
+        $new_time = $request->hour;
+        $gateway = $request->terminal;
+        $gateway_object = Terminal::where('id',$gateway);
+        $flight = Flight::findOrFail($fli);
+        $gateway_use = Flight::where('landing_terminal_id',$gateway)->where('status','unready')->get();
+        $not_possible = 0 ;
+        $counter = 0;
+        foreach ($gateway_use as $gate){
+            if(abs(strtotime($gate->departure_time) - strtotime($new_time)) <= 1800){
+                $not_possible = $not_possible + 1;
+
+            }
+            $counter = $counter  + 1;
+        }
+            if($not_possible == 0){
+                $datenueva = new DateTime($new_time);
+                $flight->departure_time = $datenueva;
+                $flight->landing_terminal_id = $gateway;
+                $flight->save();
+            }else{
+                $message = "Ya existe un vuelo con una hora cercana a la elegida, cambie la hora";
+                return redirect()->back()->with('datos', 'La terminal se encuentra ocupada a esa hora!');
+            }
+
+
+//        dd("Hora ".$new_time."Y terminal ".$gateway." Id vuelo".$flight->id,$flight->arrival_time,$flight->departure_time."Este es el nuevo time".$not_possible."Counter".$counter);
+        return redirect()->back()->with('datos2', 'Vuelo actualizado!');
     }
 }

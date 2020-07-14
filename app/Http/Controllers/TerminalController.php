@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Helper\Helper;
+use App\Helper\VoyargeHelper;
 use App\Terminal;
 use App\Airport;
+use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,7 @@ class TerminalController extends Controller
         $Terminal = Terminal::all();
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
         return view('terminal.index', compact('Terminal' ,'sidebar', 'header', 'footer'));
     }
 
@@ -34,10 +35,13 @@ class TerminalController extends Controller
     {
         //
         $Airports = Airport::all();
+
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
-        return view('terminal.create', compact("Airports",'sidebar', 'header', 'footer'));
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+
+        //return view('terminal.create')->with('Airports',$Airport, 'sidebar', $sidebar,'header', 'footer');
+        return view('terminal.create', compact( 'Airports', 'sidebar', 'header', 'footer'));
     }
 
     /**
@@ -65,7 +69,10 @@ class TerminalController extends Controller
      */
     public function show(Terminal $gateway)
     {
-        //
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+        return view('terminal.show', compact('gateway', 'sidebar', 'header', 'footer'));
     }
 
     /**
@@ -81,7 +88,7 @@ class TerminalController extends Controller
         $Airport = Airport::all();
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('terminal.edit', compact('Terminal','Airport', 'sidebar', 'header', 'footer'));
     }
@@ -124,4 +131,15 @@ class TerminalController extends Controller
         $Terminal->delete();
         return redirect()->route('gateway.index')->with('datos', '¡La terminal se eliminó correctamente!');
     }
+
+    public function create_user(Airport $airport, Request $request){
+
+        if (!Gate::allows('manage-airport-'.$airport->id)){
+            abort(401);
+        }
+
+        dd("create terminal for airport ".$airport->name);
+    }
+
+
 }

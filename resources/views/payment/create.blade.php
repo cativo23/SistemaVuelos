@@ -47,15 +47,20 @@
 
                         <form action="{{ route('payments.store') }}" method="post">@csrf
                             <div class="form-group row">
-                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('codigo')) is-invalid @endif">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="code" name="code">
-                                        <label for="ciudad">Codigo</label>
+                                        <input type="text" class="form-control" id="codigo" value="{{ old('codigo', isset($destination)? destination>codigo : '') }}" name="codigo">
+                                        <label for="codigo">Codigo</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa  fa-align-justify "></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('codigo'))
+                                            @foreach($errors->get('codigo') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
 

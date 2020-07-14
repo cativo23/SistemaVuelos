@@ -68,6 +68,10 @@
                         <tr>
                             <th class="text-center" style="width: 80px;">#</th>
                             <th>Código</th>
+                            <th>Clase</th>
+                            <th>Estado</th>
+                            <th>Avión</th>
+                            <th>Acciones</th>
                             <th  style="width: 15%">Clase</th>
                             <th  style="width: 15%">Estado</th>
                             <th style="width: 26%">Avión</th>

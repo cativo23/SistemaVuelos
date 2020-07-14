@@ -24,7 +24,7 @@ class CreateClientNaturalsTable extends Migration
             $table->string('marital_status');
 
 
-            $table->foreign('id')->references('id')->on('clients');
+            $table->foreign('id')->references('id')->on('clients')->cascadeOnDelete();
         });
     }
 
