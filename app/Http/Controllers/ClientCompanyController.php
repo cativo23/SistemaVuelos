@@ -191,5 +191,11 @@ class ClientCompanyController extends Controller
         $cliente->delete();
         return redirect()->route('clientCompanys.index')->with('datos', '¡El cliente se eliminó correctamente!');
     }
+    public function mass(Request $request)
+    {
+        ClientCompany::whereIn('id', request('ids'))->delete();
+
+        return response()->noContent();
+    }
 }
 

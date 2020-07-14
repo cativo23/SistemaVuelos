@@ -147,8 +147,11 @@ class AirplaneController extends Controller
         $ejecutivos = count(Seat::where("airplane_id","=", $airplane->id)->where("class", "=", "Ejecutiva")->get());
         $primera = count(Seat::where("airplane_id","=", $airplane->id)->where("class", "=", "Primera")->get());
 
+        $user = Auth::user();
 
-        return view('airplane.edit', compact('airplane', 'airlines', 'economicos', 'ejecutivos', 'primera'));
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+
+        return view('airplane.edit', compact('airplane', 'airlines', 'economicos', 'ejecutivos', 'primera', 'sidebar' , 'header', 'footer'));
     }
 
     /**

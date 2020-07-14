@@ -56,8 +56,8 @@ class Reservation extends Model
     /*
      * Itineraries for this reservation
      */
-    public function itineraries(){
-        return $this->hasMany(Itinerary::class);
+    public function itinerary(){
+        return $this->belongsTo(Itinerary::class);
     }
 
     /*
@@ -65,5 +65,9 @@ class Reservation extends Model
      */
     public function client(){
         return $this->belongsTo(Client::class);
+    }
+
+    public function to_string(){
+        return 'Reservación del cliente ' .$this->client->first_name.' '.$this->client->first_surname;
     }
 }

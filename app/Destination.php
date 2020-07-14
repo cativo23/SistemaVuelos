@@ -54,4 +54,8 @@ class Destination extends Model
     public function airlines(){
         return $this->belongsTo(Airline::class);
     }
+
+    public function to_string(){
+        return 'Destino ' .$this->city.', '.$this->country;
+    }
 }

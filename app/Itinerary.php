@@ -74,11 +74,35 @@ class Itinerary extends Model
     /*
      * Reservations that have this Itinerary
      */
-    public function reservations(){
-        return $this->hasMany(Reservation::class);
+    public function reservation(){
+        return $this->belongsTo(Reservation::class);
     }
 
     public function airline(){
          return $this->belongsTo(Airline::class);
+    }
+
+    public function hasSeats(array $class, int $passengers = 0){
+        $flights_with_seats = 0;
+        $flights = $this->flights;
+        foreach ($flights as $flight){
+            if ($flight->hasSeats($class, $passengers)){
+                $flights_with_seats =+1;
+            }
+        }
+        return $flights_with_seats > 0;
+    }
+
+    public function cost(){
+        $cost = 0;
+        $flights = $this->flights;
+        foreach ($flights as $flight){
+            $cost += $flight->cost;
+        }
+        return $cost;
+    }
+
+    public function to_string(){
+        return 'Itinerary ' .$this->origin.'-'.$this->destination;
     }
 }

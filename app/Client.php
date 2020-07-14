@@ -78,4 +78,8 @@ class Client extends Model
     public function itineraries(){
         $this->hasMany(Itinerary::class);
     }
+
+    public function to_string(){
+        return 'Cliente ' .$this->first_name.' '.$this->first_surname;
+    }
 }

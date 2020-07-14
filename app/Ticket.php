@@ -50,5 +50,7 @@ class Ticket extends Model
 
     protected static $logUnguarded = true;
 
-    //
+    public function to_string(){
+        return 'Ticket #' .$this->id;
+    }
 }

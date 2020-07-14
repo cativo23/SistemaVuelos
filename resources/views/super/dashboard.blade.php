@@ -47,7 +47,7 @@
                         <div class="col-6 col-sm-6 col-md-3 col-xl-3">
                             <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-center" href="be_pages_generic_inbox.html">
                                 <div class="block-content ribbon ribbon-bookmark ribbon-success ribbon-left">
-                                    <div class=" ribbon-box font-w600"><span data-toggle="countTo" data-speed="1000" data-to="93">0</span></div>
+                                    <div class=" ribbon-box font-w600"><span data-toggle="countTo" data-speed="1000" data-to="{{$total_usuarios}}">0</span></div>
                                     <p class="mt-5">
                                         <i class="si si-users fa-3x text-muted"></i>
                                     </p>
@@ -58,7 +58,7 @@
                         <div class="col-6 col-sm-6 col-md-3 col-xl-3">
                             <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-center" href="be_pages_forum_categories.html">
                                 <div class="block-content ribbon ribbon-bookmark ribbon-info ribbon-left">
-                                    <div class=" ribbon-box font-w600"><span data-toggle="countTo" data-speed="1000" data-to="6">0</span></div>
+                                    <div class=" ribbon-box font-w600"><span data-toggle="countTo" data-speed="1000" data-to="6">{{$role}}</span></div>
                                     <p class="mt-5">
                                         <i class="si si-user-following fa-3x text-muted"></i>
                                     </p>
@@ -69,7 +69,7 @@
                         <div class="col-6 col-sm-6 col-md-3 col-xl-3">
                             <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-center" href="be_pages_forum_categories.html">
                                 <div class="block-content ribbon ribbon-bookmark ribbon-warning ribbon-left">
-                                    <div class="ribbon-box font-w600"><span data-toggle="countTo" data-speed="1000" data-to="5">0</span></div>
+                                    <div class="ribbon-box font-w600"><span data-toggle="countTo" data-speed="1000" data-to="{{$permisos}}">0</span></div>
                                     <p class="mt-5">
                                         <i class="si si-lock fa-3x text-muted"></i>
                                     </p>
@@ -80,7 +80,7 @@
                         <div class="col-6 col-sm-6 col-md-3 col-xl-3">
                             <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-center" href="be_pages_forum_categories.html">
                                 <div class="block-content ribbon ribbon-bookmark ribbon-primary ribbon-left">
-                                    <div class=" ribbon-box font-w600"><span data-toggle="countTo" data-speed="1000" data-to="48">0</span></div>
+                                    <div class=" ribbon-box font-w600"><span data-toggle="countTo" data-speed="1000" data-to="{{$log}}">0</span></div>
                                     <p class="mt-5">
                                         <i class="si si-notebook fa-3x text-muted"></i>
                                     </p>
@@ -97,19 +97,18 @@
                                     <div class="float-left mt-10 d-none d-sm-block">
                                         <i class="si si-user fa-3x text-muted"></i>
                                     </div>
-                                    <div class="font-size-h3 font-w600"><span data-toggle="countTo" data-speed="1000" data-to="15">0</span></div>
+                                    <div class="font-size-h3 font-w600"><span data-toggle="countTo" data-speed="1000" data-to="{{$activos}}">0</span></div>
                                     <div class="font-size-sm font-w600 text-uppercase text-muted">Usuarios activos</div>
                                 </div>
                             </a>
                         </div>
-
                         <div class="col-6 col-xl-3">
                             <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-right" href="javascript:void(0)">
                                 <div class="block-content block-content-full clearfix">
                                     <div class="float-left mt-10 d-none d-sm-block">
                                         <i class="si si-user-unfollow fa-3x text-muted"></i>
                                     </div>
-                                    <div class="font-size-h3 font-w600"><span data-toggle="countTo" data-speed="1000" data-to="45">0</span></div>
+                                    <div class="font-size-h3 font-w600"><span data-toggle="countTo" data-speed="1000" data-to="{{$baneados}}">0</span></div>
 
                                     <div class="font-size-sm font-w600 text-uppercase text-muted">Usuarios inactivos</div>
                                 </div>
@@ -121,8 +120,8 @@
                                     <div class="float-left mt-10 d-none d-sm-block">
                                         <i class="si si-paper-plane fa-3x text-muted"></i>
                                     </div>
-                                    <div class="font-size-h3 font-w600"><span data-toggle="countTo" data-speed="1000" data-to="23">0</span></div>
-                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Administradors Aerolina</div>
+                                    <div class="font-size-h3 font-w600"><span data-toggle="countTo" data-speed="1000" data-to="{{$admin_airline}}">0</span></div>
+                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Admin Aerolínea</div>
                                 </div>
                             </a>
                         </div>
@@ -132,9 +131,9 @@
                                     <div class="float-left mt-10 d-none d-sm-block">
                                         <i class="si si-anchor fa-3x text-muted"></i>
                                     </div>
-                                    <div class="font-size-h3 font-w600"><span data-toggle="countTo" data-speed="1000" data-to="12">0</span></div>
+                                    <div class="font-size-h3 font-w600"><span data-toggle="countTo" data-speed="1000" data-to="{{$admin_airport}}">0</span></div>
 
-                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Administradors aeropuerto</div>
+                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Admin Aeropuerto</div>
                                 </div>
                             </a>
                         </div>

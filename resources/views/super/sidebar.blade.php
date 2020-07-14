@@ -124,14 +124,6 @@
                 <li class="nav-main-heading">
                     <span class="sidebar-mini-visible">CRUD</span><span class="sidebar-mini-hidden">CRUD's</span>
                 </li>
-                @if($user->can('manage-airplanes'))
-                    <li>
-                        <a class="{{ request()->is('airplanes*') ? ' active' : '' }}"
-                           href="{{route('airplanes.index')}}">
-                            <i class="si si-plane"></i><span class="sidebar-mini-hide">Aviones</span>
-                        </a>
-                    </li>
-                @endif
                 @if($user->can('manage-airline'))
                     <li>
                         <a class="{{ request()->is('airlines*') ? ' active' : '' }}"

@@ -36,7 +36,7 @@
 
                                 <div class="col-md-8">
                                     <div class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-6">
                                             @error('codigo') <div class="form-group is-invalid"> @enderror
                                                 <div class="form-material floating input-group">
                                                     <input type="text" class="form-control" id="codigo" name="codigo"
@@ -56,7 +56,7 @@
                                                 @enderror
                                                 @error('codigo') </div> @enderror
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-6">
                                             @error('nombre') <div class="form-group is-invalid input-group"> @enderror
                                                 <div class="form-material floating input-group">
                                                     <input type="text" class="form-control" id="nombre" name="nombre"
@@ -74,7 +74,7 @@
                                                 @error('nombre')<div id="nombre-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
                                                 @error('nombre')</div>@enderror
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-6">
                                             @error('representante') <div class="form-group is-invalid input-group"> @enderror
                                                 <div class="form-material floating input-group">
                                                     <input type="text" class="form-control" id="representante" name="representante"
@@ -92,7 +92,7 @@
                                                 @error('representante')<div id="representante-error" class="invalid-feedback animated fadeInDown">{{ $message }}</div>@enderror
                                                 @error('representante')</div>@enderror
                                         </div>
-                                        <div class="col-md-5">
+                                        <div class="col-md-6">
                                             @error('telefono') <div class="form-group is-invalid input-group"> @enderror
                                                 <div class="form-material floating input-group">
                                                     <input type="text" class="form-control" id="telefono" name="telefono"
