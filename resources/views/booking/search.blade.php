@@ -225,7 +225,7 @@
                 source:
                     function (term, response) {
                         var settings = {
-                            "url": "http://127.0.0.1:8000/api/destinations?term="+term,
+                            "url": "/api/destinations?term="+term,
                             "method": "GET",
                             "timeout": 0,
                             success: function (res) {
@@ -255,7 +255,7 @@
                 source:
                     function (term, response) {
                         var settings = {
-                            "url": "http://127.0.0.1:8000/api/destinations?term="+term,
+                            "url": "/api/destinations?term="+term,
                             "method": "GET",
                             "timeout": 0,
                             success: function (res) {

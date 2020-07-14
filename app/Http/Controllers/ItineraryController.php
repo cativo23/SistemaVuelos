@@ -97,7 +97,7 @@ class ItineraryController extends Controller
 
         if ($type == 'return'){
             if ($last_destination != $first_origin){
-                dd('error');
+                dd('errossr');
             }else if ($last_destination!=$origin2->id){
                 dd($last_destination);
             }
@@ -131,6 +131,7 @@ class ItineraryController extends Controller
         for($i=0;count($request->input('vuelo'))>$i; $i++){
             $flight_origin = Airport::findOrFail($request->input('origin')[$i]);
             $flight_destination = Airport::findOrFail($request->input('destination')[$i]);
+
             $airline = Airline::findOrFail($request->input('airline_id')[$i]);
             $last_code = 1;
             $last_vuelo = Flight::latest()->first();
@@ -140,11 +141,11 @@ class ItineraryController extends Controller
 
             $client = new Client();
 
-            $country_origin = json_decode($client->request('GET', 'http://127.0.0.1:8001/api/countries?q='.$flight_origin->country)->getBody(), 'true')[0];
-            $country_destination = json_decode($client->request('GET', 'http://127.0.0.1:8001/api/countries?q='.$flight_destination->country)->getBody(), 'true')[0];
+            $country_origin = json_decode($client->request('GET', 'https://be77bddc8b14.ngrok.io/api/countries?q='.$flight_origin->country)->getBody(), 'true')[0];
+            $country_destination = json_decode($client->request('GET', 'https://be77bddc8b14.ngrok.io/countries?q='.$flight_destination->country)->getBody(), 'true')[0];
 
-            $city_destination = json_decode($client->request('GET', 'http://127.0.0.1:8001/api/cities?q='.$flight_destination->city.'&country='.$country_destination['country_code'])->getBody(), 'true')[0];
-            $city_origin = json_decode($client->request('GET', 'http://127.0.0.1:8001/api/cities?q='.$flight_origin->city.'&country='.$country_origin['country_code'])->getBody(), 'true')[0];
+            $city_destination = json_decode($client->request('GET', 'https://be77bddc8b14.ngrok.io/api/cities?q='.$flight_destination->city.'&country='.$country_destination['country_code'])->getBody(), 'true')[0];
+            $city_origin = json_decode($client->request('GET', 'https://be77bddc8b14.ngrok.io/cities?q='.$flight_origin->city.'&country='.$country_origin['country_code'])->getBody(), 'true')[0];
 
             $latitude_origin = $city_origin['latitude'];
             $latitude_destination = $city_destination['latitude'];
@@ -170,8 +171,9 @@ class ItineraryController extends Controller
                 'distance_miles'=>intval($distance),
                 'airplane_id'=>$airline->airplanes[0]->id,
                 'itinerary_id'=>$itinerary->id,
-                'boarding_terminal_id'=>$flight_origin->id,
-                'landing_terminal_id'=>$flight_destination->id
+                'boarding_terminal_id'=>$flight_origin->gateways[0]->id,
+                'landing_terminal_id'=>$flight_destination->gateways[0]->id,
+                'type'=>$request->input('type_flight')[$i],
             ]);
             $vuelo->save();
         }

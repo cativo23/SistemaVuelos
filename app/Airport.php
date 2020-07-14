@@ -60,4 +60,8 @@ class Airport extends Model
     public function gateways(){
         return $this->hasMany(Terminal::class);
     }
+
+    public function to_string(){
+        return 'Aeropuerto ' .$this->name;
+    }
 }

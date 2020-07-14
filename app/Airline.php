@@ -84,6 +84,6 @@ class Airline extends Model
     }
 
     public function to_string(){
-        return 'Aerolinea '.$this->official_name;
+        return 'Aerolinea ' .$this->official_name;
     }
 }

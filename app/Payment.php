@@ -50,4 +50,8 @@ class Payment extends Model
     public function reservation(){
         return $this->belongsTo(Reservation::class);
     }
+
+    public function to_string(){
+        return 'Pago del día ' .$this->reservation->payed;
+    }
 }

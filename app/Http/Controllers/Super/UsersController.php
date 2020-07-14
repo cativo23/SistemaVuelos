@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Super;
 
+use App\Airline;
 use App\Airport;
 use App\Helper\VoyargeHelper;
 use App\Http\Controllers\Controller;
@@ -257,7 +258,7 @@ class UsersController extends Controller
         $request->validate([
             'airport_id' => 'required|integer|exists:airports,id'
         ]);
-        if ($user->can('manage-airports')) {
+        if ($user->can('manage-airport')) {
             $airport = Airport::findOrFail($request->input('airport_id'));
 
             $manage_airport = Bouncer::ability()->firstOrCreate([
@@ -286,5 +287,48 @@ class UsersController extends Controller
             }
         }
         return redirect()->route('super.users.index')->with('success', 'Permisos del usuario para el aeropuerto removidos!');
+    }
+
+    public function showGiveAirLinePermission(User $user)
+    {
+        $user_auth = Auth::user();
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user_auth);
+        return view('super.users.give_airline', compact('user', 'sidebar', 'header', 'footer'));
+    }
+
+    public function giveAirlinePermission(Request $request, User $user)
+    {
+        $request->validate([
+            'airline_id' => 'required|integer|exists:airports,id'
+        ]);
+        if ($user->can('manage-airline')) {
+            $airport = Airline::findOrFail($request->input('airline_id'));
+
+            $manage_airport = Bouncer::ability()->firstOrCreate([
+                'name' => 'manage-airline-' . $airport->id,
+                'title' => 'Manage Airline ' . $airport->short_name,
+            ]);
+
+            $abilities = $user->getAbilities();
+            foreach ($abilities as $ability) {
+                if (strpos($ability->name, 'manage-airline-') !== false) {
+                    Bouncer::disallow($user)->to($ability);
+                }
+            }
+            Bouncer::allow($user)->to($manage_airport);
+            return redirect()->route('super.users.index')->with('success', 'Permisos de usuario actualizados');
+        }
+        return redirect()->route('super.users.index')->with('error', 'Este usuario no tiene rol de administrador de Aerolinea');
+    }
+
+    public function removeAirlinePermission(User $user)
+    {
+        $abilities = $user->getAbilities();
+        foreach ($abilities as $ability) {
+            if (strpos($ability->name, 'manage-airline-') !== false) {
+                Bouncer::disallow($user)->to($ability);
+            }
+        }
+        return redirect()->route('super.users.index')->with('success', 'Permisos del usuario para el Aerolinea removidos!');
     }
 }

@@ -52,4 +52,8 @@ class Seat extends Model
     public function airplane(){
         return $this->belongsTo(Airplane::class);
     }
+
+    public function to_string(){
+        return 'Seat #' .$this->code.' del '.$this->airplane->model;
+    }
 }

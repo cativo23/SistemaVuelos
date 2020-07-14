@@ -1,6 +1,6 @@
 @extends('layouts.backend', ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer'])
 
-@section('section', 'Permiso Aeropuerto')
+@section('section', 'Permiso Aerolinea')
 
 @section('content')
     <!-- Hero -->
@@ -9,7 +9,7 @@
             <div class="content content-top text-center overflow-hidden">
                 <div class="pt-50 pb-20">
                     <h1 class="font-w700 text-white mb-10 invisible" data-toggle="appear"
-                        data-class="animated fadeInUp">Dar Permiso de Aeropuerto</h1>
+                        data-class="animated fadeInUp">Dar Permiso de Aerolinea</h1>
                     <h2 class="h4 font-w400 text-white-op invisible" data-toggle="appear"
                         data-class="animated fadeInUp">{{$user->name}}</h2>
                 </div>
@@ -22,11 +22,10 @@
             <!-- Row #1 -->
             <div class="row invisible" data-toggle="appear">
                 <div class="col-md-12">
-                    <form action="{{ route('super.give_airport', $user->id) }}" method="post">@csrf
-                        @method('PUT')
+                    <form action="{{ route('super.give_airline', $user->id) }}" method="post">@csrf
                         <div class="block block-themed">
                             <div class="block-header bg-primary-dark">
-                                <h3 class="block-title">Dar Permiso de Aeropuerto</h3>
+                                <h3 class="block-title">Dar Permiso de Aerolinea</h3>
                                 <div class="block-options">
                                     <button type="submit" class="btn btn-sm btn-alt-primary">
                                         <i class="fa fa-check"></i> Guardar
@@ -40,27 +39,27 @@
                             <div class="block-content">
 
                                 <div class="row form-group">
-                                    <div class="col-md-12 @if($errors->has('airport_id')) is-invalid @endif">
+                                    <div class="col-md-12 @if($errors->has('airline_id')) is-invalid @endif">
                                         <div class="form-material floating input-group">
-                                            <input id="airport" type="text"
-                                                   name="airport_id_fake"
-                                                   class="form-control airportapi"
-                                                   value="{{ old('airport_id_fake', '') }}">
-                                            <label for="airport">Airport</label>
+                                            <input id="airline_id" type="text"
+                                                   name="airline_id_fake"
+                                                   class="form-control airlineapi"
+                                                   value="{{ old('airline_id_fake', '') }}">
+                                            <label for="airline_id">Aerolinea</label>
                                             <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-user"></i>
                                             </span>
                                             </div>
-                                            @if($errors->has('airport_id'))
-                                                @foreach($errors->get('airport_id') as $error)
+                                            @if($errors->has('airline_id'))
+                                                @foreach($errors->get('airline_id') as $error)
                                                     <div
                                                         class="invalid-feedback animated fadeInDown">{{$error}}</div>
                                                 @endforeach
                                             @endif
                                         </div>
-                                        <input hidden style="display: none;" name="airport_id" class="airport_id_real"
-                                               value="{{ old('airport_id', '') }}">
+                                        <input hidden style="display: none;" name="airline_id" class="airline_id_real"
+                                               value="{{ old('airline_id', '') }}">
                                     </div>
                                 </div>
                             </div>
@@ -107,12 +106,12 @@
     <!-- Page JS Code -->
     <script src="{{ asset('/js/pages/be_forms_validation.min.js') }}"></script>
     <script>
-        $('.airportapi').autoComplete({
+        $('.airlineapi').autoComplete({
             minChars: 1,
             source:
                 function (term, response) {
                     var settings = {
-                        "url": "/api/airports?term="+term,
+                        "url": "/api/airlines?term="+term,
                         "method": "GET",
                         "timeout": 0,
                         success: function (res) {
@@ -126,8 +125,8 @@
                 return '<div class="autocomplete-suggestion" data-label="'+item.label+'" data-val="'+item.value+'">"'+item.label+'"</div>'
             },
             onSelect: function (event, term, ui) {
-                $(".airport_id_real").val(ui[0].getAttribute('data-val'));
-                $(".airportapi").val(ui[0].getAttribute('data-label'));
+                $(".airline_id_real").val(ui[0].getAttribute('data-val'));
+                $(".airlineapi").val(ui[0].getAttribute('data-label'));
                 return false;
             },
         });

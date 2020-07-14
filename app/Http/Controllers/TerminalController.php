@@ -140,10 +140,6 @@ class TerminalController extends Controller
 
         dd("create terminal for airport ".$airport->name);
     }
-    public function mass(Request $request)
-    {
-        Terminal::whereIn('id', request('ids'))->delete();
 
-        return response()->noContent();
-    }
+
 }

@@ -124,4 +124,8 @@ class Flight extends Model
             return count($seats) > 0;
         }
     }
+
+    public function to_string(){
+        return 'Flight ' .$this->origin.'-'.$this->destination;
+    }
 }

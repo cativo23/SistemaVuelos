@@ -13,6 +13,10 @@ use App\User;
 
 
 use phpDocumentor\Reflection\Types\False_;
+use Silber\Bouncer\Database\Ability;
+use Silber\Bouncer\Database\Queries\Abilities;
+use Silber\Bouncer\Database\Role;
+use Spatie\Activitylog\Models\Activity;
 
 class DashboardController extends Controller
 {
@@ -26,15 +30,26 @@ class DashboardController extends Controller
             Log::info('This is a super user');
 
             //Obtener el usuario super admin
-            $usuario = User::all()->last();
+            $usuario = $user;
+
+            $total_usuarios = count(User::all());
+            $role = count(Role::all());
+            $permisos = count(Ability::all());
+            $log = count(Activity::all());
+
+            $activos = count(User::withoutBanned()->get());
+
+            $baneados = count(User::onlyBanned()->get());
+
+            $admin_airline = count(User::whereIs('admin-airline')->get());
+            $admin_airport = count(User::whereIs('admin-airport')->get());
 
             //los ultimos 5 registrados
             $users = User::latest()->take(5)->get();
 
             $view = 'super.dashboard';
 
-            return view( $view , ['user'=>$user, 'sidebar'=>$sidebar, 'footer'=>$footer, 'header'=>$header,
-                'users'=>$users, 'usuario'=>$usuario]);
+            return view( $view, compact('user','users' , 'sidebar', 'header', 'footer', 'usuario', 'total_usuarios', 'role', 'permisos', 'log', 'activos', 'baneados', 'admin_airline', 'admin_airport'));
 
         }
 

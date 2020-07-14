@@ -42,6 +42,14 @@
                                             <i class="fa fa-user-times"></i>Quitar Permiso de Aeropuerto
                                         </a>
                                     @endif
+                                    @if($user->can('manage-airline'))
+                                        <a href="{{ route('super.show_give_airline', $user->id)}}" type="reset" class="btn btn-sm btn-alt-info">
+                                            <i class="fa fa-shield"></i>Permiso de Aerolinea
+                                        </a>
+                                        <a href="{{ route('super.remove_airline', $user->id)}}" type="reset" class="btn btn-sm btn-alt-info">
+                                            <i class="fa fa-user-times"></i>Quitar Permiso de Aeropuerto
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                             <div class="block-content">

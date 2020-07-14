@@ -43,4 +43,8 @@ class Backup extends Model
     protected static $logOnlyDirty = true;
 
     protected static $logUnguarded = true;
+
+    public function to_string(){
+        return 'BackUp ' .$this->name;
+    }
 }
