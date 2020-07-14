@@ -66,4 +66,8 @@ class Reservation extends Model
     public function client(){
         return $this->belongsTo(Client::class);
     }
+
+    public function to_string(){
+        return 'Reservación del cliente ' .$this->client->first_name.' '.$this->client->first_surname;
+    }
 }

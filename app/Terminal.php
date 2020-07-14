@@ -56,4 +56,8 @@ class Terminal extends Model
     public function is_boarding_in(){
         return $this->belongsToMany(Flight::class, 'boarding_terminal_id', 'id');
     }
+
+    public function to_string(){
+        return 'Terminal ' .$this->airport->name;
+    }
 }

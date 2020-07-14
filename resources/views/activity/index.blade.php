@@ -1,6 +1,6 @@
 @extends('layouts.backend', ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer'])
 
-@section('section', 'Aerolíneas')
+@section('section', 'Actividades')
 
 @section('content')
     <div class="bg-image bg-image-bottom" style="background-image: url({{ asset('/media/photos/photo34@2x.jpg') }});">
@@ -32,19 +32,18 @@
                             style="width:100%">
                             <thead>
                             <tr>
-                                <th>Subject</th>
-                                <th>Causer</th>
-                                <th>Description</th>
-
+                                <th>Realizador</th>
+                                <th>Acción</th>
+                                <th>Objecto</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($activities as $activity)
-
                                 <tr data-entry-id="">
-                                    <td>{{ $activity->name}}</td>
-                                    <td>{{ $activity->username }}</td>
-<td></td>                                </tr>
+                                    <td>{{ isset($activity->causer) ? $activity->causer->to_string() : 'None' }}</td>
+                                    <td>{{isset($activity->description) ? $activity->description : 'None'}}</td>
+                                    <td>{{ isset($activity->subject) ? $activity->subject->to_string() : 'None'}}</td>
+                                </tr>
                             @endforeach
                             </tbody>
                         </table>

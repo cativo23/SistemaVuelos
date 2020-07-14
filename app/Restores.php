@@ -37,4 +37,8 @@ class Restores extends Model
     protected static $logOnlyDirty = true;
 
     protected static $logUnguarded = true;
+
+    public function to_string(){
+        return 'Restore ' .$this->DB_instance_name;
+    }
 }

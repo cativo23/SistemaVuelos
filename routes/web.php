@@ -26,6 +26,7 @@ Route::match(['get', 'post'],'/search', 'BookingController@search')->name('searc
 Route::match(['get', 'post'],'/check', 'BookingController@check')->name('check');
 Route::get('/booking', 'BookingController@book')->name('booking');
 Route::post('/booking/completed', 'BookingController@completed')->name('completed');
+Route::view('/test_completed', 'booking.completed');
 /*
  * Cativo's Stuff START
  */
@@ -39,6 +40,9 @@ Route::group(['middleware' => ['verified', 'logs-out-banned-user'], 'prefix' => 
     Route::delete('users/mass_destroy', 'UsersController@mass')->name('users.mass');
     Route::resource('users', 'UsersController');
     Route::post('users/{user}/ban', 'UsersController@ban');
+    Route::post('users/{user}/give_airline', 'UsersController@giveAirlinePermission')->name('give_airline');
+    Route::get('users/{user}/give_airline', 'UsersController@showGiveAirLinePermission')->name('show_give_airline');
+    Route::get('users/{user}/remove_airline', 'UsersController@removeAirlinePermission')->name('remove_airline');
     Route::get('users/{user}/give_airport', 'UsersController@showGiveAirportPermission')->name('show_give_airport');
     Route::put('users/{user}/give_airport', 'UsersController@giveAirportPermission')->name('give_airport');
     Route::get('users/{user}/remove_airport', 'UsersController@removeAirportPermission')->name('remove_airport');
@@ -126,3 +130,17 @@ Route::get('/gateways/{airport}/create', 'TerminalController@create_user')->name
 Route::resource('/payments','PaymentController')->middleware(['verified','forbid-banned-user']);
 Route::get('/payments/{id}/confirm', 'PaymentController@confirm')->name('payment.confirm')->middleware(['verified','forbid-banned-user']);
 //FIN ARIEL ZELAYA
+
+
+Route::get('/admin-airline/{airline}/airplanes/create', 'AirlineAdminController@airplanes_create')->name('admin-airline.airplanes_create');
+Route::get('/admin-airline/{airline}/airplanes', 'AirlineAdminController@airplanes')->name('admin-airline.airplanes_index');
+Route::post('/admin-airline/{airline}/airplanes/store', 'AirlineAdminController@airplanes_store')->name('admin-airline.airplanes_store');
+Route::get('/admin-airline/{airline}/airplanes/{airplane}/edit', 'AirlineAdminController@airplanes_edit')->name('admin-airline.airplanes_edit');
+Route::patch('/admin-airline/{airline}/airplanes/update', 'AirlineAdminController@airplanes_update')->name('admin-airline.airplanes_update');
+Route::delete('/admin-airline/{airline}/airplanes/{airplane}/delete', 'AirlineAdminController@airplanes_destroy')->name('admin-airline.airplanes_destroy');
+Route::post('/admin-airline/{airline}/airplanes/mass', 'AirlineAdminController@airplanes_mass_destroy')->name('admin-airline.airplanes_mass_destroy');
+Route::get('/admin-airline/{airline}/edit', 'AirlineAdminController@edit_airline')->name('admin-airline.edit');
+Route::put('/admin-airline/{airline}/update', 'AirlineAdminController@update_airline')->name('admin-airline.update');
+Route::get('/admin-airline/{airline}/itineraries', 'AirlineAdminController@itineraries_index')->name('admin.airline.itineraries');
+Route::get('/admin-airline/{airline}/itineraries/create', 'AirlineAdminController@itineraries_create')->name('admin.airline.itineraries_create');
+Route::put('/admin-airline/{airline}/itineraries', 'AirlineAdminController@itineraries_store')->name('admin.airline.itineraries_store');

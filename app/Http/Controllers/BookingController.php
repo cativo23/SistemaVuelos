@@ -173,10 +173,11 @@ class BookingController extends Controller
         if (!$itinerary->hasSeats(array($seat_class), $passengers)){
             $mensaje = ['tipo'=>'danger', 'mess'=>'Itinerario no disponible'];
         }
-        $vuelos = $itinerary->flights;
 
-        $first_flight = $vuelos->first();
-        $last_flight = $vuelos->last();
+        $flights_outbound = $itinerary->flights->where('type', '=', 'O');
+
+        $first_flight = $flights_outbound->first();
+        $last_flight = $flights_outbound->last();
 
         $airport_dep = $first_flight->boarding_gateway->airport;
         $airport_arr = $last_flight->landing_gateway->airport;
@@ -278,26 +279,30 @@ class BookingController extends Controller
         $mensaje = ['tipo'=>'success', 'mess'=>'El vuelo sigue disponlible para los '.$passengers.' pasajeros !'];
 
         if ($itin->status == 'ready'){
-            dd('s');
-            $mensaje = ['tipo'=>'danger', 'mess'=>'Itinerario no disponible'];
-            $vuelos = $itin->flights;
 
-            $first_flight = $vuelos->first();
-            $last_flight = $vuelos->last();
+            $mensaje = ['tipo'=>'danger', 'mess'=>'Itinerario no disponible'];
+
+            $itinerary = $itin;
+            $flights_outbound = $itin->flights->where('type', '=', 'O');
+
+            $first_flight = $flights_outbound->first();
+            $last_flight = $flights_outbound->last();
 
             $airport_dep = $first_flight->boarding_gateway->airport;
             $airport_arr = $last_flight->landing_gateway->airport;
 
             $user = Auth::user();
 
-            return view('booking.book', compact('mensaje', 'itin','first_class', 'business', 'economy', 'passengers', 'airport_arr', 'airport_dep', 'user'));
+            return view('booking.book', compact('mensaje', 'itinerary','first_class', 'business', 'economy', 'passengers', 'airport_arr', 'airport_dep', 'user'));
         }
 
         if (!$itin->hasSeats(array($seat_class), $passengers)){
-            $vuelos = $itin->flights;
 
-            $first_flight = $vuelos->first();
-            $last_flight = $vuelos->last();
+            $itinerary = $itin;
+            $flights_outbound = $itinerary->flights->where('type', '=', 'O');
+
+            $first_flight = $flights_outbound->first();
+            $last_flight = $flights_outbound->last();
 
             $airport_dep = $first_flight->boarding_gateway->airport;
             $airport_arr = $last_flight->landing_gateway->airport;
@@ -306,7 +311,7 @@ class BookingController extends Controller
 
             $mensaje = ['tipo'=>'danger', 'mess'=>'Itinerario no disponible'];
 
-            return view('booking.book', compact('mensaje', 'itin','first_class', 'business', 'economy', 'passengers', 'airport_arr', 'airport_dep', 'user'));
+            return view('booking.book', compact('mensaje', 'itinerary','first_class', 'business', 'economy', 'passengers', 'airport_arr', 'airport_dep', 'user'));
         }
 
         $price = $itin->total_price * $passengers;
@@ -340,9 +345,18 @@ class BookingController extends Controller
 
         //ticket
 
-        $flights = $itin->flights;
+        $flights_inbound = $itin->flights->where('type', '=', 'I');
+        $flights_outbound = $itin->flights->where('type', '=', 'O');
 
-        foreach ($flights as $flight){
+        $first_flight = $flights_inbound->first();
+        $last_flight = $flights_outbound->last();
+
+        $airport_dep = $first_flight->boarding_gateway->airport;
+        $airport_arr = $last_flight->landing_gateway->airport;
+
+
+        $tickets=[];
+        foreach ($itin->flights as $flight){
 
             $seats = $flight->airplane->seats->where('class', '=', $seat_class)->take($passengers);
 
@@ -357,6 +371,7 @@ class BookingController extends Controller
                     'passenger_id'=>$client->id,
                 ]);
                 $ticket->save();
+                array_push($tickets, $ticket);
                 $seat->status=0;
                 $seat->save();
             }
@@ -365,14 +380,16 @@ class BookingController extends Controller
         $email = $request->input('email');
 
         if (Auth::user()){
-            \Mail::to(Auth::user())->send( new FlightBooked($itin, $price));
+            \Mail::to(Auth::user())->send( new FlightBooked($itin, $price, $passengers));
+            $email =  Auth::user()->email;
         }else{
-            \Mail::to($email)->send( new FlightBooked($itin, $price));
+            \Mail::to($email)->send( new FlightBooked($itin, $price, $passengers));
         }
 
+        \Mail::to(Auth::user())->send( new FlightBooked($itin, $price, $passengers));
 
+        $itinerary = $itin;
 
-        dd($request);
-        return view('booking.completed', compact('mensaje'));
+        return view('booking.completed', compact('mensaje', 'price', 'itinerary', 'reservation', 'tickets', 'passengers', 'client', 'email', 'airport_dep', 'airport_arr'));
     }
 }

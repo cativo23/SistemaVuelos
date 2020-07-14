@@ -92,4 +92,8 @@ class Itinerary extends Model
         }
         return $flights_with_seats > 0;
     }
+
+    public function to_string(){
+        return 'Itinerary ' .$this->origin.'-'.$this->destination;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Helper\Helper;
+use App\Helper\VoyargeHelper;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -14,22 +15,17 @@ use Spatie\Activitylog\Models\Activity;
 
 
 class ActivityController extends Controller{
-    public function to_string(){
-        return 'Aerolinea ' .$this->official_name;
-    }
+
 
 
     public function index()
     {
-        $activities = Activity::all()->last();
-        //dd($activities);
+        $activities = Activity::all()->sortByDesc('id');
+        $user = Auth::user();
 
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
-        return view('activity.index', compact('activities'));
+        return view('activity.index', compact('activities', 'sidebar' , 'header', 'footer'));
     }
-
-    //$activity->subject; El objeto que fue actualizado
-    //$activity->causer; El objeto que realizó el cambio
-    //$activity->description; la descripción, es decir el mensaje, usualmente dice se actualizo tal cosa,
 
 }

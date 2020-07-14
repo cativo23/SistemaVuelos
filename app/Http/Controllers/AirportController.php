@@ -240,7 +240,7 @@ class AirportController extends Controller
         }
         $gateways = Terminal::where('airport_id',$airport->id)->get();
 
-        $flights = Flight::where('status','unready')->whereIn('landing_terminal_id',$gateways)->get();
+        $flights = Flight::where('status','=', 'unready')->whereIn('landing_terminal_id', $gateways->pluck('id'))->get();
 //        dd(count($flights));
         $auth_user = Auth::user();
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($auth_user);
@@ -254,7 +254,7 @@ class AirportController extends Controller
         }
         $gateways = Terminal::where('airport_id',$airport->id)->get();
 
-        $flights = Flight::where('status','unready')->whereIn('boarding_terminal_id',$gateways)->get();
+        $flights = Flight::where('status','=','unready')->whereIn('boarding_terminal_id',$gateways->pluck('id'))->get();
 //dd(count($flights));
         $auth_user = Auth::user();
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($auth_user);

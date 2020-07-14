@@ -68,4 +68,8 @@ class Airplane extends Model
         return $this->hasMany(Seat::class);
     }
 
+    public function to_string(){
+        return 'Avion ' .$this->model. ' of'.$this->airline->short_name;
+    }
+
 }

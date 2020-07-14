@@ -52,4 +52,8 @@ class ClientCompany extends Model
     public function client(){
         return $this->belongsTo(Client::class, 'id', 'id');
     }
+
+    public function to_string(){
+        return 'Cliente ' .$this->client->first_name.' '.$this->client->first_surname;
+    }
 }

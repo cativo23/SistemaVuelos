@@ -2,33 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Airplane;
 use App\Airline;
+use App\Airplane;
 use App\Helper\VoyargeHelper;
 use App\Seat;
-use Exception;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
+use Auth;
+use Gate;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
-use Illuminate\View\View;
 
-class AirplaneController extends Controller
+class AirlineAdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Application|Factory|View
-     */
-    public function index()
+    public function airplanes(Airline $airline)
     {
-
-        if (! Gate::allows('manage-airplanes')) {
-            return abort(401);
+        if (!Gate::allows('manage-airline-'.$airline->id)){
+            abort(401);
         }
 
         $airplanes = Airplane::all();
@@ -37,39 +25,33 @@ class AirplaneController extends Controller
 
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
-        return view('airplane.index', compact('airplanes', 'sidebar' , 'header', 'footer'));
+        return view('admin-airline.airplanes', compact('airplanes', 'sidebar' , 'header', 'footer', 'airline'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Application|Factory|View
-     */
-    public function create()
+    public function airplanes_create(Airline $airline)
     {
-        $airlines = Airline::all();
+        if (!Gate::allows('manage-airline-'.$airline->id)){
+            abort(401);
+        }
 
         $user = Auth::user();
 
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
-        return view('airplane.create', compact('airlines', 'sidebar' , 'header', 'footer'));
+        return view('admin-airline.airplanes_create', compact('airline', 'sidebar' , 'header', 'footer'));
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function store(Request $request)
+    public function airplanes_store(Airline $airline, Request $request)
     {
+        if (!Gate::allows('manage-airline-'.$airline->id)){
+            abort(401);
+        }
+
         $request->validate([
             'modelo' => 'required|alpha_num|max:150',
             'tipo' => ['required', 'max:150', Rule::in(['Carga', 'Comercial', 'Militar'])],
             'fabricante' => 'required|alpha_num|max:191',
-            'aerolinea' => 'required',
             'economica' => 'required|integer|min:0',
             'ejecutiva' => 'required|integer|min:0',
             'primera' => 'required|integer|min:0'
@@ -81,7 +63,7 @@ class AirplaneController extends Controller
         //La capacidad total del avión es la suma de las 3 clases
         $airplane->seat_capacity = $request->economica + $request->ejecutiva + $request->primera;
         $airplane->manufacturer = $request->fabricante;
-        $airplane->airline_id = $request->aerolinea;
+        $airplane->airline_id = $airline->id;
         $airplane->save();
 
 
@@ -117,31 +99,16 @@ class AirplaneController extends Controller
             $asiento->save();
         }
 
-        return redirect()->route('airplanes.index')->with('datos', '¡Avión' .' ' .'"'. $airplane->model .' '
+        return redirect()->route('admin-airline.airplanes_index', $airline)->with('datos', '¡Avión' .' ' .'"'. $airplane->model .' '
             .$airplane->type .'"' .' guardado correctamente!');
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Airplane  $airplane
-     * @return Response
-     */
-    public function show(Airplane $airplane)
+    public function airplanes_edit(Airline $airline, Airplane $airplane)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Airplane  $airplane
-     * @return Application|Factory|View
-     */
-    public function edit($id)
-    {
-        $airplane = Airplane::findOrFail($id);
-        $airlines = Airline::all();
+        if (!Gate::allows('manage-airline-'.$airline->id)){
+            abort(401);
+        }
 
         $economicos = count(Seat::where("airplane_id","=", $airplane->id)->where("class", "=", "Economica")->get());
         $ejecutivos = count(Seat::where("airplane_id","=", $airplane->id)->where("class", "=", "Ejecutiva")->get());
@@ -151,30 +118,25 @@ class AirplaneController extends Controller
 
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
-        return view('airplane.edit', compact('airplane', 'airlines', 'economicos', 'ejecutivos', 'primera', 'sidebar' , 'header', 'footer'));
+        return view('admin-airline.airplanes_edit', compact('airplane', 'airline', 'economicos', 'ejecutivos', 'primera', 'sidebar' , 'header', 'footer', 'airline'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param $id
-     * @return RedirectResponse
-     */
-    public function update(Request $request, $id)
+    public function airplanes_update(Airline $airline, Request $request)
     {
+        if (!Gate::allows('manage-airline-'.$airline->id)){
+            abort(401);
+        }
+
         $request->validate([
             'modelo' => 'required|string|max:150',
             'tipo' => 'required|max:150',
             'fabricante' => 'required|string|max:255',
-            'aerolinea' => 'required',
-
             'economica' => 'integer|min:0',
             'ejecutiva' => 'integer|min:0',
             'primera' => 'integer|min:0'
         ]);
 
-        $airplane = Airplane::findOrFail($id);
+        $airplane =  Airplane::findOrFail($request->input('id'));
 
         //Obteniendo cantidades de asientos
         $economicos = count(Seat::where("airplane_id","=", $airplane->id)->where("class", "=", "Economica")->get());
@@ -281,41 +243,18 @@ class AirplaneController extends Controller
         $airplane->type = $request->tipo;
         $airplane->seat_capacity = $request->economica + $request->ejecutiva + $request->primera;
         $airplane->manufacturer = $request->fabricante;
-        $airplane->airline_id = $request->aerolinea;
         $airplane->save();
 
-        return redirect()->route('airplanes.index')->with('datos', '¡Avión' .' ' .'"'.$airplane->model .' '
+        return redirect()->route('admin-airline.airplanes_index', $airline)->with('datos', '¡Avión' .' ' .'"'.$airplane->model .' '
             .$airplane->type .'"' .' editado correctamente!');
-        //with('datos', '¡Avión editado correctamente!');
-
     }
 
-
-    public function confirm($id)
+    public function airplanes_destroy(Airline $airline, Airplane $airplane)
     {
-        $airplane = Airplane::findOrFail($id);
-        $economicos = count(Seat::where("airplane_id","=", $airplane->id)->where("class", "=", "Economica")->get());
-        $ejecutivos = count(Seat::where("airplane_id","=", $airplane->id)->where("class", "=", "Ejecutiva")->get());
-        $primera = count(Seat::where("airplane_id","=", $airplane->id)->where("class", "=", "Primera")->get());
+        if (!Gate::allows('manage-airline-'.$airline->id)){
+            abort(401);
+        }
 
-        //dd($economicos, $ejecutivos);
-        $user = Auth::user();
-
-        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
-
-        return view('airplane.confirm', compact('airplane', 'sidebar', 'header', 'footer', 'economicos', 'ejecutivos', 'primera'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param $id
-     * @return RedirectResponse
-     * @throws Exception
-     */
-    public function destroy($id)
-    {
-        $airplane = Airplane::findOrFail($id);
         $asientos = Seat::where("airplane_id","=", $airplane->id)->get();
         //dd($asientos);
         foreach ($asientos as $asiento){
@@ -323,23 +262,62 @@ class AirplaneController extends Controller
         }
         $avion = $airplane->model .' ' .$airplane->type;
         $airplane->delete();
-        return redirect()->route('airplanes.index')->with('datos', '¡Avión' .' ' .'"'.$avion .'"' .' eliminado correctamente!');
+        return redirect()->route('admin-airline.airplanes_index', $airline)->with('datos', '¡Avión' .' ' .'"'.$avion .'"' .' eliminado correctamente!');
 
     }
 
-    /**
-     * Delete all selected User at once.
-     *
-     * @param Request $request
-     * @return Response|void
-     */
-    public function mass(Request $request)
+    public function airplanes_mass_destroy(Airline $airline)
     {
-        if (!Gate::allows('manage-airplanes')) {
-            return abort(401);
+        if (!Gate::allows('manage-airline-'.$airline->id)){
+            abort(401);
         }
+
         Airplane::whereIn('id', request('ids'))->delete();
 
         return response()->noContent();
+    }
+
+    public function edit_airline(Airline $airline){
+        if (!Gate::allows('manage-airline-'.$airline->id)){
+            abort(401);
+        }
+
+        $user = Auth::user();
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+
+        return view('admin-airline.edit', compact('airline', 'sidebar', 'header', 'footer'));
+    }
+
+    public function update_airline(Airline $airline, Request $request){
+        if (!Gate::allows('manage-airline-'.$airline->id)){
+            abort(401);
+        }
+        $request->validate([
+            'codigo' => ['required','alpha_num','max:2','regex:/^[A-Z0-9]{2}$/', Rule::unique('airlines', 'code')->ignore($airline->id)],
+            'nombrecorto' => 'required|alpha|max:100',
+            'nombreoficial' => 'required|string|max:191',
+            'email' => ['required','email:rfc,dns', Rule::unique('airlines', 'email')->ignore($airline->id)],
+            'paisorigen' => 'required|string|max:191',
+            'representante' => 'required|string|max:191',
+            'paginaweb' => 'required|regex:/^[a-zA-Z0-9].{3,}$/|string|max:191',
+            'facebook' => 'required|string|max:150|regex:/^[a-zA-Z0-9].{3,}$/',
+            'instagram' => 'required|alpha_num|max:150|regex:/^[a-zA-Z0-9].{3,}$/',
+            'twitter' => 'required|alpha_num|max:150|regex:/^[a-zA-Z0-9].{3,}$/',
+            'whatsapp' => 'required|string|max:16'
+        ]);
+        $airline->code = $request->codigo;
+        $airline->short_name = $request->nombrecorto;
+        $airline->official_name = $request->nombreoficial;
+        $airline->email = $request->email;
+        $airline->origin_country = $request->paisorigen;
+        $airline->representative = $request->representante;
+        $airline->web_page = 'https://'.$request->paginaweb;
+        $airline->facebook = $request->facebook;
+        $airline->instagram = $request->instagram;
+        $airline->twitter = $request->twitter;
+        $airline->whatsapp = $request->whatsapp;
+        $airline->save();
+
+        return redirect()->route('dashboard')->with('datos', '¡La aerolinea se editó correctamente!');
     }
 }
