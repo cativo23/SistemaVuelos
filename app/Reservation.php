@@ -56,8 +56,8 @@ class Reservation extends Model
     /*
      * Itineraries for this reservation
      */
-    public function itineraries(){
-        return $this->hasMany(Itinerary::class);
+    public function itinerary(){
+        return $this->belongsTo(Itinerary::class);
     }
 
     /*

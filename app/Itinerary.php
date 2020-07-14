@@ -74,8 +74,8 @@ class Itinerary extends Model
     /*
      * Reservations that have this Itinerary
      */
-    public function reservations(){
-        return $this->hasMany(Reservation::class);
+    public function reservation(){
+        return $this->belongsTo(Reservation::class);
     }
 
     public function airline(){
@@ -91,6 +91,15 @@ class Itinerary extends Model
             }
         }
         return $flights_with_seats > 0;
+    }
+
+    public function cost(){
+        $cost = 0;
+        $flights = $this->flights;
+        foreach ($flights as $flight){
+            $cost += $flight->cost;
+        }
+        return $cost;
     }
 
     public function to_string(){

@@ -21,7 +21,7 @@
     		<div class="col-md-11">
                 <div class="block">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Información Aerolinea</h3>
+                        <h3 class="block-title">Información Aerolínea</h3>
                         <div class="block-options">
                             <button type="button" class="btn-block-option">
                                 <i class="fa fa-plane"></i>

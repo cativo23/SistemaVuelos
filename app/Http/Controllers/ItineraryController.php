@@ -141,11 +141,11 @@ class ItineraryController extends Controller
 
             $client = new Client();
 
-            $country_origin = json_decode($client->request('GET', 'http://127.0.0.1:8001/api/countries?q='.$flight_origin->country)->getBody(), 'true')[0];
-            $country_destination = json_decode($client->request('GET', 'http://127.0.0.1:8001/api/countries?q='.$flight_destination->country)->getBody(), 'true')[0];
+            $country_origin = json_decode($client->request('GET', 'https://be77bddc8b14.ngrok.io/api/countries?q='.$flight_origin->country)->getBody(), 'true')[0];
+            $country_destination = json_decode($client->request('GET', 'https://be77bddc8b14.ngrok.io/countries?q='.$flight_destination->country)->getBody(), 'true')[0];
 
-            $city_destination = json_decode($client->request('GET', 'http://127.0.0.1:8001/api/cities?q='.$flight_destination->city.'&country='.$country_destination['country_code'])->getBody(), 'true')[0];
-            $city_origin = json_decode($client->request('GET', 'http://127.0.0.1:8001/api/cities?q='.$flight_origin->city.'&country='.$country_origin['country_code'])->getBody(), 'true')[0];
+            $city_destination = json_decode($client->request('GET', 'https://be77bddc8b14.ngrok.io/api/cities?q='.$flight_destination->city.'&country='.$country_destination['country_code'])->getBody(), 'true')[0];
+            $city_origin = json_decode($client->request('GET', 'https://be77bddc8b14.ngrok.io/cities?q='.$flight_origin->city.'&country='.$country_origin['country_code'])->getBody(), 'true')[0];
 
             $latitude_origin = $city_origin['latitude'];
             $latitude_destination = $city_destination['latitude'];

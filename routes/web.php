@@ -143,4 +143,6 @@ Route::get('/admin-airline/{airline}/edit', 'AirlineAdminController@edit_airline
 Route::put('/admin-airline/{airline}/update', 'AirlineAdminController@update_airline')->name('admin-airline.update');
 Route::get('/admin-airline/{airline}/itineraries', 'AirlineAdminController@itineraries_index')->name('admin.airline.itineraries');
 Route::get('/admin-airline/{airline}/itineraries/create', 'AirlineAdminController@itineraries_create')->name('admin.airline.itineraries_create');
-Route::put('/admin-airline/{airline}/itineraries', 'AirlineAdminController@itineraries_store')->name('admin.airline.itineraries_store');
+Route::post('/admin-airline/{airline}/itineraries', 'AirlineAdminController@itineraries_store')->name('admin.airline.itineraries_store');
+Route::get('/admin-airline/{airline}/report', 'AirlineAdminController@form_report')->name('admin.airline.report');
+Route::post('/admin-airline/{airline}/report', 'AirlineAdminController@report')->name('admin.airline.report_get');

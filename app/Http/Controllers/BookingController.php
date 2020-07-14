@@ -52,11 +52,11 @@ class BookingController extends Controller
         $today = new DateTime();
 
         if ($today>=$date_from_2d){
-            dd('error');
+            return view('booking.index');
         }
 
         if ($today>=$date_to_2d){
-            dd('error');
+            return view('booking.index');
         }
 
 
@@ -82,7 +82,7 @@ class BookingController extends Controller
             array_push($seat_classes, 'Economica');
         }
 
-        $itineraries = Itinerary::where('status', '=', 'unready')
+        $itineraries = Itinerary::where('status', '=', 'ready')
                         ->whereBetween('departure_date', [$date_from_2d->format('Y-m-d'), $date_from_2u->format('Y-m-d')])
                         ->whereBetween('arrival_date', [$date_to_2d->format('Y-m-d'), $date_to_2u->format('Y-m-d')])
                         ->where('origin','=' , $origin)

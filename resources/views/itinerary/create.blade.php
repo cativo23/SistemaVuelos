@@ -298,7 +298,7 @@
                 source:
                     function (term, response) {
                         var settings = {
-                            "url": "http://127.0.0.1:8000/api/airports?term="+term,
+                            "url": "/api/airports?term="+term,
                             "method": "GET",
                             "timeout": 0,
                             success: function (res) {
@@ -324,7 +324,7 @@
                 source:
                     function (term, response) {
                         var settings = {
-                            "url": "http://127.0.0.1:8000/api/airports?term="+term,
+                            "url": "/api/airports?term="+term,
                             "method": "GET",
                             "timeout": 0,
                             success: function (res) {
@@ -349,7 +349,7 @@
                 source:
                     function (term, response) {
                         var settings = {
-                            "url": "http://127.0.0.1:8000/api/airports?term="+term,
+                            "url": "/api/airports?term="+term,
                             "method": "GET",
                             "timeout": 0,
                             success: function (res) {
@@ -373,7 +373,7 @@
                 source:
                     function (term, response) {
                         var settings = {
-                            "url": "http://127.0.0.1:8000/api/airports?term="+term,
+                            "url": "/api/airports?term="+term,
                             "method": "GET",
                             "timeout": 0,
                             success: function (res) {
@@ -397,7 +397,7 @@
                 source:
                     function (term, response) {
                         var settings = {
-                            "url": "http://127.0.0.1:8000/api/airlines?term="+term,
+                            "url": "/api/airlines?term="+term,
                             "method": "GET",
                             "timeout": 0,
                             success: function (res) {
@@ -481,7 +481,7 @@
                     source:
                         function (term, response) {
                             var settings = {
-                                "url": "http://127.0.0.1:8000/api/airports?term="+term,
+                                "url": "/api/airports?term="+term,
                                 "method": "GET",
                                 "timeout": 0,
                                 success: function (res) {
@@ -507,7 +507,7 @@
                     source:
                         function (term, response) {
                             var settings = {
-                                "url": "http://127.0.0.1:8000/api/airports?term="+term,
+                                "url": "/api/airports?term="+term,
                                 "method": "GET",
                                 "timeout": 0,
                                 success: function (res) {
@@ -531,7 +531,7 @@
                     source:
                         function (term, response) {
                             var settings = {
-                                "url": "http://127.0.0.1:8000/api/airlines?term="+term,
+                                "url": "/api/airlines?term="+term,
                                 "method": "GET",
                                 "timeout": 0,
                                 success: function (res) {
