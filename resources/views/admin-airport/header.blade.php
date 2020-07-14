@@ -89,6 +89,16 @@
 
         <!-- Right Section -->
         <div class="content-header-section">
+            <div class="btn-group" role="group">
+                <div class='time-frame'>
+                    <div id='date-part'></div>
+                </div>
+            </div>
+            <div class="btn-group" role="group">
+                <div class='time-frame'>
+                    <div id='time-part'></div>
+                </div>
+            </div>
             <!-- User Dropdown -->
             <div class="btn-group" role="group">
                 <button type="button" class="btn btn-rounded btn-dual-secondary" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -97,7 +107,7 @@
                     <i class="fa fa-angle-down ml-5"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right min-width-200" aria-labelledby="page-header-user-dropdown">
-                    <h5 class="h6 text-center py-10 mb-5 border-b text-uppercase">User</h5>
+                    <h5 class="h6 text-center py-10 mb-5 border-b text-uppercase">{{$user->name}}</h5>
                     <a class="dropdown-item" href="javascript:void(0)">
                         <i class="si si-user mr-5"></i> Profile
                     </a>

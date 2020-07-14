@@ -1,4 +1,4 @@
-@extends('layouts.backend', ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer'])
+@extends('layouts.backend', ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer',  'airport'=> $airport])
 
 @section('content')
     <!-- Page Content -->
@@ -20,12 +20,12 @@
                                     <div class="font-size-h3 font-w600 text-info">63250</div>
                                     <div class="font-size-sm font-w600 text-uppercase text-muted">Accounts</div> -->
                                     <div class="col-12 col-sm-12 text-center text-sm-left">
-                                        <div class="font-size-h4 font-w600">nombre</div>
+                                        <div class="font-size-h4 font-w600">{{$user->name}}</div>
                                         <div class="font-size-sm font-w600 text-uppercase text-muted">
-                                            <i class="fa fa-envelope"></i> email
+                                            <i class="fa fa-envelope"></i> {{$user->email}}
                                         </div>
                                         <div class="font-w600 text-info">
-                                            <i class="fa fa-user"></i>Administrador
+                                            <i class="fa fa-user"></i>Administrador del Aeropuerto {{$aeropuerto->name}}
                                         </div>
                                     </div>
                                 </div>
@@ -33,7 +33,7 @@
                             <div class="col-4">
                                 <div class="js-appear-enabled animated fadeInRight" data-toggle="appear" data-class="animated fadeInRight">
 
-                                    <div class="font-size-h3 font-w600 text-info">username</div>
+                                    <div class="font-size-h3 font-w600 text-info">{{$user->username}}</div>
                                     <div class="font-size-sm font-w600 text-uppercase text-muted">Nombre de usuario</div>
                                 </div>
                             </div>
@@ -41,104 +41,63 @@
                     </div>
                     <br>
                     <div class="row">
-
-
                         <!-- Row #5 -->
-                        <div class="col-6 col-sm-6 col-md-3 col-xl-3">
+                        <div class="col-6 col-sm-6 col-md-4 col-xl-4">
                             <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-center" href="be_pages_generic_inbox.html">
                                 <div class="block-content ribbon ribbon-bookmark ribbon-success ribbon-left">
-                                    <div class="ribbon-box">152</div>
+                                    <div class="ribbon-box">{{count($salientes)}}</div>
                                     <p class="mt-5">
-                                        <i class="si si-users fa-3x text-muted"></i>
+                                        <i class="si si-call-out fa-2x text-muted"></i>
                                     </p>
-                                    <p class="font-w600 text-uppercase">Usuarios</p>
+                                    <p class="font-w600 text-uppercase">Vuelos Salientes</p>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6 col-sm-6 col-md-3 col-xl-3">
+                        <div class="col-6 col-sm-6 col-md-4 col-xl-4">
                             <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-center" href="be_pages_forum_categories.html">
                                 <div class="block-content ribbon ribbon-bookmark ribbon-info ribbon-left">
-                                    <div class="ribbon-box">6</div>
+                                    <div class="ribbon-box">{{count($salientes)}}</div>
                                     <p class="mt-5">
-                                        <i class="si si-user-following fa-3x text-muted"></i>
+                                        <i class="si si-call-in fa-2x text-muted"></i>
                                     </p>
-                                    <p class="font-w600 text-uppercase">Roles</p>
+                                    <p class="font-w600 text-uppercase">Vuelos Entrantes</p>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6 col-sm-6 col-md-3 col-xl-3">
+                        <div class="col-6 col-sm-6 col-md-4 col-xl-4">
                             <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-center" href="be_pages_forum_categories.html">
                                 <div class="block-content ribbon ribbon-bookmark ribbon-warning ribbon-left">
-                                    <div class="ribbon-box">5</div>
+                                    <div class="ribbon-box">{{count($terminal)}}</div>
                                     <p class="mt-5">
-                                        <i class="si si-lock fa-3x text-muted"></i>
+                                        <i class="si si-chart fa-2x text-muted"></i>
                                     </p>
-                                    <p class="font-w600 text-uppercase">Permisos</p>
+                                    <p class="font-w600 text-uppercase">Terminales</p>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6 col-sm-6 col-md-3 col-xl-3">
-                            <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-center" href="be_pages_forum_categories.html">
-                                <div class="block-content ribbon ribbon-bookmark ribbon-primary ribbon-left">
-                                    <div class="ribbon-box">5</div>
-                                    <p class="mt-5">
-                                        <i class="si si-notebook fa-3x text-muted"></i>
-                                    </p>
-                                    <p class="font-w600 text-uppercase">Bitácora</p>
-                                </div>
-                            </a>
-                        </div>
-
 
                         <!-- END Row #5 -->
-                        <div class="col-6 col-xl-3">
+                        <div class="col-6 col-xl-6">
                             <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-right" href="javascript:void(0)">
                                 <div class="block-content block-content-full clearfix">
                                     <div class="float-left mt-10 d-none d-sm-block">
-                                        <i class="si si-user fa-3x text-muted"></i>
+                                        <i class="si si-arrow-up fa-3x text-muted"></i>
                                     </div>
-                                    <div class="font-size-h3 font-w600 js-count-to-enabled" data-toggle="countTo" data-speed="1000" data-to="1500">85</div>
-                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Usuarios activos</div>
+                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Asignar terminales salientes</div>
                                 </div>
                             </a>
                         </div>
 
-                        <div class="col-6 col-xl-3">
+                        <div class="col-6 col-xl-6">
                             <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-right" href="javascript:void(0)">
                                 <div class="block-content block-content-full clearfix">
                                     <div class="float-left mt-10 d-none d-sm-block">
-                                        <i class="si si-user-unfollow fa-3x text-muted"></i>
+                                        <i class="si si-arrow-down fa-3x text-muted"></i>
                                     </div>
-                                    <div class="font-size-h3 font-w600 js-count-to-enabled" data-toggle="countTo" data-speed="1000" data-to="1500">45</div>
-                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Usuarios inactivos</div>
+                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Asignar terminales entrantes</div>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-6 col-xl-3">
-                            <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-right" href="javascript:void(0)">
-                                <div class="block-content block-content-full clearfix">
-                                    <div class="float-left mt-10 d-none d-sm-block">
-                                        <i class="si si-paper-plane fa-3x text-muted"></i>
-                                    </div>
-                                    <div class="font-size-h3 font-w600 js-count-to-enabled" data-toggle="countTo" data-speed="1000" data-to="1500">
-                                        23</div>
-                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Administradors Aerolina</div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6 col-xl-3">
-                            <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-right" href="javascript:void(0)">
-                                <div class="block-content block-content-full clearfix">
-                                    <div class="float-left mt-10 d-none d-sm-block">
-                                        <i class="si si-anchor fa-3x text-muted"></i>
-                                    </div>
-                                    <div class="font-size-h3 font-w600 js-count-to-enabled" data-toggle="countTo" data-speed="1000" data-to="1500">
-                                        12</div>
-                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Administradors aeropuerto</div>
-                                </div>
-                            </a>
-                        </div>
-
                     </div>
                 </div>
 
@@ -150,41 +109,40 @@
                                 <i class="fa fa-3x fa-user-plus text-white-op"></i>
                             </div>
                             <p class="font-size-lg font-w600 text-white mb-0">
-                                Últimos Usuarios Registrados
+                                Últimos Vuelos
                             </p>
                             <p class="font-size-sm text-uppercase font-w600 text-white-op mb-0">
                                 Top 5
                             </p>
                         </div>
                         <div class="block-content block-content-full">
-                            <table class="table table-borderless table-striped table-hover mb-0">
-                                <tbody>
-                                @if (count($users) === 0)
-                                    <tr>
-                                        <td class="text-center"></td>
-                                        <td>
-                                            <strong>Aún no se registran vuelos</strong>
-                                        </td>
-                                        <td class="text-center">
-                                            <strong class="text-success"></strong>
-                                        </td>
-                                    </tr>
-                                @else
-                                    @foreach( $users as $user)
+                            <div class="table-responsive">
+                                <table class="table table-borderless table-striped table-hover mb-0">
+                                    <tbody>
+                                    @if (count($vuelos_ultimos) === 0)
                                         <tr>
                                             <td class="text-center"></td>
-                                            <td class="text-left">
-                                                <strong>{{ $user->name }}</strong>
+                                            <td>
+                                                <strong>Aún no se registran vuelos</strong>
                                             </td>
                                             <td class="text-center">
-                                                <strong class="text-success">{{ $user->email }}</strong>
+                                                <strong class="text-success"></strong>
                                             </td>
                                         </tr>
-                                    @endforeach
-                                @endif
+                                    @else
+                                        @foreach( $vuelos_ultimos as $user)
+                                            <tr>
+                                                <td class="text-center">{{ $user->airline->short_name }}</td>
+                                                <td style="white-space: nowrap;text-overflow: ellipsis;">
+                                                    <strong class="text-success">{{ $user->destination }}</strong>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                                </div>
                         </div>
                         <div class="block-content block-content-full text-center bg-body-light">
 
@@ -207,7 +165,7 @@
                                     <i class="si si-pointer fa-2x text-info"></i>
                                 </div>
                                 <div class="font-size-h3 font-w600 text-info js-count-to-enabled" data-toggle="countTo"
-                                     data-speed="1000" data-to="260">56</div>
+                                     data-speed="1000" data-to="260">{{count($vuelos)}}</div>
                                 <div class="font-size-sm font-w600 text-uppercase text-info-light">Vuelos asignados</div>
                             </div>
 
@@ -217,7 +175,7 @@
                                 </div>
                                 <div class="font-size-h3 font-w600 text-success">
                                     <span data-toggle="countTo" data-speed="1000" data-to="980"
-                                          class="js-count-to-enabled">36
+                                          class="js-count-to-enabled">{{$vuelos_done}}
                                     </span>
                                 </div>
                                 <div class="font-size-sm font-w600 text-uppercase text-danger-light">Vuelos realizados</div>
@@ -228,7 +186,7 @@
                                     <i class="si si-pencil fa-2x text-warning"></i>
                                 </div>
                                 <div class="font-size-h3 font-w600 text-warning js-count-to-enabled"
-                                     data-toggle="countTo" data-speed="1000" data-to="38">36
+                                     data-toggle="countTo" data-speed="1000" data-to="38">{{$vuelos_gestionar}}
                                 </div>
                                 <div class="font-size-sm font-w600 text-uppercase text-warning-light">Vuelos por gestionar</div>
                             </div>
@@ -238,7 +196,7 @@
                                     <i class="si si-ban fa-2x text-danger"></i>
                                 </div>
                                 <div class="font-size-h3 font-w600 text-danger js-count-to-enabled"
-                                     data-toggle="countTo" data-speed="1000" data-to="59">12</div>
+                                     data-toggle="countTo" data-speed="1000" data-to="59">{{$vuelos_cancelled}}</div>
                                 <div class="font-size-sm font-w600 text-uppercase text-danger-light">Vuelos cancelados</div>
                             </div>
                         </div>
