@@ -78,7 +78,7 @@
         -->
         <div id="page-container" class="sidebar-o sidebar-inverse enable-page-overlay side-scroll page-header-fixed page-header-glass page-header-inverse main-content-boxed enable-cookies">
 
-            @component($sidebar, ['user'=>Auth::user()])
+            @component($sidebar, ['user'=>Auth::user(), 'airline'=>$airline])
             @endcomponent
 
             @component($header, ['user'=>Auth::user()])
