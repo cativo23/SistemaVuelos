@@ -101,9 +101,23 @@
                 <li class="nav-main-heading">
                     <span class="sidebar-mini-visible">SuperAdmin</span><span class="sidebar-mini-hidden">Super Administrator</span>
                 </li>
+                <li class="{{ request()->is('backups*', 'activities*') ? ' open' : '' }}">
+                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bulb"></i><span
+                            class="sidebar-mini-hide">Administración</span></a>
+                    <ul>
+                        <li>
+                            <a class="{{ request()->is('backups*') ? ' active' : '' }}"
+                               href="{{route('backups.index')}}">Backups</a>
+                        </li>
+                        <li>
+                            <a class="{{ request()->is('activities*') ? ' active' : '' }}"
+                               href="{{route('activities.index')}}">Bitacora de Actividades</a>
+                        </li>
+                    </ul>
+                </li>
                 @if($user->can('manage-users'))
                     <li class="{{ request()->is('super/users*', 'super/roles*', 'super/abilities*') ? ' open' : '' }}">
-                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bulb"></i><span
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-user"></i><span
                                 class="sidebar-mini-hide">Manejo de Usuarios</span></a>
                         <ul>
                             <li>
