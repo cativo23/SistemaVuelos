@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Example Routes
-Route::redirect('/buy', '300');
+Route::redirect('/', 'buy', 301);
 
 Route::view('/pages/slick', 'pages.slick')->middleware('verified');
 Route::view('/pages/datatables', 'pages.datatables')->middleware('verified');

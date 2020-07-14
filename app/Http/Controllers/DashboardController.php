@@ -20,7 +20,7 @@ use Spatie\Activitylog\Models\Activity;
 
 class DashboardController extends Controller
 {
-    public function index(){
+    public function index(){;
 
         $user = Auth::user();
         $view = 'client.dashboard';
@@ -174,7 +174,18 @@ class DashboardController extends Controller
         if ($user->can('admin-airline-dash')){
             Log::info('This is a airline admin user');
             //Obtener aerolinea de admin
-            $airline = Airline::all()->last();
+
+            $abilidades = $user->getAbilities();
+
+            $airline_id = null;
+
+            foreach ($abilidades as $a){
+                if (strpos($a->name, 'manage-airline-') !== false) {
+                   $airline_id = str_replace( 'manage-airline-', '', $a->name);
+                }
+            }
+
+            $airline = Airline::findOrFail($airline_id);
             //dd($airline);
 
             // Los últimos 5 vuelos de la aerolinea
@@ -202,11 +213,7 @@ class DashboardController extends Controller
 
             //Total de vuelos por gestionar
             $vuelos_gestionar = count(Flight::where('airline_id', '=', $airline->id)
-                ->where("arrival_date","=", null)
-                ->orWhere("arrival_time","=", null)
-                ->orWhere("departure_date","=", null)
-                ->orWhere("departure_time","=", null)
-                ->get());
+                ->where("status","=", 'unready')->get());
 
             //Vuelos cancelados
             $vuelos_cancelled = count(Flight::where('airline_id', '=',$airline->id)
@@ -268,12 +275,10 @@ class DashboardController extends Controller
             return view( $view , ['user'=>$user, 'sidebar'=>$sidebar, 'footer'=>$footer, 'header'=>$header,
                 'airline'=>$airline, 'vuelos'=>$vuelos, 'vuelos_ready'=>$vuelos_ready, 'vuelos_flying'=>$vuelos_flying,
                 'vuelos_boarding'=>$vuelos_boarding, 'n_vuelos'=>$n_vuelos, 'vuelos_done'=>$vuelos_done,
-                'vuelos_gestionar'=>$vuelos_gestionar, 'vuelos_cancelled'=>$vuelos_cancelled]);        }
+                'vuelos_gestionar'=>$vuelos_gestionar, 'vuelos_cancelled'=>$vuelos_cancelled, 'airline'=>$airline]);        }
 
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
-        //list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
-
-        //return view( $view , ['user'=>$user, 'sidebar'=>$sidebar, 'footer'=>$footer, 'header'=>$header]);
+        return view( $view , ['user'=>$user, 'sidebar'=>$sidebar, 'footer'=>$footer, 'header'=>$header]);
     }
 }
