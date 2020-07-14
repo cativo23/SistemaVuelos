@@ -21,6 +21,11 @@ Route::view('/pages/datatables', 'pages.datatables')->middleware('verified');
 Route::view('/pages/blank', 'pages.blank')->middleware(['verified', 'logs-out-banned-user']);
 Route::view('/banned', 'auth.banned')->name('banned');
 
+Route::get('/buy', 'BookingController@index')->name('buy');
+Route::match(['get', 'post'],'/search', 'BookingController@search')->name('search');
+Route::match(['get', 'post'],'/check', 'BookingController@check')->name('check');
+Route::get('/booking', 'BookingController@book')->name('booking');
+Route::post('/booking/completed', 'BookingController@completed')->name('completed');
 /*
  * Cativo's Stuff START
  */
@@ -41,14 +46,14 @@ Route::group(['middleware' => ['verified', 'logs-out-banned-user'], 'prefix' => 
 
 Auth::routes(['verify' => true]); //Auth Routes
 
-Route::match(['get', 'post'], '/dashboard','DashboardController@index')->middleware('verified')->middleware('forbid-banned-user');
+Route::match(['get', 'post'], '/dashboard','DashboardController@index')->middleware(['verified','forbid-banned-user'])->name('dashboard');
 
-Route::resource('/flights', 'FlightController')->middleware('verified', 'forbid-banned-user');
+Route::resource('/flights', 'FlightController')->middleware(['verified','forbid-banned-user']);
 
-Route::resource('/backups', 'BackupController')->middleware('verified', 'forbid-banned-user');
+Route::resource('/backups', 'BackupController')->middleware(['verified','forbid-banned-user']);
 
-Route::delete('itineraries/mass_destroy', 'ItineraryController@mass')->name('itineraries.mass');
-Route::resource('/itineraries', 'ItineraryController')->middleware('verified', 'forbid-banned-user');
+Route::delete('itineraries/mass_destroy', 'ItineraryController@mass')->name('itineraries.mass')->middleware(['verified','forbid-banned-user']);
+Route::resource('/itineraries', 'ItineraryController')->middleware(['verified','forbid-banned-user']);
 
 /*
  * Cativo's Stuff END
@@ -61,31 +66,37 @@ Route::resource('/itineraries', 'ItineraryController')->middleware('verified', '
 /*
  * CRUD Destinations
  */
-Route::resource('/destinations', 'DestinationController')->middleware('verified');
-Route::get('/destinations/{id}/confirm', 'DestinationController@confirm')->name('destinations.confirm')->middleware('verified');
+Route::delete('destinations/mass_destroy', 'DestinationController@mass')->name('destinations.mass')->middleware(['verified','forbid-banned-user']);
+Route::resource('/destinations', 'DestinationController')->middleware(['verified','forbid-banned-user']);
+Route::get('/destinations/{id}/confirm', 'DestinationController@confirm')->name('destinations.confirm')->middleware(['verified','forbid-banned-user']);
 
 # CRUD Airline
-Route::delete('airlines/mass_destroy', 'AirlineController@mass')->name('airlines.mass');
-Route::resource('/airlines', 'AirlineController')->middleware(['verified']);
-Route::get('/airlines/{id}/confirm', 'AirlineController@confirm')->name('airlines.confirm')->middleware(['verified']);
+Route::delete('airlines/mass_destroy', 'AirlineController@mass')->name('airlines.mass')->middleware(['verified','forbid-banned-user']);
+Route::resource('/airlines', 'AirlineController')->middleware(['verified','forbid-banned-user']);
+Route::get('/airlines/{id}/confirm', 'AirlineController@confirm')->name('airlines.confirm')->middleware(['verified','forbid-banned-user']);
 
 
 # CRUD Airplane
-Route::delete('airplanes/mass_destroy', 'AirplaneController@mass')->name('airplanes.mass');
-Route::resource('/airplanes', 'AirplaneController');
-Route::get('/airplanes/{id}/confirm', 'AirplaneController@confirm')->name('airplanes.confirm');
+Route::delete('airplanes/mass_destroy', 'AirplaneController@mass')->name('airplanes.mass')->middleware(['verified','forbid-banned-user']);
+Route::resource('/airplanes', 'AirplaneController')->middleware(['verified','forbid-banned-user']);
+Route::get('/airplanes/{id}/confirm', 'AirplaneController@confirm')->name('airplanes.confirm')->middleware(['verified','forbid-banned-user']);
 
 # CRUD Seat
-Route::resource('/seats', 'SeatController');
-Route::get('/seats/{id}/confirm', 'SeatController@confirm')->name('seats.confirm');
+Route::resource('/seats', 'SeatController')->middleware(['verified','forbid-banned-user']);
+Route::get('/seats/{id}/confirm', 'SeatController@confirm')->name('seats.confirm')->middleware(['verified','forbid-banned-user']);
 
 # CRUD Cliente Natural
-Route::resource('/clientNaturals', 'ClientNaturalController');
-Route::get('/clientNaturals/{id}/confirm', 'ClientNaturalController@confirm')->name('clientNaturals.confirm');
+Route::delete('clientNaturals/mass_destroy', 'ClientNaturalController@mass')->name('clientNaturals.mass')->middleware(['verified','forbid-banned-user']);
+Route::resource('/clientNaturals', 'ClientNaturalController')->middleware(['verified','forbid-banned-user']);
+Route::get('/clientNaturals/{id}/confirm', 'ClientNaturalController@confirm')->name('clientNaturals.confirm')->middleware(['verified','forbid-banned-user']);
 
 # CRUD Cliente Empresa
-Route::resource('/clientCompanys', 'ClientCompanyController');
-Route::get('/clientCompanys/{id}/confirm', 'ClientCompanyController@confirm')->name('clientCompanys.confirm');
+Route::delete('clientCompanys/mass_destroy', 'ClientCompanyController@mass')->name('clientCompanys.mass')->middleware(['verified','forbid-banned-user']);
+Route::resource('/clientCompanys', 'ClientCompanyController')->middleware(['verified','forbid-banned-user']);
+Route::get('/clientCompanys/{id}/confirm', 'ClientCompanyController@confirm')->name('clientCompanys.confirm')->middleware(['verified','forbid-banned-user']);
+
+Route::resource('/activities', 'ActivityController');
+
 
 // Fin Ricardo Sosa
 
@@ -107,10 +118,11 @@ Route::get('/airports/{id}/confirm', 'AirportController@confirm')->name('airport
 Route::get('/airports/{airport}/user/{user}', 'AirportController@index_user')->name('airports.user');
 Route::get('/airports/{airport}/user/{user}/edit', 'AirportController@edit_user')->name('airports.edit_user');
 //GATEWAY
-Route::resource('/gateways','TerminalController');
-Route::get('/gateways/{id}/confirm', 'TerminalController@confirm')->name('gateways.confirm');
-Route::get('/gateways/{airport}/create', 'TerminalController@create_user')->name('gateways.create_user');
+Route::delete('gateways/mass_destroy', 'TerminalController@mass')->name('gateways.mass')->middleware(['verified','forbid-banned-user']);
+Route::resource('/gateways','TerminalController')->middleware(['verified','forbid-banned-user']);
+Route::get('/gateways/{id}/confirm', 'TerminalController@confirm')->name('gateways.confirm')->middleware(['verified','forbid-banned-user']);
+Route::get('/gateways/{airport}/create', 'TerminalController@create_user')->name('gateways.create_user')->middleware(['verified','forbid-banned-user']);
 //PAYMENT
-Route::resource('/payments','PaymentController');
-Route::get('/payments/{id}/confirm', 'PaymentController@confirm')->name('payment.confirm');
+Route::resource('/payments','PaymentController')->middleware(['verified','forbid-banned-user']);
+Route::get('/payments/{id}/confirm', 'PaymentController@confirm')->name('payment.confirm')->middleware(['verified','forbid-banned-user']);
 //FIN ARIEL ZELAYA

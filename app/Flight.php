@@ -82,28 +82,28 @@ class Flight extends Model
 
 
     public function airline(){
-        $this->belongsTo(Airline::class);
+        return $this->belongsTo(Airline::class);
     }
 
     /*
     * Airplane of this flight
     */
     public function airplane(){
-        $this->belongsTo(Airline::class);
+        return $this->hasOne(Airplane::class, 'id', 'airplane_id');
     }
 
     /*
     * Arrival Gateway of this flight
     */
     public function landing_gateway(){
-        return $this->belongsTo(Terminal::class, 'id', 'landing_terminal');
+        return $this->belongsTo(Terminal::class, 'landing_terminal_id', 'id');
     }
 
     /*
      * Boarding Gateway of this flight
      */
     public function boarding_gateway(){
-        return $this->belongsTo(Terminal::class, 'id', 'boarding_terminal');
+        return $this->belongsTo(Terminal::class, 'boarding_terminal_id', 'id');
     }
 
 
@@ -112,5 +112,16 @@ class Flight extends Model
      */
     public function  itinerary(){
         return $this-> belongsTo(Itinerary::class);
+    }
+
+
+    public function hasSeats(array $class, int $passengers){
+        $seats = $this->airplane->seats->whereIn('class', $class)->where('status', '=', 1);
+        if ($passengers > 0){
+            return count($seats) >= $passengers;
+        }
+        else{
+            return count($seats) > 0;
+        }
     }
 }

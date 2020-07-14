@@ -41,7 +41,6 @@ class ClientCompanyController extends Controller
             $numero = $last_clientCompany->client->frequent_customer_num;
             $resultado = substr($numero, 2, 7);
             $numero_cliente = (int)$resultado + 1;
-            //dd($numero_cliente);
         }
 
         $user = Auth::user();
@@ -109,7 +108,7 @@ class ClientCompanyController extends Controller
 
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
-        return view('clientCompany.show', compact('cliente'));
+        return view('clientCompany.show', compact('cliente','sidebar', 'header', 'footer'));
     }
 
     /**
@@ -124,7 +123,7 @@ class ClientCompanyController extends Controller
         $user = Auth::user();
 
         list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
-        return view('ClientCompany.edit', compact('cliente','sidebar', 'header', 'footer'));
+        return view('clientCompany.edit', compact('cliente','sidebar', 'header', 'footer'));
     }
 
     /**
@@ -191,6 +190,12 @@ class ClientCompanyController extends Controller
         $cliente = ClientCompany::findOrFail($id);
         $cliente->delete();
         return redirect()->route('clientCompanys.index')->with('datos', '¡El cliente se eliminó correctamente!');
+    }
+    public function mass(Request $request)
+    {
+        ClientCompany::whereIn('id', request('ids'))->delete();
+
+        return response()->noContent();
     }
 }
 

@@ -82,4 +82,8 @@ class Airline extends Model
     public function itineraries(){
         return $this->hasMany(Itinerary::class);
     }
+
+    public function to_string(){
+        return 'Aerolinea '.$this->official_name;
+    }
 }

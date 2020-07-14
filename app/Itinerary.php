@@ -81,4 +81,15 @@ class Itinerary extends Model
     public function airline(){
          return $this->belongsTo(Airline::class);
     }
+
+    public function hasSeats(array $class, int $passengers = 0){
+        $flights_with_seats = 0;
+        $flights = $this->flights;
+        foreach ($flights as $flight){
+            if ($flight->hasSeats($class, $passengers)){
+                $flights_with_seats =+1;
+            }
+        }
+        return $flights_with_seats > 0;
+    }
 }

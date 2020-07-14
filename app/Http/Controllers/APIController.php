@@ -6,6 +6,7 @@ use App\Airline;
 use App\Airplane;
 use App\Airport;
 use App\Backup;
+use App\Destination;
 use App\Jobs\RestoreDB;
 use App\Restores;
 use App\User;
@@ -209,6 +210,13 @@ class APIController extends Controller
         }
         $airplanes = $airplanes->get();
         return response()->json($airplanes);
+    }
+
+    public function get_destinations(Request $request){
+        $term = '%'.$request->input('term').'%';
+        $term = strtoupper($term);
+        $destinations= Destination::selectRaw("CITY as city, STATE as state,  COUNTRY as country")->whereRaw("upper(CITY) like '".$term."'")->orwhereRaw("upper(COUNTRY) like '".$term."'")->get();
+        return response()->json($destinations);
     }
 
     public function get_users(Request $request){
