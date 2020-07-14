@@ -4,7 +4,10 @@ namespace App;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Airport
@@ -19,6 +22,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $CITY
  * @property string $COUNTRY
  * @property string $CODE
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
+ * @property-read Collection|\App\Terminal[] $gateways
+ * @property-read int|null $gateways_count
  * @method static Builder|Airport newModelQuery()
  * @method static Builder|Airport newQuery()
  * @method static Builder|Airport query()
@@ -36,12 +43,25 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Airport extends Model
 {
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+    protected static $logName = 'airport';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
+
 
     /*
      * Gateways from this Airport
      */
     public function gateways(){
-        return $this->hasMany('App\Terminal');
+        return $this->hasMany(Terminal::class);
+    }
+
+    public function to_string(){
+        return 'Aeropuerto ' .$this->name;
     }
 }

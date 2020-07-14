@@ -21,7 +21,7 @@ class CreateClientCompaniesTable extends Migration
             $table->string('nic');
             $table->string('nit');
 
-            $table->foreign('id')->references('id')->on('clients');
+            $table->foreign('id')->references('id')->on('clients')->cascadeOnDelete();
         });
     }
 

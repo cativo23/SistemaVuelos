@@ -35,10 +35,10 @@
                         <!-- For more examples you can check out https://github.com/jzaefferer/jquery-validation -->
                         <form class="js-validation-signin px-30" action="{{ route('login') }}" method="POST">
                             @csrf
-                            <div class="form-group row">
+                            <div class="form-group row {{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}">
                                 <div class="col-12">
                                     <div class="form-material floating">
-                                        <input type="text" class="form-control {{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}" id="login" name="login">
+                                        <input type="text" class="form-control" id="login" name="login">
                                         <label for="login">{{ __('Username or Email') }}</label>
                                     </div>
                                     @if ($errors->has('username') || $errors->has('email'))
@@ -48,17 +48,17 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row {{ $errors->has('password') ? ' is-invalid' : '' }}">
                                 <div class="col-12">
                                     <div class="form-material floating">
-                                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" id="login-password">
+                                        <input type="password" class="form-control" name="password" required autocomplete="current-password" id="login-password">
                                         <label for="password">{{ __('Password') }}</label>
                                     </div>
-                                    @error('password')
+                                    @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                    @enderror
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">

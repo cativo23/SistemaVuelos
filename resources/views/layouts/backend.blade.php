@@ -31,7 +31,8 @@
         <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
     </head>
     <body>
-        <!-- Page Container -->
+    <div id="page-loader" class="show bg-"></div>
+    <!-- Page Container -->
         <!--
             Available classes for #page-container:
 
@@ -76,8 +77,6 @@
             'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
         -->
         <div id="page-container" class="sidebar-o sidebar-inverse enable-page-overlay side-scroll page-header-fixed page-header-glass page-header-inverse main-content-boxed enable-cookies">
-            @component('layouts.rightsidebar')
-            @endcomponent
 
             @component($sidebar, ['user'=>Auth::user()])
             @endcomponent
@@ -97,11 +96,24 @@
         <!-- END Page Container -->
 
         <!-- Codebase Core JS -->
-        <script src="{{ mix('js/codebase.app.js') }}"></script>
+        <script src="{{ asset('/js/codebase.core.min.js') }}"></script>
+        <script src="{{ asset('/js/codebase.app.min.js') }}"></script>
 
         <!-- Laravel Scaffolding JS -->
         <!-- <script src="{{ mix('js/laravel.app.js') }}"></script> -->
-
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
         @yield('js_after')
+
+        <script>
+            $(document).ready(function() {
+                var interval = setInterval(function() {
+                    var momentNow = moment();
+                    $('#date-part').html(momentNow.format('YYYY MMMM DD') + ' '
+                        + momentNow.format('dddd')
+                            .substring(0,3).toUpperCase());
+                    $('#time-part').html(momentNow.format('A hh:mm:ss'));
+                }, 100);
+            });
+        </script>
     </body>
 </html>

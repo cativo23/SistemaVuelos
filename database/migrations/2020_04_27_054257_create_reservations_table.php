@@ -21,8 +21,8 @@ class CreateReservationsTable extends Migration
             $table->boolean('payed');
             $table->integer('passengers');
 
-            $table->foreignId('client_id')->constrained();
-            $table->foreignId('itinerary_id')->constrained();
+            $table->foreignId('client_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('itinerary_id')->constrained()->cascadeOnDelete();
         });
     }
 

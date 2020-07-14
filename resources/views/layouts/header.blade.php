@@ -89,11 +89,15 @@
 
         <!-- Right Section -->
         <div class="content-header-section">
+            <div class='time-frame' role="group">
+                <div id='date-part'></div>
+                <div id='time-part'></div>
+            </div>
             <!-- User Dropdown -->
             <div class="btn-group" role="group">
                 <button type="button" class="btn btn-rounded btn-dual-secondary" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-user d-sm-none"></i>
-                    <span class="d-none d-sm-inline-block">J. Smith</span>
+                    <span class="d-none d-sm-inline-block">{{Auth::user()}}</span>
                     <i class="fa fa-angle-down ml-5"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right min-width-200" aria-labelledby="page-header-user-dropdown">

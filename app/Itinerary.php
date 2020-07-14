@@ -4,7 +4,10 @@ namespace App;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Itinerary
@@ -18,11 +21,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $ARRIVAL_TIME
  * @property string $DEPARTURE_DATE
  * @property string $DEPARTURE_TIME
- * @property float $TOTAL_DURATION
+ * @property string $TOTAL_DURATION
  * @property string $DESTINATION
  * @property string $ORIGIN
- * @property int $AIRLINE_ID
  * @property string $TYPE
+ * @property int $AIRLINE_ID
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
+ * @property-read Airline $airline
+ * @property-read Collection|Flight[] $flights
+ * @property-read int|null $flights_count
+ * @property-read Collection|Reservation[] $reservations
+ * @property-read int|null $reservations_count
  * @method static Builder|Itinerary newModelQuery()
  * @method static Builder|Itinerary newQuery()
  * @method static Builder|Itinerary query()
@@ -44,23 +54,55 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Itinerary extends Model
 {
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+    protected static $logName = 'itinerary';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
 
     /*
      * Flights for this Itinerary
      */
     public function flights(){
-        return $this->hasMany('App\Flight');
+        return $this->hasMany(Flight::class);
     }
 
     /*
      * Reservations that have this Itinerary
      */
-    public function reservations(){
-        return $this->hasMany('App\Reservation');
+    public function reservation(){
+        return $this->belongsTo(Reservation::class);
     }
 
     public function airline(){
-         return $this->belongsTo('App\Airline');
+         return $this->belongsTo(Airline::class);
+    }
+
+    public function hasSeats(array $class, int $passengers = 0){
+        $flights_with_seats = 0;
+        $flights = $this->flights;
+        foreach ($flights as $flight){
+            if ($flight->hasSeats($class, $passengers)){
+                $flights_with_seats =+1;
+            }
+        }
+        return $flights_with_seats > 0;
+    }
+
+    public function cost(){
+        $cost = 0;
+        $flights = $this->flights;
+        foreach ($flights as $flight){
+            $cost += $flight->cost;
+        }
+        return $cost;
+    }
+
+    public function to_string(){
+        return 'Itinerary ' .$this->origin.'-'.$this->destination;
     }
 }

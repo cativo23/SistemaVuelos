@@ -34,39 +34,41 @@
                                 <th style="width: 150px;">Nombre</th>
                                 <th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>
                                 <th class="text-center" style="width: 25%;">Roles</th>
+                                <th>Banneado</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($users as $key => $user)
-                                <tr data-entry-id="{{ $user->id }}">
+                            @foreach($users as $key => $user1)
+                                <tr data-entry-id="{{ $user1->id }}">
                                     <td></td>
-                                    <td class="text-center">{{ $user->id ?? '' }}</td>
+                                    <td class="text-center">{{ $user1->id ?? '' }}</td>
                                     <td class="font-w600">
-                                        <a href="{{ route('super.users.show', $user->id) }}">{{ $user->name ?? '' }}</a>
+                                        <a href="{{ route('super.users.show', $user1->id) }}">{{ $user1->name ?? '' }}</a>
                                     </td>
                                     <td class="d-none d-sm-table-cell">
-                                        {{ $user->email ?? '' }}
+                                        {{ $user1->email ?? '' }}
                                     </td>
                                     <td class="text-center d-none d-sm-table-cell">
-                                        @if(count($user->roles)>0)
-                                            @foreach($user->roles->pluck('name') as $role)
+                                        @if(count($user1->roles)>0)
+                                            @foreach($user1->roles->pluck('name') as $role)
                                                 <span class="badge badge-info">{{ $role }}</span>
                                             @endforeach
                                         @else
                                             No roles asignados
                                         @endif
                                     </td>
+                                    <td>{{$user1->isBanned() ? "Si" : "No"}}</td>
                                     <td class="text-center">
                                         <div class="btn-group">
-                                            <a href="{{ route('super.users.show', $user->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Ver" data-original-title="Ver">
+                                            <a href="{{ route('super.users.show', $user1->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Ver" data-original-title="Ver">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('super.users.edit', $user->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Editar">
+                                            <a href="{{ route('super.users.edit', $user1->id) }}" type="button" class="btn btn-sm btn-secondary js-tooltip-enabled" data-toggle="tooltip" title="Editar" data-original-title="Editar">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
                                             <button type="button" class="btn btn-sm btn-secondary js-tooltip-enabled"
-                                                    data-toggle="modal" onclick="deleteData({{$user->id}}, '{{$user->name}}')"
+                                                    data-toggle="modal" onclick="deleteData({{$user1->id}}, '{{$user1->name}}')"
                                                     data-target="#modal-fadein"><i class="fa fa-trash"></i></button>
                                         </div>
                                     </td>
@@ -140,12 +142,12 @@
     <script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
     <script>
         $(function() {
-            let copyButtonTrans = 'Copiar'
-            let csvButtonTrans = 'CSV'
-            let excelButtonTrans = 'Excel'
-            let pdfButtonTrans = 'PDF'
-            let printButtonTrans = 'Imprimir'
-            let colvisButtonTrans = 'Visibilidad de Columnas'
+            let copyButtonTrans = 'Copiar';
+            let csvButtonTrans = 'CSV';
+            let excelButtonTrans = 'Excel';
+            let pdfButtonTrans = 'PDF';
+            let printButtonTrans = 'Imprimir';
+            let colvisButtonTrans = 'Visibilidad de Columnas';
 
             let languages = {
                 'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json'
@@ -179,7 +181,7 @@
                         className: 'btn-default',
                         text: copyButtonTrans,
                         exportOptions: {
-                            columns: ':visible'
+                            columns: [1,2,3,4]
                         }
                     },
                     {
@@ -187,7 +189,7 @@
                         className: 'btn-default',
                         text: csvButtonTrans,
                         exportOptions: {
-                            columns: ':visible'
+                            columns: [1,2,3,4]
                         }
                     },
                     {
@@ -195,7 +197,7 @@
                         className: 'btn-default',
                         text: excelButtonTrans,
                         exportOptions: {
-                            columns: ':visible'
+                            columns: [1,2,3,4]
                         }
                     },
                     {
@@ -203,7 +205,7 @@
                         className: 'btn-default',
                         text: pdfButtonTrans,
                         exportOptions: {
-                            columns: ':visible'
+                            columns: [1,2,3,4]
                         }
                     },
                     {
@@ -211,7 +213,7 @@
                         className: 'btn-default',
                         text: printButtonTrans,
                         exportOptions: {
-                            columns: ':visible'
+                            columns: [1,2,3,4]
                         }
                     },
                     {
@@ -241,7 +243,7 @@
         }
         $(function () {
             let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-            let deleteButtonTrans = 'Delete'
+            let deleteButtonTrans = 'Borrar'
             let deleteButton = {
                 text: deleteButtonTrans,
                 url: "{{ route('super.users.mass') }}",

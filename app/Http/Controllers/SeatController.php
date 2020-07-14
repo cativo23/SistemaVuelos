@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helper\Helper;
+use App\Helper\VoyargeHelper;
 use App\Seat;
 use App\Airplane;
 use Exception;
@@ -27,7 +27,7 @@ class SeatController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('seat.index', compact('seats', 'sidebar', 'header', 'footer'));
     }
@@ -43,7 +43,7 @@ class SeatController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('seat.create', compact('airplanes', 'sidebar', 'header', 'footer'));
     }
@@ -98,7 +98,7 @@ class SeatController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('seat.edit', compact('asiento', 'airplanes', 'sidebar', 'header', 'footer'));
     }
@@ -135,7 +135,7 @@ class SeatController extends Controller
 
         $user = Auth::user();
 
-        list($sidebar, $header, $footer) = Helper::instance()->GetDashboard($user);
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
 
         return view('seat.confirm', compact('asiento', 'sidebar', 'header', 'footer'));
     }

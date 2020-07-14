@@ -4,9 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
- * App\clientNatural
+ * App\ClientNatural
  *
  * @property int $ID
  * @property string|null $CREATED_AT
@@ -17,6 +18,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $BIRTHDAY
  * @property string $GENDER
  * @property string $MARITAL_STATUS
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\Client $client
  * @method static Builder|ClientNatural newModelQuery()
  * @method static Builder|ClientNatural newQuery()
  * @method static Builder|ClientNatural query()
@@ -33,12 +37,25 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ClientNatural extends Model
 {
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+    protected static $logName = 'client_natural';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
+
 
     /*
      * Client Information for this Natural Client
      */
     public function client(){
         return $this->belongsTo(Client::class, 'id', 'id');
+    }
+
+    public function to_string(){
+        return 'Cliente ' .$this->client->first_name.' '.$this->client->first_surname;
     }
 }

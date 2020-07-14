@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\ClientCompany;
 use App\ClientNatural;
 use App\Client;
+use App\Helper\VoyargeHelper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 
 class ClientNaturalController extends Controller
@@ -19,7 +21,11 @@ class ClientNaturalController extends Controller
     {
         $clientesn = ClientNatural::all();
 
-        return view('clientNatural.index', compact('clientesn'));
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+
+        return view('clientNatural.index', compact('clientesn','sidebar', 'header', 'footer'));
 
     }
 
@@ -38,10 +44,13 @@ class ClientNaturalController extends Controller
             $numero = $last_clientNatural->client->frequent_customer_num;
             $resultado = substr($numero, 2, 7);
             $numero_cliente = (int)$resultado + 1;
-            //dd($numero_cliente);
         }
 
-        return view('clientNatural.create', compact('numero_cliente'));
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+
+        return view('clientNatural.create', compact('numero_cliente','sidebar', 'header', 'footer'));
     }
 
     /**
@@ -102,7 +111,11 @@ class ClientNaturalController extends Controller
     public function show($id)
     {
         $cliente = ClientNatural::findOrFail($id);
-        return view('clientNatural.show', compact('cliente'));
+
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+        return view('clientNatural.show', compact('cliente','sidebar', 'header', 'footer'));
     }
 
     /**
@@ -114,7 +127,11 @@ class ClientNaturalController extends Controller
     public function edit($id)
     {
         $cliente = ClientNatural::findOrFail($id);
-        return view('ClientNatural.edit', compact('cliente'));
+
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+        return view('ClientNatural.edit', compact('cliente','sidebar', 'header', 'footer'));
     }
 
     /**
@@ -176,7 +193,11 @@ class ClientNaturalController extends Controller
     {
         $cliente = ClientNatural::findOrFail($id);
 
-        return view('clientNatural.confirm', compact('cliente'));
+        $user = Auth::user();
+
+        list($sidebar, $header, $footer) = VoyargeHelper::instance()->GetDashboard($user);
+
+        return view('clientNatural.confirm', compact('cliente','sidebar', 'header', 'footer'));
     }
 
 
@@ -189,5 +210,11 @@ class ClientNaturalController extends Controller
         $cliente_n->delete();
         $cliente->delete();
         return redirect()->route('clientNaturals.index')->with('datos', '¡El cliente se eliminó correctamente!');
+    }
+    public function mass(Request $request)
+    {
+        ClientNatural::whereIn('id', request('ids'))->delete();
+
+        return response()->noContent();
     }
 }

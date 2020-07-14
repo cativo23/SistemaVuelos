@@ -19,7 +19,7 @@ class CreatCancelledTicketsTable extends Migration
             $table->decimal('surcharge', 10, 2);
             $table->unsignedBigInteger('cancelled_ticket');
 
-            $table->foreign('cancelled_ticket')->references('id')->on('tickets');
+            $table->foreign('cancelled_ticket')->references('id')->on('tickets')->cascadeOnDelete();
         });
     }
 

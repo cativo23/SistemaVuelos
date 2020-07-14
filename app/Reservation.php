@@ -4,7 +4,11 @@ namespace App;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
+
 
 /**
  * App\Reservation
@@ -15,8 +19,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $NUMBER
  * @property int $SUITCASE_NUM
  * @property string $PAYED
+ * @property int $PASSENGERS
  * @property int $CLIENT_ID
  * @property int $ITINERARY_ID
+ * @property-read Collection|Activity[] $activities
+ * @property-read int|null $activities_count
+ * @property-read \App\Client $client
+ * @property-read Collection|\App\Itinerary[] $itineraries
+ * @property-read int|null $itineraries_count
  * @method static Builder|Reservation newModelQuery()
  * @method static Builder|Reservation newQuery()
  * @method static Builder|Reservation query()
@@ -25,6 +35,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Reservation whereID($value)
  * @method static Builder|Reservation whereITINERARYID($value)
  * @method static Builder|Reservation whereNUMBER($value)
+ * @method static Builder|Reservation wherePASSENGERS($value)
  * @method static Builder|Reservation wherePAYED($value)
  * @method static Builder|Reservation whereSUITCASENUM($value)
  * @method static Builder|Reservation whereUPDATEDAT($value)
@@ -32,19 +43,31 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Reservation extends Model
 {
+    use LogsActivity;
+
     protected $guarded = ['id'];
+
+    protected static $logName = 'reservation';
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logUnguarded = true;
 
     /*
      * Itineraries for this reservation
      */
-    public function itineraries(){
-        return $this->hasMany('App\Itinerary');
+    public function itinerary(){
+        return $this->belongsTo(Itinerary::class);
     }
 
     /*
      * Client of this Reservation
      */
     public function client(){
-        return $this->belongsTo('App\Client');
+        return $this->belongsTo(Client::class);
+    }
+
+    public function to_string(){
+        return 'Reservación del cliente ' .$this->client->first_name.' '.$this->client->first_surname;
     }
 }

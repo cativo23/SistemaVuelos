@@ -2,15 +2,16 @@
 namespace App\Helper;
 
 use App\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 
-class Helper
+class VoyargeHelper
 {
 
     /**
-     * @param User $user
+     * @param User|Authenticatable $user
      * @return string[]
      */
-    public function GetDashboard(User $user){
+    public function GetDashboard($user){
 
         $sidebar = 'client.sidebar';
         $header = 'client.header';
@@ -44,7 +45,7 @@ class Helper
 
     public static function instance()
     {
-        return new Helper();
+        return new VoyargeHelper();
     }
 
 }

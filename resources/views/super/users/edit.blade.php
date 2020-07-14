@@ -17,84 +17,134 @@
         </div>
     </div>
     <!-- END Hero -->
-    <div class="bg-primary-darker text-body-color-light">
+    <div class="bg-body text-body-color-dark">
         <div class="content">
             <!-- Row #1 -->
             <div class="row invisible" data-toggle="appear">
-                <div class="block-content">
-                    <form action="{{ route('super.users.update', $user) }}" method="post">@csrf  @method('PUT')
-                        <div class="form-group row">
-                            <div class="col-md-6">
-                                <div class="form-material floating input-group">
-                                    <input type="text" class="form-control" id="name" value="{{ old('name', isset($user) ? $user->name : '') }}" name="name">
-                                    <label for="name">Name</label>
-                                    <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-user"></i>
-                                            </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-material floating input-group">
-                                    <input type="text" class="form-control" id="email" value="{{ old('email', isset($user) ? $user->email : '') }}" name="email">
-                                    <label for="email">Email</label>
-                                    <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-at"></i>
-                                            </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-material floating input-group">
-                                    <input type="text" class="form-control" id="username" value="{{ old('username', isset($user) ? $user->username : '') }}" name="username">
-                                    <label for="username">Username</label>
-                                    <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-at"></i>
-                                            </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-material floating input-group">
-                                    <input type="text" class="form-control" id="password" name="password">
-                                    <label for="password">Password</label>
-                                    <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-flag"></i>
-                                            </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group row {{ $errors->has('roles') ? 'has-error' : '' }}">
-                                    <label for="roles" class="col-12">Roles *
-                                        <span class="btn btn-info btn-xs select-all">Select All</span>
-                                        <span class="btn btn-info btn-xs deselect-all">Deselect All</span></label>
-                                    <select name="roles[]" id="roles" class="form-control select2" multiple="multiple" required>
-                                        @foreach($roles as $id => $roles)
-                                            <option value="{{ $id }}" {{ in_array($id, old('roles', [])) || $user->roles()->pluck('name', 'name')->contains($roles) ? 'selected' : '' }}>{{ $roles }}</option>
-                                        @endforeach
-                                    </select>
-                                    @if($errors->has('roles'))
-                                        <em class="invalid-feedback">
-                                            {{ $errors->first('roles') }}
-                                        </em>
+                <div class="col-md-12">
+                    <form action="{{ route('super.users.update', $user->id) }}" method="post">@csrf
+                        @method('PUT')
+                        <div class="block block-themed">
+                            <div class="block-header bg-primary-dark">
+                                <h3 class="block-title">Crear Usuario</h3>
+                                <div class="block-options">
+                                    <button type="submit" class="btn btn-sm btn-alt-primary">
+                                        <i class="fa fa-check"></i> Guardar
+                                    </button>
+                                    <a href="{{ route('super.users.index')}}" type="reset" class="btn btn-sm btn-alt-danger">
+                                        <i class="fa fa-times"></i> Cancelar
+                                    </a>
+                                    @if($user->can('manage-airport'))
+                                        <a href="{{ route('super.show_give_airport', $user->id)}}" type="reset" class="btn btn-sm btn-alt-info">
+                                            <i class="fa fa-shield"></i>Permiso de Aeropuerto
+                                        </a>
+                                        <a href="{{ route('super.remove_airport', $user->id)}}" type="reset" class="btn btn-sm btn-alt-info">
+                                            <i class="fa fa-user-times"></i>Quitar Permiso de Aeropuerto
+                                        </a>
+                                    @endif
+                                    @if($user->can('manage-airline'))
+                                        <a href="{{ route('super.show_give_airline', $user->id)}}" type="reset" class="btn btn-sm btn-alt-info">
+                                            <i class="fa fa-shield"></i>Permiso de Aerolinea
+                                        </a>
+                                        <a href="{{ route('super.remove_airline', $user->id)}}" type="reset" class="btn btn-sm btn-alt-info">
+                                            <i class="fa fa-user-times"></i>Quitar Permiso de Aeropuerto
+                                        </a>
                                     @endif
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-9">
+                            <div class="block-content">
 
-                                <button type="submit"
-                                        class="btn btn-square btn-outline-primary min-width-125 mb-10"
-                                        data-toggle="click-ripple">Guardar
-                                </button>
-                                <a href="{{ route('destinations.index')}}" type="button"
-                                   class="btn btn-square btn-outline-danger min-width-125 mb-10">Cancelar</a>
+                                <div class="row form-group">
+                                    <div class="col-md-6 @if($errors->has('name')) is-invalid @endif">
+                                        <div class="form-material floating input-group">
+                                            <input type="text" class="form-control" id="name" value="{{ old('name', isset($user) ? $user->name : '') }}" name="name">
+                                            <label for="name">Name</label>
+                                            <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-user"></i>
+                                            </span>
+                                            </div>
+                                            @if($errors->has('name'))
+                                                @foreach($errors->get('name') as $error)
+                                                    <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                                @endforeach
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 @if($errors->has('email')) is-invalid @endif">
+                                        <div class="form-material form-group floating input-group">
+                                            <input type="text" class="form-control" id="email" name="email" value="{{ old('email', isset($user) ? $user->email : '') }}">
+                                            <label for="email">Email</label>
+                                            <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-at"></i>
+                                            </span>
+                                            </div>
+                                            @if($errors->has('email'))
+                                                @foreach($errors->get('email') as $error)
+                                                    <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                                @endforeach
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-md-6 @if($errors->has('username')) is-invalid @endif">
+                                        <div class="form-material form-group  floating input-group">
+                                            <input type="text" class="form-control" id="username" name="username" value="{{ old('username', isset($user) ? $user->username : '') }}">
+                                            <label for="username">Username</label>
+                                            <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-at"></i>
+                                            </span>
+                                            </div>
+                                            @if($errors->has('username'))
+                                                @foreach($errors->get('username') as $error)
+                                                    <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                                @endforeach
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 @if($errors->has('password')) is-invalid @endif">
+                                        <div class="form-material form-group  floating input-group">
+                                            <input type="password" class="form-control" id="password" name="password">
+                                            <label for="password">Password</label>
+                                            <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-flag"></i>
+                                            </span>
+                                            </div>
+                                            @if($errors->has('password'))
+                                                @foreach($errors->get('password') as $error)
+                                                    <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                                @endforeach
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-md-12 mt-5">
+                                        <div class="form-group row {{ $errors->has('roles') ? 'is-invalid' : '' }}">
+                                            <div class="col-lg-8">
+                                                <div class="form-material">
+                                                    <select data-placeholder="Elija varios..." name="roles[]" id="roles" class="form-control select2" multiple="multiple" required>
+                                                        @foreach($roles as $id => $roles)
+                                                            <option value="{{ $id }}" {{ in_array($id, old('roles', [])) || $user->roles()->pluck('name', 'name')->contains($roles) ? 'selected' : '' }}>{{ $roles }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <label for="abilities">Roles * </label>
+                                                    <span data-toggle="click-ripple" class="btn btn-alt-success btn-sm  select-all">Select All</span>
+                                                    <span data-toggle="click-ripple" class="btn btn-alt-danger btn-sm deselect-all">Deselect All</span>
+                                                    @if($errors->has('roles'))
+                                                        @foreach($errors->get('roles') as $error)
+                                                            <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>

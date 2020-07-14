@@ -8683,7 +8683,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     if (this.options.touch) {
       this.$element.on('touchstart' + ScrollLock.NAMESPACE, this.options.selector, $.proxy(ScrollLock.CORE.touchHandler, this))
       this.$element.on('touchmove' + ScrollLock.NAMESPACE, this.options.selector, $.proxy(ScrollLock.CORE.handler, this))
-      
+
       if (this.options.unblock) {
         this.$element.on('touchmove' + ScrollLock.NAMESPACE, this.options.unblock, $.proxy(ScrollLock.CORE.unblockHandler, this))
       }
@@ -27080,6 +27080,7 @@ var Helpers = /*#__PURE__*/function () {
       jQuery('.js-masked-date:not(.js-masked-enabled)').mask('99/99/9999');
       jQuery('.js-masked-date-dash:not(.js-masked-enabled)').mask('99-99-9999');
       jQuery('.js-masked-phone:not(.js-masked-enabled)').mask('(999) 999-9999');
+      jQuery('.js-masked-phone-int:not(.js-masked-enabled)').mask("(99) 9999?9-9999");
       jQuery('.js-masked-phone-ext:not(.js-masked-enabled)').mask('(999) 999-9999? x99999');
       jQuery('.js-masked-taxid:not(.js-masked-enabled)').mask('99-9999999');
       jQuery('.js-masked-ssn:not(.js-masked-enabled)').mask('999-99-9999');

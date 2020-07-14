@@ -31,18 +31,23 @@
                         	@method('PUT')
                         	@csrf
                             <div class="form-group row">
-                               <div class="col-md-4">
+                            <div class="col-md-4 @if($errors->has('ciudad')) is-invalid @endif">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ $destino->city }}">
+                                    <input type="text" class="form-control" id="ciudad" value="{{ $destino->city }}" name="ciudad">
                                         <label for="ciudad">Ciudad</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-location-arrow"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('ciudad'))
+                                            @foreach($errors->get('ciudad') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('estado')) is-invalid @endif">
                                     <div class="form-material floating input-group">
                                         <input type="text" class="form-control" id="estado" name="estado" value="{{ $destino->state }}">
                                         <label for="estado">Estado</label>
@@ -51,9 +56,14 @@
                                                 <i class="fa fa-location-arrow"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('estado'))
+                                            @foreach($errors->get('estado') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('pais')) is-invalid @endif">
                                     <div class="form-material floating input-group">
                                         <input type="text" class="form-control" id="pais" name="pais" value="{{ $destino->country }}">
                                         <label for="pais">País</label>
@@ -62,20 +72,31 @@
                                                 <i class="fa fa-flag"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('pais'))
+                                            @foreach($errors->get('pais') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('codigo')) is-invalid @endif">
                                     <div class="form-material floating input-group">
-                                        <input type="text" class="form-control" id="codigo" name="codigo" value="{{ $destino->code }}">
+                                        <input type="text" class="form-control" id="codigo" value="{{ $destino->code }}" name="codigo">
+
                                         <label for="codigo">Código de Destino</label>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-hashtag"></i>
                                             </span>
                                         </div>
+                                        @if($errors->has('codigo'))
+                                            @foreach($errors->get('codigo') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 @if($errors->has('continente')) is-invalid @endif">
                                     <div class="form-material floating">
 
                                     	@php ($continentes=['Asia', 'América', 'África', 'Antártida', 'Europa', 'Oceanía'])
@@ -94,6 +115,11 @@
                                         </select>
                                         <label for="continente">Continente</label>
                                     </div>
+                                    @if($errors->has('continente'))
+                                            @foreach($errors->get('continente') as $error)
+                                                <div class="invalid-feedback animated fadeInDown">{{$error}}</div>
+                                            @endforeach
+                                        @endif
                                 </div>
                             </div>
 
