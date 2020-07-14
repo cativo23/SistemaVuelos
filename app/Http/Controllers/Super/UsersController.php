@@ -89,6 +89,8 @@ class UsersController extends Controller
             'roles' => ['required', 'array']
         ]);
 
+        $request->replace(['password'=>Hash::make($request->input('password'))]);
+
         $user = User::create($request->all());
 
         foreach ($request->input('roles') as $role) {

@@ -1,4 +1,4 @@
-@extends('layouts.backend', ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer'])
+@extends('layouts.backend', ['sidebar'=>$sidebar??'layouts.sidebar', 'header'=>$header??'layouts.header', 'footer'=>$footer??'layouts.footer', 'airline', $airline])
 
 @section('content')
     <!-- Page Content -->
@@ -46,24 +46,22 @@
 
                         <!-- Row #5 -->
                         <div class="col-8 col-sm-6 col-md-6 col-xl-6">
-                            <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-center" href="#">
+                            <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-center" href="{{route('admin.airline.itineraries_create', $airline)}}">
                                 <div class="block-content ribbon ribbon-bookmark ribbon-success ribbon-left">
-                                    <div class="ribbon-box">Nuevo Vuelo</div>
                                     <p class="mt-5">
                                         <i class="si si-note fa-3x text-muted"></i>
                                     </p>
-                                    <p class="font-w600 text-uppercase">Asigne un vuelo al aeropuerto</p>
+                                    <p class="font-w600 text-uppercase">Nuevo Itinerario</p>
                                 </div>
                             </a>
                         </div>
                         <div class="col-8 col-sm-6 col-md-6 col-xl-6">
-                            <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-center" href="#">
+                            <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-center" href="{{route('admin.airline.report', $airline)}}">
                                 <div class="block-content ribbon ribbon-bookmark ribbon-primary ribbon-left">
-                                    <div class="ribbon-box">Total 15</div>
                                     <p class="mt-5">
                                         <i class="si si-book-open fa-3x text-muted"></i>
                                     </p>
-                                    <p class="font-w600 text-uppercase">Gestionar Vuelos</p>
+                                    <p class="font-w600 text-uppercase">Generar Reporte</p>
                                 </div>
                             </a>
                         </div>
@@ -124,37 +122,39 @@
                             </p>
                         </div>
                         <div class="block-content block-content-full">
-                            <table class="table table-borderless table-striped table-hover mb-0">
-                                <tbody>
-                                @if (count($vuelos) === 0)
-                                    <tr>
-                                        <td class="text-center"></td>
-                                        <td>
-                                            <strong>Aún no se registran vuelos</strong>
-                                        </td>
-                                        <td class="text-center">
-                                            <strong class="text-success"></strong>
-                                        </td>
-                                    </tr>
-                                @else
-                                    @foreach( $vuelos as $vuelo)
+                            <div class="table-responsive">
+                                <table class="table table-borderless table-striped table-hover mb-0">
+                                    <tbody>
+                                    @if (count($vuelos) === 0)
                                         <tr>
-                                            <td class="text-center">De</td>
-                                            <td class="text-left">
-                                                <strong>{{ $vuelo->origin }}</strong>
-                                            </td>
-                                            <td class="text-center">a</td>
-                                            <td class="text-left">
-                                                <strong>{{ $vuelo->destination }}</strong>
+                                            <td class="text-center"></td>
+                                            <td>
+                                                <strong>Aún no se registran vuelos</strong>
                                             </td>
                                             <td class="text-center">
-                                                <strong class="text-success">{{ $vuelo->status }}</strong>
+                                                <strong class="text-success"></strong>
                                             </td>
                                         </tr>
-                                    @endforeach
-                                @endif
-                                </tbody>
-                            </table>
+                                    @else
+                                        @foreach( $vuelos as $vuelo)
+                                            <tr>
+                                                <td class="text-center">De</td>
+                                                <td class="text-left overflow-hidden" style="white-space: nowrap;text-overflow: ellipsis;">
+                                                    <strong>{{ $vuelo->origin }}</strong>
+                                                </td>
+                                                <td class="text-center">a</td>
+                                                <td class="text-left overflow-hidden" style="white-space: nowrap;text-overflow: ellipsis;">
+                                                    <strong>{{ $vuelo->destination }}</strong>
+                                                </td>
+                                                <td class="text-center">
+                                                    <strong class="text-success">{{ $vuelo->status }}</strong>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="block-content block-content-full text-center bg-body-light">
                             @if (count($vuelos) === 0)
