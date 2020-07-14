@@ -77,8 +77,7 @@
             'main-content-narrow'                       Full width Main Content with a percentage width (screen width > 1200px)
         -->
         <div id="page-container" class="sidebar-o sidebar-inverse enable-page-overlay side-scroll page-header-fixed page-header-glass page-header-inverse main-content-boxed enable-cookies">
-
-            @component($sidebar, ['user'=>Auth::user(), 'airline'=>$airline])
+            @component($sidebar, ['user'=>Auth::user(), 'airline'=>$airline ?? '',  'airport'=>$airport??''])
             @endcomponent
 
             @component($header, ['user'=>Auth::user()])
