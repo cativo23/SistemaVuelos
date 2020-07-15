@@ -51,7 +51,7 @@
                 <div class="col-6 col-md-6 col-xl-2">
                     <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-center" href="javascript:void(0)">
                         <div class="block-content ribbon ribbon-bookmark ribbon-warning ribbon-left">
-                            <div class="ribbon-box">565</div>
+                            <div class="ribbon-box">@if($user->client_id) $user->client->miles @else 590 @endif</div>
                             <p class="mt-5">
                                 <i class="si si-star fa-3x text-muted"></i>
                             </p>
