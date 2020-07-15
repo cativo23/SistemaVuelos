@@ -15,9 +15,9 @@
                                     <div class="font-size-h3 font-w600 text-info">63250</div>
                                     <div class="font-size-sm font-w600 text-uppercase text-muted">Accounts</div> -->
                                     <div class="col-12 col-sm-12 text-center text-sm-left">
-                                        <div class="font-size-h4 font-w600">José Ricardo Sosa Hernández</div>
+                                        <div class="font-size-h4 font-w600">{{$user->name}}</div>
                                         <div class="font-size-sm font-w600 text-uppercase text-muted">
-                                            <i class="fa fa-envelope"></i> email
+                                            <i class="fa fa-envelope"></i> {{$user->email}}
                                         </div>
                                         <div class="font-w600 text-info">
                                             <i class="fa fa-users"></i> Cliente
@@ -28,7 +28,7 @@
                             <div class="col-4">
                                 <div class="js-appear-enabled animated fadeInRight" data-toggle="appear" data-class="animated fadeInRight">
 
-                                    <div class="font-size-h3 font-w600 text-info">username</div>
+                                    <div class="font-size-h3 font-w600 text-info">{{$user->username}}</div>
                                     <div class="font-size-sm font-w600 text-uppercase text-muted">Nombre de usuario</div>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="col-6 col-md-6 col-xl-2">
-                    <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-center" href="be_pages_generic_inbox.html">
+                    <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-center" href="{{route('buy')}}">
                         <div class="block-content ribbon ribbon-bookmark ribbon-success ribbon-left">
                             <div class="ribbon-box">Vuelos</div>
                             <p class="mt-5">
@@ -49,9 +49,9 @@
                     </a>
                 </div>
                 <div class="col-6 col-md-6 col-xl-2">
-                    <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-center" href="be_pages_generic_inbox.html">
+                    <a class="block block-rounded block-transparent bg-black-op text-body-color-light text-center" href="javascript:void(0)">
                         <div class="block-content ribbon ribbon-bookmark ribbon-warning ribbon-left">
-                            <div class="ribbon-box">500</div>
+                            <div class="ribbon-box">565</div>
                             <p class="mt-5">
                                 <i class="si si-star fa-3x text-muted"></i>
                             </p>
