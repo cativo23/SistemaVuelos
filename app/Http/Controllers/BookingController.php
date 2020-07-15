@@ -125,7 +125,7 @@ class BookingController extends Controller
 
         $mensaje = ['tipo'=>'success', 'mess'=>'El vuelo sigue disponlible para los '.$passengers.' pasajeros !'];
 
-        if ($itinerary->status == 'ready'){
+        if ($itinerary->status == 'unready'){
             $mensaje = ['tipo'=>'danger', 'mess'=>'Itinerario no disponible'];
         }
 
@@ -166,7 +166,7 @@ class BookingController extends Controller
 
         $mensaje = ['tipo'=>'success', 'mess'=>'El vuelo sigue disponlible para los '.$passengers.' pasajeros !'];
 
-        if ($itinerary->status == 'ready'){
+        if ($itinerary->status == 'unrready'){
             $mensaje = ['tipo'=>'danger', 'mess'=>'Itinerario no disponible'];
         }
 
@@ -278,7 +278,7 @@ class BookingController extends Controller
 
         $mensaje = ['tipo'=>'success', 'mess'=>'El vuelo sigue disponlible para los '.$passengers.' pasajeros !'];
 
-        if ($itin->status == 'ready'){
+        if ($itin->status == 'unready'){
 
             $mensaje = ['tipo'=>'danger', 'mess'=>'Itinerario no disponible'];
 

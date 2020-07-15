@@ -25,7 +25,7 @@ class AddStatusToItinerary extends Migration
      */
     public function down()
     {
-        Schema::table('itinerary', function (Blueprint $table) {
+        Schema::table('itineraries', function (Blueprint $table) {
             $table->dropColumn('status');
         });
     }
