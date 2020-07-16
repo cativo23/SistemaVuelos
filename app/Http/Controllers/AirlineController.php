@@ -58,7 +58,7 @@ class AirlineController extends Controller
             'codigo' => 'required|alpha_num|max:2|unique:airlines,code|regex:/^[A-Z0-9]{2}$/',
             'nombrecorto' => 'required|alpha|max:100',
             'nombreoficial' => 'required|string|max:191',
-            'email' => 'required|email:rfc,dns,spoof|unique:airlines,email',
+            'email' => 'required|email:rfc,dns|unique:airlines,email',
             'paisorigen' => 'required|string|max:191',
             'representante' => 'required|string|max:191',
             'paginaweb' => 'required|regex:/^[a-zA-Z0-9].{3,}$/|string|max:191',
