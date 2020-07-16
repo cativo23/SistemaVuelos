@@ -27,10 +27,5 @@ class AddClientIdUser extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign('client_id');
-            $table->dropIndex('client_id');
-            $table->dropColumn('client_id');
-        });
     }
 }

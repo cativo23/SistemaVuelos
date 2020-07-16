@@ -27,12 +27,6 @@ class BookingController extends Controller
     }
 
     public function search(Request $request){
-        $request->validate([
-            'origin'=>'required|string',
-            'destination'=>'required|string',
-            'from'=>'required|date',
-            'to'=>'required|date',
-        ]);
 
         $origin = $request->input('origin');
         $destination = $request->input('destination');
@@ -48,17 +42,6 @@ class BookingController extends Controller
         date_add($date_to_2u, date_interval_create_from_date_string('2 days'));
         $date_to_2d= new DateTime($to);
         date_sub($date_to_2d, date_interval_create_from_date_string('2 days'));
-
-        $today = new DateTime();
-
-        if ($today>=$date_from_2d){
-            return view('booking.index');
-        }
-
-        if ($today>=$date_to_2d){
-            return view('booking.index');
-        }
-
 
 
         $first_class = $request->input('first_class');
@@ -83,10 +66,10 @@ class BookingController extends Controller
         }
 
         $itineraries = Itinerary::where('status', '=', 'ready')
-                        ->whereBetween('departure_date', [$date_from_2d->format('Y-m-d'), $date_from_2u->format('Y-m-d')])
-                        ->whereBetween('arrival_date', [$date_to_2d->format('Y-m-d'), $date_to_2u->format('Y-m-d')])
                         ->where('origin','=' , $origin)
-                        ->where('destination','=' , $destination);
+                        ->where('destination','=' , $destination)
+                        ->whereBetween('departure_date', [$date_from_2d->format('Y-m-d'), $date_from_2u->format('Y-m-d')])
+                        ->whereBetween('arrival_date', [$date_to_2d->format('Y-m-d'), $date_to_2u->format('Y-m-d')]);
 
         if ($type){
             $itineraries = $itineraries->where('type', '=', $type );
@@ -125,7 +108,7 @@ class BookingController extends Controller
 
         $mensaje = ['tipo'=>'success', 'mess'=>'El vuelo sigue disponlible para los '.$passengers.' pasajeros !'];
 
-        if ($itinerary->status == 'ready'){
+        if ($itinerary->status == 'unready'){
             $mensaje = ['tipo'=>'danger', 'mess'=>'Itinerario no disponible'];
         }
 
@@ -166,7 +149,7 @@ class BookingController extends Controller
 
         $mensaje = ['tipo'=>'success', 'mess'=>'El vuelo sigue disponlible para los '.$passengers.' pasajeros !'];
 
-        if ($itinerary->status == 'ready'){
+        if ($itinerary->status == 'unrready'){
             $mensaje = ['tipo'=>'danger', 'mess'=>'Itinerario no disponible'];
         }
 
@@ -278,7 +261,7 @@ class BookingController extends Controller
 
         $mensaje = ['tipo'=>'success', 'mess'=>'El vuelo sigue disponlible para los '.$passengers.' pasajeros !'];
 
-        if ($itin->status == 'ready'){
+        if ($itin->status == 'unready'){
 
             $mensaje = ['tipo'=>'danger', 'mess'=>'Itinerario no disponible'];
 
@@ -374,6 +357,8 @@ class BookingController extends Controller
                 array_push($tickets, $ticket);
                 $seat->status=0;
                 $seat->save();
+
+                $client->miles += $flight->flight_miles;
             }
         }
 

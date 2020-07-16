@@ -116,7 +116,12 @@ class Flight extends Model
 
 
     public function hasSeats(array $class, int $passengers){
-        $seats = $this->airplane->seats->whereIn('class', $class)->where('status', '=', 1);
+        $seats = $this->airplane->seats->where('status', '=', 1);
+        if ($class){
+            if ($class[0] != ""){
+                $seats = $seats->whereIn('class', $class);
+            }
+        }
         if ($passengers > 0){
             return count($seats) >= $passengers;
         }

@@ -301,6 +301,8 @@
                 }
                 fp_arrival.set('maxDate', dateStr);
             });
+
+            $('.from').val('{{$from}}');
         });
     </script>
 
