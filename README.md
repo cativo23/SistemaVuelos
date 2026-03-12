@@ -1,27 +1,27 @@
-# ⚠️ Proyecto Archivado
+# ⚠️ Archived Project
 
-**Proyecto de Clase BAD - Sistema de vuelos en Laravel, archivado como referencia**
-
----
-
-## Estado del Proyecto
-
-Este repositorio está **archivado** y ya no recibe mantenimiento activo.
-
-### ¿Por qué se archivó?
-
-- Proyecto de clase de Base de Datos (BAD)
-- Sistema de gestión de vuelos
-- Desarrollado en Laravel
-- Se archiva como referencia académica
+**Database Class Project - Flight System in Laravel, Archived as Reference**
 
 ---
 
-## Información Original
+## Project Status
 
-Sistema de gestión de vuelos desarrollado como proyecto universitario con Laravel 7 y PHP 7.4.
+This repository is **archived** and is no longer actively maintained.
 
-## Tecnologías
+### Why was this archived?
+
+- Database class project (BAD)
+- Flight management system
+- Developed in Laravel
+- Archived as academic reference
+
+---
+
+## Original Information
+
+Flight management system developed as university project with Laravel 7 and PHP 7.4.
+
+## Technologies
 
 - Laravel 7
 - PHP 7.4
@@ -29,4 +29,4 @@ Sistema de gestión de vuelos desarrollado como proyecto universitario con Larav
 
 ---
 
-**Nota:** Este repositorio se mantiene como referencia de trabajos académicos completados.
+**Note:** This repository is kept as reference of completed academic work.
